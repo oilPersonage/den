@@ -1,308 +1,362 @@
-@import './fonts.css';
-@import 'tailwindcss';
+@import "./fonts.css";
+@import "tailwindcss";
+
+:root {
+  --col-bl: 20, 20, 20;
+}
 
 @theme {
-	--font-sans: 'Moderustic', ui-sans-serif, system-ui;
-	--font-display: 'Unbounded', ui-sans-serif, system-ui;
-	--text-h1: 2.5rem; /* 32px */
+  --font-sans: "Moderustic", ui-sans-serif, system-ui;
+  --font-display: "Unbounded", ui-sans-serif, system-ui;
+  --text-h1: 2.5rem; /* 32px */
 
-	/* Коэффициент масштабирования (Scale Factor) — 1.25 (Major Third) */
-	--ratio: 1.25;
-	--spacing-header: 69px;
+  /* Коэффициент масштабирования (Scale Factor) — 1.25 (Major Third) */
+  --ratio: 1.25;
+  --spacing-header: 69px;
 
-	/* Вычисляем остальные размеры */
-	--text-h2: calc(var(--text-h1) / var(--ratio));
-	--text-h3: calc(var(--text-h2) / var(--ratio));
-	--text-h4: calc(var(--text-h3) / var(--ratio));
-	--text-h5: calc(var(--text-h4) / var(--ratio));
-	--text-h6: calc(var(--text-h5) / var(--ratio));
+  /* Вычисляем остальные размеры */
+  --text-h2: calc(var(--text-h1) / var(--ratio));
+  --text-h3: calc(var(--text-h2) / var(--ratio));
+  --text-h4: calc(var(--text-h3) / var(--ratio));
+  --text-h5: calc(var(--text-h4) / var(--ratio));
+  --text-h6: calc(var(--text-h5) / var(--ratio));
 
-	/* Тестовые и вспомогательные элементы */
-	--text-p: 1rem; /* Базовый текст (16px) */
-	--text-span: 0.875rem; /* Чуть меньше (14px) */
+  /* Тестовые и вспомогательные элементы */
+  --text-p: 1rem; /* Базовый текст (16px) */
+  --text-span: 0.875rem; /* Чуть меньше (14px) */
 
-	/* 1. Определяем "мастер-переменную" (максимальный отступ) */
-	--sp-max: 3rem; /* 48px */
+  /* 1. Определяем "мастер-переменную" (максимальный отступ) */
+  --sp-max: 3rem; /* 48px */
 
-	/* 2. Генерируем 4 типа на основе максимума */
-	/* Имена через --spacing-* автоматически создают утилиты p-*, m-*, gap-* и т.д. */
-	--spacing-2xs: calc(var(--sp-max) * 0.062); /* 1/16 */
-	--spacing-xs: calc(var(--sp-max) * 0.125); /* 1/8 */
-	--spacing-sm: calc(var(--sp-max) * 0.25); /* 1/4 */
-	--spacing-md: calc(var(--sp-max) * 0.5); /* 1/2 */
-	--spacing-lg: var(--sp-max); /* 100% */
-	--spacing-xl: calc(var(--sp-max) * 2); /* 100% */
+  /* 2. Генерируем 4 типа на основе максимума */
+  /* Имена через --spacing-* автоматически создают утилиты p-*, m-*, gap-* и т.д. */
+  --spacing-2xs: calc(var(--sp-max) * 0.062); /* 1/16 */
+  --spacing-xs: calc(var(--sp-max) * 0.125); /* 1/8 */
+  --spacing-sm: calc(var(--sp-max) * 0.25); /* 1/4 */
+  --spacing-md: calc(var(--sp-max) * 0.5); /* 1/2 */
+  --spacing-lg: var(--sp-max); /* 100% */
+  --spacing-xl: calc(var(--sp-max) * 2); /* 100% */
 
-	--color-bg: #f9f9f9;
-	--color-bg2: #f4f4f4;
-	--color-black: #141414;
-	--color-border: #e9e9e9;
-	--color-btn-hover: rgba(0, 0, 0, 0.03);
+  --color-bg: #f9f9f9;
+  --color-bg2: #f4f4f4;
+  --color-black: rgb(var(--col-bl));
+  --color-border: #e9e9e9;
+  --color-btn-hover: rgba(0, 0, 0, 0.03);
 }
 
 @media (max-width: 1388px) {
-	html {
-		/* Уменьшаем базу с 16px до 14px */
-		font-size: 95%;
-	}
-	:root {
-		/* На мобилках разница между H1 и H6 должна быть меньше,
+  html {
+    /* Уменьшаем базу с 16px до 14px */
+    font-size: 95%;
+  }
+  :root {
+    /* На мобилках разница между H1 и H6 должна быть меньше,
        поэтому уменьшаем коэффициент прогрессии */
-		--ratio: 1.5;
-	}
+    /* --ratio: 1.1; */
+  }
 }
 
 @media (max-width: 768px) {
-	html {
-		/* Уменьшаем базу с 16px до 14px */
-		font-size: 80%;
-	}
-	:root {
-		/* На мобилках разница между H1 и H6 должна быть меньше,
+  html {
+    /* Уменьшаем базу с 16px до 14px */
+    font-size: 80%;
+  }
+  :root {
+    /* На мобилках разница между H1 и H6 должна быть меньше,
        поэтому уменьшаем коэффициент прогрессии */
-		--spacing-header: 55px;
-	}
+    --spacing-header: 55px;
+  }
 }
 
 @layer base {
-	body {
-		@apply bg-bg;
-	}
-	h1 {
-		@apply text-h1 font-bold tracking-tight font-display leading-[1.1];
-	}
-	h2,
-	h2 span {
-		@apply text-h2 font-bold tracking-tight font-display leading-[1.1];
-	}
-	h3 {
-		@apply text-h3 font-semibold font-display;
-	}
-	h4 {
-		@apply text-h4 font-semibold font-display;
-	}
-	h5 {
-		@apply text-h5 font-medium font-display;
-	}
-	h6 {
-		@apply text-h6 font-medium font-display;
-	}
+  body {
+    @apply bg-bg;
+  }
+  h1 {
+    @apply text-h1 font-bold tracking-tight font-display leading-[1.1];
+  }
+  h2,
+  h2 span {
+    @apply text-h2 font-bold tracking-tight font-display leading-[1.1];
+  }
+  h3 {
+    @apply text-h3 font-semibold font-display;
+  }
+  h4,
+  h4 span {
+    @apply text-h4 font-semibold font-display;
+  }
+  h5 {
+    @apply text-h5 font-medium font-display;
+  }
+  h6 {
+    @apply text-h6 font-medium font-display;
+  }
 
-	p,
-	p span {
-		@apply text-p leading-[1.2];
-	}
-	span {
-		@apply text-span;
-	}
+  p,
+  p span {
+    @apply text-p leading-[1.2];
+  }
+  span {
+    @apply text-span;
+  }
 
-	:root {
-		--spacing-max: 2rem; /* На мобилках меньше */
-	}
-	@media (min-width: 1024px) {
-		:root {
-			--spacing-max: 4rem; /* На десктопах больше */
-		}
-	}
+  :root {
+    --spacing-max: 2rem; /* На мобилках меньше */
+  }
+  @media (min-width: 1024px) {
+    :root {
+      --spacing-max: 4rem; /* На десктопах больше */
+    }
+  }
 }
 
 @layer components {
-	.btn {
-		@apply relative flex w-max font-display tracking-tight py-sm px-md text-black;
-		--space: 4px;
-	}
-	.btn.black {
-		@apply text-bg bg-black;
-	}
-	.btn span {
-		@apply h-0.5 w-0.5 flex border-transparent transition-transform;
-	}
-	.btn:hover span {
-		@apply h-2 w-2;
-	}
-	span.btn-tl {
-		@apply absolute top-0 left-0 border-t-black border-l-black border;
-	}
-	span.btn-tr {
-		@apply absolute top-0 right-0 border-t-black border-r-black border;
-	}
-	span.btn-bl {
-		@apply absolute bottom-0 left-0 border-l-black border-b-black border;
-	}
-	span.btn-br {
-		@apply absolute bottom-0 right-0 border-b-black border-r-black border;
-	}
-	.btn:hover .btn-tl {
-		@apply -translate-y-[var(--space)] -translate-x-[var(--space)];
-	}
-	.btn:hover .btn-tr {
-		@apply -translate-y-[var(--space)] translate-[var(--space)];
-	}
-	.btn:hover .btn-bl {
-		@apply translate-y-[var(--space)] -translate-[var(--space)];
-	}
-	.btn:hover .btn-br {
-		@apply translate-y-[var(--space)] translate-[var(--space)];
-	}
-	.btn.biggest {
-		@apply py-4 px-8 text-lg;
-	}
-	.btn.link {
-		@apply text-p md:text-xs 2xl:text-span xl:max-2xl:px-sm;
-		--space: 0;
-	}
-	.btn.link:hover {
-		@apply bg-btn-hover;
-	}
-	.btn.link:hover span {
-		@apply opacity-100;
-	}
-	.btn.link span {
-		@apply transition-all opacity-0;
-	}
+  .btn {
+    @apply relative flex w-max font-display tracking-tight py-sm px-md text-black;
+    --space: 4px;
+  }
+  .btn.black {
+    @apply text-bg bg-black;
+  }
+  .btn span,
+  .input-wrapper span {
+    @apply h-0.5 w-0.5 flex border-transparent transition-transform;
+  }
+  .btn:hover span,
+  input:focus ~ span,
+  textarea:focus ~ span {
+    @apply h-2 w-2;
+  }
+  span.btn-tl {
+    @apply absolute top-0 left-0 border-t-black border-l-black border;
+  }
+  span.btn-tr {
+    @apply absolute top-0 right-0 border-t-black border-r-black border;
+  }
+  span.btn-bl {
+    @apply absolute bottom-0 left-0 border-l-black border-b-black border;
+  }
+  span.btn-br {
+    @apply absolute bottom-0 right-0 border-b-black border-r-black border;
+  }
+  .btn:hover .btn-tl {
+    @apply -translate-y-[var(--space)] -translate-x-[var(--space)];
+  }
+  .btn:hover .btn-tr {
+    @apply -translate-y-[var(--space)] translate-[var(--space)];
+  }
+  .btn:hover .btn-bl {
+    @apply translate-y-[var(--space)] -translate-[var(--space)];
+  }
+  .btn:hover .btn-br {
+    @apply translate-y-[var(--space)] translate-[var(--space)];
+  }
+  .btn.biggest {
+    @apply py-4 px-8 text-lg;
+  }
+  .btn.link {
+    @apply text-p md:text-xs 2xl:text-span xl:max-2xl:px-sm;
+    --space: 0;
+  }
+  .input-wrapper {
+    @apply relative;
+    --space: 0;
+  }
+  .btn.link:hover {
+    @apply bg-btn-hover;
+  }
+  .btn.link:hover span,
+  textarea:focus ~ span,
+  input:focus ~ span {
+    @apply opacity-100;
+  }
+  .btn.link span,
+  .input-wrapper span {
+    @apply transition-all opacity-0;
+  }
+  .wrapper {
+    @apply max-w-7xl px-md mx-auto;
+  }
+  .main-wrapper {
+    @apply px-md lg:px-lg 2xl:px-xl;
+  }
+  input,
+  textarea {
+    @apply bg-bg2 min-h-lg w-full px-sm py-sm outline-0;
+  }
+  label {
+    @apply w-full flex flex-col;
+  }
+  label p {
+    @apply mb-sm;
+  }
+  textarea {
+    @apply min-h-xl resize-none flex;
+  }
 
-	.wrapper {
-		@apply max-w-7xl px-md mx-auto;
-	}
-	.main-wrapper {
-		@apply px-md lg:px-lg 2xl:px-xl;
-	}
+  .link-short {
+    @apply underline;
+  }
 }
 
 html {
-	scroll-behavior: smooth !important;
-	overflow-y: auto;
-	scroll-padding-top: var(--spacing-header);
+  scroll-behavior: smooth !important;
+  overflow-y: auto;
+  scroll-padding-top: var(--spacing-header);
 }
 
 body.menu-opened {
-	overscroll-behavior: none;
-	touch-action: none;
+  overscroll-behavior: none;
+  touch-action: none;
 }
 
 .header-adv {
-	@apply grid md:gap-xs;
+  @apply grid md:gap-xs;
 }
 .header-adv li span {
-	@apply font-display font-bold text-lg min-w-16 leading-[1.2];
+  @apply font-display font-bold text-lg min-w-16 leading-[1.2];
 }
 navs > a {
-	@apply opacity-0;
-	backface-visibility: hidden;
+  @apply opacity-0;
+  backface-visibility: hidden;
 }
 .navs-wrapper {
-	@apply flex md:gap-2 items-end flex-1 md:justify-between fixed md:static max-md:flex-col top-13.75 inset-0
+  @apply flex md:gap-2 items-end flex-1 md:justify-between fixed md:static max-md:flex-col top-13.75 inset-0
  max-md:pointer-events-none max-md:select-none;
 }
 .navs-wrapper.opened {
-	@apply pointer-events-auto select-auto;
+  @apply pointer-events-auto select-auto;
 }
 navs {
-	@apply flex flex-col flex-1 max-md:justify-end items-end md:flex-row 2xl:gap-2 max-md:w-full bg-bg
+  @apply flex flex-col flex-1 max-md:justify-end items-end md:flex-row 2xl:gap-2 max-md:w-full bg-bg
  max-md:opacity-0 max-md:pb-sm;
 }
 .header-contacts {
-	@apply flex items-end max-md:flex-1 md:gap-2 max-md:flex-col md:translate-x-md max-md:py-sm max-md:bg-bg2 max-md:w-full
+  @apply flex items-end max-md:flex-1 md:gap-2 max-md:flex-col md:translate-x-md max-md:py-sm max-md:bg-bg2 max-md:w-full
  max-md:opacity-0;
 }
 
-[data-ai='0'],
-[data-ai='1'],
-[data-ai='1.1'],
-[data-ai='2'],
-[data-ai='3'],
-[data-ai='4'] {
-	@apply opacity-0 will-change-transform;
+[data-ai="0"],
+[data-ai="1"],
+[data-ai="1.1"],
+[data-ai="2"],
+[data-ai="3"],
+[data-ai="4"] {
+  @apply opacity-0 will-change-transform;
 }
-[data-ai='1'] {
-	@apply max-md:origin-bottom-right;
+[data-ai="1"] {
+  @apply max-md:origin-bottom-right;
 }
-[data-ai='1.1'] {
-	@apply max-md:origin-top-right;
+[data-ai="1.1"] {
+  @apply max-md:origin-top-right;
 }
 .header-adv li {
-	@apply flex gap-sm items-end;
+  @apply flex gap-sm items-end;
 }
 
 @keyframes scroll-animation {
-	0% {
-		transform: translateY(150%);
-	}
-	100% {
-		transform: translateY(-150%);
-	}
+  0% {
+    transform: translateY(150%);
+  }
+  100% {
+    transform: translateY(-150%);
+  }
 }
 .scroll-animation {
-	@apply h-full w-0.5 bg-bg2 mr-1 relative overflow-hidden;
+  @apply h-full w-0.5 bg-bg2 mr-1 relative overflow-hidden;
 }
 .scroll-animation + p {
-	@apply text-sm;
+  @apply text-sm;
 }
 .scroll-animation span {
-	@apply bg-black flex w-full h-xl;
-	animation: scroll-animation 5s linear infinite;
+  @apply bg-black flex w-full h-xl;
+  animation: scroll-animation 5s linear infinite;
 }
 .h1Box h2 [data-char],
 .h1Box p [data-char],
 #header-button {
-	@apply will-change-transform opacity-0;
+  @apply will-change-transform opacity-0;
 }
 
 @keyframes contacts-animation {
-	0%,
-	70% {
-		transform: translate(0px, 0px);
-	}
-	40% {
-		transform: translate(5px, -5px);
-	}
+  0%,
+  70% {
+    transform: translate(0px, 0px);
+  }
+  40% {
+    transform: translate(5px, -5px);
+  }
 }
 
 a:hover .link-map {
-	animation: contacts-animation 3s linear infinite;
+  animation: contacts-animation 3s linear infinite;
 }
 .header-logo {
-	@apply flex h-11 text-black mr-xl max-md:opacity-100 w-9;
+  @apply flex h-11 text-black mr-xl max-md:opacity-100 w-9;
 }
 
 .hamb {
-	@apply flex items-center min-h-full uppercase font-display font-bold md:hidden;
+  @apply flex items-center min-h-full uppercase font-display font-bold md:hidden;
 }
 .hamb-inner {
-	@apply overflow-hidden max-h-[12px] flex flex-col items-end;
+  @apply overflow-hidden max-h-[12px] flex flex-col items-end;
 }
 .hamb-open,
 .hamb-close {
-	@apply leading-[0.9];
+  @apply leading-[0.9];
 }
 
 @keyframes anim1 {
-	0%,
-	100% {
-		transform: rotateZ(41deg) skewX(42deg);
-	}
-	50% {
-		transform: rotateZ(41deg) skewX(-49deg);
-	}
+  0%,
+  100% {
+    transform: rotateZ(41deg) skewX(42deg);
+  }
+  50% {
+    transform: rotateZ(41deg) skewX(-49deg);
+  }
 }
 
 .anim1 {
-	transform-origin: bottom left relative;
+  transform-origin: bottom left relative;
 }
 .anim1 path {
-	transform-origin: 17.78px 27.31px;
+  transform-origin: 17.78px 27.31px;
 }
 
 .anime22 path {
-	@apply opacity-0;
+  @apply opacity-0;
 }
 .loading-wrapper {
-	@apply origin-center;
+  @apply origin-center;
 }
 .loading-inner {
-	@apply origin-bottom;
+  @apply origin-bottom;
 }
 
 .loader.closed {
-	@apply pointer-events-none select-none;
+  @apply pointer-events-none select-none;
+}
+
+.modal {
+  @apply fixed z-11 inset-0 flex items-center justify-center pointer-events-none select-none opacity-0 px-md;
+  --alpha: 0;
+  background-color: rgba(var(--col-bl), var(--alpha));
+}
+.modal.opened {
+  @apply z-11 pointer-events-auto select-auto opacity-100;
+}
+
+.modal-wrapper {
+  @apply translate-y-10 opacity-0;
+}
+.modal-inner {
+  @apply bg-bg py-lg px-lg max-w-3xl;
+}
+[data-modal-anim="1"],
+[data-modal-anim="2"] {
+  @apply opacity-0;
+}
+.modal h4 [data-char] {
+  @apply opacity-0;
 }
