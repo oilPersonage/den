@@ -1,0 +1,14 @@
+@font-face {
+	font-family: "Moderustic"; /* Название, которое вы будете использовать в коде */
+	src: url("/Moderustic-Regular.ttf") format("truetype");
+	font-weight: normal;
+	font-style: normal;
+	font-display: swap; /* Чтобы текст не пропадал во время загрузки */
+}
+@font-face {
+	font-family: "Moderustic"; /* Название, которое вы будете использовать в коде */
+	src: url("/Moderustic-Bold.ttf") format("truetype");
+	font-weight: bold;
+	font-style: normal;
+	font-display: swap; /* Чтобы текст не пропадал во время загрузки */
+}
