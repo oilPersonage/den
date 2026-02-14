@@ -16,6 +16,8 @@
 	},
 	"dependencies": {
 		"@tailwindcss/vite": "^4.1.18",
-		"animejs": "^4.3.5"
+		"animejs": "^4.3.5",
+		"embla-carousel": "^8.6.0",
+		"embla-carousel-autoplay": "^8.6.0"
 	}
 }
