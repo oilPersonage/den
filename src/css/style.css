@@ -14,22 +14,17 @@
 	--ratio: 1.25;
 	--spacing-header: 69px;
 
-	/* Вычисляем остальные размеры */
 	--text-h2: calc(var(--text-h1) / var(--ratio));
 	--text-h3: calc(var(--text-h2) / var(--ratio));
 	--text-h4: calc(var(--text-h3) / var(--ratio));
 	--text-h5: calc(var(--text-h4) / var(--ratio));
 	--text-h6: calc(var(--text-h5) / var(--ratio));
 
-	/* Тестовые и вспомогательные элементы */
 	--text-p: 1rem; /* Базовый текст (16px) */
 	--text-span: 0.875rem; /* Чуть меньше (14px) */
 
-	/* 1. Определяем "мастер-переменную" (максимальный отступ) */
 	--sp-max: 3rem; /* 48px */
 
-	/* 2. Генерируем 4 типа на основе максимума */
-	/* Имена через --spacing-* автоматически создают утилиты p-*, m-*, gap-* и т.д. */
 	--spacing-2xs: calc(var(--sp-max) * 0.062); /* 1/16 */
 	--spacing-xs: calc(var(--sp-max) * 0.125); /* 1/8 */
 	--spacing-sm: calc(var(--sp-max) * 0.25); /* 1/4 */
@@ -66,7 +61,7 @@
 
 @layer base {
 	body {
-		@apply bg-bg;
+		@apply bg-bg text-black;
 	}
 	h1 {
 		@apply text-h1 font-bold tracking-tight font-display leading-[1.1];
@@ -208,7 +203,7 @@
 		@apply underline;
 	}
 	.big-space {
-		@apply py-2xl;
+		@apply py-lg md:py-2xl;
 	}
 }
 
