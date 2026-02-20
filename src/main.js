@@ -4,20 +4,25 @@ import './ts/mobileMenu'
 import './ts/modal'
 import './ts/scrollAnimation'
 import './ts/embla'
+import './ts/model'
 
-import { animate, onScroll } from 'animejs'
+import { animate, onScroll, utils } from 'animejs'
 
 const rootStyles = getComputedStyle(document.documentElement)
-const bg1 = rootStyles.getPropertyValue('--color-bg').trim()
-const bg2 = rootStyles.getPropertyValue('--color-bg2').trim()
+// const bg1 = rootStyles.getPropertyValue('--color-bg').trim()
+// const bg2 = rootStyles.getPropertyValue('--color-bg2').trim()
 
 animate('#header', {
-	borderBottomColor: [bg1, bg2],
+	'--alpha': 1,
+	alternate: true,
 	autoplay: onScroll({
 		container: document.body, // объект, который скроллим
 		enter: 'top top',
 		leave: 'top bottom+=200',
-		// debug: true,
+		debug: true,
+		onUpdate(e) {
+			// console.log(e)
+		},
 		sync: true,
 	}),
 
