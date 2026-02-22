@@ -9,14 +9,15 @@ export function factoryShadow(scene, color, intens, w, h, position, isHelper) {
 	scene.add(spotLight.target)
 
 	spotLight.angle = Math.PI / 4 // ширина ~45° (имитирует размер)
-	spotLight.penumbra = 0.3 // мягкие края
+	spotLight.penumbra = 0.7 // мягкие края
 	spotLight.distance = 30
 
 	// Тени!
 	spotLight.castShadow = true
-	spotLight.shadow.mapSize.set(2048, 2048)
+	spotLight.shadow.mapSize.set(5200, 5200)
 	spotLight.shadow.camera.near = 0.5
 	spotLight.shadow.camera.far = 50
+	spotLight.shadow.normalBias = 0.02
 	spotLight.shadow.camera.fov = 60
 	scene.add(spotLight)
 

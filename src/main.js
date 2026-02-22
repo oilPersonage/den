@@ -19,7 +19,7 @@ animate('#header', {
 		container: document.body, // объект, который скроллим
 		enter: 'top top',
 		leave: 'top bottom+=200',
-		debug: true,
+		// debug: true,
 		onUpdate(e) {
 			// console.log(e)
 		},

@@ -412,7 +412,7 @@ a:hover .link-map {
 }
 
 .canvas-wrapper {
-	@apply absolute -right-20 bottom-0 w-[75%] h-full;
+	@apply absolute max-md:left-0 md:-right-20 bottom-0 w-[75%] h-full max-lg:w-full;
 }
 .canvas-wrapper canvas {
 	@apply w-full h-full bg-transparent!;
