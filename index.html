@@ -4,7 +4,17 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 		<link rel="icon" type="image/svg+xml" href="/vite.svg" />
-		<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@200..900&display=swap" rel="stylesheet" />
+		<script>
+			if ('scrollRestoration' in history) {
+				history.scrollRestoration = 'manual'
+			}
+			window.scrollTo(0, 0)
+		</script>
+		<link
+			preconnect
+			href="https://fonts.googleapis.com/css2?family=Unbounded:wght@200..900&display=swap"
+			rel="stylesheet"
+		/>
 		<link rel="stylesheet" href="/src/css/style.css" />
 		<title>den</title>
 	</head>
@@ -91,15 +101,10 @@
 							<span class="btn-tr"></span>
 							<span class="btn-bl"></span>
 							<span class="btn-br"></span>
-							<svg
-								class="w-2.5 2xl:w-3 ml-xs link-map"
-								viewBox="0 0 21 19"
-								fill="none"
-								xmlns="http://www.w3.org/2000/svg"
-							>
+							<svg class="svg-link" viewBox="0 0 16 14" fill="none" xmlns="http://www.w3.org/2000/svg">
 								<path
-									d="M19.6445 11.7277H17.6445V3.4707L2.8189 18.8223H0L16.2852 2H7.79297V0H19.6445V11.7277Z"
-									fill="currentColor"
+									d="M15.1064 10.0312H13.1064V3.41406L2.92304 13.6924H0L11.6924 2H4.94922V0H15.1064V10.0312Z"
+									fill="black"
 								/>
 							</svg>
 						</a>
@@ -107,7 +112,7 @@
 				</div>
 			</div>
 		</header>
-		<section id="main" class="main-wrapper pt-header pb-md min-h-svh flex flex-col overflow-hidden">
+		<section id="main" data-animate-container class="main-wrapper relative pt-header pb-md min-h-svh flex flex-col">
 			<div class="canvas-wrapper"></div>
 			<div class="flex flex-col py-md flex-1">
 				<div class="flex gap-sm md:gap-lg *:max-w-100">
@@ -173,7 +178,7 @@
 
 			<a href="#" class="btn currentColor biggest"> Подробнее </a>-->
 		</section>
-		<section class="big-space" data-animate-container>
+		<section class="big-space max-md:pb-xl" data-animate-container>
 			<div class="wrapper">
 				<h2 data-typing class="mb-lg">Почему с нами выгодно работать?</h2>
 				<div class="grid grid-cols-[repeat(auto-fit,minmax(240px,1fr))] gap-md md:gap-lg mb-xl">
@@ -196,11 +201,16 @@
 				</div>
 			</div>
 
-			<div class="embla logotype-carousel" data-count-per-page="5">
-				<!--<div class="logotype-carousel-inner">-->
-				<div class="embla-viewport" data-from-bottom>
-					<div class="embla-container">
-						<div class="embla-slide">
+			<div
+				class="slider logotype-carousel"
+				data-duration="85"
+				data-infinity
+				data-width-auto="true"
+				data-count-per-page="5"
+			>
+				<div class="slider-container" data-from-bottom>
+					<div class="slider-track">
+						<div class="slide">
 							<a href="#">
 								<svg viewBox="0 0 224 64" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 									<g clip-path="url(#clip0_93_158)">
@@ -315,22 +325,22 @@
 								</svg>
 							</a>
 						</div>
-						<div class="embla-slide">
+						<div class="slide">
 							<a href="#" class="logo-image">
 								<img src="/logotypes/perm_metal.png" alt="logotype perm metal" />
 							</a>
 						</div>
-						<div class="embla-slide">
+						<div class="slide">
 							<a href="#" class="logo-image">
 								<img src="/logotypes/guardian.png" alt="logotype guardian" />
 							</a>
 						</div>
-						<div class="embla-slide">
+						<div class="slide">
 							<a href="#" class="logo-image">
 								<img class="mix-blend-difference" src="/logotypes/mex_factory.png" alt="logotype mex_factory" />
 							</a>
 						</div>
-						<div class="embla-slide">
+						<div class="slide">
 							<a href="#">
 								<svg viewBox="0 0 788 64" fill="none" xmlns="http://www.w3.org/2000/svg">
 									<path
@@ -485,7 +495,7 @@
 								</svg>
 							</a>
 						</div>
-						<div class="embla-slide">
+						<div class="slide">
 							<a href="#">
 								<svg viewBox="0 0 60 64" fill="none" xmlns="http://www.w3.org/2000/svg">
 									<path
@@ -509,7 +519,7 @@
 								</svg>
 							</a>
 						</div>
-						<div class="embla-slide">
+						<div class="slide">
 							<a href="#">
 								<svg viewBox="0 0 120 64" fill="none" xmlns="http://www.w3.org/2000/svg">
 									<path
@@ -528,7 +538,7 @@
 								</svg>
 							</a>
 						</div>
-						<div class="embla-slide">
+						<div class="slide">
 							<a href="#">
 								<svg viewBox="0 0 64 65" fill="none" xmlns="http://www.w3.org/2000/svg">
 									<path
@@ -538,7 +548,7 @@
 								</svg>
 							</a>
 						</div>
-						<div class="embla-slide">
+						<div class="slide">
 							<a href="#">
 								<svg viewBox="0 0 216 64" fill="none" xmlns="http://www.w3.org/2000/svg">
 									<path
@@ -556,7 +566,7 @@
 								</svg>
 							</a>
 						</div>
-						<div class="embla-slide">
+						<div class="slide">
 							<a href="#">
 								<svg viewBox="0 0 267 64" fill="none" xmlns="http://www.w3.org/2000/svg">
 									<path
@@ -791,7 +801,7 @@
 								</svg>
 							</a>
 						</div>
-						<div class="embla-slide">
+						<div class="slide">
 							<a href="#">
 								<svg viewBox="0 0 335 64" fill="none" xmlns="http://www.w3.org/2000/svg">
 									<g clip-path="url(#clip0_93_102)">
@@ -808,15 +818,483 @@
 								</svg>
 							</a>
 						</div>
-						<div class="embla-slide">
+						<div class="slide">
 							<a href="#" class="logo-image">
 								<img src="/logotypes/ural-him.png" alt="" />
 							</a>
 						</div>
-						<div class="embla-slide">
+						<div class="slide">
 							<a href="#" class="logo-image">
 								<img class="mix-blend-difference" src="/logotypes/torg.png" alt="" />
 							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="main-wrapper">
+			<div class="cards-wrapper big">
+				<div class="card" data-animate-container>
+					<div class="slider" data-dots data-duration="0" data-count-per-page="1">
+						<div class="slider-container" data-from-bottom>
+							<div class="slider-track">
+								<div class="slide">
+									<div class="card-img">
+										<img src="/pictures/card-1.png" alt="" />
+									</div>
+								</div>
+								<div class="slide">
+									<div class="card-img">
+										<img src="/pictures/card-2.jpg" alt="" />
+									</div>
+								</div>
+								<div class="slide">
+									<div class="card-img">
+										<img src="/pictures/card-1.png" alt="" />
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="card-content">
+						<div>
+							<h3 data-from-bottom>Наименование в две строки с разными ракурсами о боке</h3>
+							<p class="card-desc md:hidden mt-sm" data-from-bottom>
+								Минималистичный и уютный, идеально подойдёт для одного человека или пары. Максимум комфорта на
+								минимальной площади
+							</p>
+						</div>
+						<div class="card-variant justify-between md:hidden!" data-from-bottom>
+							<p class="card-text-info">Конфигурация:</p>
+							<div class="card-variant-btns">
+								<a data-embla-dot href="#" class="link btn active small">
+									1
+									<span></span>
+									<span></span>
+									<span></span>
+									<span></span>
+								</a>
+								<a data-embla-dot href="#" class="link btn small">
+									2
+									<span></span>
+									<span></span>
+									<span></span>
+									<span></span>
+								</a>
+								<a data-embla-dot href="#" class="link btn small">
+									3
+									<span></span>
+									<span></span>
+									<span></span>
+									<span></span>
+								</a>
+							</div>
+						</div>
+						<div class="card-box">
+							<div class="card-left">
+								<div class="card-variant max-md:hidden!" data-from-bottom>
+									<p class="card-text-info">Конфигурация:</p>
+									<div class="card-variant-btns">
+										<a data-embla-dot href="#" class="link btn active small">
+											1
+											<span></span>
+											<span></span>
+											<span></span>
+											<span></span>
+										</a>
+										<a data-embla-dot href="#" class="link btn small">
+											2
+											<span></span>
+											<span></span>
+											<span></span>
+											<span></span>
+										</a>
+										<a data-embla-dot href="#" class="link btn small">
+											3
+											<span></span>
+											<span></span>
+											<span></span>
+											<span></span>
+										</a>
+									</div>
+								</div>
+								<div class="card-term" data-from-bottom>
+									<p class="card-text-info">Срок:</p>
+									<p>от 3 дней</p>
+								</div>
+								<div class="card-price" data-from-bottom>
+									<p class="card-text-info">Цена:</p>
+									<p>от 1.000.000 ₽</p>
+								</div>
+							</div>
+							<div class="card-right">
+								<p class="card-desc max-md:hidden" data-from-bottom>
+									Минималистичный и уютный, идеально подойдёт для одного человека или пары. Максимум комфорта на
+									минимальной площади
+								</p>
+								<a href="#" class="btn black" data-from-bottom>
+									Подробнее
+									<span></span>
+									<span></span>
+									<span></span>
+									<span></span>
+									<svg class="svg-link" viewBox="0 0 16 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+										<path
+											d="M15.1064 10.0312H13.1064V3.41406L2.92304 13.6924H0L11.6924 2H4.94922V0H15.1064V10.0312Z"
+											fill="currentColor"
+										/>
+									</svg>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="card" data-embla-parent data-animate-container>
+					<div class="slider" data-dots data-duration="0" data-count-per-page="1">
+						<div class="slider-container" data-from-bottom>
+							<div class="slider-track">
+								<div class="slide">
+									<div class="card-img">
+										<img src="/pictures/card-1.png" alt="" />
+									</div>
+								</div>
+								<div class="slide">
+									<div class="card-img">
+										<img src="/pictures/card-2.jpg" alt="" />
+									</div>
+								</div>
+								<div class="slide">
+									<div class="card-img">
+										<img src="/pictures/card-1.png" alt="" />
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="card-content">
+						<div>
+							<h3 data-from-bottom>Наименование в две строки с разными ракурсами о боке</h3>
+							<p class="card-desc md:hidden mt-sm" data-from-bottom>
+								Минималистичный и уютный, идеально подойдёт для одного человека или пары. Максимум комфорта на
+								минимальной площади
+							</p>
+						</div>
+						<div class="card-variant justify-between md:hidden!" data-from-bottom>
+							<p class="card-text-info">Конфигурация:</p>
+							<div class="card-variant-btns">
+								<a data-embla-dot href="#" class="link btn active small">
+									1
+									<span></span>
+									<span></span>
+									<span></span>
+									<span></span>
+								</a>
+								<a data-embla-dot href="#" class="link btn small">
+									2
+									<span></span>
+									<span></span>
+									<span></span>
+									<span></span>
+								</a>
+								<a data-embla-dot href="#" class="link btn small">
+									3
+									<span></span>
+									<span></span>
+									<span></span>
+									<span></span>
+								</a>
+							</div>
+						</div>
+						<div class="card-box">
+							<div class="card-left">
+								<div class="card-variant max-md:hidden!" data-from-bottom>
+									<p class="card-text-info">Конфигурация:</p>
+									<div class="card-variant-btns">
+										<a data-embla-dot href="#" class="link btn active small">
+											1
+											<span></span>
+											<span></span>
+											<span></span>
+											<span></span>
+										</a>
+										<a data-embla-dot href="#" class="link btn small">
+											2
+											<span></span>
+											<span></span>
+											<span></span>
+											<span></span>
+										</a>
+										<a data-embla-dot href="#" class="link btn small">
+											3
+											<span></span>
+											<span></span>
+											<span></span>
+											<span></span>
+										</a>
+									</div>
+								</div>
+								<div class="card-term" data-from-bottom>
+									<p class="card-text-info">Срок:</p>
+									<p>от 3 дней</p>
+								</div>
+								<div class="card-price" data-from-bottom>
+									<p class="card-text-info">Цена:</p>
+									<p>от 1.000.000 ₽</p>
+								</div>
+							</div>
+							<div class="card-right">
+								<p class="card-desc max-md:hidden" data-from-bottom>
+									Минималистичный и уютный, идеально подойдёт для одного человека или пары. Максимум комфорта на
+									минимальной площади
+								</p>
+								<a href="#" class="btn black" data-from-bottom>
+									Подробнее
+									<span></span>
+									<span></span>
+									<span></span>
+									<span></span>
+									<svg class="svg-link" viewBox="0 0 16 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+										<path
+											d="M15.1064 10.0312H13.1064V3.41406L2.92304 13.6924H0L11.6924 2H4.94922V0H15.1064V10.0312Z"
+											fill="currentColor"
+										/>
+									</svg>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="card" data-embla-parent data-animate-container>
+					<div class="slider" data-dots data-duration="0" data-count-per-page="1">
+						<div class="slider-container" data-from-bottom>
+							<div class="slider-track">
+								<div class="slide">
+									<div class="card-img">
+										<img src="/pictures/card-1.png" alt="" />
+									</div>
+								</div>
+								<div class="slide">
+									<div class="card-img">
+										<img src="/pictures/card-2.jpg" alt="" />
+									</div>
+								</div>
+								<div class="slide">
+									<div class="card-img">
+										<img src="/pictures/card-1.png" alt="" />
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="card-content">
+						<div>
+							<h3 data-from-bottom>Наименование в две строки с разными ракурсами о боке</h3>
+							<p class="card-desc md:hidden mt-sm" data-from-bottom>
+								Минималистичный и уютный, идеально подойдёт для одного человека или пары. Максимум комфорта на
+								минимальной площади
+							</p>
+						</div>
+						<div class="card-variant justify-between md:hidden!" data-from-bottom>
+							<p class="card-text-info">Конфигурация:</p>
+							<div class="card-variant-btns">
+								<a data-embla-dot href="#" class="link btn active small">
+									1
+									<span></span>
+									<span></span>
+									<span></span>
+									<span></span>
+								</a>
+								<a data-embla-dot href="#" class="link btn small">
+									2
+									<span></span>
+									<span></span>
+									<span></span>
+									<span></span>
+								</a>
+								<a data-embla-dot href="#" class="link btn small">
+									3
+									<span></span>
+									<span></span>
+									<span></span>
+									<span></span>
+								</a>
+							</div>
+						</div>
+						<div class="card-box">
+							<div class="card-left">
+								<div class="card-variant max-md:hidden!" data-from-bottom>
+									<p class="card-text-info">Конфигурация:</p>
+									<div class="card-variant-btns">
+										<a data-embla-dot href="#" class="link btn active small">
+											1
+											<span></span>
+											<span></span>
+											<span></span>
+											<span></span>
+										</a>
+										<a data-embla-dot href="#" class="link btn small">
+											2
+											<span></span>
+											<span></span>
+											<span></span>
+											<span></span>
+										</a>
+										<a data-embla-dot href="#" class="link btn small">
+											3
+											<span></span>
+											<span></span>
+											<span></span>
+											<span></span>
+										</a>
+									</div>
+								</div>
+								<div class="card-term" data-from-bottom>
+									<p class="card-text-info">Срок:</p>
+									<p>от 3 дней</p>
+								</div>
+								<div class="card-price" data-from-bottom>
+									<p class="card-text-info">Цена:</p>
+									<p>от 1.000.000 ₽</p>
+								</div>
+							</div>
+							<div class="card-right">
+								<p class="card-desc max-md:hidden" data-from-bottom>
+									Минималистичный и уютный, идеально подойдёт для одного человека или пары. Максимум комфорта на
+									минимальной площади
+								</p>
+								<a href="#" class="btn black" data-from-bottom>
+									Подробнее
+									<span></span>
+									<span></span>
+									<span></span>
+									<span></span>
+									<svg class="svg-link" viewBox="0 0 16 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+										<path
+											d="M15.1064 10.0312H13.1064V3.41406L2.92304 13.6924H0L11.6924 2H4.94922V0H15.1064V10.0312Z"
+											fill="currentColor"
+										/>
+									</svg>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="card" data-embla-parent data-animate-container>
+					<div class="slider" data-dots data-duration="0" data-count-per-page="1">
+						<div class="slider-container" data-from-bottom>
+							<div class="slider-track">
+								<div class="slide">
+									<div class="card-img">
+										<img src="/pictures/card-1.png" alt="" />
+									</div>
+								</div>
+								<div class="slide">
+									<div class="card-img">
+										<img src="/pictures/card-2.jpg" alt="" />
+									</div>
+								</div>
+								<div class="slide">
+									<div class="card-img">
+										<img src="/pictures/card-1.png" alt="" />
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="card-content">
+						<div>
+							<h3 data-from-bottom>Наименование в две строки с разными ракурсами о боке</h3>
+							<p class="card-desc md:hidden mt-sm" data-from-bottom>
+								Минималистичный и уютный, идеально подойдёт для одного человека или пары. Максимум комфорта на
+								минимальной площади
+							</p>
+						</div>
+						<div class="card-variant justify-between md:hidden!" data-from-bottom>
+							<p class="card-text-info">Конфигурация:</p>
+							<div class="card-variant-btns">
+								<a data-embla-dot href="#" class="link btn active small">
+									1
+									<span></span>
+									<span></span>
+									<span></span>
+									<span></span>
+								</a>
+								<a data-embla-dot href="#" class="link btn small">
+									2
+									<span></span>
+									<span></span>
+									<span></span>
+									<span></span>
+								</a>
+								<a data-embla-dot href="#" class="link btn small">
+									3
+									<span></span>
+									<span></span>
+									<span></span>
+									<span></span>
+								</a>
+							</div>
+						</div>
+						<div class="card-box">
+							<div class="card-left">
+								<div class="card-variant max-md:hidden!" data-from-bottom>
+									<p class="card-text-info">Конфигурация:</p>
+									<div class="card-variant-btns">
+										<a data-embla-dot href="#" class="link btn active small">
+											1
+											<span></span>
+											<span></span>
+											<span></span>
+											<span></span>
+										</a>
+										<a data-embla-dot href="#" class="link btn small">
+											2
+											<span></span>
+											<span></span>
+											<span></span>
+											<span></span>
+										</a>
+										<a data-embla-dot href="#" class="link btn small">
+											3
+											<span></span>
+											<span></span>
+											<span></span>
+											<span></span>
+										</a>
+									</div>
+								</div>
+								<div class="card-term" data-from-bottom>
+									<p class="card-text-info">Срок:</p>
+									<p>от 3 дней</p>
+								</div>
+								<div class="card-price" data-from-bottom>
+									<p class="card-text-info">Цена:</p>
+									<p>от 1.000.000 ₽</p>
+								</div>
+							</div>
+							<div class="card-right">
+								<p class="card-desc max-md:hidden" data-from-bottom>
+									Минималистичный и уютный, идеально подойдёт для одного человека или пары. Максимум комфорта на
+									минимальной площади
+								</p>
+								<a href="#" class="btn black" data-from-bottom>
+									Подробнее
+									<span></span>
+									<span></span>
+									<span></span>
+									<span></span>
+									<svg class="svg-link" viewBox="0 0 16 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+										<path
+											d="M15.1064 10.0312H13.1064V3.41406L2.92304 13.6924H0L11.6924 2H4.94922V0H15.1064V10.0312Z"
+											fill="currentColor"
+										/>
+									</svg>
+								</a>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -851,23 +1329,6 @@
 							<path d="M35.6279 6.52344V20.7578L26.6865 14.2617V0L35.6279 6.52344Z" fill="currentColor" />
 							<path d="M17.7812 6.52344V20.7578L26.7227 14.2617V0L17.7812 6.52344Z" fill="currentColor" />
 							<path d="M0 33.6694L17.7852 20.7475L9.14651 12.7781L0 19.61V33.6694Z" fill="currentColor" />
-						</svg>
-						<svg
-							class="absolute top-0 left-0 anime2 text-currentColor/30"
-							stroke="currentColor"
-							width="54"
-							height="54"
-							viewBox="0 0 54 54"
-							fill="none"
-							xmlns="http://www.w3.org/2000/svg"
-						>
-							<path
-								pathLength="950"
-								stroke-width="0.5"
-								d="M0.294963 19.9186L9.35955 27.0316L17.8217 46.8455V32.8494L26.6805 39.196L35.6055 32.8494V46.8446L44.1999 27.0316L53.4554 19.8256L44.5304 13.0162L35.6055 20.9195V6.73562L26.6805 0.124634L17.8217 6.73562L17.7802 20.9058L9.35955 13.0162L0.100098 19.7519V33.9127L26.6805 53.3105L53.4554 33.9127L26.6805 14.423L0.172325 33.8647V19.8271"
-								stroke="currentColor"
-								stroke-width="0.2"
-							/>
 						</svg>
 					</div>
 				</div>

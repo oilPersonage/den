@@ -3,14 +3,11 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js'
 import { HDRLoader } from 'three/addons/loaders/HDRLoader.js'
 import { factoryShadow } from './factoryShadow'
-import Stats from 'three/examples/jsm/libs/stats.module'
-import { ringGeometry } from './ringGeo'
-// import { prepareConfiguration } from './animation.js'
-//
-const wrapper = document.querySelector('.canvas-wrapper')
 
 export const TARGET = new THREE.Vector3(0, 0, -0)
 export let mixer = null
+
+const wrapper = document.querySelector('.canvas-wrapper')
 const clock = new THREE.Clock() // для delta time
 
 // Сцена, камера, рендерер
@@ -30,9 +27,9 @@ renderer.outputColorSpace = THREE.SRGBColorSpace
 renderer.toneMappingExposure = 1 // Уменьшить яркость (0.6 = тусклее)
 wrapper.appendChild(renderer.domElement)
 
-const stats = new Stats()
-stats.showPanel(0) // 0: fps, 1: ms, 2: mb (память)
-document.body.appendChild(stats.dom)
+// const stats = new Stats()
+// stats.showPanel(0) // 0: fps, 1: ms, 2: mb (память)
+// document.body.appendChild(stats.dom)
 
 // Загрузка GLTF
 const loader = new GLTFLoader()
@@ -88,7 +85,7 @@ controls.maxAzimuthAngle = Math.PI / 1.6 // 45 градусов вправо
 window.addEventListener('resize', () => {
 	camera.aspect = window.innerWidth / window.innerHeight
 	camera.updateProjectionMatrix()
-	renderer.setSize(window.innerWidth, window.innerHeight)
+	renderer.setSize(width, height)
 })
 
 // Только рабочие параметры OrbitControls
@@ -124,7 +121,7 @@ camera.updateProjectionMatrix()
 camera.lookAt(TARGET)
 // Анимация
 function animate() {
-	requestAnimationFrame(animate)
+	requestAnimationFrame(animateModal)
 
 	// Копирует позицию target в бокс
 	controls.update()
@@ -132,6 +129,9 @@ function animate() {
 	mixer?.update(delta)
 
 	renderer.render(scene, camera)
-	stats.update()
+	// stats.update()
 }
-animate()
+export function animateModal() {
+	wrapper.classList.add('show')
+	animate()
+}

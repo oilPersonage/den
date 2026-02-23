@@ -21,7 +21,7 @@ typingList.forEach((el) =>
 )
 
 fromBottomList.forEach((el) => {
-	const items = [...document.querySelectorAll('[data-from-bottom]')]
+	const items = [...el.querySelectorAll('[data-from-bottom]')]
 	const delay = 50
 	animate(items, {
 		y: [14, 0],
@@ -29,7 +29,7 @@ fromBottomList.forEach((el) => {
 		duration: 600,
 		delay: stagger(-delay, { start: delay * items.length, from: 'last' }),
 		easing: 'inSine',
-		autoplay: onScroll({ enter: 'end', leave: 'start' }),
+		autoplay: onScroll({ enter: '80% 20%', leave: '20% 80%' }),
 	})
 })
 
@@ -42,3 +42,17 @@ fromTopList.forEach((el) =>
 		autoplay: onScroll({ enter: 'end', leave: 'start' }),
 	}),
 )
+
+animate('#header', {
+	'--alpha': 1,
+	alternate: true,
+	autoplay: onScroll({
+		container: document.body, // объект, который скроллим
+		enter: 'top top',
+		leave: 'top bottom+=200',
+		// debug: true,
+		sync: true,
+	}),
+	easing: 'linear', // ВАЖНО: для скролла всегда используйте linear
+	duration: 1000, // В v4 это определяет "плавность" или дистанцию внутри onScroll
+})

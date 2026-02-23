@@ -38,6 +38,7 @@
 	--color-bg: rgb(var(--col-bg));
 	--color-bg2: rgb(var(--col-bg2));
 	--color-black: rgb(var(--col-bl));
+	--color-black2: rgba(var(--col-bl), 0.6);
 	--color-border: #e9e9e9;
 	--color-btn-hover: rgba(0, 0, 0, 0.03);
 }
@@ -73,7 +74,7 @@
 		@apply text-h2 font-bold tracking-tight font-display leading-[1.1];
 	}
 	h3 {
-		@apply text-h3 font-semibold font-display;
+		@apply text-h3 font-semibold font-display leading-[1.1];
 	}
 	h4,
 	h4 span {
@@ -113,16 +114,21 @@
 			h2 span {
 				font-size: 20px;
 			}
+			h3,
+			h3 span {
+				font-size: 16px;
+			}
 		}
 	}
 }
 
 @layer components {
 	.btn {
-		@apply relative flex w-max font-display tracking-tight py-sm px-md text-black;
+		@apply relative flex items-center w-max font-display tracking-tight py-sm px-md text-black;
 		--space: 4px;
 	}
-	.btn.black {
+	.btn.black,
+	.btn.active {
 		@apply text-bg bg-black;
 	}
 	.btn span,
@@ -134,32 +140,42 @@
 	textarea:focus ~ span {
 		@apply h-2 w-2;
 	}
-	span.btn-tl {
+	.btn span:first-child,
+	.link span:first-child {
 		@apply absolute top-0 left-0 border-t-black border-l-black border;
 	}
-	span.btn-tr {
+	.btn span:nth-child(2),
+	.link span:nth-child(2) {
 		@apply absolute top-0 right-0 border-t-black border-r-black border;
 	}
-	span.btn-bl {
+	.btn span:nth-child(3),
+	.link span:nth-child(3) {
 		@apply absolute bottom-0 left-0 border-l-black border-b-black border;
 	}
-	span.btn-br {
+	.btn span:nth-child(4),
+	.link span:nth-child(4) {
 		@apply absolute bottom-0 right-0 border-b-black border-r-black border;
 	}
-	.btn:hover .btn-tl {
+	.btn:hover span:first-child {
 		@apply -translate-y-[var(--space)] -translate-x-[var(--space)];
 	}
-	.btn:hover .btn-tr {
+	.btn:hover span:nth-child(2) {
 		@apply -translate-y-[var(--space)] translate-[var(--space)];
 	}
-	.btn:hover .btn-bl {
+	.btn:hover span:nth-child(3) {
 		@apply translate-y-[var(--space)] -translate-[var(--space)];
 	}
-	.btn:hover .btn-br {
+	.btn:hover span:nth-child(4) {
 		@apply translate-y-[var(--space)] translate-[var(--space)];
 	}
 	.btn.biggest {
 		@apply py-4 px-8 text-lg;
+	}
+	.btn.small {
+		@apply flex justify-center p-0 w-9 h-8.5 transition-colors leading-7.5;
+	}
+	.btn.small span {
+		@apply h-1 w-1;
 	}
 	.btn.link {
 		@apply text-p md:text-xs 2xl:text-span xl:max-2xl:px-sm;
@@ -172,6 +188,10 @@
 	.btn.link:hover {
 		@apply bg-btn-hover;
 	}
+	.btn.link.black:hover,
+	.btn.link.active:hover {
+		@apply bg-black text-bg;
+	}
 	.btn.link:hover span,
 	textarea:focus ~ span,
 	input:focus ~ span {
@@ -181,6 +201,11 @@
 	.input-wrapper span {
 		@apply transition-all opacity-0;
 	}
+
+	.svg-link {
+		@apply w-3.5 h-3.5 ml-xs stroke-1;
+	}
+
 	.wrapper {
 		@apply max-w-7xl px-md mx-auto;
 	}
@@ -303,7 +328,7 @@ navs {
 	}
 }
 
-a:hover .link-map {
+a:hover .svg-link {
 	animation: contacts-animation 3s linear infinite;
 }
 .header-logo {
@@ -382,10 +407,10 @@ a:hover .link-map {
 	@apply h-full object-cover saturate-0 flex;
 }
 .logotype-carousel a {
-	@apply bg-bg px-md flex w-max h-12 flex items-center;
+	@apply bg-bg px-md w-max h-12 flex items-center;
 }
 .logotype-carousel {
-	@apply relative;
+	@apply relative max-md:pt-md;
 }
 .logotype-carousel::after,
 .logotype-carousel::before {
@@ -405,15 +430,94 @@ a:hover .link-map {
 	touch-action: pan-y pinch-zoom;
 }
 
-.embla-slide {
-	/*@apply min-w-0;*/
-	--slide-height: 14rem;
-	--slide-size: 100%;
-}
-
 .canvas-wrapper {
-	@apply absolute max-md:left-0 md:-right-20 bottom-0 w-[75%] h-full max-lg:w-full;
+	@apply absolute max-md:left-0 right-0 bottom-0 w-[75%] h-svh max-lg:w-full overflow-hidden opacity-0 transition-opacity duration-1000;
+}
+.canvas-wrapper.show {
+	@apply opacity-100;
 }
 .canvas-wrapper canvas {
-	@apply w-full h-full bg-transparent!;
+	@apply w-full h-full bg-transparent! md:translate-x-20;
+}
+
+/*CARD*/
+.cards-wrapper {
+	@apply grid gap-lg mt-lg;
+}
+.cards-wrapper.big {
+	@apply grid grid-cols-1 md:grid-cols-[repeat(auto-fit,minmax(600px,1fr))] gap-xl;
+}
+.card {
+	@apply flex flex-col gap-md;
+}
+.card-content {
+	@apply flex flex-col gap-md;
+}
+.card-box {
+	@apply flex gap-md md:gap-lg max-md:justify-between;
+}
+.card-left {
+	@apply flex flex-col gap-xs max-md:justify-end;
+}
+.card-right {
+	@apply flex flex-col gap-md;
+}
+.card-price {
+	@apply flex gap-2xs;
+}
+.card-img {
+	@apply flex items-center justify-center p-md overflow-hidden bg-bg2 h-120;
+}
+.card-img img {
+	@apply w-full h-full object-contain shrink-0;
+}
+.card-variant,
+.card-term {
+	@apply flex items-center gap-xs;
+}
+.card-term {
+	@apply max-md:-mt-1.5 mt-auto;
+}
+.card-variant-btns {
+	@apply grid grid-cols-3 gap-2xs w-max;
+}
+.card-text-info {
+	@apply text-black2;
+}
+.card-price p:last-child {
+	@apply font-display max-md:text-lg font-bold;
+}
+.card-variant button {
+	@apply w-6 h-6 bg-bg2;
+}
+.card-desc {
+	@apply flex-1;
+}
+.card .embla {
+	--slide-size: 100%;
+}
+.embla .embla__slide {
+	flex: 0 0 var(--slide-size);
+	min-width: 0;
+}
+
+/*SLIDER*/
+.slider {
+	/*--items: 1;*/
+	--slide-width: calc((100% - (var(--items) - 1) * var(--gap)) / var(--items));
+	@apply w-full;
+}
+.slider-container {
+	overflow: hidden;
+}
+.slider-track {
+	display: flex;
+	will-change: auto;
+	touch-action: pan-y pinch-zoom;
+	margin-left: calc(var(--gap) * -1);
+}
+.slide {
+	flex: 0 0 var(--slide-width);
+	padding-left: var(--slide-spacing);
+	padding-left: var(--gap);
 }

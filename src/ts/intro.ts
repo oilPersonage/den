@@ -1,9 +1,13 @@
 import { createTimeline, stagger, splitText, cubicBezier, animate } from 'animejs'
+import { animateModal } from './model'
 export const isMobile = window.matchMedia('(max-width: 768px)').matches
 const loader = document.querySelector('.loader')
 
 const timeline = createTimeline({
 	defaults: { ease: cubicBezier(0.1, 0.7, 0.5, 1) },
+	onComplete() {
+		animateModal()
+	},
 })
 const { chars } = splitText('.h1Box h2', { chars: true })
 const { chars: charsP } = splitText('.h1Box p', { chars: true })
@@ -87,7 +91,7 @@ timeline
 		'-=1200',
 	)
 
-document.addEventListener('DOMContentLoaded', () => {
+export function startIntro() {
 	if (!loader) return
 	loader.classList.add('closed')
 	animate('.loader', {
@@ -96,4 +100,4 @@ document.addEventListener('DOMContentLoaded', () => {
 			timeline.play()
 		},
 	})
-})
+}

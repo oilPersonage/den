@@ -1,31 +1,25 @@
-import './ts/intro'
-import './ts/logotype'
-import './ts/mobileMenu'
-import './ts/modal'
-import './ts/scrollAnimation'
-import './ts/embla'
-import './ts/model'
+async function bootstrap() {
+	// 1. Сначала загружаем критические модули (логотип и интро)
+	// Мы используем динамический импорт, чтобы контролировать порядок
+	const [logotype, intro] = await Promise.all([import('./ts/logotype'), import('./ts/intro')])
 
-import { animate, onScroll, utils } from 'animejs'
+	// 2. В фоновом режиме подгружаем всё остальное (инфраструктуру)
+	// Это не блокирует запуск анимации интро
+	const heavyModules = [
+		import('./ts/mobileMenu'),
+		import('./ts/modal'),
+		import('./ts/scrollAnimation'),
+		import('./ts/slider'),
+		import('./ts/model'),
+	]
 
-const rootStyles = getComputedStyle(document.documentElement)
-// const bg1 = rootStyles.getPropertyValue('--color-bg').trim()
-// const bg2 = rootStyles.getPropertyValue('--color-bg2').trim()
+	// 3. Когда всё (включая DOM и скрипты) готово — запускаем Intro
+	// Внутри intro.ts должна быть функция, например export const startIntro = ...
+	setTimeout(intro.startIntro, 1000)
 
-animate('#header', {
-	'--alpha': 1,
-	alternate: true,
-	autoplay: onScroll({
-		container: document.body, // объект, который скроллим
-		enter: 'top top',
-		leave: 'top bottom+=200',
-		// debug: true,
-		onUpdate(e) {
-			// console.log(e)
-		},
-		sync: true,
-	}),
+	// Ждем остальные модули (просто чтобы убедиться, что всё ок)
+	await Promise.all(heavyModules)
+	console.log('All systems ready')
+}
 
-	easing: 'linear', // ВАЖНО: для скролла всегда используйте linear
-	duration: 1000, // В v4 это определяет "плавность" или дистанцию внутри onScroll
-})
+bootstrap()
