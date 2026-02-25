@@ -21,7 +21,6 @@ export const fadePlugin: TSliderPlugin = (api) => {
 
 	// 2. Подписываемся на изменение слайда
 	api.engine = (index: number) => {
-		console.log(duration)
 		slides.forEach((s, i) => {
 			s.style.opacity = i === index ? '1' : '0'
 			s.style.zIndex = i === index ? '1' : '0'

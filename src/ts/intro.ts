@@ -9,7 +9,7 @@ const timeline = createTimeline({
 		animateModal()
 	},
 })
-const { chars } = splitText('.h1Box h2', { chars: true })
+const { chars } = splitText('.h1Box h1', { chars: true })
 const { chars: charsP } = splitText('.h1Box p', { chars: true })
 
 const spaceSm = 5

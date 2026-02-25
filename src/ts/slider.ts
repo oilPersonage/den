@@ -12,7 +12,7 @@ for (const slide of sliders) {
 	if (fade !== undefined) plugins.push(fadePlugin)
 
 	const api = slider(slide, { items: 1, widthAuto, duration: duration ? Number(duration) : undefined }, plugins)
-	console.log({ infinity }, slide.dataset)
+
 	if (dots !== undefined) {
 		generateDots(api, { dotsWrapper: '.card-variant-btns', parentIdentifier: '.card', selector: 'a' })
 	}

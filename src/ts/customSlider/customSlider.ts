@@ -84,7 +84,6 @@ const generateDots: TGenerateDots = (api, generateDotsOptions): void => {
 	) as HTMLElement[]
 	dots.forEach((dot, idx) => {
 		dot.addEventListener('click', (e) => {
-			console.log(idx)
 			e.preventDefault()
 			api.goTo(idx)
 		})

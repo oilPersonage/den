@@ -7,10 +7,11 @@ async function bootstrap() {
 	// Это не блокирует запуск анимации интро
 	const heavyModules = [
 		import('./ts/mobileMenu'),
-		import('./ts/modal'),
 		import('./ts/scrollAnimation'),
-		import('./ts/slider'),
 		import('./ts/model'),
+		import('./ts/modal'),
+		import('./ts/slider'),
+		import('./ts/adv'),
 	]
 
 	// 3. Когда всё (включая DOM и скрипты) готово — запускаем Intro
@@ -19,7 +20,6 @@ async function bootstrap() {
 
 	// Ждем остальные модули (просто чтобы убедиться, что всё ок)
 	await Promise.all(heavyModules)
-	console.log('All systems ready')
 }
 
 bootstrap()
