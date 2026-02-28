@@ -45,13 +45,15 @@
 	--color-btn-hover: rgba(0, 0, 0, 0.03);
 }
 
-@media (max-width: 1388px) {
-	html {
-		/* Уменьшаем базу с 16px до 14px */
-		font-size: 95%;
-	}
+html {
+	background: linear-gradient(to bottom, #f9f9f9, #e0e0e0);
+	height: 100vh;
 }
 
+body {
+	background-color: #f9f9f9;
+	padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+}
 @layer base {
 	body {
 		@apply bg-bg text-black;
@@ -89,6 +91,9 @@
 	}
 	span {
 		@apply text-span;
+	}
+	footer {
+		padding-bottom: env(safe-area-inset-bottom);
 	}
 
 	:root {

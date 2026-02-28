@@ -7,6 +7,7 @@ import GUI from 'lil-gui'
 // const gui = new GUI()
 
 export const TARGET = new THREE.Vector3(0, 0, -0)
+let animatedId = null
 const lightData = {
 	1: { x: -7, y: 16, z: 7, strength: 1500 },
 	2: { x: 11, y: 12, z: -8, strength: 1000 },
@@ -157,17 +158,36 @@ camera.updateProjectionMatrix()
 camera.lookAt(TARGET)
 // Анимация
 function animate() {
-	requestAnimationFrame(animateModal)
-
-	// Копирует позицию target в бокс
+	animatedId = requestAnimationFrame(animate)
 	controls.update()
 	const delta = clock.getDelta() // время между кадрами
 	mixer?.update(delta)
 
 	renderer.render(scene, camera)
-	// stats.update()
 }
+
+// 2. Логика Observer
+const observer = new IntersectionObserver(
+	(entries) => {
+		entries.forEach((entry) => {
+			if (entry.isIntersecting) {
+				// Хедер виден — запускаем цикл рендера
+				console.log('Header visible: Start Loop')
+				animate()
+			} else {
+				// Хедер ушел — стопаем рендер, чтобы не греть видюху
+				console.log('Header hidden: Stop Loop')
+				cancelAnimationFrame(animatedId)
+			}
+		})
+	},
+	{
+		threshold: 0.1, // Сработает, когда хотя бы 10% хедера в кадре
+	},
+)
+
 export function animateModal() {
 	wrapper.classList.add('show')
-	animate()
+
+	observer.observe(wrapper)
 }

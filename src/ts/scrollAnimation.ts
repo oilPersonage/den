@@ -1,4 +1,9 @@
 import { animate, onScroll, splitText, stagger, cubicBezier } from 'animejs'
+import Lenis from 'lenis'
+
+const len = new Lenis({
+	autoRaf: true,
+})
 
 function prepareChars(el) {
 	const { chars } = splitText(el, { chars: true })

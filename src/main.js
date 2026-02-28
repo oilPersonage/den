@@ -20,6 +20,7 @@ async function bootstrap() {
 	setTimeout(intro.startIntro, 1000)
 
 	// Ждем остальные модули (просто чтобы убедиться, что всё ок)
+
 	await Promise.all(heavyModules)
 }
 
