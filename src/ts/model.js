@@ -3,8 +3,17 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js'
 import { HDRLoader } from 'three/addons/loaders/HDRLoader.js'
 import { factoryShadow } from './factoryShadow'
+import GUI from 'lil-gui'
+// const gui = new GUI()
 
 export const TARGET = new THREE.Vector3(0, 0, -0)
+const lightData = {
+	1: { x: -7, y: 16, z: 7, strength: 1500 },
+	2: { x: 11, y: 12, z: -8, strength: 1000 },
+	3: { x: -7, y: 5, z: -10, strength: 1000 },
+	// 4: { x: 0, y: 3, z: 4, strength: 10, target: new THREE.Vector3(0, -20, 4), noShadow: true },
+	// 5: { x: -1, y: 3, z: 4, strength: 10, target: new THREE.Vector3(0, -20, 4), noShadow: true },
+}
 export let mixer = null
 
 const wrapper = document.querySelector('.canvas-wrapper')
@@ -27,9 +36,41 @@ renderer.outputColorSpace = THREE.SRGBColorSpace
 renderer.toneMappingExposure = 1 // Уменьшить яркость (0.6 = тусклее)
 wrapper.appendChild(renderer.domElement)
 
-// const stats = new Stats()
-// stats.showPanel(0) // 0: fps, 1: ms, 2: mb (память)
-// document.body.appendChild(stats.dom)
+function createLights() {
+	for (const key of Object.keys(lightData)) {
+		const { x, y, z, strength, target, noShadow } = lightData[key]
+		const light = factoryShadow({
+			scene,
+			color: 0xffffff,
+			strength,
+			position: new THREE.Vector3(x, y, z),
+			delayIntensity: !!target,
+			noShadow,
+		})
+
+		scene.add(light)
+
+		if (target) {
+			light.target.position.copy(target)
+		}
+
+		// const folder = gui.addFolder(key)
+
+		// folder
+		// 	.add(lightData[key], 'x', -20, 1)
+		// 	.max(20)
+		// 	.onChange((v) => (light.position.x = v))
+		// folder
+		// 	.add(lightData[key], 'y', -20, 1)
+		// 	.max(20)
+		// 	.onChange((v) => (light.position.y = v))
+		// folder
+		// 	.add(lightData[key], 'z', -20, 1)
+		// 	.max(20)
+		// 	.onChange((v) => (light.position.z = v))
+		// folder.add(lightData[key], 'strength').onChange((v) => (light.intensity = v))
+	}
+}
 
 // Загрузка GLTF
 const loader = new GLTFLoader()
@@ -63,6 +104,7 @@ loader.load(
 				obj.material.side = THREE.FrontSide // иногда помогает с артефактами
 			}
 		})
+		createLights()
 	},
 	undefined,
 	(error) => console.error('Ошибка загрузки:', error),
@@ -105,12 +147,6 @@ hdrLoader.load('./sky.hdr', (texture) => {
 
 	scene.background = null
 })
-
-factoryShadow(scene, 0xffffff, 5000, 2, 2, new THREE.Vector3(5, 20, 15), false)
-factoryShadow(scene, 0xffffff, 500, 2, 2, new THREE.Vector3(20, 10, 15), false)
-factoryShadow(scene, 0xffffff, 400, 2, 2, new THREE.Vector3(5, 5, -15), false)
-
-// ringGeometry(scene)
 
 const light = new THREE.AmbientLight(0xffffff, 1) // soft white light
 scene.add(light)

@@ -12,6 +12,7 @@ async function bootstrap() {
 		import('./ts/modal'),
 		import('./ts/slider'),
 		import('./ts/adv'),
+		import('./ts/variant'),
 	]
 
 	// 3. Когда всё (включая DOM и скрипты) готово — запускаем Intro
