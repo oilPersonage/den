@@ -13,7 +13,7 @@ const tl = createTimeline({
 	autoplay: onScroll({
 		target: '.adv-wrapper', // СЛЕДИМ ЗА ЭТИМ БЛОКОМ
 		// debug: true,
-		sync: 0.5,
+		sync: true,
 		enter: 'top',
 		// leave: 'НИЗ_БЛОКА ВЕРХ_ЭКРАНА' (конец)
 		leave: 'bottom',

@@ -52,7 +52,7 @@ html {
 
 body {
 	background-color: #f9f9f9;
-	padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+	padding-top: env(safe-area-inset-top);
 }
 @layer base {
 	body {
@@ -554,7 +554,7 @@ a:hover .svg-link {
 	@apply relative flex flex-col flex-1;
 }
 .adv-decor-wrapper {
-	@apply absolute rotate-90 origin-top-left -left-1 md:-left-sm top-0 mt-[152px] md:mt-[195px] overflow-hidden;
+	@apply absolute rotate-90 origin-top-left -left-1 md:-left-sm top-0 mt-[142px] md:mt-[195px] overflow-hidden;
 }
 .adv-decor {
 	@apply flex font-bold text-2xl h-max will-change-transform;
