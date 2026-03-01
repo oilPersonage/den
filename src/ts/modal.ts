@@ -67,7 +67,8 @@ timeline
   );
 
 btnOpenModal.forEach((el) =>
-  el.addEventListener("click", () => {
+  el.addEventListener("click", (e) => {
+    e.preventDefault();
     modal.classList.add("opened");
     timeline.speed = 1;
     timeline.play();
