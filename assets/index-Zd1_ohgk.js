@@ -1,1 +1,0 @@
-import{n as a,a as b}from"./parser-BXmmdfUt.js";const t=(e,r,c)=>(((1-3*c+3*r)*e+(3*c-6*r))*e+3*r)*e,l=(e,r,c)=>{let n=0,i=1,s,o,u=0;do o=n+(i-n)/2,s=t(o,r,c)-e,s>0?i=o:n=o;while(b(s)>1e-7&&++u<100);return o},B=(e=.5,r=0,c=.5,n=1)=>e===r&&c===n?a:i=>i===0||i===1?i:t(l(i,e,c),r,n);export{B as c};
