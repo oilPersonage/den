@@ -3,10 +3,11 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js'
 import { HDRLoader } from 'three/addons/loaders/HDRLoader.js'
 import { factoryShadow } from './factoryShadow'
+export const isMobile = window.matchMedia('(max-width: 480px)').matches
 import GUI from 'lil-gui'
 // const gui = new GUI()
 
-export const TARGET = new THREE.Vector3(0, 0, -0)
+export const TARGET = isMobile ? new THREE.Vector3(-1.5, 0, 1.5) : new THREE.Vector3(0, 0, -0)
 let animatedId = null
 const lightData = {
 	1: { x: -7, y: 16, z: 7, strength: 1500 },

@@ -20,7 +20,7 @@ typingList.forEach((el) =>
 		y: [14, 0],
 		opacity: [0, 1],
 		duration: 600,
-		delay: stagger('-10', { start: 200, from: 'last' }),
+		delay: stagger(10, { start: 200 }),
 		easing: 'inSine',
 		autoplay: onScroll({ enter: '80% 20%', leave: 'top 80%' }),
 	}),
@@ -35,7 +35,7 @@ fromBottomList.forEach((el) => {
 		duration: 600,
 		delay: stagger(-delay, { start: delay * items.length, from: 'last' }),
 		easing: 'inSine',
-		autoplay: onScroll({ enter: '80% 20%', leave: 'top 80%' }),
+		autoplay: onScroll(),
 	})
 })
 

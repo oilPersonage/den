@@ -3,7 +3,9 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-		<meta name="theme-color" content="#f9f9f9" />
+		<!--<meta name="theme-color" content="#f9f9f9" />-->
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="default" />
 
 		<link rel="icon" type="image/svg+xml" href="/vite.svg" />
 		<meta http-equiv="x-ua-compatible" content="ie=edge" />
@@ -13,9 +15,30 @@
 			// }
 			// window.scrollTo(0, 0)
 		</script>
+		<title>Строительная компания | Дома под ключ | [Город]</title>
+		<meta
+			name="description"
+			content="Строительство домов под ключ в [Город]. Модульные дома, каркасные технологии. Быстро. Надежно. От производителя."
+		/>
+
+		<!-- Open Graph -->
+		<meta property="og:title" content="Строительная компания [Название] | Дома под ключ" />
+		<meta property="og:description" content="Профессиональное строительство домов в [Город]. Качество гарантируем." />
+		<meta property="og:image" content="[ссылка_на_лого_1200x630].jpg" />
+		<meta property="og:url" content="https://вашсайт.ru" />
+		<meta property="og:type" content="website" />
+
+		<!-- Twitter -->
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content="Строительная компания [Название]" />
+		<meta name="twitter:description" content="Дома под ключ от производителя" />
+
+		<!-- Бизнес -->
+		<meta name="business:contact_data:country_name" content="Россия" />
+		<meta name="business:contact_data:city" content="[Город]" />
+
 		<link href="https://fonts.googleapis.com/css2?family=Play:wght@400;700&display=swap" rel="stylesheet" />
-		<link rel="stylesheet" href="/src/css/style.css?v1" />
-		<title>den</title>
+		<link rel="stylesheet" href="/src/css/style.css" />
 	</head>
 	<body>
 		<!--<div id="header-sentinel" class="absolute top-0 w-full h-17"></div>-->
@@ -1306,7 +1329,7 @@
 			</div>
 
 			<div class="wrapper">
-				<div class="adv-wrapper min-h-[500vh] relative w-full">
+				<div class="adv-wrapper min-h-[500dvh] relative w-full">
 					<div class="adv" data-animate-container>
 						<h2 class="py-lg max-md:pt-sm" data-typing>Чем мы отличаемся от других производителей?</h2>
 						<div class="adv-decor-wrapper">
@@ -1314,12 +1337,19 @@
 							<span class="adv-decor-line"></span>
 							<span class="adv-decor-line"></span>
 							<span class="adv-decor-line"></span>
-							<div class="adv-decor">
-								<p data-from-bottom>СОБСТВЕННОЕ ПРОИЗВОДСТВО</p>
-								<p data-from-bottom>ГАРАНТИЯ 3 ГОДА</p>
-								<p data-from-bottom>КОМПЛЕКСНЫЙ ПОДХОД</p>
-								<p data-from-bottom>СКОРОСТЬ</p>
+							<div data-from-bottom class="adv-decor">
+								<p class="active">СОБСТВЕННОЕ ПРОИЗВОДСТВО</p>
+								<p>ГАРАНТИЯ 3 ГОДА</p>
+								<p>КОМПЛЕКСНЫЙ ПОДХОД</p>
+								<p>СКОРОСТЬ</p>
 							</div>
+						</div>
+						<div class="adv-right-progress">
+							<p class="font-display">progress</p>
+							<div class="adv-right-line absolute"></div>
+							<p class="adv-right-number">1</p>
+							<p class="adv-right-number">2</p>
+							<p class="adv-right-number">3</p>
 						</div>
 						<div class="adv-main">
 							<div class="adv-text-box">
@@ -1676,7 +1706,7 @@
 			</div>
 		</section>
 
-		<div class="fixed loader flex items-center justify-center inset-0 bg-bg z-10">
+		<div class="fixed loader flex items-center justify-center inset-0 bottom-4 z-10">
 			<div class="text-currentColor">
 				<div class="loading-shadow absolute bottom-1 bg-currentColor w-full h-8 rounded-[50%]"></div>
 				<div class="loading-wrapper">

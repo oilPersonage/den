@@ -46,19 +46,31 @@
 }
 
 html {
-	position: relative;
-	background: #f9f9f9;
-	height: 100vh;
+	background: var(--color-bg);
+	min-height: 200vh !important;
+	/*background-color: transparent !important;*/
+	background-repeat: no-repeat !important;
+	background-attachment: fixed !important;
+	min-height: 100dvh !important;
+
+	scroll-behavior: smooth !important;
+	scroll-padding-top: var(--spacing-header);
+
+	-webkit-font-smoothing: antialiased;
+	-webkit-text-size-adjust: 100%;
+	-moz-osx-font-smoothing: grayscale;
+	text-rendering: optimizeLegibility;
 }
 
 body {
-	background: transparent;
 	padding-top: env(safe-area-inset-top);
+	position: relative;
+	overflow-x: hidden;
 }
 @layer base {
-	body {
-		@apply bg-bg text-black;
-	}
+	/*body {*/
+	/*@apply text-black;*/
+	/*}*/
 	h1,
 	h1 span {
 		@apply text-h1 font-bold tracking-tight font-display leading-[1.1];
@@ -247,16 +259,6 @@ body {
 	}
 }
 
-html {
-	scroll-behavior: smooth !important;
-	overflow-y: auto;
-	scroll-padding-top: var(--spacing-header);
-
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
-	text-rendering: optimizeLegibility;
-}
-
 body.menu-opened {
 	overscroll-behavior: none;
 	touch-action: none;
@@ -390,7 +392,9 @@ a:hover .svg-link {
 .loading-inner {
 	@apply origin-bottom;
 }
-
+.loader {
+	@apply bg-bg;
+}
 .loader.closed {
 	@apply pointer-events-none select-none;
 }
@@ -554,8 +558,12 @@ a:hover .svg-link {
 .adv-main {
 	@apply relative flex flex-col flex-1;
 }
+.adv-right-progress,
 .adv-decor-wrapper {
-	@apply absolute rotate-90 origin-top-left -left-1 md:-left-sm top-0 mt-[142px] md:mt-[195px] overflow-hidden;
+	@apply absolute mt-[293px] top-0 rotate-90 origin-top-left;
+}
+.adv-decor-wrapper {
+	@apply -left-1 md:-left-sm overflow-hidden md:mt-[195px];
 }
 .adv-decor {
 	@apply flex font-bold text-2xl h-max will-change-transform;
@@ -563,9 +571,7 @@ a:hover .svg-link {
 .adv-decor p {
 	@apply text-nowrap opacity-15 pr-md;
 	will-change: opacity;
-}
-.adv-decor p:first-child {
-	@apply !opacity-100;
+	transition: opacity 0.6s ease-in-out;
 }
 .adv-decor p.active {
 	@apply opacity-100;
@@ -573,24 +579,39 @@ a:hover .svg-link {
 .adv-img:first-child {
 	translate: 0 0;
 }
-
-.adv-img:not(:first-child) {
-	@apply will-change-transform;
-	transform: translateY(100%);
+.adv .adv-img {
+	@apply duration-1000 transition-transform translate-y-full;
+}
+.adv-img:first-child {
+	@apply translate-y-0;
+}
+.adv-img.active {
+	@apply translate-y-0;
 }
 .adv-img img {
-	@apply w-full h-full object-cover bg-bg2;
+	@apply w-full h-full object-cover;
 }
-
+.adv-text-inner.active-0 {
+	@apply translate-x-0;
+}
+.adv-text-inner.active-1 {
+	@apply -translate-x-full;
+}
+.adv-text-inner.active-2 {
+	@apply -translate-x-[calc(100%*2)];
+}
+.adv-text-inner.active-3 {
+	@apply -translate-x-[calc(100%*3)];
+}
 .adv-text-content {
 	@apply relative flex-1 overflow-hidden;
 }
 .adv-text-box {
-	@apply md:absolute z-4 w-full md:w-115 -top-px left-0 pb-md flex flex-col bg-bg justify-between *:flex-1 gap-md;
+	@apply md:bg-bg md:absolute z-4 w-full md:w-115 -top-px left-0 pb-lg flex flex-col justify-between *:flex-1 gap-md;
 }
 
 .adv-text-inner {
-	@apply will-change-transform flex;
+	@apply will-change-transform flex transition-transform duration-600;
 }
 
 .adv-text-content p {
@@ -620,14 +641,10 @@ a:hover .svg-link {
 	@apply left-0;
 }
 .adv-decor-line:nth-child(3) {
-	@apply left-1.5;
+	@apply left-1;
 }
 .adv-decor-line:nth-child(4) {
-	@apply left-3;
-}
-
-.adv-line-bg {
-	@apply absolute z-1 left-0 top-0 w-3 h-full bg-bg;
+	@apply left-2;
 }
 
 .main-variants-img {
@@ -635,4 +652,20 @@ a:hover .svg-link {
 }
 .main-variants-img.active {
 	@apply opacity-100;
+}
+
+.adv-right-progress {
+	@apply absolute -right-md flex flex-col justify-between md:mt-[192px] rotate-0 origin-top-left font-display;
+}
+.adv-right-progress p:not(.adv-right-number) {
+	writing-mode: vertical-rl;
+}
+.adv-right-number:last-child {
+	@apply pb-0;
+}
+.adv-right-number {
+	@apply text-xs p-1.25 bg-bg relative leading-[0.6];
+}
+.adv-right-line {
+	@apply w-px bg-black mt-20 md:mt-16.5 left-2 h-0;
 }
