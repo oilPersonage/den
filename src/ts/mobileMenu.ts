@@ -77,6 +77,7 @@ if (isMobile) {
     });
 
   function toggleMenu(event: Event) {
+    if (event.target.id === 'catalog-btn') return;
     navsWrapper?.classList.toggle("opened");
     document.body.classList.toggle("menu-opened");
 

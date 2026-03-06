@@ -7,6 +7,7 @@ async function bootstrap() {
 	// Это не блокирует запуск анимации интро
 	const heavyModules = [
 		import('./ts/mobileMenu'),
+		import('./ts/catalog'),
 		import('./ts/scrollAnimation'),
 		import('./ts/model'),
 		import('./ts/modal'),

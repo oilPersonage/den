@@ -1,22 +1,24 @@
+import GUI from 'lil-gui'
 import * as THREE from 'three'
-import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js'
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'
 import { HDRLoader } from 'three/addons/loaders/HDRLoader.js'
 import { factoryShadow } from './factoryShadow'
 export const isMobile = window.matchMedia('(max-width: 480px)').matches
-import GUI from 'lil-gui'
 // const gui = new GUI()
 
 export const TARGET = isMobile ? new THREE.Vector3(-1.5, 0, 1.5) : new THREE.Vector3(0, 0, -0)
 let animatedId = null
+let isPlaying = false
 const lightData = {
-	1: { x: -7, y: 16, z: 7, strength: 1500 },
-	2: { x: 11, y: 12, z: -8, strength: 1000 },
-	3: { x: -7, y: 5, z: -10, strength: 1000 },
+	1: { x: -0.8, y: 20, z: 15, strength: 2400 },
+	2: { x: 20, y: 20, z: -6, strength: 2400 },
+	3: { x: -20, y: 8, z: -6, strength: 2500 },
 	// 4: { x: 0, y: 3, z: 4, strength: 10, target: new THREE.Vector3(0, -20, 4), noShadow: true },
 	// 5: { x: -1, y: 3, z: 4, strength: 10, target: new THREE.Vector3(0, -20, 4), noShadow: true },
 }
 export let mixer = null
+const actions = []
 
 const wrapper = document.querySelector('.canvas-wrapper')
 const clock = new THREE.Clock() // для delta time
@@ -96,6 +98,7 @@ loader.load(
 			const action = mixer.clipAction(clip)
 			action.setLoop(THREE.LoopPingPong, Infinity)
 			action.play() // ВСЕ анимации по своим таймингам!
+			actions.push(action)
 		})
 
 		gltf.scene.traverse((obj) => {
@@ -150,7 +153,7 @@ hdrLoader.load('./sky.hdr', (texture) => {
 	scene.background = null
 })
 
-const light = new THREE.AmbientLight(0xffffff, 1) // soft white light
+const light = new THREE.AmbientLight(0xffffff, 0.7) // soft white light
 scene.add(light)
 
 camera.position.set(5, 5, 5)
@@ -161,24 +164,32 @@ camera.lookAt(TARGET)
 function animate() {
 	animatedId = requestAnimationFrame(animate)
 	controls.update()
-	const delta = clock.getDelta() // время между кадрами
-	mixer?.update(delta)
+	if (isPlaying && mixer) {
+		mixer.update(clock.getDelta()) // ✅ ТОЛЬКО когда играет
+	}
 
 	renderer.render(scene, camera)
 }
 
-// 2. Логика Observer
+export function stopAnimationModel() {
+	clock.stop()
+	cancelAnimationFrame(animatedId)
+	isPlaying = false
+}
+export function playAnimationModel() {
+	if (isPlaying) return
+	clock.start()
+	animate()
+	isPlaying = true
+}
+
 const observer = new IntersectionObserver(
 	(entries) => {
 		entries.forEach((entry) => {
 			if (entry.isIntersecting) {
-				// Хедер виден — запускаем цикл рендера
-				console.log('Header visible: Start Loop')
-				animate()
+				playAnimationModel()
 			} else {
-				// Хедер ушел — стопаем рендер, чтобы не греть видюху
-				console.log('Header hidden: Stop Loop')
-				cancelAnimationFrame(animatedId)
+				stopAnimationModel()
 			}
 		})
 	},

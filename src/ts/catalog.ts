@@ -1,0 +1,98 @@
+import { animate, createTimeline, stagger, waapi } from 'animejs'
+import { playAnimationModel, stopAnimationModel } from './model'
+import { isMobile } from './intro'
+
+const catalogCloseBtn = document.querySelector('#catalog-close-btn') as HTMLLinkElement
+const catalogBtn = document.querySelector('#catalog-btn') as HTMLLinkElement
+const catalogWrapper = document.querySelector('#catalog-wrapper') as HTMLDivElement
+const catalogInner = document.querySelector('#catalog-inner') as HTMLDivElement
+const items = document.querySelectorAll('[data-catalog-bottom]') as NodeListOf<HTMLDivElement>
+const mobileItems = document.querySelectorAll('[data-catalog-bottom] > p') as NodeListOf<HTMLDivElement>
+
+let isOpened = false
+
+const time = 500
+
+const translate = isMobile ? 'translateX' : 'translateY'
+
+const tl = createTimeline({
+	autoplay: false,
+	defaults: {
+		ease: 'outExpo',
+	},
+	onComplete(self) {
+		if (self.reversed) {
+			catalogWrapper.classList.remove('opened')
+			playAnimationModel()
+		}
+	},
+})
+
+const innerAnimate = waapi.animate(catalogInner, {
+	[translate]: [50, 0],
+	opacity: [0, 1],
+	duration: time,
+})
+
+const itemsAnimate = waapi.animate(items, {
+	[translate]: [isMobile ? 30 : 60, 0],
+	opacity: [0, 1],
+	duration: time,
+	// ease: spring({ bounce: 0.4, duration: 500 }),
+	delay: stagger((time - 300) / items.length),
+})
+tl.sync(innerAnimate, 0).sync(itemsAnimate, '-=300')
+
+function toggleCatalog(e) {
+	e.preventDefault()
+	if (isOpened) {
+		tl.reverse()
+	} else {
+		stopAnimationModel()
+		catalogWrapper.classList.add('opened')
+		tl.play()
+	}
+	isOpened = !isOpened
+}
+
+catalogCloseBtn.addEventListener('click', toggleCatalog)
+catalogBtn.addEventListener('click', toggleCatalog)
+
+// SCROLL HIDE END FIELD
+
+function initScrollEndClass(container) {
+  const trigger = document.createElement('div')
+  container.classList.add('has-scroll')
+  trigger.className = 'scroll-end-trigger'
+  trigger.style.height = '1px'
+  container.append(trigger)
+
+  const observer = new IntersectionObserver(
+    ([entry]) => {
+    	console.log('enry')
+      container.classList.toggle('scrolled-to-end', !entry.isIntersecting)
+    },
+    {
+      root: container,
+      threshold: 0,
+      rootMargin: '0px 0px -1px 0px'
+    }
+  )
+
+  observer.observe(trigger)
+}
+items.forEach(container => {
+	const el = container.querySelector('.catalog-sub-wrapper')
+  const hasScrollbar = el.scrollHeight > el.clientHeight
+
+  if (hasScrollbar) {
+    initScrollEndClass(el)
+  }
+})
+
+mobileItems.forEach(item => {
+	item.addEventListener('click', () => {
+		const subWrapper = item.parentElement.querySelector('.catalog-sub-wrapper')
+		subWrapper?.classList.toggle('opened')
+	})
+})
