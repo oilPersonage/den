@@ -231,7 +231,7 @@ body {
 	}
 
 	.svg-link {
-		@apply flex min-w-2 h-2 mb-1.5 -mr-1.5 ml-xs stroke-1;
+		@apply flex min-w-2 h-2 mb-1.5 -mr-2.5 ml-xs stroke-1;
 	}
 
 	.wrapper {
@@ -374,7 +374,7 @@ navs {
 }
 
 a:hover .svg-link {
-	animation: contacts-animation 3s linear infinite;
+	@apply md:animate-[contacts-animation_3s_linear_infinite];
 }
 .header-logo {
 	@apply flex h-11 text-black mr-[180px] max-md:opacity-100 w-9;
@@ -778,16 +778,19 @@ footer p {
 	aspect-ratio: unset !important;
 }
 .catalog-sub-menu {
-	@apply flex-1 flex flex-col md:absolute left-0 top-0 right-0 z-3 md:pr-2 md:pb-3 overflow-hidden min-h-0;
+	@apply flex-1 flex flex-col md:absolute left-0 top-0 right-0 z-3 md:pr-2.5 md:pb-3 overflow-hidden min-h-0;
 }
 .catalog-sub-menu a:last-child {
 	@apply max-md:mb-md;
 }
 .catalog-sub-menu a {
-	@apply flex gap-sm flex-row w-full max-md:pl-0 max-md:pr-1.5 max-md:py-0 p-1 pr-md;
+	@apply flex gap-sm flex-row w-full max-md:pl-0 max-md:pr-2.5 p-0 pr-md;
 }
 .catalog-sub-menu a.active {
 	@apply flex-1;
+}
+.catalog-sub-menu a .svg-link {
+	/*@apply pr-0 ml-0;*/
 }
 .catalog-sub-menu p {
 	@apply leading-[1.2] py-1 flex-1;
@@ -800,7 +803,7 @@ footer p {
 }
 
 #catalog-close-btn {
-	@apply absolute right-1 md:right-xl top-2 md:top-4 font-display font-bold uppercase max-md:text-[11px];
+	@apply absolute right-1 md:right-xl top-2 md:top-4.5 font-display font-bold uppercase max-md:text-[11px];
 }
 
 .catalog-item-svg {
