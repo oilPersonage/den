@@ -60,39 +60,55 @@ catalogBtn.addEventListener('click', toggleCatalog)
 
 // SCROLL HIDE END FIELD
 
-function initScrollEndClass(container) {
-  const trigger = document.createElement('div')
-  container.classList.add('has-scroll')
-  trigger.className = 'scroll-end-trigger'
-  trigger.style.height = '1px'
-  container.append(trigger)
+function createScrollTriggerObserver(container: HTMLElement, config) {
+	const trigger = document.createElement('div')
+	trigger.className = config.className
+	console.log(trigger)
+	container.append(trigger)
 
-  const observer = new IntersectionObserver(
-    ([entry]) => {
-    	console.log('enry')
-      container.classList.toggle('scrolled-to-end', !entry.isIntersecting)
-    },
-    {
-      root: container,
-      threshold: 0,
-      rootMargin: '0px 0px -1px 0px'
-    }
-  )
+	const observer = new IntersectionObserver(
+		([entry]) => {
+			console.log(entry)
+			container.classList.toggle(
+				config.className.replace('-trigger', ''),
+				entry.isIntersecting === config.isIntersectingAction,
+			)
+		},
+		{
+			root: container,
+			threshold: 0,
+			rootMargin: config.rootMargin,
+		},
+	)
 
-  observer.observe(trigger)
+	observer.observe(trigger)
+	return observer // для disconnect при необходимости
 }
-items.forEach(container => {
-	const el = container.querySelector('.catalog-sub-wrapper')
-  const hasScrollbar = el.scrollHeight > el.clientHeight
 
-  if (hasScrollbar) {
-    initScrollEndClass(el)
-  }
+items.forEach((container) => {
+	const el = container.querySelector('.catalog-sub-wrapper') as HTMLElement
+	const hasScrollbar = el.scrollHeight > el.clientHeight
+	console.log(hasScrollbar)
+	if (hasScrollbar) {
+		el.classList.add('has-scroll')
+		createScrollTriggerObserver(el, {
+			className: 'scroll-end-trigger',
+			isIntersectingAction: false, // класс когда НЕ видно
+			rootMargin: '0px 0px -100% 0px',
+		})
+
+		// Начало скролла
+		createScrollTriggerObserver(el, {
+			className: 'scroll-top-trigger',
+			isIntersectingAction: true, // класс когда видно
+			rootMargin: '-100% 0px 0px 0px',
+		})
+	}
 })
 
-mobileItems.forEach(item => {
-	item.addEventListener('click', () => {
-		const subWrapper = item.parentElement.querySelector('.catalog-sub-wrapper')
-		subWrapper?.classList.toggle('opened')
-	})
-})
+// mobileItems.forEach(item => {
+// 	item.addEventListener('click', () => {
+// 		const subWrapper = item.parentElement.querySelector('.catalog-sub-wrapper')
+// 		subWrapper?.classList.toggle('opened')
+// 	})
+// })

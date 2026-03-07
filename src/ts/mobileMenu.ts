@@ -29,7 +29,7 @@ if (isMobile) {
     .add(
       closeChars,
       {
-        translateY: [0, -14],
+        translateY: [0, -12],
         easing: "inOutCirc",
         delay: stagger(60)
       },
