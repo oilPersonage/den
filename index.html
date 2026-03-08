@@ -43,10 +43,10 @@
 		<meta name="business:contact_data:city" content="[Город]" />
 
 		<link href="https://fonts.googleapis.com/css2?family=Play:wght@400;700&display=swap" rel="stylesheet" />
-		<script type="module" crossorigin src="/den/assets/index-CCk3G1kc.js"></script>
-		<link rel="stylesheet" crossorigin href="/den/assets/index-CKl7SMDA.css">
+		<script type="module" crossorigin src="/den/assets/index-DU0pmuXr.js"></script>
+		<link rel="stylesheet" crossorigin href="/den/assets/index-DbPiZ1Rv.css">
 	</head>
-	<body>
+	<body data-page-index>
 		<!--<div id="header-sentinel" class="absolute top-0 w-full h-17"></div>-->
 		<header id="header" class="main-wrapper fixed z-4 top-0 left-0 right-0 border-b">
 			<div class="flex justify-between h-header items-center">
@@ -72,7 +72,7 @@
 				</div>
 				<div class="navs-wrapper">
 					<navs>
-						<a href="#main" class="link btn" data-ai="1">
+						<a href="/" class="link btn font-bold" data-ai="1">
 							Главная
 							<span class="btn-tl"></span>
 							<span class="btn-tr"></span>
@@ -86,28 +86,28 @@
 							<span class="btn-bl"></span>
 							<span class="btn-br"></span>
 						</a>
-						<a href="#rent" class="link btn" data-ai="1">
+						<a href="/den/rent" class="link btn" data-ai="1">
 							Аренда
 							<span class="btn-tl"></span>
 							<span class="btn-tr"></span>
 							<span class="btn-bl"></span>
 							<span class="btn-br"></span>
 						</a>
-						<a href="#projects" class="link btn" data-ai="1">
+						<a href="/den/projects" class="link btn" data-ai="1">
 							Проекты
 							<span class="btn-tl"></span>
 							<span class="btn-tr"></span>
 							<span class="btn-bl"></span>
 							<span class="btn-br"></span>
 						</a>
-						<a href="#" class="link btn" data-ai="1">
+						<a href="/den/questions" class="link btn" data-ai="1">
 							Вопрос - Ответ
 							<span class="btn-tl"></span>
 							<span class="btn-tr"></span>
 							<span class="btn-bl"></span>
 							<span class="btn-br"></span>
 						</a>
-						<a href="#" class="link btn" data-ai="1">
+						<a href="/den/contacts" class="link btn" data-ai="1">
 							Контакты
 							<span class="btn-tl"></span>
 							<span class="btn-tr"></span>
@@ -157,19 +157,19 @@
 				<div class="mt-auto mr-auto mb-lg md:my-auto flex flex-col gap-sm md:gap-lg">
 					<ul class="header-adv">
 						<li data-ai="4">
-							<span>10</span>
+							<span>14</span>
 							<p>лет на рынке</p>
 						</li>
 						<li data-ai="4">
-							<span>500+</span>
+							<span>3000+</span>
 							<p>проектов</p>
 						</li>
 						<li data-ai="4">
-							<span>30</span>
+							<span>10+</span>
 							<p>регионов поставок</p>
 						</li>
 					</ul>
-					<a href="#" id="header-button" class="btn uppercase biggest black btn-open-modal">
+					<a href="#" data-modal="request" id="header-button" class="btn uppercase biggest black btn-open-modal">
 						Оставить заявку
 						<span class="btn-tl"></span>
 						<span class="btn-tr"></span>
@@ -213,6 +213,7 @@
 
 			<a href="#" class="btn currentColor biggest"> Подробнее </a>-->
 		</section>
+
 		<section class="big-space max-md:pb-xl" data-animate-container>
 			<div class="wrapper">
 				<h2 data-typing class="mb-lg">Почему с нами выгодно работать?</h2>
@@ -1436,7 +1437,7 @@
 					</div>
 					<div class="flex flex-col gap-xs max-md:mt-sm md:gap-sm">
 						<p class="font-bold font-display" data-from-bottom>Готовы начать? Свяжитесь с нами</p>
-						<a href="#" class="btn black biggest btn-open-modal">
+						<a href="#" class="btn black biggest btn-open-modal" data-modal="request">
 							Связаться
 							<span></span>
 							<span></span>
@@ -1825,10 +1826,10 @@
 			</div>
 		</div>
 
-		<div class="modal">
+		<div class="modal" data-modal-name="request">
 			<div class="modal-wrapper">
 				<div class="modal-inner">
-					<h4 class="mb-md">Оставить заявку</h4>
+					<h4 data-modal-title class="mb-md">Оставить заявку</h4>
 					<div class="flex max-md:flex-col gap-md mb-md">
 						<label for="name">
 							<p data-modal-anim="1">Ваше имя</p>
@@ -1847,6 +1848,7 @@
 									class="input-base"
 									data-modal-anim="2"
 									type="text"
+									data-phone
 									placeholder="Телефон"
 									name="phone"
 									id="phone"
@@ -1879,7 +1881,7 @@
 					</label>
 
 					<div class="flex flex-col gap-sm">
-						<a data-modal-anim="1" href="#" class="btn currentColor">
+						<a data-modal-anim="1" href="#" class="btn black">
 							Отправить
 							<span class="btn-tl"></span>
 							<span class="btn-tr"></span>
@@ -1889,9 +1891,73 @@
 
 						<span data-modal-anim="2" class="flex flex-col leading-[1.1]">
 							Нажимая кнопку, вы даете согласие на обработку персональных данных в соответствии с
-							<a href="#" class="link-short inline">Политикой конфиденциальности</a>
+							<a href="#" class="link-short inline" data-modal="polities">Политикой конфиденциальности</a>
 						</span>
 					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="modal modal-right" data-modal-name="polities" data-lenis-prevent>
+			<div class="modal-wrapper">
+				<div class="modal-inner">
+					<h4 data-modal-title class="mb-xs">Политика конфиденциальности</h4>
+					<p data-modal-anim="1" class="mb-md">Дата вступления в силу: 8 марта 2026 г.</p>
+					<ul class="flex flex-col gap-sm" data-modal-anim="1">
+						<li>
+							<p>Общие положения</p>
+							<p>
+								Настоящая Политика конфиденциальности (далее — «Политика») определяет порядок обработки персональных
+								данных пользователей сайта [НАЗВАНИЕ_САЙТА] (далее — «Сайт», «мы», «нас»).
+							</p>
+							<p>Мы собираем минимальный объем данных, необходимый только для обратной связи.</p>
+						</li>
+						<li>
+							<p>Какие данные мы собираем</p>
+							<p>Мы обрабатываем только: Имя, Номер телефона, Текст сообщения</p>
+							<p>Эти данные передаются на электронную почту компании исключительно для обработки вашего обращения.</p>
+						</li>
+						<li>
+							<p>Цели обработки данных</p>
+							<p>
+								Персональные данные используются исключительно для: Обратной связи по вашему запросу, Связаться с вами
+								по телефону или email
+							</p>
+
+							<p>Мы НЕ используем данные для: Маркетинга и рассылок, Передачи третьим лицам, Аналитики и статистики</p>
+						</li>
+						<li>
+							<p>Как мы храним данные</p>
+							<p>
+								Данные не сохраняются на сервере сайта Передаются только на корпоративную электронную почту Хранятся не
+								более 30 дней или до выполнения запроса Доступ имеют только ответственные сотрудники
+							</p>
+						</li>
+						<li>
+							<p>Передача данных третьим лицам Мы НЕ передаем ваши данные:</p>
+							<p>
+								Рекламным сетям Аналитическим сервисам Другим третьим лицам Единственная передача — на нашу
+								корпоративную почту.
+							</p>
+						</li>
+						<li>
+							<p>Ваши права Вы можете в любой момент:</p>
+							<p>
+								апросить удаление ваших данных Отозвать согласие на обработку Получить информацию об обработке Напишите
+								на [email_компании]
+							</p>
+						</li>
+						<p>
+							Безопасность данных Передача по защищенному протоколу HTTPS Доступ к почте по двухфакторной аутентификации
+							Регулярное удаление обработанных обращений
+						</p>
+						<p>
+							Изменения политики Мы можем обновлять Политику. Актуальная версия всегда на этой странице. 9. Контакты По
+							вопросам конфиденциальности: Email: [email_компании] Телефон: [телефон_компании]
+						</p>
+					</ul>
+
+					<a href="#" class="btn black mt-lg ml-auto" data-modal-close="polities">Закрыть</a>
 				</div>
 			</div>
 		</div>
@@ -2080,7 +2146,9 @@
 									</svg>
 								</a>
 								<a href="#" class="btn link">
-									<p>Комплектации разные: с тамбуром, перегородками, комнатами, санузлом и тд</p>
+									<p class="catalog-only-text">
+										Комплектации разные: с тамбуром, перегородками, комнатами, санузлом и тд
+									</p>
 									<span></span>
 									<span></span>
 									<span></span>
