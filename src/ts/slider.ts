@@ -46,7 +46,7 @@ for (const slide of sliders) {
     generateDots(api, {
       dotsWrapper: ".card-variant-btns",
       parentIdentifier: ".card",
-      selector: "a"
+      selector: ".card-variant-btns a"
     });
   }
 }

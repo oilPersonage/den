@@ -103,10 +103,10 @@ const generateDots: TGenerateDots = (api, generateDotsOptions): void => {
     parent = api.dom.container.querySelector(dotsWrapper) as HTMLElement;
   }
   if (!parent) throw new Error("Parent element for dots not found");
-
   const dots = [...parent.querySelectorAll(selector || "button")].filter(
     (el) => el.offsetParent !== null
   ) as HTMLElement[];
+  console.log(dots);
   dots.forEach((dot, idx) => {
     dot.addEventListener("click", (e) => {
       e.preventDefault();
