@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import { TProductPicture } from "src/libs/products";
+import CustomImage from "./customImage";
 
 export default function ProductPicture({
   pictures
@@ -24,7 +25,7 @@ export default function ProductPicture({
         className="flex-1 bg-bg2 items-center flex justify-center"
         data-ai="4"
       >
-        <img src={pictures[currentPicture]?.src} alt="" />
+        <CustomImage src={pictures[currentPicture]?.src || ""} alt="" />
       </div>
       <div className="grid grid-cols-[1fr] grid-rows-4 *:bg-bg2 gap-xs *:min-w-20 *:aspect-square">
         {pictures.map((el, idx) => (
@@ -35,7 +36,7 @@ export default function ProductPicture({
             data-ai="4"
             onClick={() => setPicture(idx)}
           >
-            <img src={el.smallSrc} alt="" />
+            <CustomImage src={el.smallSrc} alt="" />
             <span></span>
             <span></span>
             <span></span>

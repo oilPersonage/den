@@ -41,7 +41,11 @@ export default async function RootLayout({
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 
-        <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+        <link
+          rel="icon"
+          type="image/svg+xml"
+          href={`${process.env.NEXT_PUBLIC_BASE_PATH}/vite.svg`}
+        />
         {/* <meta http-equiv="x-ua-compatible" content="ie=edge" /> */}
         {/* <Script>
 			if ('scrollRestoration' in history) {
@@ -80,7 +84,10 @@ export default async function RootLayout({
         <Policies />
         <Catalog products={groupedProducts} />
       </body>
-      <Script src="/scripts/main.js?v1" type="module" />
+      <Script
+        src={`${process.env.NEXT_PUBLIC_BASE_PATH}/scripts/main.js`}
+        type="module"
+      />
     </html>
   );
 }

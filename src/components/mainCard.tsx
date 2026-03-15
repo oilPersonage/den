@@ -1,5 +1,6 @@
 import { Product } from "src/libs/products";
 import { priceFormatter } from "src/utils/priceFormater";
+import CustomImage from "./customImage";
 
 export default function MainCard({ product }: { product: Product }) {
   const { pictures, h1, headingDescription, price, slug, characters } = product;
@@ -18,7 +19,7 @@ export default function MainCard({ product }: { product: Product }) {
             {pictures.map((el, idx) => (
               <div key={idx} className="slide">
                 <div className="card-img">
-                  <img src={el.smallSrc} alt="" />
+                  <CustomImage src={el.smallSrc} alt="" />
                 </div>
               </div>
             ))}

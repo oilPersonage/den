@@ -1,4 +1,5 @@
 import { Product } from "src/libs/products";
+import CustomImage from "./customImage";
 
 export default function Catalog({
   products
@@ -43,7 +44,7 @@ export default function Catalog({
                       href={`/product/${slug}`}
                       className="btn link"
                     >
-                      <img
+                      <CustomImage
                         className="catalog-sub-img"
                         src="/pictures/fallback.png"
                         alt=""

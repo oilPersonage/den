@@ -1,4 +1,5 @@
 import Request from "components/request";
+import CustomImage from "src/components/customImage";
 import Loader from "src/components/loader";
 import MainCard from "src/components/mainCard";
 import Navs from "src/components/navs";
@@ -303,7 +304,7 @@ export default async function Home() {
               </div>
               <div className="slide">
                 <a href="#" className="logo-image">
-                  <img
+                  <CustomImage
                     src="/logotypes/perm_metal.png"
                     alt="logotype perm metal"
                   />
@@ -311,12 +312,15 @@ export default async function Home() {
               </div>
               <div className="slide">
                 <a href="#" className="logo-image">
-                  <img src="/logotypes/guardian.png" alt="logotype guardian" />
+                  <CustomImage
+                    src="/logotypes/guardian.png"
+                    alt="logotype guardian"
+                  />
                 </a>
               </div>
               <div className="slide">
                 <a href="#" className="logo-image">
-                  <img
+                  <CustomImage
                     className="mix-blend-difference"
                     src="/logotypes/mex_factory.png"
                     alt="logotype mex_factory"
@@ -843,12 +847,12 @@ export default async function Home() {
               </div>
               <div className="slide">
                 <a href="#" className="logo-image">
-                  <img src="/logotypes/ural-him.png" alt="" />
+                  <CustomImage src="/logotypes/ural-him.png" alt="" />
                 </a>
               </div>
               <div className="slide">
                 <a href="#" className="logo-image">
-                  <img
+                  <CustomImage
                     className="mix-blend-difference"
                     src="/logotypes/torg.png"
                     alt=""
@@ -919,16 +923,16 @@ export default async function Home() {
               </div>
               <div className="adv-img-wrapper">
                 <div className="adv-img">
-                  <img data-zoom src="/pictures/card-4.jpg" alt="" />
+                  <CustomImage data-zoom src="/pictures/card-4.jpg" alt="" />
                 </div>
                 <div className="adv-img">
-                  <img src="/pictures/card-3.jpg" alt="" />
+                  <CustomImage src="/pictures/card-3.jpg" alt="" />
                 </div>
                 <div className="adv-img">
-                  <img src="/pictures/card-5.jpg" alt="" />
+                  <CustomImage src="/pictures/card-5.jpg" alt="" />
                 </div>
                 <div className="adv-img">
-                  <img src="/pictures/card-4.jpg" alt="" />
+                  <CustomImage src="/pictures/card-4.jpg" alt="" />
                 </div>
               </div>
             </div>
@@ -992,13 +996,13 @@ export default async function Home() {
       <section className="main-variants h-screen pt-header flex flex-col">
         <div className="w-full flex-1 p-md flex flex-col min-h-0">
           <div className="bg-bg2 relative flex flex-1 min-h-0 overflow-hidden">
-            <img
+            <CustomImage
               className="main-variants-img active"
               data-zoom
               src="/pictures/card-6.jpg"
               alt=""
             />
-            <img
+            <CustomImage
               className="main-variants-img"
               src="/pictures/card-7.jpg"
               alt=""
