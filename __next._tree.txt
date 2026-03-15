@@ -15,4 +15,4 @@
 :HL["/den/logotypes/mex_factory.png","image"]
 :HL["/den/logotypes/ural-him.png","image"]
 :HL["/den/logotypes/torg.png","image"]
-0:{"buildId":"Ue7jNn3_Tc4y-X0kQ2OdQ","tree":{"name":"","paramType":null,"paramKey":"","hasRuntimePrefetch":false,"slots":{"children":{"name":"__PAGE__","paramType":null,"paramKey":"__PAGE__","hasRuntimePrefetch":false,"slots":null,"isRootLayout":false}},"isRootLayout":true},"staleTime":300}
+0:{"buildId":"tH4v33suSndkhtx8tfWcP","tree":{"name":"","paramType":null,"paramKey":"","hasRuntimePrefetch":false,"slots":{"children":{"name":"__PAGE__","paramType":null,"paramKey":"__PAGE__","hasRuntimePrefetch":false,"slots":null,"isRootLayout":false}},"isRootLayout":true},"staleTime":300}

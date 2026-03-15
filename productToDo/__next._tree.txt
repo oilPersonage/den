@@ -4,4 +4,4 @@
 :HL["/den/_next/static/media/e7af107ebd9caa41-s.p.1c70c238.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
 :HL["/den/_next/static/media/f54eae68c77706ff-s.p.daecaad2.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
 :HL["/den/pictures/fallback.png","image"]
-0:{"buildId":"Ue7jNn3_Tc4y-X0kQ2OdQ","tree":{"name":"","paramType":null,"paramKey":"","hasRuntimePrefetch":false,"slots":{"children":{"name":"productToDo","paramType":null,"paramKey":"productToDo","hasRuntimePrefetch":false,"slots":{"children":{"name":"__PAGE__","paramType":null,"paramKey":"__PAGE__","hasRuntimePrefetch":false,"slots":null,"isRootLayout":false}},"isRootLayout":false}},"isRootLayout":true},"staleTime":300}
+0:{"buildId":"tH4v33suSndkhtx8tfWcP","tree":{"name":"","paramType":null,"paramKey":"","hasRuntimePrefetch":false,"slots":{"children":{"name":"productToDo","paramType":null,"paramKey":"productToDo","hasRuntimePrefetch":false,"slots":{"children":{"name":"__PAGE__","paramType":null,"paramKey":"__PAGE__","hasRuntimePrefetch":false,"slots":null,"isRootLayout":false}},"isRootLayout":false}},"isRootLayout":true},"staleTime":300}
