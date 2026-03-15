@@ -1,7 +1,8 @@
 import { isIndex, isQuestions } from "ts/config";
 
-const [logotype, intro] = await Promise.all([
+const [logotype, canvas, intro] = await Promise.all([
   import("ts/logotype"),
+  import("ts/dotsCanvas"),
   import("ts/intro")
 ]);
 

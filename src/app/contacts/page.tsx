@@ -102,7 +102,7 @@ export default function Contacts() {
               <RequestForm />
               <div className="h-full">
                 <CustomImage
-                  className="h-full object-cover"
+                  className="h-full object-cover saturate-0"
                   src="/pictures/map.png"
                   alt=""
                 />

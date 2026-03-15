@@ -78,6 +78,11 @@ export default async function RootLayout({
         <meta name="business:contact_data:city" content="[Город]" />
       </head>
       <body>
+        <div
+          id="dots-canvas"
+          className="fixed inset-0 -z-1 pointer-events-auto select-none"
+        ></div>
+
         {children}
 
         <Footer />

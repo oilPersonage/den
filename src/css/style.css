@@ -48,6 +48,8 @@
 
 html {
   background: var(--color-bg);
+  /* background: url("/bg-dot.png"), var(--color-bg); */
+  border: none;
   scroll-behavior: smooth !important;
   overscroll-behavior: none;
 

@@ -106,7 +106,7 @@ const generateDots: TGenerateDots = (api, generateDotsOptions): void => {
   const dots = [...parent.querySelectorAll(selector || "button")].filter(
     (el) => el.offsetParent !== null
   ) as HTMLElement[];
-  console.log(dots);
+
   dots.forEach((dot, idx) => {
     dot.addEventListener("click", (e) => {
       e.preventDefault();
@@ -137,7 +137,6 @@ const slider: TSliderInit = (target, options = {}, plugins = []) => {
   const slides = [
     ...track.querySelectorAll(":scope >  .slide")
   ] as HTMLElement[];
-  console.log(slides);
 
   const cleanOptions = Object.fromEntries(
     Object.entries(options).filter(([_, v]) => v !== undefined)
