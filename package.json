@@ -8,6 +8,7 @@
     "build:sc": "esbuild src/ts/main.ts --bundle --outdir=public/scripts --format=esm --minify --splitting=false",
     "build": "npm run clean && npm run build:sc && next build",
     "start": "next start",
+    "export": "next export",
     "preview": "npx serve out -l 3001 --single",
     "lint": "eslint",
     "clean": "rm -rf out .next"
