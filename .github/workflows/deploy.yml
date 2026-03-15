@@ -28,9 +28,6 @@ jobs:
       - name: Build project
         run: npm run build # esbuild + next build
 
-      - name: Export static files
-        run: npm run export # → out/
-
       # ✅ Копируем out/ → den/ для GitHub Pages
       - name: Prepare deployment folder
         run: |
