@@ -4,4 +4,4 @@
 :HL["/den/_next/static/media/e7af107ebd9caa41-s.p.1c70c238.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
 :HL["/den/_next/static/media/f54eae68c77706ff-s.p.daecaad2.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
 :HL["/den/pictures/fallback.png","image"]
-0:{"buildId":"kuHKFynaazVJvKkd90Jv2","tree":{"name":"","paramType":null,"paramKey":"","hasRuntimePrefetch":false,"slots":{"children":{"name":"questions","paramType":null,"paramKey":"questions","hasRuntimePrefetch":false,"slots":{"children":{"name":"__PAGE__","paramType":null,"paramKey":"__PAGE__","hasRuntimePrefetch":false,"slots":null,"isRootLayout":false}},"isRootLayout":false}},"isRootLayout":true},"staleTime":300}
+0:{"buildId":"WGG36Se3UnFt7pyCFhSwG","tree":{"name":"","paramType":null,"paramKey":"","hasRuntimePrefetch":false,"slots":{"children":{"name":"questions","paramType":null,"paramKey":"questions","hasRuntimePrefetch":false,"slots":{"children":{"name":"__PAGE__","paramType":null,"paramKey":"__PAGE__","hasRuntimePrefetch":false,"slots":null,"isRootLayout":false}},"isRootLayout":false}},"isRootLayout":true},"staleTime":300}
