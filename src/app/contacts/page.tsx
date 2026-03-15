@@ -1,6 +1,6 @@
 import CustomImage from "src/components/customImage";
 import Navs from "src/components/navs";
-import Request from "src/components/request";
+import RequestForm from "src/components/requestForm";
 
 export default function Contacts() {
   return (
@@ -99,9 +99,13 @@ export default function Contacts() {
               </div>
             </div>
             <div className="flex gap-xl *:flex-1">
-              <Request />
-              <div>
-                <CustomImage src="/pictures/map.png" alt="" />
+              <RequestForm />
+              <div className="h-full">
+                <CustomImage
+                  className="h-full object-cover"
+                  src="/pictures/map.png"
+                  alt=""
+                />
               </div>
             </div>
           </div>
