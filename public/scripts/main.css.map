@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../node_modules/lenis/dist/lenis.css"],
+  "sourcesContent": ["html.lenis,html.lenis body{height:auto}.lenis:not(.lenis-autoToggle).lenis-stopped{overflow:clip}.lenis [data-lenis-prevent],.lenis [data-lenis-prevent-wheel],.lenis [data-lenis-prevent-touch],.lenis [data-lenis-prevent-vertical],.lenis [data-lenis-prevent-horizontal]{overscroll-behavior:contain}.lenis.lenis-smooth iframe{pointer-events:none}.lenis.lenis-autoToggle{transition-property:overflow;transition-duration:1ms;transition-behavior:allow-discrete}\n"],
+  "mappings": ";AAAA,IAAI,CAAC;AAAM,IAAI,CAAV,MAAiB;AAAK,UAAO;AAAI;AAAC,CAAlC,KAAwC,KAAK,CAAC,iBAAiB,CAAC;AAAc,YAAS;AAAI;AAAC,CAA5F,MAAmG,CAAC;AAAoB,CAAxH,MAA+H,CAAC;AAA0B,CAA1J,MAAiK,CAAC;AAA0B,CAA5L,MAAmM,CAAC;AAA6B,CAAjO,MAAwO,CAAC;AAA+B,uBAAoB;AAAO;AAAC,CAApS,KAA0S,CAAC,aAAa;AAAO,kBAAe;AAAI;AAAC,CAAnV,KAAyV,CAA3S;AAA6T,uBAAoB;AAAS,uBAAoB;AAAI,uBAAoB;AAAc;",
+  "names": []
+}
