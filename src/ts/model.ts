@@ -10,6 +10,7 @@ let mixer = null;
 let isPlaying = false;
 let animate = null;
 
+const repoName = "/den";
 const wrapper = document.querySelector(".canvas-wrapper") as HTMLElement;
 const clock = new THREE.Clock(); // для delta time
 
@@ -90,7 +91,7 @@ if (isIndex) {
   const loader = new GLTFLoader();
   let model;
   loader.load(
-    `/building.glb`,
+    repoName + `/building.glb`,
     (gltf) => {
       model = gltf.scene;
       scene.background = null;
@@ -148,7 +149,7 @@ if (isIndex) {
   // Только рабочие параметры OrbitControls
   // HDRI/Skybox окружение
   const hdrLoader = new HDRLoader();
-  hdrLoader.load(`/sky.hdr`, (texture) => {
+  hdrLoader.load(repoName + `/sky.hdr`, (texture) => {
     texture.mapping = THREE.EquirectangularReflectionMapping;
 
     const pmremGenerator = new THREE.PMREMGenerator(renderer);

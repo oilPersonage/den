@@ -41,7 +41,7 @@ export default function Catalog({
                   {products[key]?.map(({ name, slug }, idx) => (
                     <a
                       key={slug + idx}
-                      href={`/product/${slug}`}
+                      href={`${process.env.NEXT_PUBLIC_BASE_PATH}/product/${slug}`}
                       className="btn link"
                     >
                       <CustomImage
