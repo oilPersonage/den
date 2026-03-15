@@ -6,7 +6,7 @@ const nextConfig: NextConfig = {
   output: "export",
   trailingSlash: true,
   assetPrefix: isProd ? "/den/" : undefined,
-  basePath: isProd ? "/den/" : undefined,
+  basePath: isProd ? "/den" : undefined,
   skipTrailingSlashRedirect: true,
   images: { unoptimized: true },
   typescript: {
