@@ -28,7 +28,6 @@ jobs:
       - name: Build project
         run: npm run build # esbuild + next build
 
-      # ✅ Копируем out/ → den/ для GitHub Pages
       - name: Prepare deployment folder
         run: |
           mkdir -p den
