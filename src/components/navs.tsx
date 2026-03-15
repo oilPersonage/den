@@ -1,11 +1,14 @@
 export default function Navs({ page }: { page?: string }) {
   const links = [
-    { title: "Главная", href: "/" },
+    { title: "Главная", href: process.env.NEXT_PUBLIC_BASE_PATH + "/" },
     { title: "Каталог", href: "#", id: "catalog-btn" },
-    { title: "Аренда", href: "/rent" },
-    { title: "Проекты", href: "/projects" },
-    { title: "Вопрос — ответ", href: "/questions" },
-    { title: "Контакты", href: "/contacts" }
+    { title: "Аренда", href: process.env.NEXT_PUBLIC_BASE_PATH + "/rent" },
+    { title: "Проекты", href: process.env.NEXT_PUBLIC_BASE_PATH + "/projects" },
+    {
+      title: "Вопрос — ответ",
+      href: process.env.NEXT_PUBLIC_BASE_PATH + "/questions"
+    },
+    { title: "Контакты", href: process.env.NEXT_PUBLIC_BASE_PATH + "/contacts" }
   ];
   return (
     <header
@@ -13,7 +16,11 @@ export default function Navs({ page }: { page?: string }) {
       className="main-wrapper fixed z-4 top-0 left-0 right-0 border-b"
     >
       <div className="flex justify-between h-header items-center">
-        <a href="/" className="header-logo" data-ai="1">
+        <a
+          href={`${process.env.NEXT_PUBLIC_BASE_PATH}/`}
+          className="header-logo"
+          data-ai="1"
+        >
           <svg
             viewBox="0 0 38 32"
             className="fill-current"

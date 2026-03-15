@@ -1,5 +1,6 @@
+import CustomImage from "src/components/customImage";
 import Navs from "src/components/navs";
-import RequestSection from "src/components/requestSection";
+import Request from "src/components/request";
 
 export default function Contacts() {
   return (
@@ -97,8 +98,12 @@ export default function Contacts() {
                 </div>
               </div>
             </div>
-
-            <RequestSection />
+            <div className="flex gap-xl *:flex-1">
+              <Request />
+              <div>
+                <CustomImage src="/pictures/map.png" alt="" />
+              </div>
+            </div>
           </div>
         </div>
       </section>
