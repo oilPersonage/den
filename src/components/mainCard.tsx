@@ -100,7 +100,11 @@ export default function MainCard({ product }: { product: Product }) {
               Минималистичный и уютный, идеально подойдёт для одного человека
               или пары. Максимум комфорта на минимальной площади
             </p>
-            <a href={slug} className="btn black" data-from-bottom>
+            <a
+              href={`${process.env.NEXT_PUBLIC_BASE_PATH}/product/${slug}`}
+              className="btn black"
+              data-from-bottom
+            >
               Подробнее
               <span></span>
               <span></span>

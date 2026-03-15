@@ -3,7 +3,10 @@ export default function Footer() {
     <footer data-animate-container>
       <div className="wrapper">
         <div className="flex flex-col items-center gap-md">
-          <a href="/" className="h-14 w-14 text-bg">
+          <a
+            href={`${process.env.NEXT_PUBLIC_BASE_PATH}/`}
+            className="h-14 w-14 text-bg"
+          >
             <svg
               viewBox="0 0 38 32"
               className="fill-current"
