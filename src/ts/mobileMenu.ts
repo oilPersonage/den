@@ -1,7 +1,7 @@
 import { animate, createTimeline, splitText, stagger } from 'animejs'
 const navsWrapper = document.querySelector('.navs-wrapper')
-const links = [...document.querySelectorAll('navs [data-ai="1"]')]
-const navs = document.querySelector('navs') || ''
+const links = [...document.querySelectorAll('nav [data-ai="1"]')]
+const navs = document.querySelector('nav') || ''
 const contacts = document.querySelector('.header-contacts') || ''
 const hamb = document.querySelector('.hamb')
 let isOpened = false

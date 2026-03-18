@@ -35890,7 +35890,7 @@ var init_dotsCanvas = __esm({
       // Базовый радиус
       hoverRadius: 2.3,
       // Радиус при наведении
-      influenceRadius: 2050,
+      influenceRadius: 850,
       // Радиус влияния мыши
       color: new Color(0),
       // color: new THREE.Color(0x808080),
@@ -35953,13 +35953,13 @@ void main() {
     vec2 st = vUv;
     vec2 pixelCoord = st * u_resolution + u_scroll;
     vec2 mousePixel = u_mouse * u_resolution + u_scroll;
-    
+
     vec2 gridPos = floor(pixelCoord / u_spacing);
     vec2 dotPos = (gridPos + 0.5) * u_spacing;
-    
+
     vec2 distToDot = pixelCoord - dotPos;
     float dist = length(distToDot);
-    
+
     vec2 mouseToDot = dotPos - mousePixel;
     float distToMouse = length(mouseToDot);
 
@@ -35968,11 +35968,11 @@ void main() {
     // \u041D\u0430 \u0433\u0440\u0430\u043D\u0438\u0446\u0435 \u0440\u0430\u0434\u0438\u0443\u0441\u0430 (distToMouse = u_influenceRadius) -> influence = 0
     // \u041C\u0435\u0436\u0434\u0443 \u043D\u0438\u043C\u0438 - \u043F\u043B\u0430\u0432\u043D\u044B\u0439 \u043F\u0435\u0440\u0435\u0445\u043E\u0434
     float mouseInfluence = 1.0 - smoothstep(0.0, u_influenceRadius, distToMouse);
-    
+
     // \u0420\u0438\u0441\u0443\u0435\u043C \u0442\u043E\u0447\u043A\u0443
-    float alpha = dist < u_baseRadius ? 1.0 : 0.0;
-		float mouseAlpha = 0.1 - smoothstep(0.0, u_influenceRadius, distToMouse);
-    
+    float alpha = dist < u_baseRadius ? .1 : 0.0;
+		float mouseAlpha = smoothstep(0.0, u_influenceRadius, distToMouse * 1.);
+
     gl_FragColor = vec4(u_color,  alpha * mouseAlpha);
 }`
     });
@@ -35987,7 +35987,6 @@ void main() {
       const scrollY = window.scrollY;
       const scrollX = window.scrollX;
       material.uniforms.u_scroll.value.set(scrollX, -scrollY);
-      console.log(material.uniforms.u_scroll.value.y);
     });
     renderer.domElement.addEventListener("mouseleave", () => {
       material.uniforms.u_mouse.value.set(-100, -100);
@@ -36007,8 +36006,6 @@ void main() {
     window.addEventListener("resize", updateDotCount);
     clock = new Clock2();
     animate2();
-    console.log("\u{1F680} Shader dots \u0437\u0430\u043F\u0443\u0449\u0435\u043D!");
-    console.log("\u{1F4AA} \u0418\u0441\u043F\u043E\u043B\u044C\u0437\u0443\u0435\u0442\u0441\u044F GPU \u0434\u043B\u044F \u043C\u0438\u043B\u043B\u0438\u043E\u043D\u043E\u0432 \u0442\u043E\u0447\u0435\u043A");
   }
 });
 
@@ -39825,7 +39822,7 @@ var init_model = __esm({
     mixer = null;
     isPlaying = false;
     animate3 = null;
-    repoName = "/den";
+    repoName = "";
     wrapper2 = document.querySelector(".canvas-wrapper");
     clock2 = new Clock2();
     if (isIndex) {
@@ -39859,14 +39856,7 @@ var init_model = __esm({
       const scene2 = new Scene();
       const width = wrapper2.clientWidth;
       const height = wrapper2.clientHeight;
-      const camera2 = new OrthographicCamera(
-        -width / 2,
-        width / 2,
-        height / 2,
-        -height / 2,
-        -1e3,
-        1e3
-      );
+      const camera2 = new OrthographicCamera(-width / 2, width / 2, height / 2, -height / 2, -1e3, 1e3);
       const renderer2 = new WebGLRenderer({ antialias: true, alpha: true });
       renderer2.setClearColor(0, 0);
       renderer2.setClearAlpha(0);
@@ -39880,7 +39870,7 @@ var init_model = __esm({
       const loader2 = new GLTFLoader();
       let model;
       loader2.load(
-        repoName + `/building.glb`,
+        repoName + `/home.glb`,
         (gltf) => {
           model = gltf.scene;
           scene2.background = null;
@@ -39888,7 +39878,8 @@ var init_model = __esm({
           mixer = new AnimationMixer(gltf.scene);
           gltf.animations.forEach((clip) => {
             const action = mixer.clipAction(clip);
-            action.setLoop(LoopPingPong, Infinity);
+            action.setLoop(LoopOnce);
+            action.clampWhenFinished = true;
             action.play();
             actions.push(action);
           });
@@ -39970,10 +39961,12 @@ __export(intro_exports, {
   startIntro: () => startIntro
 });
 function startIntro(isIndexPage) {
+  console.log(123);
   const timeline = createTimeline({
     defaults: { ease: cubicBezier(0.1, 0.7, 0.5, 1) },
     autoplay: false,
     onComplete() {
+      document.body.classList.add("intro-complete");
       if (!isIndexPage) return;
       animateModel();
     }
@@ -40175,8 +40168,8 @@ var init_mobileMenu = __esm({
     init_modules();
     init_config();
     navsWrapper = document.querySelector(".navs-wrapper");
-    links = [...document.querySelectorAll('navs [data-ai="1"]')];
-    navs = document.querySelector("navs") || "";
+    links = [...document.querySelectorAll('nav [data-ai="1"]')];
+    navs = document.querySelector("nav") || "";
     contacts = document.querySelector(".header-contacts") || "";
     hamb = document.querySelector(".hamb");
     isOpened = false;
