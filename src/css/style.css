@@ -896,7 +896,7 @@ footer p {
 	@apply rotate-180;
 }
 .accordion-btn {
-	@apply min-w-full text-lg py-4 px-8 flex justify-between;
+	@apply min-w-full text-lg py-4 px-8 flex justify-between max-md:leading-[1.2];
 }
 .accordion.current {
 	@apply border-l border-black;
@@ -906,14 +906,20 @@ footer p {
 	@apply opacity-30 border-l-0;
 }
 .question-heading-wrapper {
-	@apply sticky h-fit flex flex-col gap-sm top-[40vh];
+	@apply sticky h-fit flex md:flex-col gap-sm top-[40vh] max-md:[writing-mode:vertical-rl];
 }
 .question-heading {
-	@apply flex items-center min-h-[60px];
+	@apply flex items-center min-h-[60px] max-w-30;
+}
+.question-counter {
+	@apply max-md:min-h-15 flex items-end;
+}
+.question-counter > span {
+	@apply max-md:text-[16px];
 }
 
 .question-heading-line {
-	@apply min-w-xl h-px flex bg-black mt-1 ml-sm;
+	@apply min-w-2 md:min-w-xl h-px flex bg-black mt-1 max-md:hidden;
 }
 .accordion-item p {
 	@apply leading-[1.4];
