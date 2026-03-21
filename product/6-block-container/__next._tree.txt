@@ -1,7 +1,7 @@
-:HL["/den/_next/static/chunks/1efd2a59d5e8d096.css","style"]
+:HL["/den/_next/static/chunks/02671212d7659fd4.css","style"]
 :HL["/den/_next/static/media/33b9f26218da1dbf-s.p.d1442d81.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
 :HL["/den/_next/static/media/92d6beca20aace01-s.p.52698055.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
 :HL["/den/_next/static/media/e7af107ebd9caa41-s.p.1c70c238.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
 :HL["/den/_next/static/media/f54eae68c77706ff-s.p.daecaad2.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
 :HL["/den/pictures/fallback.png","image"]
-0:{"buildId":"uAPK21bui7IzyYBsRYPaO","tree":{"name":"","paramType":null,"paramKey":"","hasRuntimePrefetch":false,"slots":{"children":{"name":"product","paramType":null,"paramKey":"product","hasRuntimePrefetch":false,"slots":{"children":{"name":"slug","paramType":"d","paramKey":"6-block-container","hasRuntimePrefetch":false,"slots":{"children":{"name":"__PAGE__","paramType":null,"paramKey":"__PAGE__","hasRuntimePrefetch":false,"slots":null,"isRootLayout":false}},"isRootLayout":false}},"isRootLayout":false}},"isRootLayout":true},"staleTime":300}
+0:{"buildId":"UOr7z3kZ6-GrQDgIaxJqB","tree":{"name":"","paramType":null,"paramKey":"","hasRuntimePrefetch":false,"slots":{"children":{"name":"product","paramType":null,"paramKey":"product","hasRuntimePrefetch":false,"slots":{"children":{"name":"slug","paramType":"d","paramKey":"6-block-container","hasRuntimePrefetch":false,"slots":{"children":{"name":"__PAGE__","paramType":null,"paramKey":"__PAGE__","hasRuntimePrefetch":false,"slots":null,"isRootLayout":false}},"isRootLayout":false}},"isRootLayout":false}},"isRootLayout":true},"staleTime":300}
