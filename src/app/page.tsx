@@ -3,7 +3,7 @@ import CustomImage from "src/components/customImage";
 import Loader from "src/components/loader";
 import MainCard from "src/components/mainCard";
 import Navs from "src/components/navs";
-import { getProducts } from "src/libs/products";
+import { getGroupedProducts, getProducts } from "src/libs/products";
 
 export async function generateStaticParams() {
   const products = await getProducts();
@@ -14,8 +14,9 @@ export async function generateStaticParams() {
 
 export default async function Home() {
   const products = await getProducts();
+  const productsGrouped = await getGroupedProducts();
 
-  const firstItems = [products[0], products[6], products[10], products[3]];
+  const firstItems = [products[0], products[12], products[28], products[20]];
   const secondItems = [products[2], products[7]];
 
   return (
@@ -152,7 +153,7 @@ export default async function Home() {
           data-duration="85"
           data-infinity
           data-width-auto="true"
-          data-count-per-page="5"
+          data-per-page="5"
         >
           <div className="slider-container" data-from-bottom>
             <div className="slider-track">
@@ -867,7 +868,11 @@ export default async function Home() {
       <section className="main-wrapper py-xl">
         <div className="cards-wrapper big">
           {firstItems.map((product) => (
-            <MainCard key={product.id} product={product} />
+            <MainCard
+              sameProducts={productsGrouped[product.tag]}
+              key={product.id}
+              product={product}
+            />
           ))}
         </div>
       </section>
@@ -1034,7 +1039,11 @@ export default async function Home() {
       <section className="main-wrapper py-xl">
         <div className="cards-wrapper big">
           {secondItems.map((product) => (
-            <MainCard key={product.id} product={product} />
+            <MainCard
+              sameProducts={productsGrouped[product.tag]}
+              key={product.id}
+              product={product}
+            />
           ))}
         </div>
       </section>

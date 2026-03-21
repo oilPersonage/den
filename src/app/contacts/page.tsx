@@ -99,8 +99,8 @@ export default function Contacts() {
               </div>
             </div>
             <div className="flex gap-xl *:flex-1">
-              <RequestForm />
-              <div className="h-full">
+              <RequestForm isIntro />
+              <div data-ai="4" className="h-full">
                 <CustomImage
                   className="h-full object-cover saturate-0"
                   src="/pictures/map.png"

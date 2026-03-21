@@ -1,51 +1,11 @@
-import { fadePlugin, infinityScroll } from "./plugins";
-
-type TInitOptions = {
-  gap: number;
-  items: number;
-  duration: number;
-  widthAuto: boolean;
-  countPerPage: number;
-  ease: string;
-};
-
-type TOptions = Partial<TInitOptions>;
-
-export type TSliderEvents = {
-  changed: (idx: number) => void;
-  // scroll: (progress: number) => void;
-};
-
-type TEventName = keyof TSliderEvents;
-
-export type TSlider = {
-  goTo: (index: number) => number | undefined;
-  goPrev: () => void;
-  goNext: () => void;
-  engine: (index: number) => void;
-  options: TInitOptions;
-  info: {
-    disablePrev: boolean;
-    disableNext: boolean;
-    currentIdx: number;
-    slidesLength: number;
-    totalWidth: number;
-  };
-  dom: {
-    container: HTMLElement;
-    slides: HTMLElement[];
-    track: HTMLElement;
-    prev?: HTMLElement;
-    next?: HTMLElement;
-  };
-  on: <K extends TEventName>(event: K, cb: TSliderEvents[K]) => void;
-};
-export type TSliderPlugin = (api: TSlider) => void;
-export type TSliderInit = (
-  target: string | HTMLElement,
-  options?: Partial<TOptions>,
-  plugins?: TSliderPlugin[]
-) => TSlider;
+import { createDraggable, Draggable } from "animejs";
+import {
+  TEventName,
+  TInitOptions,
+  TSlider,
+  TSliderEvents,
+  TSliderInit
+} from "./types";
 
 const easings = {
   easeInOut: "cubic-bezier(0.422,0,0.552,1)",
@@ -53,76 +13,25 @@ const easings = {
   easeOut: "cubic-bezier(0.585, 0.002,1,0.467)",
   linear: "linear"
 };
-
 const initOptions: TInitOptions = {
   gap: 0,
   items: 1,
   duration: 0.3,
   widthAuto: false,
-  ease: easings.easeInOut
+  ease: easings.easeInOut,
+  perPage: 1,
+  media: {}
 };
 
-/**
- * Генерирует навигационные точки для слайдера.
- *
- * @param api - Инстанс слайдера, созданный через initSlider.
- * @param dotsWrapper - CSS селектор контейнера, в который будут добавлены точки (например, '.dots-wrapper').
- * @param navsWrapper - CSS селектор контейнера, в который будут добавлены точки (например, '.dots-wrapper').
- * @param parentIdentifier - CSS селектор контейнера, если dots лежат в не в api.container
- */
-
-export type TGenerateDotsOptions = {
-  dotsWrapper: string; // path to dots container
-  parentIdentifier?: string;
-  selector?: string;
-};
-
-export type TGenerateDots = (
-  api: TSlider,
-  options: TGenerateDotsOptions
-) => void;
-
-export const generateArrows = (api: TSlider, options): void => {
-  const { arrowsWrapper, selector } = options;
-  const wrapper = document.querySelector(arrowsWrapper);
-  if (!wrapper) return;
-  const [prev, next] = [...wrapper.querySelectorAll(selector)];
-  prev.addEventListener("click", () => api.goPrev());
-  next.addEventListener("click", () => api.goNext());
-  prev.classList.add("disabled");
-  api.dom.prev = prev;
-  api.dom.next = next;
-};
-
-const generateDots: TGenerateDots = (api, generateDotsOptions): void => {
-  const { dotsWrapper, parentIdentifier, selector } = generateDotsOptions;
-  let parent;
-  if (parentIdentifier) {
-    parent = api.dom.container.closest(parentIdentifier) as HTMLElement;
-  } else {
-    parent = api.dom.container.querySelector(dotsWrapper) as HTMLElement;
-  }
-  if (!parent) throw new Error("Parent element for dots not found");
-  const dots = [...parent.querySelectorAll(selector || "button")].filter(
-    (el) => el.offsetParent !== null
-  ) as HTMLElement[];
-
-  dots.forEach((dot, idx) => {
-    dot.addEventListener("click", (e) => {
-      e.preventDefault();
-      api.goTo(idx);
-    });
-  });
-
-  api.on("changed", (idx) => {
-    dots.forEach((el) => el.classList.remove("active"));
-    dots[idx]?.classList.add("active");
-  });
-};
-
-const slider: TSliderInit = (target, options = {}, plugins = []) => {
+export const slider: TSliderInit = (target, options = {}, plugins = []) => {
   let container: HTMLElement | undefined;
-  let state = { currentIdx: 0, disabledPrev: false, disabledNext: false };
+  let state = {
+    currentIdx: 0,
+    disabledPrev: false,
+    disabledNext: false,
+    changeCount: 1,
+    draggable: Draggable
+  };
 
   if (typeof target === "string") {
     container = document.querySelector(target) as HTMLElement;
@@ -144,11 +53,26 @@ const slider: TSliderInit = (target, options = {}, plugins = []) => {
   const currentOptions = { ...initOptions, ...cleanOptions };
   currentOptions.duration = currentOptions.duration * 1000;
 
-  if (!currentOptions.widthAuto) {
-    container.style.setProperty("--items", currentOptions.items.toString());
-    container.style.minWidth = "0px";
+  function applyStyles() {
+    Object.keys(currentOptions.media).forEach((media) => {
+      if (window.matchMedia(`(width<=${media}px)`).matches) {
+        currentOptions.items =
+          currentOptions.media[media].items ||
+          currentOptions.items ||
+          currentOptions.items;
+        state.changeCount =
+          Number(currentOptions.media[media].changeCount) || state.changeCount;
+      }
+    });
+
+    if (!currentOptions.widthAuto && container) {
+      container.style.setProperty("--items", currentOptions.items.toString());
+      container.style.minWidth = "0px";
+    }
+
+    container?.style.setProperty("--gap", `${currentOptions.gap}px`);
   }
-  container.style.setProperty("--gap", `${currentOptions.gap}px`);
+  applyStyles();
 
   if (!slides.length) throw new Error("No slides found");
 
@@ -164,11 +88,51 @@ const slider: TSliderInit = (target, options = {}, plugins = []) => {
     listeners[event]?.forEach((cb: any) => cb(...args));
   };
 
-  const arrayWidths = slides.map((slide) => slide.clientWidth);
-  const totalWidth = arrayWidths.reduce((acc, curr) => acc + curr, 0);
+  function onCheckDisabledArrows(index: number, total: number) {
+    api.dom.next?.classList.toggle("disabled", index >= total);
+    api.dom.prev?.classList.toggle("disabled", index === 0);
+  }
 
-  track.style["transitionTimingFunction"] = currentOptions.ease;
-  track.style["transitionDuration"] = `${currentOptions.duration}ms`;
+  let arrayWidths = slides.map((slide) => slide.clientWidth);
+  let totalWidth = arrayWidths.reduce((acc, curr) => acc + curr, 0);
+
+  function createDrag() {
+    const snap: number[] = [0];
+    for (let i = 0; i < arrayWidths.length - currentOptions.items; i++) {
+      const next = snap[i] - arrayWidths[i];
+      snap.push(next);
+    }
+    track.style["transitionTimingFunction"] = currentOptions.ease;
+    track.style["transitionDuration"] = `${currentOptions.duration}ms`;
+    state.draggable = createDraggable(track, {
+      x: { snap },
+      dragThreshold: { touch: 7, mouse: 7 },
+      y: false,
+      onSnap(e) {
+        const total = slides.length - currentOptions.items;
+        const currenIdx = snap.findIndex((widht) => widht === e.snapped[0]);
+        onCheckDisabledArrows(currenIdx, total);
+        state.currentIdx = currenIdx;
+      },
+      onGrab() {
+        track.style["transitionTimingFunction"] = "auto";
+        track.style["transitionDuration"] = `0ms`;
+      },
+      onSettle() {
+        track.style["transitionTimingFunction"] = currentOptions.ease;
+        track.style["transitionDuration"] = `${currentOptions.duration}ms`;
+      }
+    });
+  }
+
+  function onResize() {
+    arrayWidths = slides.map((slide) => slide.clientWidth);
+    totalWidth = arrayWidths.reduce((acc, curr) => acc + curr, 0);
+    createDrag();
+    applyStyles();
+  }
+  createDrag();
+  window.addEventListener("resize", onResize);
 
   const api: TSlider = {
     dom: {
@@ -190,32 +154,30 @@ const slider: TSliderInit = (target, options = {}, plugins = []) => {
       if (listeners[event]) listeners[event].push(cb);
     },
     engine: (index: number) => {
-      const l = arrayWidths.reduce(
-        (acc, curr, idx) => (idx < index ? acc + curr : acc),
-        0
-      );
-      track.style.transform = `translate3d(-${l}px, 0, 0)`;
+      track.style["transitionTimingFunction"] = currentOptions.ease;
+      track.style["transitionDuration"] = `${currentOptions.duration}ms`;
+      state.draggable.setX(state.draggable.snapX[index]);
     },
     goPrev: () => {
-      api.goTo(state.currentIdx - 1);
+      api.goTo(state.currentIdx - state.changeCount);
     },
-
     goNext: () => {
-      api.goTo(state.currentIdx + 1);
+      api.goTo(state.currentIdx + state.changeCount);
     },
     goTo: (index: number) => {
       const total = slides.length - currentOptions.items;
-      const isDisabled = index === total + 1 || index === -1;
+      const isDisabled =
+        index >= total + state.changeCount || index === -state.changeCount;
 
       if (isDisabled) return;
-      api.dom.next?.classList.toggle("disabled", index === total);
-      api.dom.prev?.classList.toggle("disabled", index === 0);
+      onCheckDisabledArrows(index, total);
       api.engine(index);
       emit("changed", index);
       state.currentIdx = index;
       return index;
     }
   };
+
   if (plugins.length > 0) {
     plugins.forEach((plugin) => {
       plugin(api);
@@ -224,5 +186,3 @@ const slider: TSliderInit = (target, options = {}, plugins = []) => {
 
   return api;
 };
-
-export { fadePlugin, generateDots, infinityScroll, slider };
