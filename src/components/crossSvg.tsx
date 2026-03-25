@@ -1,4 +1,4 @@
-export default function CrossSvg({ onClick }) {
+export default function CrossSvg({ onClick }: { onClick?: () => void }) {
   return (
     <button className="btn link h-12 px-4 bg-bg2" onClick={onClick}>
       <svg

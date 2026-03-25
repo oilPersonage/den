@@ -41184,7 +41184,7 @@ var init_model = __esm({
       const loader2 = new GLTFLoader();
       let model;
       loader2.load(
-        repoName + `/home.glb`,
+        repoName + `/home2.glb`,
         (gltf) => {
           model = gltf.scene;
           scene.background = null;
@@ -42807,9 +42807,15 @@ var init_scrollAnimation = __esm({
     });
     containerCoord = isMobile ? { enter: "end", leave: "start" } : { enter: "80% 20%", leave: "20% 80%" };
     footerWrapper = document.querySelector("footer .wrapper");
-    typingList = [...document.querySelectorAll("[data-typing]")].map(prepareChars);
-    fromBottomList = [...document.querySelectorAll("[data-animate-container]")];
-    fromTopList = [...document.querySelectorAll("[data-from-top]")].map(prepareChars);
+    typingList = [...document.querySelectorAll("[data-typing]")].map(
+      prepareChars
+    );
+    fromBottomList = [
+      ...document.querySelectorAll("[data-animate-container]")
+    ];
+    fromTopList = [...document.querySelectorAll("[data-from-top]")].map(
+      prepareChars
+    );
     zoomList = [...document.querySelectorAll("[data-zoom]")];
     typingList.forEach(({ el, chars: chars2 }) => {
       const container = el.closest("[data-animate-container]");
@@ -42944,11 +42950,47 @@ function createTimelineFn(modal) {
     "modal p"
   );
 }
-var btnOpenModal, btnCloseModal, modals, timelines;
+function checkStatusArrows(idx) {
+  if (!isNaN(idx)) {
+    prevImgBtn?.classList.toggle("disabled", idx === 0);
+    nextImgBtn?.classList.toggle("disabled", idx === imgsLength - 1);
+  }
+}
+function setImageSize() {
+  if (!img || !imgModal) return;
+  const originalImg = new Image();
+  originalImg.src = img.src;
+  const { width: imgW, height: imgH } = originalImg;
+  const imgRatio = imgW / imgH;
+  const windowRatio = window.innerWidth / window.innerHeight;
+  if (imgRatio > windowRatio) {
+    const size = window.innerWidth - modalSpacing;
+    imgModal.style.width = size + "px";
+    imgModal.style.height = size / imgRatio + "px";
+    img.style.width = size + "px";
+    img.style.height = size / imgRatio + "px";
+  } else {
+    const size = window.innerHeight - modalSpacing;
+    imgModal.style.height = size + "px";
+    imgModal.style.width = size * imgRatio + "px";
+    img.style.height = size + "px";
+    img.style.width = size * imgRatio + "px";
+  }
+}
+function changeImg(dir) {
+  if (currentImgIdx === 0 && dir < 0 || currentImgIdx === imgsLength - 1 && dir > 0)
+    return;
+  currentImgIdx += dir;
+  img.src = pathImgFolder + currentImgIdx + ".png";
+  setImageSize();
+  checkStatusArrows(currentImgIdx);
+}
+var btnOpenModal, btnCloseModal, modals, timelines, modalSpacing, prevImgBtn, nextImgBtn, currentImgIdx, pathImgFolder, img, imgModal, imgsLength;
 var init_modal = __esm({
   "src/ts/modal.ts"() {
     "use strict";
     init_modules();
+    init_intro();
     btnOpenModal = [
       ...document.querySelectorAll("[data-modal]")
     ];
@@ -42969,11 +43011,33 @@ var init_modal = __esm({
         modal
       };
     });
+    modalSpacing = isMobile2 ? 46 : 120;
+    prevImgBtn = document.querySelector("[data-photo-prev]");
+    nextImgBtn = document.querySelector("[data-photo-next]");
+    currentImgIdx = 0;
+    pathImgFolder = "";
+    img = null;
+    imgModal = null;
+    imgsLength = [...document.querySelectorAll('[data-modal="photos"]')].length;
+    prevImgBtn?.addEventListener("click", () => changeImg(-1));
+    nextImgBtn?.addEventListener("click", () => changeImg(1));
+    window.addEventListener("resize", setImageSize);
     btnOpenModal.forEach((el) => {
       el.addEventListener("click", (e) => {
         e.preventDefault();
         const modalName = el.dataset.modal;
         const { timeline, modal } = timelines[modalName];
+        if (modalName === "photos") {
+          img = modal.querySelector("img");
+          imgModal = modal.querySelector(".modal-wrapper");
+          const { src = "" } = el.dataset;
+          img.src = src;
+          const number = parseInt(src.match(/\d+/)[0]);
+          pathImgFolder = src.match(/^.*?(?=\d+)/)?.[0] || "";
+          currentImgIdx = number;
+          checkStatusArrows(currentImgIdx);
+          setImageSize();
+        }
         modal.classList.add("opened");
         timeline.speed = 1;
         timeline.play();

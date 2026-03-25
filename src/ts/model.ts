@@ -91,7 +91,8 @@ if (isIndex) {
   const loader = new GLTFLoader();
   let model;
   loader.load(
-    repoName + `/home.glb`,
+    // repoName + `/home2.glb`,
+    `/den/home2.glb`,
     (gltf) => {
       model = gltf.scene;
       scene.background = null;
@@ -151,19 +152,23 @@ if (isIndex) {
   // Только рабочие параметры OrbitControls
   // HDRI/Skybox окружение
   const hdrLoader = new HDRLoader();
-  hdrLoader.load(repoName + `/sky.hdr`, (texture) => {
-    texture.mapping = THREE.EquirectangularReflectionMapping;
+  hdrLoader.load(
+    `/den/sky.hdr`,
+    // repoName + `/sky.hdr`,
+    (texture) => {
+      texture.mapping = THREE.EquirectangularReflectionMapping;
 
-    const pmremGenerator = new THREE.PMREMGenerator(renderer);
-    const envMap = pmremGenerator.fromEquirectangular(texture).texture;
+      const pmremGenerator = new THREE.PMREMGenerator(renderer);
+      const envMap = pmremGenerator.fromEquirectangular(texture).texture;
 
-    scene.environment = envMap; // освещение = PMREM
-    // texture.envMapIntensity = 1.5
+      scene.environment = envMap; // освещение = PMREM
+      // texture.envMapIntensity = 1.5
 
-    pmremGenerator.dispose();
+      pmremGenerator.dispose();
 
-    scene.background = null;
-  });
+      scene.background = null;
+    }
+  );
 
   const light = new THREE.AmbientLight(0xffffff, 0.7); // soft white light
   scene.add(light);

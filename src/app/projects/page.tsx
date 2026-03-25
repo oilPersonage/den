@@ -1,73 +1,51 @@
+import CustomImage from "src/components/customImage";
+import PhotoModal from "src/components/modalPhoto";
 import Navs from "src/components/navs";
 
 export default function Projects() {
   return (
     <>
       <Navs page="/projects" />
-      <ul className="flex">
+      <div className="main-wrapper pt-header">
+        {/* <h2 className="pl-lg  top-26">Проекты</h2> */}
         <div className="relative">
-          <h2 className="sticky pl-lg top-26">Проекты</h2>
-          <h4 className="sticky pl-lg top-42 h-screen">Лукоил</h4>
-          <h4 className="sticky pl-lg top-52 h-screen">Трансерфинг</h4>
-          <h4 className="sticky pl-lg top-62 h-screen">МФЦ</h4>
-          <h2 className="sticky pl-lg pt-lg top-72 h-screen bg-bg2">
-            Фотографии
-          </h2>
+          <div data-stack className="py-lg px-lg flex gap-xl">
+            <h4 className="min-w-80">МФЦ</h4>
+            <div className="min-h-screen">1</div>
+          </div>
+          <div data-stack className="py-lg px-lg flex gap-xl">
+            <h4 className="min-w-80">Строительная компания</h4>
+            <div className="min-h-screen">1</div>
+          </div>
+          <div data-stack className="py-lg px-lg flex gap-xl">
+            <h4 className="min-w-80">Еще какая-то</h4>
+            <div className="min-h-screen">1</div>
+          </div>
         </div>
 
         {/* Правая колонка с контентом */}
-        <div className="flex-1 pt-9">
-          <div className="h-screen flex items-center px-lg">
-            <div>Контент для Лукоила</div>
-          </div>
-          <div className="h-screen flex items-center px-lg">
-            <div>Контент для Трансерфинга</div>
-          </div>
-          <div className="h-screen flex items-center px-lg">
-            <div>Контент для МФЦ</div>
-          </div>
-          <div className="min-h-screen flex px-lg bg-bg2 py-lg">
-            <div className="min-h-screen w-full">
-              <div className="grid grid-cols-[repeat(auto-fit,minmax(240px,1fr))] *:bg-bg gap-1 *:min-h-40">
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-              </div>
-            </div>
+        <div className="py-xl">
+          <h2 className="mb-md">Фотографии</h2>
+          <div className="grid grid-cols-[repeat(auto-fill,minmax(240px,1fr))] *:bg-black/20 gap-1 *:min-h-40">
+            {[
+              ...Array.from({ length: 2 }, (_, i) => (
+                <div
+                  key={i}
+                  data-src={`/pictures/production/${i}.png`}
+                  data-modal="photos"
+                >
+                  <CustomImage
+                    className="w-full h-full object-cover"
+                    src={`/pictures/production/${i}.png`}
+                    alt="text"
+                  />
+                </div>
+              ))
+            ]}
           </div>
         </div>
-      </ul>
+      </div>
+      <PhotoModal />
     </>
   );
 }

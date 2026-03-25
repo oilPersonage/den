@@ -8,5 +8,14 @@ export default function CustomImage({
   className?: string;
 }) {
   const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
-  return <img src={basePath + src} className={className} alt={alt} />;
+  return (
+    <img
+      src={basePath + src}
+      className={className}
+      alt={alt}
+      decoding="async"
+      loading="lazy"
+      fetchPriority="low"
+    />
+  );
 }
