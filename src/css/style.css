@@ -563,21 +563,14 @@ a:hover .svg-link {
 .card-img img {
   @apply w-full h-full object-contain shrink-0;
 }
+
 .card-variant,
 .card-term {
   @apply flex flex-col gap-sm;
 }
+
 .card-term {
   @apply max-md:-mt-1.5 mt-auto;
-}
-.card-variant-btns {
-  @apply grid grid-cols-[repeat(6,1fr)] gap-2xs w-fit;
-}
-.card-variant-btns button {
-  @apply transition-colors;
-}
-.card-variant-btns button.active {
-  @apply bg-bg2;
 }
 .card-text-info p {
   @apply text-black2 text-lg;
@@ -587,6 +580,9 @@ a:hover .svg-link {
 }
 .card-variant button {
   @apply w-full h-full;
+}
+.card-variant button.active {
+  @apply bg-btn-hover;
 }
 .card-desc.extended {
   @apply text-ellipsis line-clamp-3;
@@ -653,7 +649,7 @@ a:hover .svg-link {
   @apply absolute mt-[293px] max-md:mt-[207px] top-0 rotate-90 origin-top-left;
 }
 .adv-decor-wrapper {
-  @apply -left-0.5 md:-left-sm overflow-hidden md:mt-[195px];
+  @apply md:-left-0.5 md:-left-sm overflow-hidden md:mt-[195px] max-md:rotate-0 max-md:mt-59;
 }
 .adv-decor {
   @apply flex font-bold text-2xl h-max will-change-transform;
@@ -806,6 +802,18 @@ footer p {
   @apply relative flex flex-col md:gap-2 md:bg-bg2 md:p-sm md:pr-1 md:pb-0 border border-transparent transition-colors
 	will-change-transform;
 }
+.catalog-item.with-col-span2 {
+  @apply md:col-span-2;
+}
+/* .catalog-item.with-col-span2 .catalog-sub-menu {
+  @apply flex-row;
+}
+.catalog-item.with-col-span2 .catalog-sub-menu a {
+  @apply flex-col;
+} */
+.catalog-item.with-row-span2 {
+  @apply md:row-span-2;
+}
 .catalog-item:hover {
   @apply md:border-black;
 }
@@ -845,7 +853,7 @@ footer p {
   @apply max-md:mb-md;
 }
 .catalog-sub-menu a {
-  @apply flex gap-sm flex-row w-full max-md:pl-0 max-md:pr-2.5 p-0 pr-md;
+  @apply flex gap-sm flex-row w-full max-md:pl-0 max-md:pr-2.5 p-0 pr-md min-h-[47px];
 }
 .catalog-sub-menu a.active {
   @apply flex-1;
@@ -857,7 +865,7 @@ footer p {
   @apply leading-[1.2] py-1 flex-1;
 }
 .catalog-sub-img {
-  @apply flex-1;
+  @apply flex-1 m-1;
 }
 .catalog-sub-menu img {
   @apply max-w-12 max-h-10 object-cover;

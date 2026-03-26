@@ -1,7 +1,4 @@
-"use client";
-
-import { useState } from "react";
-import { Product, TProductPicture } from "src/libs/products";
+import { Product } from "src/libs/products";
 import { priceFormatter } from "src/utils/priceFormater";
 import ArrowSvg from "./arrowSvg";
 import CustomImage from "./customImage";
@@ -15,24 +12,30 @@ export default function MainCard({
   product: Product;
   sameProducts: Product[];
 }) {
-  const [currentVariant, setCurrentVariant] = useState(
-    sameProducts.find((el) => el.slug === product.slug) as Product
-  );
+  const currentVariant = sameProducts.find(
+    (el) => el.slug === product.slug
+  ) as Product;
 
-  const { pictures, h1, headingDescription, price, slug } =
-    currentVariant as Product;
-
-  function setActiveProduct(slug: string) {
-    setCurrentVariant(sameProducts.find((el) => el.slug === slug) as Product);
-  }
+  const { h1, headingDescription, price, slug } = currentVariant as Product;
 
   return (
-    <div className="card" data-animate-container>
-      {pictures.map((el: TProductPicture, idx: number) => (
-        <div key={idx} className="card-img">
-          <CustomImage src={el.smallSrc} alt="" />
+    <div className="card" data-animate-container data-combined-slider>
+      <div
+        className="slider"
+        data-combined-slider-outer
+        data-dot-selector="[data-dot]"
+        data-dots=".card-variant-btns"
+      >
+        <div className="slider-container">
+          <div className="slider-track">
+            {sameProducts.map((el: Product) => (
+              <div key={el.id} className="slide card-img">
+                <CustomImage src={el.pictures[0].src} alt="" />
+              </div>
+            ))}
+          </div>
         </div>
-      ))}
+      </div>
       <div className="card-content">
         <div>
           <h4 data-from-bottom>{h1}</h4>
@@ -45,6 +48,7 @@ export default function MainCard({
           <div className="card-left">
             <div className="card-variant" data-from-bottom>
               <div
+                data-combined-slider-inner
                 className="slider"
                 data-per-page="6"
                 data-arrows=".same-products-arrows-wrapper"
@@ -71,14 +75,13 @@ export default function MainCard({
                     </button>
                   </div>
                 </div>
-                <div className="slider-container">
+                <div className="card-variant-btns slider-container">
                   <div className="slider-track">
-                    {sameProducts.map((prod) => (
+                    {sameProducts.map((prod, idx) => (
                       <SameProductBtn
                         key={prod.id}
-                        isActive={prod.slug === slug}
+                        isActive={idx === 0}
                         product={prod}
-                        setActiveProduct={setActiveProduct}
                       />
                     ))}
                   </div>

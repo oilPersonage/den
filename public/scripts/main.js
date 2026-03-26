@@ -41115,7 +41115,7 @@ function animateModel() {
   wrapper?.classList.add("show");
   observer.observe(wrapper);
 }
-var animatedId, mixer, isPlaying, animate2, repoName, wrapper, clock, createLights2, observer;
+var animatedId, mixer, isPlaying, animate2, wrapper, clock, createLights2, observer;
 var init_model = __esm({
   "src/ts/model.ts"() {
     "use strict";
@@ -41129,7 +41129,6 @@ var init_model = __esm({
     mixer = null;
     isPlaying = false;
     animate2 = null;
-    repoName = "";
     wrapper = document.querySelector(".canvas-wrapper");
     clock = new Clock2();
     if (isIndex) {
@@ -41184,7 +41183,8 @@ var init_model = __esm({
       const loader2 = new GLTFLoader();
       let model;
       loader2.load(
-        repoName + `/home2.glb`,
+        // repoName + `/home2.glb`,
+        `/den/home2.glb`,
         (gltf) => {
           model = gltf.scene;
           scene.background = null;
@@ -41227,14 +41227,18 @@ var init_model = __esm({
         renderer.setSize(width, height);
       });
       const hdrLoader = new HDRLoader();
-      hdrLoader.load(repoName + `/sky.hdr`, (texture) => {
-        texture.mapping = EquirectangularReflectionMapping;
-        const pmremGenerator = new PMREMGenerator(renderer);
-        const envMap = pmremGenerator.fromEquirectangular(texture).texture;
-        scene.environment = envMap;
-        pmremGenerator.dispose();
-        scene.background = null;
-      });
+      hdrLoader.load(
+        `/den/sky.hdr`,
+        // repoName + `/sky.hdr`,
+        (texture) => {
+          texture.mapping = EquirectangularReflectionMapping;
+          const pmremGenerator = new PMREMGenerator(renderer);
+          const envMap = pmremGenerator.fromEquirectangular(texture).texture;
+          scene.environment = envMap;
+          pmremGenerator.dispose();
+          scene.background = null;
+        }
+      );
       const light = new AmbientLight(16777215, 0.7);
       scene.add(light);
       camera.position.set(5, 5, 5);
@@ -41483,7 +41487,7 @@ var init_mobileMenu = __esm({
     navsWrapper = document.querySelector(".navs-wrapper");
     links = [...document.querySelectorAll('nav [data-ai="1"]')];
     navs = document.querySelector("nav") || "";
-    contacts = document.querySelector(".header-contacts") || "";
+    contacts = document.querySelector(".header-contacts");
     hamb = document.querySelector(".hamb");
     isOpened = false;
     if (isMobile) {
@@ -41505,6 +41509,9 @@ var init_mobileMenu = __esm({
       toggleMenu2 = toggleMenu;
       const { chars: menuChars } = splitText(".hamb-open", { chars: true });
       const { chars: closeChars } = splitText(".hamb-close", { chars: true });
+      [...links, ...[...contacts.querySelectorAll("a")]].forEach(
+        (el) => el.removeAttribute("data-ai")
+      );
       const animateMenu = createTimeline({
         autoplay: false,
         defaults: { duration: 300 }
@@ -41551,7 +41558,7 @@ var init_mobileMenu = __esm({
         translateX: [-40, 0],
         opacity: [0, 1],
         easing: "easeOutQuad"
-      }).add('header [data-ai="1.1"]', {
+      }).add(contacts.querySelectorAll("a"), {
         translateY: [stagger("-10"), 0],
         opacity: [0, 1],
         scale: [0.8, 1],
@@ -43146,17 +43153,22 @@ var init_customSlider = __esm({
         track.style["transitionDuration"] = `${currentOptions.duration}ms`;
         state.draggable = createDraggable(track, {
           x: { snap: snap3 },
-          dragThreshold: { touch: 7, mouse: 7 },
+          dragThreshold: { touch: 20, mouse: 40 },
           y: false,
           onSnap(e) {
-            const total = slides.length - currentOptions.items;
             const currenIdx = snap3.findIndex((widht) => widht === e.snapped[0]);
-            onCheckDisabledArrows(currenIdx, total);
             state.currentIdx = currenIdx;
           },
           onGrab() {
             track.style["transitionTimingFunction"] = "auto";
             track.style["transitionDuration"] = `0ms`;
+          },
+          onRelease() {
+            onCheckDisabledArrows(state.currentIdx, api.info.totalLength);
+            emit("changed", state.currentIdx);
+            if (api.dependSlider) {
+              api.dependSlider.checkChangeDependSlider(state.currentIdx);
+            }
           },
           onSettle() {
             track.style["transitionTimingFunction"] = currentOptions.ease;
@@ -43173,6 +43185,7 @@ var init_customSlider = __esm({
       createDrag();
       window.addEventListener("resize", onResize);
       const api = {
+        id: crypto.randomUUID(),
         dom: {
           container,
           slides,
@@ -43185,7 +43198,8 @@ var init_customSlider = __esm({
           disablePrev: state.disabledPrev,
           currentIdx: state.currentIdx,
           slidesLength: slides.length,
-          totalWidth
+          totalWidth,
+          totalLength: slides.length - currentOptions.items
         },
         options: currentOptions,
         on: (event, cb) => {
@@ -43195,22 +43209,30 @@ var init_customSlider = __esm({
           track.style["transitionTimingFunction"] = currentOptions.ease;
           track.style["transitionDuration"] = `${currentOptions.duration}ms`;
           state.draggable.setX(state.draggable.snapX[index]);
+          emit("changed", index);
         },
         goPrev: () => {
-          api.goTo(state.currentIdx - state.changeCount);
+          api.goTo(Math.max(0, state.currentIdx - state.changeCount));
         },
         goNext: () => {
-          api.goTo(state.currentIdx + state.changeCount);
+          api.goTo(
+            Math.min(api.info.totalLength, state.currentIdx + state.changeCount)
+          );
         },
         goTo: (index) => {
-          const total = slides.length - currentOptions.items;
+          const total = api.info.totalLength;
           const isDisabled = index >= total + state.changeCount || index === -state.changeCount;
           if (isDisabled) return;
-          onCheckDisabledArrows(index, total);
           api.engine(index);
-          emit("changed", index);
           state.currentIdx = index;
           return index;
+        },
+        checkChangeDependSlider: (index) => {
+          if (index >= api.options.items) {
+            api.goNext();
+          } else {
+            api.goPrev();
+          }
         }
       };
       if (plugins.length > 0) {
@@ -43343,19 +43365,76 @@ var init_customSlider2 = __esm({
 
 // src/ts/slider.ts
 var slider_exports = {};
-var fadePlugin2, generateArrows2, generateDots2, infinityScroll2, slider2, sliders;
+function createSlider(slide) {
+  const {
+    duration,
+    dots,
+    dotSelector,
+    arrows,
+    widthAuto,
+    gap = 0,
+    perPage = 1,
+    mobilePerPage,
+    changeCount = 1
+  } = slide.dataset;
+  const api = slider2(slide, {
+    items: Number(perPage),
+    gap: Number(gap),
+    widthAuto,
+    duration: duration ? Number(duration) : void 0,
+    media: {
+      480: {
+        items: Number(mobilePerPage),
+        changeCount
+      }
+    }
+  });
+  if (arrows) {
+    generateArrows2(api, {
+      arrowsWrapper: arrows,
+      selector: "button"
+    });
+  }
+  if (dots !== void 0) {
+    generateDots2(api, {
+      dotsWrapper: dots,
+      parentIdentifier: ".card",
+      selector: dotSelector || "button"
+    });
+  }
+  return api;
+}
+var fadePlugin2, generateArrows2, generateDots2, infinityScroll2, slider2, sliders, combinedSlider;
 var init_slider = __esm({
   "src/ts/slider.ts"() {
     "use strict";
     init_customSlider2();
     ({ fadePlugin: fadePlugin2, generateArrows: generateArrows2, generateDots: generateDots2, infinityScroll: infinityScroll2, slider: slider2 } = customSlider);
-    sliders = [...document.querySelectorAll(".slider")];
+    sliders = [
+      ...document.querySelectorAll("[data-slider]")
+    ];
+    combinedSlider = [
+      ...document.querySelectorAll("[data-combined-slider]")
+    ];
+    for (const slide of combinedSlider) {
+      const outerSlider = slide.querySelector(
+        "[data-combined-slider-outer]"
+      );
+      const api = createSlider(outerSlider);
+      const innerSlider = slide.querySelector(
+        "[data-combined-slider-inner]"
+      );
+      console.log({ innerSlider });
+      if (!innerSlider) continue;
+      api.dependSlider = createSlider(innerSlider);
+    }
     for (const slide of sliders) {
       const {
         duration,
         infinity,
         fade,
         dots,
+        dotSelector,
         arrows,
         widthAuto,
         gap = 0,
@@ -43390,9 +43469,9 @@ var init_slider = __esm({
       }
       if (dots !== void 0) {
         generateDots2(api, {
-          dotsWrapper: ".card-variant-btns",
+          dotsWrapper: dots,
           parentIdentifier: ".card",
-          selector: ".card-variant-btns a"
+          selector: dotSelector || "button"
         });
       }
     }

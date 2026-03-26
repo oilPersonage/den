@@ -38,7 +38,7 @@ export default function ShowMoreText({
     <>
       <div
         {...dataAttr}
-        className={`${isOpenedDesc ? "max-h-32" : "max-h-19"} mt-sm overflow-hidden`}
+        className={`${isOpenedDesc ? "max-h-full" : "max-h-19"} mt-sm overflow-hidden`}
       >
         <p
           ref={refDesc}

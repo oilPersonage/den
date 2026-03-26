@@ -18,9 +18,12 @@ export type TSliderEvents = {
 export type TEventName = keyof TSliderEvents;
 
 export type TSlider = {
+  id: string;
+  dependSlider: TSlider;
   goTo: (index: number) => number | undefined;
   goPrev: () => void;
   goNext: () => void;
+  checkChangeDependSlider: (idx: number) => void;
   engine: (index: number) => void;
   options: TInitOptions;
   info: {
@@ -29,6 +32,7 @@ export type TSlider = {
     currentIdx: number;
     slidesLength: number;
     totalWidth: number;
+    totalLength: number;
   };
   dom: {
     container: HTMLElement;

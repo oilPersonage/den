@@ -23,7 +23,6 @@ export default function Projects() {
           </div>
         </div>
 
-        {/* Правая колонка с контентом */}
         <div className="py-xl">
           <h2 className="mb-md">Фотографии</h2>
           <div className="grid grid-cols-[repeat(auto-fill,minmax(240px,1fr))] *:bg-black/20 gap-1 *:min-h-40">

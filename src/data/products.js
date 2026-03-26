@@ -32,8 +32,8 @@ export default [
     id: "RSQwAwqa5mUnjgO4x9z9g",
     pictures: [
       {
-        src: "/pictures/block-container/1.png",
-        smallSrc: "/pictures/block-container/1.png"
+        src: "/pictures/block-container/1.webp",
+        smallSrc: "/pictures/block-container/1-small.webp"
       }
     ]
   },
@@ -90,8 +90,8 @@ export default [
     id: "lVktCjJlK4jzeNudCfZMD",
     pictures: [
       {
-        src: "/pictures/block-container/2.png",
-        smallSrc: "/pictures/block-container/2.png"
+        src: "/pictures/block-container/2.webp",
+        smallSrc: "/pictures/block-container/2-small.webp"
       }
     ]
   },
@@ -148,8 +148,8 @@ export default [
     id: "fF-AQF-A7w6EldDtpcTW_",
     pictures: [
       {
-        src: "/pictures/block-container/3.png",
-        smallSrc: "/pictures/block-container/3.png"
+        src: "/pictures/block-container/3.webp",
+        smallSrc: "/pictures/block-container/3-small.webp"
       }
     ]
   },
@@ -206,8 +206,8 @@ export default [
     id: "RfIA0bH5DsKZ28b4Er4ci",
     pictures: [
       {
-        src: "/pictures/block-container/4.png",
-        smallSrc: "/pictures/block-container/4.png"
+        src: "/pictures/block-container/4.webp",
+        smallSrc: "/pictures/block-container/4-small.webp"
       }
     ]
   },

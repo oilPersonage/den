@@ -106,17 +106,22 @@ export const slider: TSliderInit = (target, options = {}, plugins = []) => {
     track.style["transitionDuration"] = `${currentOptions.duration}ms`;
     state.draggable = createDraggable(track, {
       x: { snap },
-      dragThreshold: { touch: 7, mouse: 7 },
+      dragThreshold: { touch: 20, mouse: 40 },
       y: false,
       onSnap(e) {
-        const total = slides.length - currentOptions.items;
         const currenIdx = snap.findIndex((widht) => widht === e.snapped[0]);
-        onCheckDisabledArrows(currenIdx, total);
         state.currentIdx = currenIdx;
       },
       onGrab() {
         track.style["transitionTimingFunction"] = "auto";
         track.style["transitionDuration"] = `0ms`;
+      },
+      onRelease() {
+        onCheckDisabledArrows(state.currentIdx, api.info.totalLength);
+        emit("changed", state.currentIdx);
+        if (api.dependSlider) {
+          api.dependSlider.checkChangeDependSlider(state.currentIdx);
+        }
       },
       onSettle() {
         track.style["transitionTimingFunction"] = currentOptions.ease;
@@ -135,6 +140,7 @@ export const slider: TSliderInit = (target, options = {}, plugins = []) => {
   window.addEventListener("resize", onResize);
 
   const api: TSlider = {
+    id: crypto.randomUUID(),
     dom: {
       container,
       slides,
@@ -147,7 +153,8 @@ export const slider: TSliderInit = (target, options = {}, plugins = []) => {
       disablePrev: state.disabledPrev,
       currentIdx: state.currentIdx,
       slidesLength: slides.length,
-      totalWidth
+      totalWidth,
+      totalLength: slides.length - currentOptions.items
     },
     options: currentOptions,
     on: <K extends TEventName>(event: K, cb: TSliderEvents[K]) => {
@@ -157,24 +164,31 @@ export const slider: TSliderInit = (target, options = {}, plugins = []) => {
       track.style["transitionTimingFunction"] = currentOptions.ease;
       track.style["transitionDuration"] = `${currentOptions.duration}ms`;
       state.draggable.setX(state.draggable.snapX[index]);
+      emit("changed", index);
     },
     goPrev: () => {
-      api.goTo(state.currentIdx - state.changeCount);
+      api.goTo(Math.max(0, state.currentIdx - state.changeCount));
     },
     goNext: () => {
-      api.goTo(state.currentIdx + state.changeCount);
+      api.goTo(
+        Math.min(api.info.totalLength, state.currentIdx + state.changeCount)
+      );
     },
     goTo: (index: number) => {
-      const total = slides.length - currentOptions.items;
+      const total = api.info.totalLength;
       const isDisabled =
         index >= total + state.changeCount || index === -state.changeCount;
-
       if (isDisabled) return;
-      onCheckDisabledArrows(index, total);
       api.engine(index);
-      emit("changed", index);
       state.currentIdx = index;
       return index;
+    },
+    checkChangeDependSlider: (index: number) => {
+      if (index >= api.options.items) {
+        api.goNext();
+      } else {
+        api.goPrev();
+      }
     }
   };
 

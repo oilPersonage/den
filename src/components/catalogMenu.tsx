@@ -8,8 +8,9 @@ export default function Catalog({
 }) {
   function renderClassMenu(idx: number) {
     const colIdx = [0, 5, 9];
-    if (colIdx.includes(idx)) return "lg:col-span-2";
-    if (idx === 2) return "lg:row-span-2";
+    if (colIdx.includes(idx)) return "with-col-span2";
+    if (idx === 2) return "with-row-span2";
+    return "";
   }
 
   return (
@@ -38,7 +39,7 @@ export default function Catalog({
             >
               <div className="catalog-sub-wrapper">
                 <div className="catalog-sub-menu">
-                  {products[key]?.map(({ name, slug }, idx) => (
+                  {products[key]?.map(({ name, slug, pictures }, idx) => (
                     <a
                       key={slug + idx}
                       href={`${process.env.NEXT_PUBLIC_BASE_PATH}/product/${slug}`}
@@ -46,7 +47,7 @@ export default function Catalog({
                     >
                       <CustomImage
                         className="catalog-sub-img"
-                        src="/pictures/fallback.png"
+                        src={pictures[0].smallSrc}
                         alt=""
                       />
                       <p>{name}</p>

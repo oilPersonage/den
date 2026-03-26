@@ -16,6 +16,7 @@ export default function CustomImage({
       decoding="async"
       loading="lazy"
       fetchPriority="low"
+      // onError={(e) => (e.target.src = "/pictures/fallback.png")}
     />
   );
 }

@@ -150,6 +150,7 @@ export default async function Home() {
 
         <div
           className="slider logotype-carousel"
+          data-slider
           data-duration="85"
           data-infinity
           data-width-auto="true"
