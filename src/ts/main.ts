@@ -26,6 +26,7 @@ if (isIndex) {
 
 const heavyModules = [
   import("ts/mobileMenu"),
+  // import("ts/calculator"),
   import("ts/catalog"),
   import("ts/scrollAnimation"),
   import("ts/modal"),

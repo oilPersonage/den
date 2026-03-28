@@ -1,6 +1,15 @@
-export default function CrossSvg({ onClick }: { onClick?: () => void }) {
+export default function CrossSvg({
+  onClick,
+  className
+}: {
+  onClick?: () => void;
+  className?: string;
+}) {
   return (
-    <button className="btn link h-12 px-4 bg-bg2" onClick={onClick}>
+    <button
+      className={`${className} btn link h-12 px-4 bg-bg2`}
+      onClick={onClick}
+    >
       <svg
         className="w-4 h-4 rotate-45"
         viewBox="0 0 24 24"

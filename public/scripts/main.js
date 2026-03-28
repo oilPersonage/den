@@ -43424,7 +43424,6 @@ var init_slider = __esm({
       const innerSlider = slide.querySelector(
         "[data-combined-slider-inner]"
       );
-      console.log({ innerSlider });
       if (!innerSlider) continue;
       api.dependSlider = createSlider(innerSlider);
     }
@@ -43625,6 +43624,7 @@ if (isIndex) {
 }
 var heavyModules = [
   Promise.resolve().then(() => (init_mobileMenu(), mobileMenu_exports)),
+  // import("ts/calculator"),
   Promise.resolve().then(() => (init_catalog(), catalog_exports)),
   Promise.resolve().then(() => (init_scrollAnimation(), scrollAnimation_exports)),
   Promise.resolve().then(() => (init_modal(), modal_exports)),

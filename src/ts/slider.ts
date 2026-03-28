@@ -65,7 +65,6 @@ for (const slide of combinedSlider) {
   const innerSlider = slide.querySelector(
     "[data-combined-slider-inner]"
   ) as HTMLElement;
-  console.log({ innerSlider });
   if (!innerSlider) continue; // !!!!!!!!!!!!!!!!!!!!
 
   api.dependSlider = createSlider(innerSlider);

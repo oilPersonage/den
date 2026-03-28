@@ -976,3 +976,74 @@ footer p {
 .product-characters {
   @apply flex flex-col flex-1;
 }
+
+/* CALCULATOR */
+
+#calc-wrapper {
+  @apply mt-6 ml-6 flex flex-col;
+}
+.calc-base {
+  @apply w-80.5 h-60 bg-bg2 relative -mt-3.5;
+  transition:
+    width 0.3s ease,
+    height 0.3s ease;
+}
+
+.base-drag-item {
+  @apply py-3.5 relative;
+}
+
+.drag-window {
+  @apply w-fit;
+}
+
+.drag-door {
+  @apply absolute w-fit;
+}
+.drag-door::after {
+  content: "";
+  @apply absolute origin-top w-1 h-[calc(100%-36px)] bg-black top-4 left-1.5 rotate-25 pointer-events-none;
+}
+.calc-base-wall {
+  @apply absolute inset-3.5;
+  box-shadow:
+    /* 0 0 0 1px #212529, */ 0 0 0 14px #d4d4d4;
+  /* 0 0 0 14px #212529; */
+}
+.base-drag-item:hover .calc-rotate,
+.base-drag-item:hover .calc-cross {
+  @apply opacity-100 pointer-events-auto;
+}
+.calc-rotate {
+  @apply absolute -right-6 top-3.5;
+}
+.calc-cross {
+  @apply absolute -right-6 top-9.5;
+}
+.calc-cross,
+.calc-rotate {
+  @apply p-0.5 opacity-0 pointer-events-none transition-colors cursor-pointer;
+}
+.calc-base-item {
+  @apply py-3.5 absolute;
+}
+.calc-base-item button {
+  @apply bg-btn-hover p-1.5 w-6 h-6;
+}
+.calc-base-svg {
+  @apply h-4 w-4;
+}
+.calc-base-drag button {
+  @apply px-2 py-2 h-8!;
+}
+.calc-base-drag {
+  @apply flex flex-col gap-px top-3 absolute -left-8.5 bg-btn-hover;
+}
+.calc-left-block {
+  @apply bg-btn-hover min-h-10 min-w-100;
+}
+.calc-arrow-top {
+  @apply rotate-180;
+}
+
+/* CALCULATOR */
