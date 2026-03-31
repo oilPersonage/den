@@ -1,110 +1,257 @@
-import { Timer, utils } from "animejs";
+import { createTimer, utils } from "animejs";
+import { isDefined } from "src/utils/getDecl";
+import { calculateSizes } from "./calculateSize";
+import draggableHeight from "./draggableHeight";
 
-const MAGNET_THRESHOLD = 12;
+const MAGNET_THRESHOLD = 20;
+export const WALL_HEIGHT = 16;
+export const MIN_WALL_OFFSET = 80 + WALL_HEIGHT;
 
-const dragTimer = new Timer({
-  duration: Infinity,
+const dragTimer = createTimer({
+  duration: 1000,
+  loop: true,
   frameRate: 60, // Явно указываем 60 fps
   onUpdate: updatePosition,
   autoplay: true
 });
 
-let currentDragItem: HTMLElement | null = null;
+export interface State {
+  currentDragItem?: HTMLElement;
+  isDragging: boolean;
+}
+
+type ItemType = "wall" | "door" | "window";
+
+export interface Item {
+  dom: HTMLElement;
+  fixedXFn: (value: number) => number;
+  fixedYFn: (value: number) => number;
+  finalX: number;
+  finalY: number;
+  h: number;
+  w: number;
+  pH: number;
+  pW: number;
+  x: number;
+  y: number;
+  initDragX: number;
+  initDragY: number;
+  magnetPointsX: number[];
+  magnetPointsY: number[];
+  type: ItemType;
+  rotated: boolean;
+}
+
+const elementsState = new Map<HTMLElement, Item>();
+
+export const state: State = {
+  currentDragItem: undefined,
+  isDragging: false
+};
 
 function updatePosition() {
-  if (!currentDragItem) return;
-
-  currentDragItem.style.left = `${fixedXFn(finalX)}px`;
-  currentDragItem.style.top = `${fixedYFn(initialTop + dy)}px`;
+  if (!state.currentDragItem) return;
+  const item = elementsState.get(state.currentDragItem);
+  if (!item) return;
+  const { y, x, finalY, finalX, dom } = item;
+  if (!dom || !isDefined(finalX) || !isDefined(finalY)) return;
+  item.x = utils.lerp(x, item.finalX, 0.3);
+  item.y = utils.lerp(y, item.finalY, 0.3);
+  dom.style.left = `${item.x}px`;
+  dom.style.top = `${item.y}px`;
 }
+
+const findMagnetPoint = (
+  value: number,
+  points: number[],
+  threshold: number
+): number => {
+  // Проходим по всем точкам
+  for (let i = 0; i < points.length; i++) {
+    const point = points[i];
+
+    const start =
+      i === points.length - 1 ? point - threshold : point - threshold;
+    const end = point + threshold;
+
+    // Если значение попадает в диапазон - прилипаем
+    if (value < end && value > start) {
+      return point;
+    }
+  }
+
+  // Не попали ни в один диапазон - возвращаем исходное значение
+  return value;
+};
 
 export function watchDrag(selector: string, parentId: string) {
   const parent = document.getElementById(parentId);
-  if (!parent) return () => {}; // Возвращаем пустую функцию очистки
-
-  const { width, height } = parent.getBoundingClientRect();
+  if (!parent) return;
   const draggables = [...parent.querySelectorAll(selector)] as HTMLElement[];
   if (!draggables.length) return () => {};
 
   // Сохраняем обработчики для очистки
   const cleanupFunctions: Array<() => void> = [];
 
+  function updateData(item: HTMLElement, rotated: boolean) {
+    const { cX, cY, fixedXFn, fixedYFn, magX, magY, h, w, pW, pH } =
+      calculateSizes(item, parent, rotated);
+    // Сохраняем состояние для элемента
+    elementsState.set(item, {
+      type: item.dataset.type as ItemType,
+      rotated,
+      dom: item,
+      x: cX,
+      y: cY,
+      pW,
+      pH,
+      h,
+      w,
+      finalX: cX,
+      finalY: cY,
+      initDragX: cX,
+      initDragY: cY,
+      fixedXFn,
+      fixedYFn,
+      magnetPointsX: magX,
+      magnetPointsY: magY
+    });
+    item.style.left = `${fixedXFn(cX)}px`;
+    item.style.top = `${fixedYFn(cY)}px`;
+
+    return {
+      fixedXFn,
+      fixedYFn,
+      cY,
+      cX
+    };
+  }
+
   draggables.forEach((item) => {
-    const rotated =
-      item.dataset.rotate === "90" || item.dataset.rotate === "270";
-    const rect = item.getBoundingClientRect();
-    const halfWidth = rect.height / 2 - rect.width / 2;
-    const halfHeight = rect.width / 2 - rect.height / 2;
-    const startBorderX = rotated ? 0 - halfWidth : 0;
-    const startBorderY = rotated ? 0 - halfHeight : 0;
-    const endBorderX = rotated ? 0 + halfWidth : 0;
-    const endBorderY = rotated ? 0 + halfHeight : 0;
-    const cropX = [startBorderX, width + endBorderX];
-    const cropY = [startBorderY, height + endBorderY];
-    const h = item.clientHeight;
-    const w = item.clientWidth;
-    const fixedXFn = utils.clamp(cropX[0], cropX[1] - w);
-    const fixedYFn = utils.clamp(cropY[0], cropY[1] - h);
+    const rotated = !!item.dataset.rotated;
+    const { fixedXFn, fixedYFn, cY, cX } = updateData(item, rotated);
+    item.style.left = `${fixedXFn(cX)}px`;
+    item.style.top = `${fixedYFn(cY)}px`;
 
-    const magnetPointsX = [cropX[0], 120, cropX[1]];
-    const magnetPointsY = [...cropY];
+    if (item.querySelector(".calc-wall-height-wrapper")) {
+      const cleanup = draggableHeight(elementsState.get(item), updateData);
+      cleanupFunctions.push(cleanup);
+    }
 
-    const s = window.getComputedStyle(item);
-    let isDragging = false;
-    let startX = 0,
-      startY = 0;
-    let initialLeft = parseFloat(s.left) || 0;
-    let initialTop = parseFloat(s.top) || 0;
-    item.style.left = `${fixedXFn(initialLeft)}px`;
-    item.style.top = `${fixedYFn(initialTop)}px`;
+    let currentState: Item | undefined = undefined;
+
+    let start = [0, 0];
 
     // Создаем обработчики
     const onMouseDown = (e: MouseEvent) => {
-      isDragging = true;
+      const elementState = elementsState.get(item);
+      currentState = elementState;
+      if (!elementState) return;
+      if (
+        !parent ||
+        e.target?.closest(".calc-action-wrapper") ||
+        e.target?.closest(".calc-wall-height-wrapper")
+      )
+        return;
+      parent.classList.add("draggable");
+      state.isDragging = true;
 
-      const style = window.getComputedStyle(item);
-      initialLeft = parseFloat(style.left) || 0;
-      initialTop = parseFloat(style.top) || 0;
+      const { cX, cY, magX, magY, fixedXFn, fixedYFn, h, w, pH } =
+        calculateSizes(item, parent, rotated);
+      elementState.magnetPointsX = magX;
+      elementState.magnetPointsY = magY;
+      elementState.h = h;
+      elementState.w = w;
 
-      startX = e.clientX;
-      startY = e.clientY;
+      if (elementState.type !== "wall") {
+        const moreMagnetX: number[] = [];
+        const moreMagnetY: number[] = [];
+        const elements = [...elementsState.values()];
+        // Устанавливаю дополнительные магнит точки, если добавились перегородки
+        elements
+          .filter((el) => el.type === "wall")
+          .forEach((el) =>
+            !el.rotated
+              ? moreMagnetX.push(el.finalX)
+              : moreMagnetY.push(el.finalY)
+          );
+        elements
+          .filter((el) => el.type !== "wall")
+          .forEach((el) => {
+            el.magnetPointsX = [
+              el.magnetPointsX[0],
+              ...moreMagnetX,
+              el.magnetPointsX[1]
+            ];
+            el.magnetPointsY = [
+              el.magnetPointsY[0],
+              ...moreMagnetY,
+              el.magnetPointsY[1]
+            ];
+          });
+      }
 
+      elementState.fixedXFn = fixedXFn;
+      elementState.fixedYFn = fixedYFn;
+
+      elementState.x = cX;
+      elementState.y = cY;
+      elementState.finalX = cX;
+      elementState.finalY = cY;
+      elementState.initDragX = cX;
+      elementState.initDragY = cY;
+
+      state.currentDragItem = elementState.dom;
       item.style.cursor = "grabbing";
-      item.style.zIndex = "1000";
+      item.classList.add("draggable");
 
+      start = [e.clientX, e.clientY];
+      elementState.dom = item;
+
+      // Глобальный курсор
+      document.body.style.cursor = "grabbing";
+      document.body.style.userSelect = "none";
+      item.style.cursor = "grabbing";
       e.preventDefault();
     };
 
     const onMouseMove = (e: MouseEvent) => {
-      if (!isDragging) return;
+      if (!state.isDragging || !currentState) return;
 
-      const dx = e.clientX - startX;
-      const dy = e.clientY - startY;
+      const dx = e.clientX - start[0];
+      const dy = e.clientY - start[1];
 
-      const valueX = initialLeft + dx;
-      const finalX = magnetPointsX.reduce((closest, point, idx) => {
-        const closestDistance = [
-          idx === magnetPointsX.length - 1
-            ? point - MAGNET_THRESHOLD - 14
-            : point - MAGNET_THRESHOLD,
-          point + MAGNET_THRESHOLD
-        ];
-        return valueX < closestDistance[1] && valueX > closestDistance[0]
-          ? point
-          : closest;
-      }, valueX);
+      const valueX = currentState.initDragX + dx;
+      currentState.finalX = rotated
+        ? valueX
+        : findMagnetPoint(valueX, currentState.magnetPointsX, MAGNET_THRESHOLD);
+      const valueY = currentState.initDragY + dy;
+      currentState.finalY = rotated
+        ? findMagnetPoint(valueY, currentState.magnetPointsY, MAGNET_THRESHOLD)
+        : valueY;
+      currentState.finalX = fixedXFn(currentState.finalX);
+      currentState.finalY = fixedYFn(currentState.finalY);
 
-      item.style.left = `${fixedXFn(finalX)}px`;
-      item.style.top = `${fixedYFn(initialTop + dy)}px`;
-      // console.log(fixedXFn(initialLeft + dx), fixedYFn(initialTop + dx));
+      // if (currentState.type === 'wall') {
+      // 	const contentSize = currentState.dom.querySelector('.calc-wall-coords')
+      // 	contentSize.textContent = `x=${currentState.finalX} y=${currentState.finalY}`
+      // }
     };
 
     const onMouseUp = () => {
-      if (!isDragging) return;
-
-      isDragging = false;
+      item.classList.remove("draggable");
+      parent.classList.remove("draggable");
+      currentState = undefined;
+      state.currentDragItem = undefined;
+      if (!state.isDragging) return;
       item.style.cursor = "grab";
-      item.style.zIndex = "";
+
+      state.isDragging = false;
+      // Возвращаем курсор
+      document.body.style.cursor = "";
+      document.body.style.userSelect = "";
+      item.style.cursor = "grab";
+      item.style.removeProperty("z-index");
     };
 
     // Добавляем обработчики
@@ -117,11 +264,11 @@ export function watchDrag(selector: string, parentId: string) {
       item.removeEventListener("mousedown", onMouseDown);
       window.removeEventListener("mousemove", onMouseMove);
       window.removeEventListener("mouseup", onMouseUp);
+      document.body.style.cursor = "";
+      document.body.style.userSelect = "";
     });
 
     // Устанавливаем начальный курсор
-    item.style.cursor = "grab";
-    item.style.position = "absolute";
   });
 
   // Возвращаем функцию очистки

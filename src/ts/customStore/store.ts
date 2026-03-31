@@ -1,8 +1,11 @@
 import { Draggable } from "animejs";
+import { TItem } from "src/app/calc/page";
 
 export interface Container {
   id: string;
-  idx: number;
+  windows: TItem[];
+  doors: TItem[];
+  walls: TItem[];
 }
 
 export interface TState {

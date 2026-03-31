@@ -983,14 +983,10 @@ footer p {
   @apply mt-6 ml-6 flex flex-col;
 }
 .calc-base {
-  @apply w-80.5 h-60 bg-bg2 relative -mt-3.5;
-  transition:
-    width 0.3s ease,
-    height 0.3s ease;
+  @apply w-80.5 h-60 bg-bg2 relative -mt-4;
 }
-
-.base-drag-item {
-  @apply py-3.5 relative;
+.calc-base.draggable .calc-base-item:not(.draggable) .calc-action-wrapper {
+  @apply hidden;
 }
 
 .drag-window {
@@ -1004,10 +1000,10 @@ footer p {
   content: "";
   @apply absolute origin-top w-1 h-[calc(100%-36px)] bg-black top-4 left-1.5 rotate-25 pointer-events-none;
 }
-.calc-base-wall {
-  @apply absolute inset-3.5;
+.calc-base-border {
+  @apply absolute inset-4;
   box-shadow:
-    /* 0 0 0 1px #212529, */ 0 0 0 14px #d4d4d4;
+    /* 0 0 0 1px #212529, */ 0 0 0 16px #d4d4d4;
   /* 0 0 0 14px #212529; */
 }
 .base-drag-item:hover .calc-rotate,
@@ -1015,7 +1011,7 @@ footer p {
   @apply opacity-100 pointer-events-auto;
 }
 .calc-rotate {
-  @apply absolute -right-6 top-3.5;
+  @apply absolute -right-6 top-4;
 }
 .calc-cross {
   @apply absolute -right-6 top-9.5;
@@ -1025,19 +1021,103 @@ footer p {
   @apply p-0.5 opacity-0 pointer-events-none transition-colors cursor-pointer;
 }
 .calc-base-item {
-  @apply py-3.5 absolute;
+  @apply py-4 absolute w-fit cursor-grab z-3;
+}
+.calc-base-item.calc-base-rotated {
+  @apply py-0 px-4;
+}
+.calc-base-window {
+  @apply relative h-20 w-4 z-2 bg-bg2 flex flex-col items-center;
+}
+.calc-base-rotated .calc-base-window {
+  @apply flex-row w-20 h-4 py-0;
+}
+.calc-base-window-d {
+  @apply w-full h-2 bg-black;
+}
+.calc-base-rotated .calc-base-window-d {
+  @apply h-full w-2;
+}
+.calc-base-rotated .calc-base-window-c {
+  @apply w-full h-0.5;
+}
+.calc-base-window-c {
+  @apply flex-1 w-0.5 bg-black;
+}
+.calc-base-wall.calc-base-rotated {
+  @apply h-4 top-auto bottom-auto left-0 right-0;
+}
+.calc-base-wall {
+  @apply z-1 top-0 bottom-0;
+}
+.calc-base-item:hover .calc-wall-height-wrapper,
+.calc-base-item:hover .calc-action-wrapper {
+  @apply opacity-100 pointer-events-auto;
+}
+.calc-base-rotated .calc-action-wrapper {
+  @apply right-4 bottom-4 pb-0.5 top-auto left-auto flex-row-reverse;
+}
+.calc-base-item .calc-action-wrapper {
+  @apply pointer-events-none;
+}
+.calc-base-rotated .calc-wall-height-wrapper {
+  @apply w-[calc(100%-32px)] top-4 pt-0.5;
+}
+.calc-base-item.draggable .calc-wall-height-wrapper,
+.calc-base-item.draggable .calc-action-wrapper {
+  @apply opacity-0!;
+}
+.calc-base-item.draggable .calc-wall-height-wrapper,
+.calc-base-item.draggable button {
+  @apply select-none! pointer-events-none!;
+}
+.calc-base-item.changed-height .calc-wall-height-wrapper {
+  @apply opacity-100!;
+}
+.calc-action-wrapper {
+  @apply absolute opacity-0 top-4.25 -left-6.5 h-min transition-opacity flex flex-col pr-0.5;
+}
+.calc-wall-height-wrapper {
+  @apply absolute opacity-0 bottom-0 left-4 max-h-[calc(100%-32px)] top-[15px] pl-0.5 pointer-events-none select-none cursor-auto
+	flex flex-col;
+}
+.calc-wall-height-btn {
+  @apply bg-gray-200 cursor-ns-resize! absolute bottom-0 left-px items-center;
+}
+.calc-base-rotated .calc-wall-height-btn:hover {
+  @apply cursor-ew-resize!;
+}
+.calc-base-rotated .calc-wall-height-btn {
+  @apply top-px right-px left-auto;
+}
+.calc-base-rotated .calc-wall-height-count {
+  @apply rotate-0 top-0.5 left-auto right-8;
+}
+.calc-base-rotated .calc-base-wall-bg {
+  @apply min-h-4 min-w-4;
+}
+.calc-base-wall-bg {
+  @apply h-full bg-neutral-200 relative z-2 min-h-4 min-w-4;
+}
+
+.calc-wall-height-count {
+  @apply absolute bottom-9 rotate-90 -left-2.25 pointer-events-none select-none;
+}
+.calc-base-item:hover .calc-wall-height-wrapper,
+.calc-base-item:hover button {
+  @apply pointer-events-auto select-auto;
 }
 .calc-base-item button {
-  @apply bg-btn-hover p-1.5 w-6 h-6;
+  @apply bg-gray-200 p-1.5 w-6 h-6 pointer-events-none select-none;
 }
 .calc-base-svg {
   @apply h-4 w-4;
 }
-.calc-base-drag button {
-  @apply px-2 py-2 h-8!;
+.calc-block-actions {
+  @apply flex gap-1;
 }
-.calc-base-drag {
-  @apply flex flex-col gap-px top-3 absolute -left-8.5 bg-btn-hover;
+.calc-block-actions button {
+  @apply px-2 py-2 h-8;
 }
 .calc-left-block {
   @apply bg-btn-hover min-h-10 min-w-100;
@@ -1046,4 +1126,16 @@ footer p {
   @apply rotate-180;
 }
 
+.debug-helper {
+  @apply absolute border-black border opacity-80;
+}
+
+.calc-wall-coords {
+  @apply absolute bottom-0 left-1;
+}
+
 /* CALCULATOR */
+
+.divider {
+  @apply w-full h-px bg-black/10;
+}
