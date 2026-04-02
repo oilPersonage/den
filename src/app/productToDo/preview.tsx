@@ -1,4 +1,4 @@
-import ProductCalc from 'src/components/productCalc'
+import ProductCalc from 'src/components/ProductPrice'
 import RequestSection from 'src/components/requestSection'
 import { TCharacter } from 'src/libs/products'
 

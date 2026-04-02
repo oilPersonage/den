@@ -166,7 +166,7 @@ var init_globals = __esm({
 });
 
 // node_modules/animejs/dist/modules/core/helpers.js
-var toLowerCase, stringStartsWith, now, isArr, isObj, isNum, isStr, isFnc, isUnd, isNil, isSvg, isHex, isRgb, isHsl, isCol, isKey, svgCssReservedProperties, isValidSVGAttribute, parseNumber, pow, sqrt, sin, cos, abs, exp, floor, asin, max, atan2, PI, _round, clamp, powCache, round, snap, lerp, clampInfinity, normalizeTime, cloneArray, mergeObjects, forEachChildren, removeChild, addChild;
+var toLowerCase, stringStartsWith, now, isArr, isObj, isNum, isStr, isFnc, isUnd, isNil, isSvg, isHex, isRgb, isHsl, isCol, isKey, svgCssReservedProperties, isValidSVGAttribute, parseNumber, pow, sqrt, sin, cos, abs, floor, asin, max, PI, _round, clamp, powCache, round, snap, lerp, clampInfinity, normalizeTime, cloneArray, mergeObjects, forEachChildren, removeChild, addChild;
 var init_helpers = __esm({
   "node_modules/animejs/dist/modules/core/helpers.js"() {
     init_consts();
@@ -214,11 +214,9 @@ var init_helpers = __esm({
     sin = Math.sin;
     cos = Math.cos;
     abs = Math.abs;
-    exp = Math.exp;
     floor = Math.floor;
     asin = Math.asin;
     max = Math.max;
-    atan2 = Math.atan2;
     PI = Math.PI;
     _round = Math.round;
     clamp = (v, min, max2) => v < min ? min : v > max2 ? max2 : v;
@@ -2977,134 +2975,6 @@ var init_timeline = __esm({
   }
 });
 
-// node_modules/animejs/dist/modules/animatable/animatable.js
-var Animatable;
-var init_animatable = __esm({
-  "node_modules/animejs/dist/modules/animatable/animatable.js"() {
-    init_consts();
-    init_globals();
-    init_helpers();
-    init_animation();
-    init_parser();
-    Animatable = class {
-      /**
-       * @param {TargetsParam} targets
-       * @param {AnimatableParams} parameters
-       */
-      constructor(targets, parameters) {
-        if (scope.current) scope.current.register(this);
-        const beginHandler = () => {
-          if (this.callbacks.completed) this.callbacks.reset();
-          this.callbacks.play();
-        };
-        const pauseHandler = () => {
-          if (this.callbacks.completed) return;
-          let paused = true;
-          for (let name in this.animations) {
-            const anim = this.animations[name];
-            if (!anim.paused && paused) {
-              paused = false;
-              break;
-            }
-          }
-          if (paused) {
-            this.callbacks.complete();
-          }
-        };
-        const globalParams = {
-          onBegin: beginHandler,
-          onComplete: pauseHandler,
-          onPause: pauseHandler
-        };
-        const callbacksAnimationParams = { v: 1, autoplay: false };
-        const properties = {};
-        this.targets = [];
-        this.animations = {};
-        this.callbacks = null;
-        if (isUnd(targets) || isUnd(parameters)) return;
-        for (let propName in parameters) {
-          const paramValue = parameters[propName];
-          if (isKey(propName)) {
-            properties[propName] = paramValue;
-          } else if (stringStartsWith(propName, "on")) {
-            callbacksAnimationParams[propName] = paramValue;
-          } else {
-            globalParams[propName] = paramValue;
-          }
-        }
-        this.callbacks = new JSAnimation({ v: 0 }, callbacksAnimationParams);
-        for (let propName in properties) {
-          const propValue = properties[propName];
-          const isObjValue = isObj(propValue);
-          let propParams = {};
-          let to = "+=0";
-          if (isObjValue) {
-            const unit = propValue.unit;
-            if (isStr(unit)) to += unit;
-          } else {
-            propParams.duration = propValue;
-          }
-          propParams[propName] = isObjValue ? mergeObjects({ to }, propValue) : to;
-          const animParams = mergeObjects(globalParams, propParams);
-          animParams.composition = compositionTypes.replace;
-          animParams.autoplay = false;
-          const animation = this.animations[propName] = new JSAnimation(targets, animParams, null, 0, false).init();
-          if (!this.targets.length) this.targets.push(...animation.targets);
-          this[propName] = (to2, duration, ease) => {
-            const tween = (
-              /** @type {Tween} */
-              animation._head
-            );
-            if (isUnd(to2) && tween) {
-              const numbers = tween._numbers;
-              if (numbers && numbers.length) {
-                return numbers;
-              } else {
-                return tween._modifier(tween._number);
-              }
-            } else {
-              forEachChildren(animation, (tween2) => {
-                if (isArr(to2)) {
-                  for (let i = 0, l = (
-                    /** @type {Array} */
-                    to2.length
-                  ); i < l; i++) {
-                    if (!isUnd(tween2._numbers[i])) {
-                      tween2._fromNumbers[i] = /** @type {Number} */
-                      tween2._modifier(tween2._numbers[i]);
-                      tween2._toNumbers[i] = to2[i];
-                    }
-                  }
-                } else {
-                  tween2._fromNumber = /** @type {Number} */
-                  tween2._modifier(tween2._number);
-                  tween2._toNumber = /** @type {Number} */
-                  to2;
-                }
-                if (!isUnd(ease)) tween2._ease = parseEase(ease);
-                tween2._currentTime = 0;
-              });
-              if (!isUnd(duration)) animation.stretch(duration);
-              animation.reset(true).resume();
-              return this;
-            }
-          };
-        }
-      }
-      revert() {
-        for (let propName in this.animations) {
-          this[propName] = noop;
-          this.animations[propName].revert();
-        }
-        this.animations = {};
-        this.targets.length = 0;
-        if (this.callbacks) this.callbacks.revert();
-        return this;
-      }
-    };
-  }
-});
-
 // node_modules/animejs/dist/modules/utils/number.js
 var number_exports = {};
 __export(number_exports, {
@@ -3136,176 +3006,6 @@ var init_number = __esm({
     damp = (start, end, deltaTime, factor) => {
       return !factor ? start : factor === 1 ? end : lerp(start, end, 1 - Math.exp(-factor * deltaTime * 0.1));
     };
-  }
-});
-
-// node_modules/animejs/dist/modules/easings/spring/index.js
-var maxSpringParamValue, Spring, spring;
-var init_spring = __esm({
-  "node_modules/animejs/dist/modules/easings/spring/index.js"() {
-    init_consts();
-    init_globals();
-    init_helpers();
-    init_values();
-    maxSpringParamValue = K * 10;
-    Spring = class {
-      /**
-       * @param {SpringParams} [parameters]
-       */
-      constructor(parameters = {}) {
-        const hasBounceOrDuration = !isUnd(parameters.bounce) || !isUnd(parameters.duration);
-        this.timeStep = 0.02;
-        this.restThreshold = 5e-4;
-        this.restDuration = 200;
-        this.maxDuration = 6e4;
-        this.maxRestSteps = this.restDuration / this.timeStep / K;
-        this.maxIterations = this.maxDuration / this.timeStep / K;
-        this.bn = clamp(setValue(parameters.bounce, 0.5), -1, 1);
-        this.pd = clamp(setValue(parameters.duration, 628), 10 * globals.timeScale, maxSpringParamValue * globals.timeScale);
-        this.m = clamp(setValue(parameters.mass, 1), 1, maxSpringParamValue);
-        this.s = clamp(setValue(parameters.stiffness, 100), minValue, maxSpringParamValue);
-        this.d = clamp(setValue(parameters.damping, 10), minValue, maxSpringParamValue);
-        this.v = clamp(setValue(parameters.velocity, 0), -maxSpringParamValue, maxSpringParamValue);
-        this.w0 = 0;
-        this.zeta = 0;
-        this.wd = 0;
-        this.b = 0;
-        this.completed = false;
-        this.solverDuration = 0;
-        this.settlingDuration = 0;
-        this.parent = null;
-        this.onComplete = parameters.onComplete || noop;
-        if (hasBounceOrDuration) this.calculateSDFromBD();
-        this.compute();
-        this.ease = (t) => {
-          const currentTime = t * this.settlingDuration;
-          const completed = this.completed;
-          const perceivedTime = this.pd;
-          if (currentTime >= perceivedTime && !completed) {
-            this.completed = true;
-            this.onComplete(this.parent);
-          }
-          if (currentTime < perceivedTime && completed) {
-            this.completed = false;
-          }
-          return t === 0 || t === 1 ? t : this.solve(t * this.solverDuration);
-        };
-      }
-      /** @type {EasingFunction} */
-      solve(time2) {
-        const { zeta, w0, wd, b } = this;
-        let t = time2;
-        if (zeta < 1) {
-          t = exp(-t * zeta * w0) * (1 * cos(wd * t) + b * sin(wd * t));
-        } else if (zeta === 1) {
-          t = (1 + b * t) * exp(-t * w0);
-        } else {
-          t = ((1 + b) * exp((-zeta * w0 + wd) * t) + (1 - b) * exp((-zeta * w0 - wd) * t)) / 2;
-        }
-        return 1 - t;
-      }
-      calculateSDFromBD() {
-        const pds = globals.timeScale === 1 ? this.pd / K : this.pd;
-        this.m = 1;
-        this.v = 0;
-        this.s = pow(2 * PI / pds, 2);
-        if (this.bn >= 0) {
-          this.d = (1 - this.bn) * 4 * PI / pds;
-        } else {
-          this.d = 4 * PI / (pds * (1 + this.bn));
-        }
-        this.s = round(clamp(this.s, minValue, maxSpringParamValue), 3);
-        this.d = round(clamp(this.d, minValue, 300), 3);
-      }
-      calculateBDFromSD() {
-        const pds = 2 * PI / sqrt(this.s);
-        this.pd = pds * (globals.timeScale === 1 ? K : 1);
-        const zeta = this.d / (2 * sqrt(this.s));
-        if (zeta <= 1) {
-          this.bn = 1 - this.d * pds / (4 * PI);
-        } else {
-          this.bn = 4 * PI / (this.d * pds) - 1;
-        }
-        this.bn = round(clamp(this.bn, -1, 1), 3);
-        this.pd = round(clamp(this.pd, 10 * globals.timeScale, maxSpringParamValue * globals.timeScale), 3);
-      }
-      compute() {
-        const { maxRestSteps, maxIterations, restThreshold, timeStep, m, d: d2, s, v } = this;
-        const w0 = this.w0 = clamp(sqrt(s / m), minValue, K);
-        const bouncedZeta = this.zeta = d2 / (2 * sqrt(s * m));
-        if (bouncedZeta < 1) {
-          this.wd = w0 * sqrt(1 - bouncedZeta * bouncedZeta);
-          this.b = (bouncedZeta * w0 + -v) / this.wd;
-        } else if (bouncedZeta === 1) {
-          this.wd = 0;
-          this.b = -v + w0;
-        } else {
-          this.wd = w0 * sqrt(bouncedZeta * bouncedZeta - 1);
-          this.b = (bouncedZeta * w0 + -v) / this.wd;
-        }
-        let solverTime = 0;
-        let restSteps = 0;
-        let iterations = 0;
-        while (restSteps <= maxRestSteps && iterations <= maxIterations) {
-          if (abs(1 - this.solve(solverTime)) < restThreshold) {
-            restSteps++;
-          } else {
-            restSteps = 0;
-          }
-          this.solverDuration = solverTime;
-          solverTime += timeStep;
-          iterations++;
-        }
-        this.settlingDuration = round(this.solverDuration * K, 0) * globals.timeScale;
-      }
-      get bounce() {
-        return this.bn;
-      }
-      set bounce(v) {
-        this.bn = clamp(setValue(v, 1), -1, 1);
-        this.calculateSDFromBD();
-        this.compute();
-      }
-      get duration() {
-        return this.pd;
-      }
-      set duration(v) {
-        this.pd = clamp(setValue(v, 1), 10 * globals.timeScale, maxSpringParamValue * globals.timeScale);
-        this.calculateSDFromBD();
-        this.compute();
-      }
-      get stiffness() {
-        return this.s;
-      }
-      set stiffness(v) {
-        this.s = clamp(setValue(v, 100), minValue, maxSpringParamValue);
-        this.calculateBDFromSD();
-        this.compute();
-      }
-      get damping() {
-        return this.d;
-      }
-      set damping(v) {
-        this.d = clamp(setValue(v, 10), minValue, maxSpringParamValue);
-        this.calculateBDFromSD();
-        this.compute();
-      }
-      get mass() {
-        return this.m;
-      }
-      set mass(v) {
-        this.m = clamp(setValue(v, 1), 1, maxSpringParamValue);
-        this.compute();
-      }
-      get velocity() {
-        return this.v;
-      }
-      set velocity(v) {
-        this.v = clamp(setValue(v, 0), -maxSpringParamValue, maxSpringParamValue);
-        this.compute();
-      }
-    };
-    spring = (parameters) => new Spring(parameters);
   }
 });
 
@@ -3442,1170 +3142,6 @@ var init_target = __esm({
       );
       return targetsArray;
     };
-  }
-});
-
-// node_modules/animejs/dist/modules/draggable/draggable.js
-var preventDefault, DOMProxy, Transforms, parseDraggableFunctionParameter, zIndex, Draggable, createDraggable;
-var init_draggable = __esm({
-  "node_modules/animejs/dist/modules/draggable/draggable.js"() {
-    init_globals();
-    init_consts();
-    init_targets();
-    init_helpers();
-    init_values();
-    init_number();
-    init_timer();
-    init_animation();
-    init_composition();
-    init_animatable();
-    init_parser();
-    init_spring();
-    init_target();
-    preventDefault = (e) => {
-      if (e.cancelable) e.preventDefault();
-    };
-    DOMProxy = class {
-      /** @param {Object} el */
-      constructor(el) {
-        this.el = el;
-        this.zIndex = 0;
-        this.parentElement = null;
-        this.classList = {
-          add: noop,
-          remove: noop
-        };
-      }
-      get x() {
-        return this.el.x || 0;
-      }
-      set x(v) {
-        this.el.x = v;
-      }
-      get y() {
-        return this.el.y || 0;
-      }
-      set y(v) {
-        this.el.y = v;
-      }
-      get width() {
-        return this.el.width || 0;
-      }
-      set width(v) {
-        this.el.width = v;
-      }
-      get height() {
-        return this.el.height || 0;
-      }
-      set height(v) {
-        this.el.height = v;
-      }
-      getBoundingClientRect() {
-        return {
-          top: this.y,
-          right: this.x,
-          bottom: this.y + this.height,
-          left: this.x + this.width
-        };
-      }
-    };
-    Transforms = class {
-      /**
-       * @param {DOMTarget|DOMProxy} $el
-       */
-      constructor($el) {
-        this.$el = $el;
-        this.inlineTransforms = [];
-        this.point = new DOMPoint();
-        this.inversedMatrix = this.getMatrix().inverse();
-      }
-      /**
-       * @param {Number} x
-       * @param {Number} y
-       * @return {DOMPoint}
-       */
-      normalizePoint(x, y) {
-        this.point.x = x;
-        this.point.y = y;
-        return this.point.matrixTransform(this.inversedMatrix);
-      }
-      /**
-       * @callback TraverseParentsCallback
-       * @param {DOMTarget} $el
-       * @param {Number} i
-       */
-      /**
-       * @param {TraverseParentsCallback} cb
-       */
-      traverseUp(cb) {
-        let $el = (
-          /** @type {DOMTarget|Document} */
-          this.$el.parentElement
-        ), i = 0;
-        while ($el && $el !== doc) {
-          cb(
-            /** @type {DOMTarget} */
-            $el,
-            i
-          );
-          $el = /** @type {DOMTarget} */
-          $el.parentElement;
-          i++;
-        }
-      }
-      getMatrix() {
-        const matrix = new DOMMatrix();
-        this.traverseUp(($el) => {
-          const transformValue = getComputedStyle($el).transform;
-          if (transformValue) {
-            const elMatrix = new DOMMatrix(transformValue);
-            matrix.preMultiplySelf(elMatrix);
-          }
-        });
-        return matrix;
-      }
-      remove() {
-        this.traverseUp(($el, i) => {
-          this.inlineTransforms[i] = $el.style.transform;
-          $el.style.transform = "none";
-        });
-      }
-      revert() {
-        this.traverseUp(($el, i) => {
-          const ct = this.inlineTransforms[i];
-          if (ct === "") {
-            $el.style.removeProperty("transform");
-          } else {
-            $el.style.transform = ct;
-          }
-        });
-      }
-    };
-    parseDraggableFunctionParameter = (value, draggable) => value && isFnc(value) ? (
-      /** @type {Function} */
-      value(draggable)
-    ) : (
-      /** @type {T} */
-      value
-    );
-    zIndex = 0;
-    Draggable = class {
-      /**
-       * @param {TargetsParam} target
-       * @param {DraggableParams} [parameters]
-       */
-      constructor(target, parameters = {}) {
-        if (!target) return;
-        if (scope.current) scope.current.register(this);
-        const paramX = parameters.x;
-        const paramY = parameters.y;
-        const trigger = parameters.trigger;
-        const modifier = parameters.modifier;
-        const ease = parameters.releaseEase;
-        const customEase = ease && parseEase(ease);
-        const hasSpring = !isUnd(ease) && !isUnd(
-          /** @type {Spring} */
-          ease.ease
-        );
-        const xProp = (
-          /** @type {String} */
-          isObj(paramX) && !isUnd(
-            /** @type {Object} */
-            paramX.mapTo
-          ) ? (
-            /** @type {Object} */
-            paramX.mapTo
-          ) : "translateX"
-        );
-        const yProp = (
-          /** @type {String} */
-          isObj(paramY) && !isUnd(
-            /** @type {Object} */
-            paramY.mapTo
-          ) ? (
-            /** @type {Object} */
-            paramY.mapTo
-          ) : "translateY"
-        );
-        const container = parseDraggableFunctionParameter(parameters.container, this);
-        this.containerArray = isArr(container) ? container : null;
-        this.$container = /** @type {HTMLElement} */
-        container && !this.containerArray ? parseTargets(
-          /** @type {DOMTarget} */
-          container
-        )[0] : doc.body;
-        this.useWin = this.$container === doc.body;
-        this.$scrollContainer = this.useWin ? win : this.$container;
-        this.$target = /** @type {HTMLElement} */
-        isObj(target) ? new DOMProxy(target) : parseTargets(target)[0];
-        this.$trigger = /** @type {HTMLElement} */
-        parseTargets(trigger ? trigger : target)[0];
-        this.fixed = get(this.$target, "position") === "fixed";
-        this.isFinePointer = true;
-        this.containerPadding = [0, 0, 0, 0];
-        this.containerFriction = 0;
-        this.releaseContainerFriction = 0;
-        this.snapX = 0;
-        this.snapY = 0;
-        this.scrollSpeed = 0;
-        this.scrollThreshold = 0;
-        this.dragSpeed = 0;
-        this.dragThreshold = 3;
-        this.maxVelocity = 0;
-        this.minVelocity = 0;
-        this.velocityMultiplier = 0;
-        this.cursor = false;
-        this.releaseXSpring = hasSpring ? (
-          /** @type {Spring} */
-          ease
-        ) : spring({
-          mass: setValue(parameters.releaseMass, 1),
-          stiffness: setValue(parameters.releaseStiffness, 80),
-          damping: setValue(parameters.releaseDamping, 20)
-        });
-        this.releaseYSpring = hasSpring ? (
-          /** @type {Spring} */
-          ease
-        ) : spring({
-          mass: setValue(parameters.releaseMass, 1),
-          stiffness: setValue(parameters.releaseStiffness, 80),
-          damping: setValue(parameters.releaseDamping, 20)
-        });
-        this.releaseEase = customEase || eases.outQuint;
-        this.hasReleaseSpring = hasSpring;
-        this.onGrab = parameters.onGrab || noop;
-        this.onDrag = parameters.onDrag || noop;
-        this.onRelease = parameters.onRelease || noop;
-        this.onUpdate = parameters.onUpdate || noop;
-        this.onSettle = parameters.onSettle || noop;
-        this.onSnap = parameters.onSnap || noop;
-        this.onResize = parameters.onResize || noop;
-        this.onAfterResize = parameters.onAfterResize || noop;
-        this.disabled = [0, 0];
-        const animatableParams = {};
-        if (modifier) animatableParams.modifier = modifier;
-        if (isUnd(paramX) || paramX === true) {
-          animatableParams[xProp] = 0;
-        } else if (isObj(paramX)) {
-          const paramXObject = (
-            /** @type {DraggableAxisParam} */
-            paramX
-          );
-          const animatableXParams = {};
-          if (paramXObject.modifier) animatableXParams.modifier = paramXObject.modifier;
-          if (paramXObject.composition) animatableXParams.composition = paramXObject.composition;
-          animatableParams[xProp] = animatableXParams;
-        } else if (paramX === false) {
-          animatableParams[xProp] = 0;
-          this.disabled[0] = 1;
-        }
-        if (isUnd(paramY) || paramY === true) {
-          animatableParams[yProp] = 0;
-        } else if (isObj(paramY)) {
-          const paramYObject = (
-            /** @type {DraggableAxisParam} */
-            paramY
-          );
-          const animatableYParams = {};
-          if (paramYObject.modifier) animatableYParams.modifier = paramYObject.modifier;
-          if (paramYObject.composition) animatableYParams.composition = paramYObject.composition;
-          animatableParams[yProp] = animatableYParams;
-        } else if (paramY === false) {
-          animatableParams[yProp] = 0;
-          this.disabled[1] = 1;
-        }
-        this.animate = /** @type {AnimatableObject} */
-        new Animatable(this.$target, animatableParams);
-        this.xProp = xProp;
-        this.yProp = yProp;
-        this.destX = 0;
-        this.destY = 0;
-        this.deltaX = 0;
-        this.deltaY = 0;
-        this.scroll = { x: 0, y: 0 };
-        this.coords = [this.x, this.y, 0, 0];
-        this.snapped = [0, 0];
-        this.pointer = [0, 0, 0, 0, 0, 0, 0, 0];
-        this.scrollView = [0, 0];
-        this.dragArea = [0, 0, 0, 0];
-        this.containerBounds = [-maxValue, maxValue, maxValue, -maxValue];
-        this.scrollBounds = [0, 0, 0, 0];
-        this.targetBounds = [0, 0, 0, 0];
-        this.window = [0, 0];
-        this.velocityStack = [0, 0, 0];
-        this.velocityStackIndex = 0;
-        this.velocityTime = now();
-        this.velocity = 0;
-        this.angle = 0;
-        this.cursorStyles = null;
-        this.triggerStyles = null;
-        this.bodyStyles = null;
-        this.targetStyles = null;
-        this.touchActionStyles = null;
-        this.transforms = new Transforms(this.$target);
-        this.overshootCoords = { x: 0, y: 0 };
-        this.overshootTicker = new Timer({
-          autoplay: false,
-          onUpdate: () => {
-            this.updated = true;
-            this.manual = true;
-            if (!this.disabled[0]) this.animate[this.xProp](this.overshootCoords.x, 1);
-            if (!this.disabled[1]) this.animate[this.yProp](this.overshootCoords.y, 1);
-          },
-          onComplete: () => {
-            this.manual = false;
-            if (!this.disabled[0]) this.animate[this.xProp](this.overshootCoords.x, 0);
-            if (!this.disabled[1]) this.animate[this.yProp](this.overshootCoords.y, 0);
-          }
-        }, null, 0).init();
-        this.updateTicker = new Timer({ autoplay: false, onUpdate: () => this.update() }, null, 0).init();
-        this.contained = !isUnd(container);
-        this.manual = false;
-        this.grabbed = false;
-        this.dragged = false;
-        this.updated = false;
-        this.released = false;
-        this.canScroll = false;
-        this.enabled = false;
-        this.initialized = false;
-        this.activeProp = this.disabled[1] ? xProp : yProp;
-        this.animate.callbacks.onRender = () => {
-          const hasUpdated = this.updated;
-          const hasMoved = this.grabbed && hasUpdated;
-          const hasReleased = !hasMoved && this.released;
-          const x = this.x;
-          const y = this.y;
-          const dx = x - this.coords[2];
-          const dy = y - this.coords[3];
-          this.deltaX = dx;
-          this.deltaY = dy;
-          this.coords[2] = x;
-          this.coords[3] = y;
-          if (hasUpdated && (dx || dy)) {
-            this.onUpdate(this);
-          }
-          if (!hasReleased) {
-            this.updated = false;
-          } else {
-            this.computeVelocity(dx, dy);
-            this.angle = atan2(dy, dx);
-          }
-        };
-        this.animate.callbacks.onComplete = () => {
-          if (!this.grabbed && this.released) {
-            this.released = false;
-          }
-          if (!this.manual) {
-            this.deltaX = 0;
-            this.deltaY = 0;
-            this.velocity = 0;
-            this.velocityStack[0] = 0;
-            this.velocityStack[1] = 0;
-            this.velocityStack[2] = 0;
-            this.velocityStackIndex = 0;
-            this.onSettle(this);
-          }
-        };
-        this.resizeTicker = new Timer({
-          autoplay: false,
-          duration: 150 * globals.timeScale,
-          onComplete: () => {
-            this.onResize(this);
-            this.refresh();
-            this.onAfterResize(this);
-          }
-        }).init();
-        this.parameters = parameters;
-        this.resizeObserver = new ResizeObserver(() => {
-          if (this.initialized) {
-            this.resizeTicker.restart();
-          } else {
-            this.initialized = true;
-          }
-        });
-        this.enable();
-        this.refresh();
-        this.resizeObserver.observe(this.$container);
-        if (!isObj(target)) this.resizeObserver.observe(this.$target);
-      }
-      /**
-       * @param  {Number} dx
-       * @param  {Number} dy
-       * @return {Number}
-       */
-      computeVelocity(dx, dy) {
-        const prevTime = this.velocityTime;
-        const curTime = now();
-        const elapsed = curTime - prevTime;
-        if (elapsed < 17) return this.velocity;
-        this.velocityTime = curTime;
-        const velocityStack = this.velocityStack;
-        const vMul = this.velocityMultiplier;
-        const minV = this.minVelocity;
-        const maxV = this.maxVelocity;
-        const vi = this.velocityStackIndex;
-        velocityStack[vi] = round(clamp(sqrt(dx * dx + dy * dy) / elapsed * vMul, minV, maxV), 5);
-        const velocity = max(velocityStack[0], velocityStack[1], velocityStack[2]);
-        this.velocity = velocity;
-        this.velocityStackIndex = (vi + 1) % 3;
-        return velocity;
-      }
-      /**
-       * @param {Number}  x
-       * @param {Boolean} [muteUpdateCallback]
-       * @return {this}
-       */
-      setX(x, muteUpdateCallback = false) {
-        if (this.disabled[0]) return;
-        const v = round(x, 5);
-        this.overshootTicker.pause();
-        this.manual = true;
-        this.updated = !muteUpdateCallback;
-        this.destX = v;
-        this.snapped[0] = snap(v, this.snapX);
-        this.animate[this.xProp](v, 0);
-        this.manual = false;
-        return this;
-      }
-      /**
-       * @param {Number}  y
-       * @param {Boolean} [muteUpdateCallback]
-       * @return {this}
-       */
-      setY(y, muteUpdateCallback = false) {
-        if (this.disabled[1]) return;
-        const v = round(y, 5);
-        this.overshootTicker.pause();
-        this.manual = true;
-        this.updated = !muteUpdateCallback;
-        this.destY = v;
-        this.snapped[1] = snap(v, this.snapY);
-        this.animate[this.yProp](v, 0);
-        this.manual = false;
-        return this;
-      }
-      get x() {
-        return round(
-          /** @type {Number} */
-          this.animate[this.xProp](),
-          globals.precision
-        );
-      }
-      set x(x) {
-        this.setX(x, false);
-      }
-      get y() {
-        return round(
-          /** @type {Number} */
-          this.animate[this.yProp](),
-          globals.precision
-        );
-      }
-      set y(y) {
-        this.setY(y, false);
-      }
-      get progressX() {
-        return mapRange(this.x, this.containerBounds[3], this.containerBounds[1], 0, 1);
-      }
-      set progressX(x) {
-        this.setX(mapRange(x, 0, 1, this.containerBounds[3], this.containerBounds[1]), false);
-      }
-      get progressY() {
-        return mapRange(this.y, this.containerBounds[0], this.containerBounds[2], 0, 1);
-      }
-      set progressY(y) {
-        this.setY(mapRange(y, 0, 1, this.containerBounds[0], this.containerBounds[2]), false);
-      }
-      updateScrollCoords() {
-        const sx = round(this.useWin ? win.scrollX : this.$container.scrollLeft, 0);
-        const sy = round(this.useWin ? win.scrollY : this.$container.scrollTop, 0);
-        const [cpt, cpr, cpb, cpl] = this.containerPadding;
-        const threshold = this.scrollThreshold;
-        this.scroll.x = sx;
-        this.scroll.y = sy;
-        this.scrollBounds[0] = sy - this.targetBounds[0] + cpt - threshold;
-        this.scrollBounds[1] = sx - this.targetBounds[1] - cpr + threshold;
-        this.scrollBounds[2] = sy - this.targetBounds[2] - cpb + threshold;
-        this.scrollBounds[3] = sx - this.targetBounds[3] + cpl - threshold;
-      }
-      updateBoundingValues() {
-        const $container = this.$container;
-        if (!$container) return;
-        const cx = this.x;
-        const cy = this.y;
-        const cx2 = this.coords[2];
-        const cy2 = this.coords[3];
-        this.coords[2] = 0;
-        this.coords[3] = 0;
-        this.setX(0, true);
-        this.setY(0, true);
-        this.transforms.remove();
-        const iw = this.window[0] = win.innerWidth;
-        const ih = this.window[1] = win.innerHeight;
-        const uw = this.useWin;
-        const sw = $container.scrollWidth;
-        const sh = $container.scrollHeight;
-        const fx = this.fixed;
-        const transformContainerRect = $container.getBoundingClientRect();
-        const [cpt, cpr, cpb, cpl] = this.containerPadding;
-        this.dragArea[0] = uw ? 0 : transformContainerRect.left;
-        this.dragArea[1] = uw ? 0 : transformContainerRect.top;
-        this.scrollView[0] = uw ? clamp(sw, iw, sw) : sw;
-        this.scrollView[1] = uw ? clamp(sh, ih, sh) : sh;
-        this.updateScrollCoords();
-        const { width, height, left, top, right, bottom } = $container.getBoundingClientRect();
-        this.dragArea[2] = round(uw ? clamp(width, iw, iw) : width, 0);
-        this.dragArea[3] = round(uw ? clamp(height, ih, ih) : height, 0);
-        const containerOverflow = get($container, "overflow");
-        const visibleOverflow = containerOverflow === "visible";
-        const hiddenOverflow = containerOverflow === "hidden";
-        this.canScroll = fx ? false : this.contained && ($container === doc.body && visibleOverflow || !hiddenOverflow && !visibleOverflow) && (sw > this.dragArea[2] + cpl - cpr || sh > this.dragArea[3] + cpt - cpb) && (!this.containerArray || this.containerArray && !isArr(this.containerArray));
-        if (this.contained) {
-          const sx = this.scroll.x;
-          const sy = this.scroll.y;
-          const canScroll = this.canScroll;
-          const targetRect = this.$target.getBoundingClientRect();
-          const hiddenLeft = canScroll ? uw ? 0 : $container.scrollLeft : 0;
-          const hiddenTop = canScroll ? uw ? 0 : $container.scrollTop : 0;
-          const hiddenRight = canScroll ? this.scrollView[0] - hiddenLeft - width : 0;
-          const hiddenBottom = canScroll ? this.scrollView[1] - hiddenTop - height : 0;
-          this.targetBounds[0] = round(targetRect.top + sy - (uw ? 0 : top), 0);
-          this.targetBounds[1] = round(targetRect.right + sx - (uw ? iw : right), 0);
-          this.targetBounds[2] = round(targetRect.bottom + sy - (uw ? ih : bottom), 0);
-          this.targetBounds[3] = round(targetRect.left + sx - (uw ? 0 : left), 0);
-          if (this.containerArray) {
-            this.containerBounds[0] = this.containerArray[0] + cpt;
-            this.containerBounds[1] = this.containerArray[1] - cpr;
-            this.containerBounds[2] = this.containerArray[2] - cpb;
-            this.containerBounds[3] = this.containerArray[3] + cpl;
-          } else {
-            this.containerBounds[0] = -round(targetRect.top - (fx ? clamp(top, 0, ih) : top) + hiddenTop - cpt, 0);
-            this.containerBounds[1] = -round(targetRect.right - (fx ? clamp(right, 0, iw) : right) - hiddenRight + cpr, 0);
-            this.containerBounds[2] = -round(targetRect.bottom - (fx ? clamp(bottom, 0, ih) : bottom) - hiddenBottom + cpb, 0);
-            this.containerBounds[3] = -round(targetRect.left - (fx ? clamp(left, 0, iw) : left) + hiddenLeft - cpl, 0);
-          }
-        }
-        this.transforms.revert();
-        this.coords[2] = cx2;
-        this.coords[3] = cy2;
-        this.setX(cx, true);
-        this.setY(cy, true);
-      }
-      /**
-       * @param  {Array} bounds
-       * @param  {Number} x
-       * @param  {Number} y
-       * @return {Number}
-       */
-      isOutOfBounds(bounds, x, y) {
-        if (!this.contained) return 0;
-        const [bt, br, bb, bl] = bounds;
-        const [dx, dy] = this.disabled;
-        const obx = !dx && x < bl || !dx && x > br;
-        const oby = !dy && y < bt || !dy && y > bb;
-        return obx && !oby ? 1 : !obx && oby ? 2 : obx && oby ? 3 : 0;
-      }
-      refresh() {
-        const params = this.parameters;
-        const paramX = params.x;
-        const paramY = params.y;
-        const container = parseDraggableFunctionParameter(params.container, this);
-        const cp = parseDraggableFunctionParameter(params.containerPadding, this) || 0;
-        const containerPadding = (
-          /** @type {[Number, Number, Number, Number]} */
-          isArr(cp) ? cp : [cp, cp, cp, cp]
-        );
-        const cx = this.x;
-        const cy = this.y;
-        const parsedCursorStyles = parseDraggableFunctionParameter(params.cursor, this);
-        const cursorStyles = { onHover: "grab", onGrab: "grabbing" };
-        if (parsedCursorStyles) {
-          const { onHover, onGrab } = (
-            /** @type {DraggableCursorParams} */
-            parsedCursorStyles
-          );
-          if (onHover) cursorStyles.onHover = onHover;
-          if (onGrab) cursorStyles.onGrab = onGrab;
-        }
-        const parsedDragThreshold = parseDraggableFunctionParameter(params.dragThreshold, this);
-        const dragThreshold = { mouse: 3, touch: 7 };
-        if (isNum(parsedDragThreshold)) {
-          dragThreshold.mouse = parsedDragThreshold;
-          dragThreshold.touch = parsedDragThreshold;
-        } else if (parsedDragThreshold) {
-          const { mouse, touch } = parsedDragThreshold;
-          if (!isUnd(mouse)) dragThreshold.mouse = mouse;
-          if (!isUnd(touch)) dragThreshold.touch = touch;
-        }
-        this.containerArray = isArr(container) ? container : null;
-        this.$container = /** @type {HTMLElement} */
-        container && !this.containerArray ? parseTargets(
-          /** @type {DOMTarget} */
-          container
-        )[0] : doc.body;
-        this.useWin = this.$container === doc.body;
-        this.$scrollContainer = this.useWin ? win : this.$container;
-        this.isFinePointer = matchMedia("(pointer:fine)").matches;
-        this.containerPadding = setValue(containerPadding, [0, 0, 0, 0]);
-        this.containerFriction = clamp(setValue(parseDraggableFunctionParameter(params.containerFriction, this), 0.8), 0, 1);
-        this.releaseContainerFriction = clamp(setValue(parseDraggableFunctionParameter(params.releaseContainerFriction, this), this.containerFriction), 0, 1);
-        this.snapX = parseDraggableFunctionParameter(isObj(paramX) && !isUnd(paramX.snap) ? paramX.snap : params.snap, this);
-        this.snapY = parseDraggableFunctionParameter(isObj(paramY) && !isUnd(paramY.snap) ? paramY.snap : params.snap, this);
-        this.scrollSpeed = setValue(parseDraggableFunctionParameter(params.scrollSpeed, this), 1.5);
-        this.scrollThreshold = setValue(parseDraggableFunctionParameter(params.scrollThreshold, this), 20);
-        this.dragSpeed = setValue(parseDraggableFunctionParameter(params.dragSpeed, this), 1);
-        this.dragThreshold = this.isFinePointer ? dragThreshold.mouse : dragThreshold.touch;
-        this.minVelocity = setValue(parseDraggableFunctionParameter(params.minVelocity, this), 0);
-        this.maxVelocity = setValue(parseDraggableFunctionParameter(params.maxVelocity, this), 50);
-        this.velocityMultiplier = setValue(parseDraggableFunctionParameter(params.velocityMultiplier, this), 1);
-        this.cursor = parsedCursorStyles === false ? false : cursorStyles;
-        this.updateBoundingValues();
-        const [bt, br, bb, bl] = this.containerBounds;
-        this.setX(clamp(cx, bl, br), true);
-        this.setY(clamp(cy, bt, bb), true);
-      }
-      update() {
-        this.updateScrollCoords();
-        if (this.canScroll) {
-          const [cpt, cpr, cpb, cpl] = this.containerPadding;
-          const [sw, sh] = this.scrollView;
-          const daw = this.dragArea[2];
-          const dah = this.dragArea[3];
-          const csx = this.scroll.x;
-          const csy = this.scroll.y;
-          const nsw = this.$container.scrollWidth;
-          const nsh = this.$container.scrollHeight;
-          const csw = this.useWin ? clamp(nsw, this.window[0], nsw) : nsw;
-          const csh = this.useWin ? clamp(nsh, this.window[1], nsh) : nsh;
-          const swd = sw - csw;
-          const shd = sh - csh;
-          if (this.dragged && swd > 0) {
-            this.coords[0] -= swd;
-            this.scrollView[0] = csw;
-          }
-          if (this.dragged && shd > 0) {
-            this.coords[1] -= shd;
-            this.scrollView[1] = csh;
-          }
-          const s = this.scrollSpeed * 10;
-          const threshold = this.scrollThreshold;
-          const [x, y] = this.coords;
-          const [st, sr, sb, sl] = this.scrollBounds;
-          const t = round(clamp((y - st + cpt) / threshold, -1, 0) * s, 0);
-          const r = round(clamp((x - sr - cpr) / threshold, 0, 1) * s, 0);
-          const b = round(clamp((y - sb - cpb) / threshold, 0, 1) * s, 0);
-          const l = round(clamp((x - sl + cpl) / threshold, -1, 0) * s, 0);
-          if (t || b || l || r) {
-            const [nx, ny] = this.disabled;
-            let scrollX = csx;
-            let scrollY = csy;
-            if (!nx) {
-              scrollX = round(clamp(csx + (l || r), 0, sw - daw), 0);
-              this.coords[0] -= csx - scrollX;
-            }
-            if (!ny) {
-              scrollY = round(clamp(csy + (t || b), 0, sh - dah), 0);
-              this.coords[1] -= csy - scrollY;
-            }
-            if (this.useWin) {
-              this.$scrollContainer.scrollBy(-(csx - scrollX), -(csy - scrollY));
-            } else {
-              this.$scrollContainer.scrollTo(scrollX, scrollY);
-            }
-          }
-        }
-        const [ct, cr, cb, cl] = this.containerBounds;
-        const [px1, py1, px2, py2, px3, py3] = this.pointer;
-        this.coords[0] += (px1 - px3) * this.dragSpeed;
-        this.coords[1] += (py1 - py3) * this.dragSpeed;
-        this.pointer[4] = px1;
-        this.pointer[5] = py1;
-        const [cx, cy] = this.coords;
-        const [sx, sy] = this.snapped;
-        const cf = (1 - this.containerFriction) * this.dragSpeed;
-        this.setX(cx > cr ? cr + (cx - cr) * cf : cx < cl ? cl + (cx - cl) * cf : cx, false);
-        this.setY(cy > cb ? cb + (cy - cb) * cf : cy < ct ? ct + (cy - ct) * cf : cy, false);
-        this.computeVelocity(px1 - px3, py1 - py3);
-        this.angle = atan2(py1 - py2, px1 - px2);
-        const [nsx, nsy] = this.snapped;
-        if (nsx !== sx && this.snapX || nsy !== sy && this.snapY) {
-          this.onSnap(this);
-        }
-      }
-      stop() {
-        this.updateTicker.pause();
-        this.overshootTicker.pause();
-        for (let prop in this.animate.animations) this.animate.animations[prop].pause();
-        removeTargetsFromRenderable([this], null, "x");
-        removeTargetsFromRenderable([this], null, "y");
-        removeTargetsFromRenderable([this], null, "progressX");
-        removeTargetsFromRenderable([this], null, "progressY");
-        removeTargetsFromRenderable([this.scroll]);
-        removeTargetsFromRenderable([this.overshootCoords]);
-        return this;
-      }
-      /**
-       * @param {Number} [duration]
-       * @param {Number} [gap]
-       * @param {EasingParam} [ease]
-       * @return {this}
-       */
-      scrollInView(duration, gap = 0, ease = eases.inOutQuad) {
-        this.updateScrollCoords();
-        const x = this.destX;
-        const y = this.destY;
-        const scroll = this.scroll;
-        const scrollBounds = this.scrollBounds;
-        const canScroll = this.canScroll;
-        if (!this.containerArray && this.isOutOfBounds(scrollBounds, x, y)) {
-          const [st, sr, sb, sl] = scrollBounds;
-          const t = round(clamp(y - st, -maxValue, 0), 0);
-          const r = round(clamp(x - sr, 0, maxValue), 0);
-          const b = round(clamp(y - sb, 0, maxValue), 0);
-          const l = round(clamp(x - sl, -maxValue, 0), 0);
-          new JSAnimation(scroll, {
-            x: round(scroll.x + (l ? l - gap : r ? r + gap : 0), 0),
-            y: round(scroll.y + (t ? t - gap : b ? b + gap : 0), 0),
-            duration: isUnd(duration) ? 350 * globals.timeScale : duration,
-            ease,
-            onUpdate: () => {
-              this.canScroll = false;
-              this.$scrollContainer.scrollTo(scroll.x, scroll.y);
-            }
-          }).init().then(() => {
-            this.canScroll = canScroll;
-          });
-        }
-        return this;
-      }
-      handleHover() {
-        if (this.isFinePointer && this.cursor && !this.cursorStyles) {
-          this.cursorStyles = set(this.$trigger, {
-            cursor: (
-              /** @type {DraggableCursorParams} */
-              this.cursor.onHover
-            )
-          });
-        }
-      }
-      /**
-       * @param  {Number} [duration]
-       * @param  {Number} [gap]
-       * @param  {EasingParam} [ease]
-       * @return {this}
-       */
-      animateInView(duration, gap = 0, ease = eases.inOutQuad) {
-        this.stop();
-        this.updateBoundingValues();
-        const x = this.x;
-        const y = this.y;
-        const [cpt, cpr, cpb, cpl] = this.containerPadding;
-        const bt = this.scroll.y - this.targetBounds[0] + cpt + gap;
-        const br = this.scroll.x - this.targetBounds[1] - cpr - gap;
-        const bb = this.scroll.y - this.targetBounds[2] - cpb - gap;
-        const bl = this.scroll.x - this.targetBounds[3] + cpl + gap;
-        const ob = this.isOutOfBounds([bt, br, bb, bl], x, y);
-        if (ob) {
-          const [disabledX, disabledY] = this.disabled;
-          const destX = clamp(snap(x, this.snapX), bl, br);
-          const destY = clamp(snap(y, this.snapY), bt, bb);
-          const dur = isUnd(duration) ? 350 * globals.timeScale : duration;
-          if (!disabledX && (ob === 1 || ob === 3)) this.animate[this.xProp](destX, dur, ease);
-          if (!disabledY && (ob === 2 || ob === 3)) this.animate[this.yProp](destY, dur, ease);
-        }
-        return this;
-      }
-      /**
-       * @param {MouseEvent|TouchEvent} e
-       */
-      handleDown(e) {
-        const $eTarget = (
-          /** @type {HTMLElement} */
-          e.target
-        );
-        if (this.grabbed || /** @type {HTMLInputElement} */
-        $eTarget.type === "range") return;
-        e.stopPropagation();
-        this.grabbed = true;
-        this.released = false;
-        this.stop();
-        this.updateBoundingValues();
-        const touches = (
-          /** @type {TouchEvent} */
-          e.changedTouches
-        );
-        const eventX = touches ? touches[0].clientX : (
-          /** @type {MouseEvent} */
-          e.clientX
-        );
-        const eventY = touches ? touches[0].clientY : (
-          /** @type {MouseEvent} */
-          e.clientY
-        );
-        const { x, y } = this.transforms.normalizePoint(eventX, eventY);
-        const [ct, cr, cb, cl] = this.containerBounds;
-        const cf = (1 - this.containerFriction) * this.dragSpeed;
-        const cx = this.x;
-        const cy = this.y;
-        this.coords[0] = this.coords[2] = !cf ? cx : cx > cr ? cr + (cx - cr) / cf : cx < cl ? cl + (cx - cl) / cf : cx;
-        this.coords[1] = this.coords[3] = !cf ? cy : cy > cb ? cb + (cy - cb) / cf : cy < ct ? ct + (cy - ct) / cf : cy;
-        this.pointer[0] = x;
-        this.pointer[1] = y;
-        this.pointer[2] = x;
-        this.pointer[3] = y;
-        this.pointer[4] = x;
-        this.pointer[5] = y;
-        this.pointer[6] = x;
-        this.pointer[7] = y;
-        this.deltaX = 0;
-        this.deltaY = 0;
-        this.velocity = 0;
-        this.velocityStack[0] = 0;
-        this.velocityStack[1] = 0;
-        this.velocityStack[2] = 0;
-        this.velocityStackIndex = 0;
-        this.angle = 0;
-        if (this.targetStyles) {
-          this.targetStyles.revert();
-          this.targetStyles = null;
-        }
-        const z = (
-          /** @type {Number} */
-          get(this.$target, "zIndex", false)
-        );
-        zIndex = (z > zIndex ? z : zIndex) + 1;
-        this.targetStyles = set(this.$target, { zIndex });
-        if (this.triggerStyles) {
-          this.triggerStyles.revert();
-          this.triggerStyles = null;
-        }
-        if (this.cursorStyles) {
-          this.cursorStyles.revert();
-          this.cursorStyles = null;
-        }
-        if (this.isFinePointer && this.cursor) {
-          this.bodyStyles = set(doc.body, {
-            cursor: (
-              /** @type {DraggableCursorParams} */
-              this.cursor.onGrab
-            )
-          });
-        }
-        this.scrollInView(100, 0, eases.out(3));
-        this.onGrab(this);
-        doc.addEventListener("touchmove", this);
-        doc.addEventListener("touchend", this);
-        doc.addEventListener("touchcancel", this);
-        doc.addEventListener("mousemove", this);
-        doc.addEventListener("mouseup", this);
-        doc.addEventListener("selectstart", this);
-      }
-      /**
-       * @param {MouseEvent|TouchEvent} e
-       */
-      handleMove(e) {
-        if (!this.grabbed) return;
-        const touches = (
-          /** @type {TouchEvent} */
-          e.changedTouches
-        );
-        const eventX = touches ? touches[0].clientX : (
-          /** @type {MouseEvent} */
-          e.clientX
-        );
-        const eventY = touches ? touches[0].clientY : (
-          /** @type {MouseEvent} */
-          e.clientY
-        );
-        const { x, y } = this.transforms.normalizePoint(eventX, eventY);
-        const movedX = x - this.pointer[6];
-        const movedY = y - this.pointer[7];
-        let $parent = (
-          /** @type {HTMLElement} */
-          e.target
-        );
-        let isAtTop = false;
-        let isAtBottom = false;
-        let canTouchScroll = false;
-        while (touches && $parent && $parent !== this.$trigger) {
-          const overflowY = get($parent, "overflow-y");
-          if (overflowY !== "hidden" && overflowY !== "visible") {
-            const { scrollTop, scrollHeight, clientHeight } = $parent;
-            if (scrollHeight > clientHeight) {
-              canTouchScroll = true;
-              isAtTop = scrollTop <= 3;
-              isAtBottom = scrollTop >= scrollHeight - clientHeight - 3;
-              break;
-            }
-          }
-          $parent = $parent.parentElement;
-        }
-        if (canTouchScroll && (!isAtTop && !isAtBottom || isAtTop && movedY < 0 || isAtBottom && movedY > 0)) {
-          this.pointer[0] = x;
-          this.pointer[1] = y;
-          this.pointer[2] = x;
-          this.pointer[3] = y;
-          this.pointer[4] = x;
-          this.pointer[5] = y;
-          this.pointer[6] = x;
-          this.pointer[7] = y;
-        } else {
-          preventDefault(e);
-          if (!this.triggerStyles) this.triggerStyles = set(this.$trigger, { pointerEvents: "none" });
-          this.$trigger.addEventListener("touchstart", preventDefault, { passive: false });
-          this.$trigger.addEventListener("touchmove", preventDefault, { passive: false });
-          this.$trigger.addEventListener("touchend", preventDefault);
-          if (this.dragged || !this.disabled[0] && abs(movedX) > this.dragThreshold || !this.disabled[1] && abs(movedY) > this.dragThreshold) {
-            this.updateTicker.resume();
-            this.pointer[2] = this.pointer[0];
-            this.pointer[3] = this.pointer[1];
-            this.pointer[0] = x;
-            this.pointer[1] = y;
-            this.dragged = true;
-            this.released = false;
-            this.onDrag(this);
-          }
-        }
-      }
-      handleUp() {
-        if (!this.grabbed) return;
-        this.updateTicker.pause();
-        if (this.triggerStyles) {
-          this.triggerStyles.revert();
-          this.triggerStyles = null;
-        }
-        if (this.bodyStyles) {
-          this.bodyStyles.revert();
-          this.bodyStyles = null;
-        }
-        const [disabledX, disabledY] = this.disabled;
-        const [px1, py1, px2, py2, px3, py3] = this.pointer;
-        const [ct, cr, cb, cl] = this.containerBounds;
-        const [sx, sy] = this.snapped;
-        const springX = this.releaseXSpring;
-        const springY = this.releaseYSpring;
-        const releaseEase = this.releaseEase;
-        const hasReleaseSpring = this.hasReleaseSpring;
-        const overshootCoords = this.overshootCoords;
-        const cx = this.x;
-        const cy = this.y;
-        const pv = this.computeVelocity(px1 - px3, py1 - py3);
-        const pa = this.angle = atan2(py1 - py2, px1 - px2);
-        const ds = pv * 150;
-        const cf = (1 - this.releaseContainerFriction) * this.dragSpeed;
-        const nx = cx + cos(pa) * ds;
-        const ny = cy + sin(pa) * ds;
-        const bx = nx > cr ? cr + (nx - cr) * cf : nx < cl ? cl + (nx - cl) * cf : nx;
-        const by = ny > cb ? cb + (ny - cb) * cf : ny < ct ? ct + (ny - ct) * cf : ny;
-        const dx = this.destX = clamp(round(snap(bx, this.snapX), 5), cl, cr);
-        const dy = this.destY = clamp(round(snap(by, this.snapY), 5), ct, cb);
-        const ob = this.isOutOfBounds(this.containerBounds, nx, ny);
-        let durationX = 0;
-        let durationY = 0;
-        let easeX = releaseEase;
-        let easeY = releaseEase;
-        let longestReleaseDuration = 0;
-        overshootCoords.x = cx;
-        overshootCoords.y = cy;
-        if (!disabledX) {
-          const directionX = dx === cr ? cx > cr ? -1 : 1 : cx < cl ? -1 : 1;
-          const distanceX = round(cx - dx, 0);
-          springX.velocity = disabledY && hasReleaseSpring ? distanceX ? ds * directionX / abs(distanceX) : 0 : pv;
-          const { ease, settlingDuration, restDuration } = springX;
-          durationX = cx === dx ? 0 : hasReleaseSpring ? settlingDuration : settlingDuration - restDuration * globals.timeScale;
-          if (hasReleaseSpring) easeX = ease;
-          if (durationX > longestReleaseDuration) longestReleaseDuration = durationX;
-        }
-        if (!disabledY) {
-          const directionY = dy === cb ? cy > cb ? -1 : 1 : cy < ct ? -1 : 1;
-          const distanceY = round(cy - dy, 0);
-          springY.velocity = disabledX && hasReleaseSpring ? distanceY ? ds * directionY / abs(distanceY) : 0 : pv;
-          const { ease, settlingDuration, restDuration } = springY;
-          durationY = cy === dy ? 0 : hasReleaseSpring ? settlingDuration : settlingDuration - restDuration * globals.timeScale;
-          if (hasReleaseSpring) easeY = ease;
-          if (durationY > longestReleaseDuration) longestReleaseDuration = durationY;
-        }
-        if (!hasReleaseSpring && ob && cf && (durationX || durationY)) {
-          const composition = compositionTypes.blend;
-          new JSAnimation(overshootCoords, {
-            x: { to: bx, duration: durationX * 0.65 },
-            y: { to: by, duration: durationY * 0.65 },
-            ease: releaseEase,
-            composition
-          }).init();
-          new JSAnimation(overshootCoords, {
-            x: { to: dx, duration: durationX },
-            y: { to: dy, duration: durationY },
-            ease: releaseEase,
-            composition
-          }).init();
-          this.overshootTicker.stretch(max(durationX, durationY)).restart();
-        } else {
-          if (!disabledX) this.animate[this.xProp](dx, durationX, easeX);
-          if (!disabledY) this.animate[this.yProp](dy, durationY, easeY);
-        }
-        this.scrollInView(longestReleaseDuration, this.scrollThreshold, releaseEase);
-        let hasSnapped = false;
-        if (dx !== sx) {
-          this.snapped[0] = dx;
-          if (this.snapX) hasSnapped = true;
-        }
-        if (dy !== sy && this.snapY) {
-          this.snapped[1] = dy;
-          if (this.snapY) hasSnapped = true;
-        }
-        if (hasSnapped) this.onSnap(this);
-        this.grabbed = false;
-        this.dragged = false;
-        this.updated = true;
-        this.released = true;
-        this.onRelease(this);
-        this.$trigger.removeEventListener("touchstart", preventDefault);
-        this.$trigger.removeEventListener("touchmove", preventDefault);
-        this.$trigger.removeEventListener("touchend", preventDefault);
-        doc.removeEventListener("touchmove", this);
-        doc.removeEventListener("touchend", this);
-        doc.removeEventListener("touchcancel", this);
-        doc.removeEventListener("mousemove", this);
-        doc.removeEventListener("mouseup", this);
-        doc.removeEventListener("selectstart", this);
-      }
-      reset() {
-        this.stop();
-        this.resizeTicker.pause();
-        this.grabbed = false;
-        this.dragged = false;
-        this.updated = false;
-        this.released = false;
-        this.canScroll = false;
-        this.setX(0, true);
-        this.setY(0, true);
-        this.coords[0] = 0;
-        this.coords[1] = 0;
-        this.pointer[0] = 0;
-        this.pointer[1] = 0;
-        this.pointer[2] = 0;
-        this.pointer[3] = 0;
-        this.pointer[4] = 0;
-        this.pointer[5] = 0;
-        this.pointer[6] = 0;
-        this.pointer[7] = 0;
-        this.velocity = 0;
-        this.velocityStack[0] = 0;
-        this.velocityStack[1] = 0;
-        this.velocityStack[2] = 0;
-        this.velocityStackIndex = 0;
-        this.angle = 0;
-        return this;
-      }
-      enable() {
-        if (!this.enabled) {
-          this.enabled = true;
-          this.$target.classList.remove("is-disabled");
-          this.touchActionStyles = set(this.$trigger, {
-            touchAction: this.disabled[0] ? "pan-x" : this.disabled[1] ? "pan-y" : "none"
-          });
-          this.$trigger.addEventListener("touchstart", this, { passive: true });
-          this.$trigger.addEventListener("mousedown", this, { passive: true });
-          this.$trigger.addEventListener("mouseenter", this);
-        }
-        return this;
-      }
-      disable() {
-        this.enabled = false;
-        this.grabbed = false;
-        this.dragged = false;
-        this.updated = false;
-        this.released = false;
-        this.canScroll = false;
-        this.touchActionStyles.revert();
-        if (this.cursorStyles) {
-          this.cursorStyles.revert();
-          this.cursorStyles = null;
-        }
-        if (this.triggerStyles) {
-          this.triggerStyles.revert();
-          this.triggerStyles = null;
-        }
-        if (this.bodyStyles) {
-          this.bodyStyles.revert();
-          this.bodyStyles = null;
-        }
-        if (this.targetStyles) {
-          this.targetStyles.revert();
-          this.targetStyles = null;
-        }
-        this.$target.classList.add("is-disabled");
-        this.$trigger.removeEventListener("touchstart", this);
-        this.$trigger.removeEventListener("mousedown", this);
-        this.$trigger.removeEventListener("mouseenter", this);
-        doc.removeEventListener("touchmove", this);
-        doc.removeEventListener("touchend", this);
-        doc.removeEventListener("touchcancel", this);
-        doc.removeEventListener("mousemove", this);
-        doc.removeEventListener("mouseup", this);
-        doc.removeEventListener("selectstart", this);
-        return this;
-      }
-      revert() {
-        this.reset();
-        this.disable();
-        this.$target.classList.remove("is-disabled");
-        this.updateTicker.revert();
-        this.overshootTicker.revert();
-        this.resizeTicker.revert();
-        this.animate.revert();
-        this.resizeObserver.disconnect();
-        return this;
-      }
-      /**
-       * @param {Event} e
-       */
-      handleEvent(e) {
-        switch (e.type) {
-          case "mousedown":
-            this.handleDown(
-              /** @type {MouseEvent} */
-              e
-            );
-            break;
-          case "touchstart":
-            this.handleDown(
-              /** @type {TouchEvent} */
-              e
-            );
-            break;
-          case "mousemove":
-            this.handleMove(
-              /** @type {MouseEvent} */
-              e
-            );
-            break;
-          case "touchmove":
-            this.handleMove(
-              /** @type {TouchEvent} */
-              e
-            );
-            break;
-          case "mouseup":
-            this.handleUp();
-            break;
-          case "touchend":
-            this.handleUp();
-            break;
-          case "touchcancel":
-            this.handleUp();
-            break;
-          case "mouseenter":
-            this.handleHover();
-            break;
-          case "selectstart":
-            preventDefault(e);
-            break;
-        }
-      }
-    };
-    createDraggable = (target, parameters) => new Draggable(target, parameters);
   }
 });
 
@@ -5591,14 +4127,14 @@ var init_waapi = __esm({
           const easeToParse = setValue(params.ease, globals.defaults.ease);
           const easeFunctionResult = getFunctionValue(easeToParse, $el, i, targetsLength);
           const keyEasing = isFnc(easeFunctionResult) || isStr(easeFunctionResult) ? easeFunctionResult : easeToParse;
-          const spring2 = (
+          const spring = (
             /** @type {Spring} */
             easeToParse.ease && easeToParse
           );
           const easing = parseWAAPIEasing(keyEasing);
-          const duration = (spring2 ? (
+          const duration = (spring ? (
             /** @type {Spring} */
-            spring2.settlingDuration
+            spring.settlingDuration
           ) : getFunctionValue(setValue(params.duration, globals.defaults.duration), $el, i, targetsLength)) * timeScale;
           const delay = getFunctionValue(setValue(params.delay, globals.defaults.delay), $el, i, targetsLength) * timeScale;
           const composite = (
@@ -6483,7 +5019,6 @@ var init_modules = __esm({
   "node_modules/animejs/dist/modules/index.js"() {
     init_animation();
     init_timeline();
-    init_draggable();
     init_scroll();
     init_utils();
     init_waapi();
@@ -41372,7 +39907,7 @@ var init_intro = __esm({
     init_model();
     isMobile2 = window.matchMedia("(max-width: 768px)").matches;
     loader = document.querySelector(".loader");
-    ({ chars } = splitText(".h1Box h1", { chars: true }));
+    ({ chars } = splitText(".h1Box .animate-chars", { chars: true }));
     spaceSm = 5;
     spaceMd = spaceSm * 2;
     spaceLg = spaceMd * 2;
@@ -43075,7 +41610,6 @@ var easings, initOptions, slider;
 var init_customSlider = __esm({
   "src/ts/customSlider/customSlider.ts"() {
     "use strict";
-    init_modules();
     easings = {
       easeInOut: "cubic-bezier(0.422,0,0.552,1)",
       easeIn: "cubic-bezier(0, 0.515,0.552,1)",
@@ -43097,9 +41631,11 @@ var init_customSlider = __esm({
         currentIdx: 0,
         disabledPrev: false,
         disabledNext: false,
-        changeCount: 1,
-        draggable: Draggable
+        changeCount: 1
+        // draggable: Draggable,
       };
+      let arrayWidths = [];
+      let totalWidth = 0;
       if (typeof target === "string") {
         container = document.querySelector(target);
       } else if (target instanceof HTMLElement) {
@@ -43108,17 +41644,14 @@ var init_customSlider = __esm({
       if (!container) throw new Error("Target element not found");
       const track = container.querySelector(".slider-track");
       if (!track) throw new Error("Track element not found");
-      const slides = [
-        ...track.querySelectorAll(":scope >  .slide")
-      ];
-      const cleanOptions = Object.fromEntries(
-        Object.entries(options).filter(([_, v]) => v !== void 0)
-      );
+      const slides = [...track.querySelectorAll(":scope >  .slide")];
+      const cleanOptions = Object.fromEntries(Object.entries(options).filter(([_, v]) => v !== void 0));
       const currentOptions = { ...initOptions, ...cleanOptions };
       currentOptions.duration = currentOptions.duration * 1e3;
       function applyStyles() {
         Object.keys(currentOptions.media).forEach((media) => {
           if (window.matchMedia(`(width<=${media}px)`).matches) {
+            console.log(currentOptions);
             currentOptions.items = currentOptions.media[media].items || currentOptions.items || currentOptions.items;
             state.changeCount = Number(currentOptions.media[media].changeCount) || state.changeCount;
           }
@@ -43141,48 +41674,10 @@ var init_customSlider = __esm({
         api.dom.next?.classList.toggle("disabled", index >= total);
         api.dom.prev?.classList.toggle("disabled", index === 0);
       }
-      let arrayWidths = slides.map((slide) => slide.clientWidth);
-      let totalWidth = arrayWidths.reduce((acc, curr) => acc + curr, 0);
-      function createDrag() {
-        const snap3 = [0];
-        for (let i = 0; i < arrayWidths.length - currentOptions.items; i++) {
-          const next = snap3[i] - arrayWidths[i];
-          snap3.push(next);
-        }
-        track.style["transitionTimingFunction"] = currentOptions.ease;
-        track.style["transitionDuration"] = `${currentOptions.duration}ms`;
-        state.draggable = createDraggable(track, {
-          x: { snap: snap3 },
-          dragThreshold: { touch: 20, mouse: 40 },
-          y: false,
-          onSnap(e) {
-            const currenIdx = snap3.findIndex((widht) => widht === e.snapped[0]);
-            state.currentIdx = currenIdx;
-          },
-          onGrab() {
-            track.style["transitionTimingFunction"] = "auto";
-            track.style["transitionDuration"] = `0ms`;
-          },
-          onRelease() {
-            onCheckDisabledArrows(state.currentIdx, api.info.totalLength);
-            emit("changed", state.currentIdx);
-            if (api.dependSlider) {
-              api.dependSlider.checkChangeDependSlider(state.currentIdx);
-            }
-          },
-          onSettle() {
-            track.style["transitionTimingFunction"] = currentOptions.ease;
-            track.style["transitionDuration"] = `${currentOptions.duration}ms`;
-          }
-        });
-      }
       function onResize() {
-        arrayWidths = slides.map((slide) => slide.clientWidth);
-        totalWidth = arrayWidths.reduce((acc, curr) => acc + curr, 0);
-        createDrag();
         applyStyles();
       }
-      createDrag();
+      onResize();
       window.addEventListener("resize", onResize);
       const api = {
         id: crypto.randomUUID(),
@@ -43206,18 +41701,14 @@ var init_customSlider = __esm({
           if (listeners[event]) listeners[event].push(cb);
         },
         engine: (index) => {
+          arrayWidths = slides.map((slide) => slide.clientWidth);
+          totalWidth = arrayWidths.reduce((acc, curr) => acc + curr, 0);
           track.style["transitionTimingFunction"] = currentOptions.ease;
           track.style["transitionDuration"] = `${currentOptions.duration}ms`;
-          state.draggable.setX(state.draggable.snapX[index]);
+          track.style.translate = `-${arrayWidths[index] * index}px 0`;
+          onCheckDisabledArrows(index, api.info.totalLength);
+          state.currentIdx = index;
           emit("changed", index);
-        },
-        goPrev: () => {
-          api.goTo(Math.max(0, state.currentIdx - state.changeCount));
-        },
-        goNext: () => {
-          api.goTo(
-            Math.min(api.info.totalLength, state.currentIdx + state.changeCount)
-          );
         },
         goTo: (index) => {
           const total = api.info.totalLength;
@@ -43226,6 +41717,12 @@ var init_customSlider = __esm({
           api.engine(index);
           state.currentIdx = index;
           return index;
+        },
+        goPrev: () => {
+          api.goTo(Math.max(0, state.currentIdx - state.changeCount));
+        },
+        goNext: () => {
+          api.goTo(Math.min(api.info.totalLength, state.currentIdx + state.changeCount));
         },
         checkChangeDependSlider: (index) => {
           if (index >= api.options.items) {
@@ -43366,29 +41863,20 @@ var init_customSlider2 = __esm({
 // src/ts/slider.ts
 var slider_exports = {};
 function createSlider(slide) {
-  const {
-    duration,
-    dots,
-    dotSelector,
-    arrows,
-    widthAuto,
-    gap = 0,
-    perPage = 1,
-    mobilePerPage,
-    changeCount = 1
-  } = slide.dataset;
-  const api = slider2(slide, {
+  const { duration, dots, dotSelector, arrows, widthAuto, gap = 0, perPage = "1", mobilePerPage } = slide.dataset;
+  const data = {
     items: Number(perPage),
     gap: Number(gap),
     widthAuto,
-    duration: duration ? Number(duration) : void 0,
-    media: {
-      480: {
-        items: Number(mobilePerPage),
-        changeCount
-      }
+    duration: duration ? Number(duration) : void 0
+  };
+  data.media = mobilePerPage ? {
+    480: {
+      items: Number(mobilePerPage),
+      changeCount: 1
     }
-  });
+  } : void 0;
+  const api = slider2(slide, data);
   if (arrows) {
     generateArrows2(api, {
       arrowsWrapper: arrows,
@@ -43410,20 +41898,12 @@ var init_slider = __esm({
     "use strict";
     init_customSlider2();
     ({ fadePlugin: fadePlugin2, generateArrows: generateArrows2, generateDots: generateDots2, infinityScroll: infinityScroll2, slider: slider2 } = customSlider);
-    sliders = [
-      ...document.querySelectorAll("[data-slider]")
-    ];
-    combinedSlider = [
-      ...document.querySelectorAll("[data-combined-slider]")
-    ];
+    sliders = [...document.querySelectorAll("[data-slider]")];
+    combinedSlider = [...document.querySelectorAll("[data-combined-slider]")];
     for (const slide of combinedSlider) {
-      const outerSlider = slide.querySelector(
-        "[data-combined-slider-outer]"
-      );
+      const outerSlider = slide.querySelector("[data-combined-slider-outer]");
       const api = createSlider(outerSlider);
-      const innerSlider = slide.querySelector(
-        "[data-combined-slider-inner]"
-      );
+      const innerSlider = slide.querySelector("[data-combined-slider-inner]");
       if (!innerSlider) continue;
       api.dependSlider = createSlider(innerSlider);
     }
@@ -43439,7 +41919,7 @@ var init_slider = __esm({
         gap = 0,
         perPage = 1,
         mobilePerPage,
-        changeCount = 1
+        parentIdentifier
       } = slide.dataset;
       const plugins = [];
       if (infinity !== void 0) plugins.push(infinityScroll2);
@@ -43453,8 +41933,8 @@ var init_slider = __esm({
           duration: duration ? Number(duration) : void 0,
           media: {
             480: {
-              items: Number(mobilePerPage),
-              changeCount
+              items: mobilePerPage ? +mobilePerPage : +perPage,
+              changeCount: 1
             }
           }
         },
@@ -43469,7 +41949,7 @@ var init_slider = __esm({
       if (dots !== void 0) {
         generateDots2(api, {
           dotsWrapper: dots,
-          parentIdentifier: ".card",
+          parentIdentifier: parentIdentifier ?? ".card",
           selector: dotSelector || "button"
         });
       }
@@ -43624,7 +42104,6 @@ if (isIndex) {
 }
 var heavyModules = [
   Promise.resolve().then(() => (init_mobileMenu(), mobileMenu_exports)),
-  // import("ts/calculator"),
   Promise.resolve().then(() => (init_catalog(), catalog_exports)),
   Promise.resolve().then(() => (init_scrollAnimation(), scrollAnimation_exports)),
   Promise.resolve().then(() => (init_modal(), modal_exports)),
@@ -43684,7 +42163,6 @@ animejs/dist/modules/timer/timer.js:
 
 animejs/dist/modules/easings/none.js:
 animejs/dist/modules/easings/eases/parser.js:
-animejs/dist/modules/easings/spring/index.js:
 animejs/dist/modules/easings/cubic-bezier/index.js:
   (**
    * Anime.js - easings - ESM
@@ -43697,14 +42175,6 @@ animejs/dist/modules/timeline/position.js:
 animejs/dist/modules/timeline/timeline.js:
   (**
    * Anime.js - timeline - ESM
-   * @version v4.3.6
-   * @license MIT
-   * @copyright 2026 - Julian Garnier
-   *)
-
-animejs/dist/modules/animatable/animatable.js:
-  (**
-   * Anime.js - animatable - ESM
    * @version v4.3.6
    * @license MIT
    * @copyright 2026 - Julian Garnier
@@ -43728,14 +42198,6 @@ animejs/dist/modules/waapi/composition.js:
 animejs/dist/modules/waapi/waapi.js:
   (**
    * Anime.js - waapi - ESM
-   * @version v4.3.6
-   * @license MIT
-   * @copyright 2026 - Julian Garnier
-   *)
-
-animejs/dist/modules/draggable/draggable.js:
-  (**
-   * Anime.js - draggable - ESM
    * @version v4.3.6
    * @license MIT
    * @copyright 2026 - Julian Garnier
