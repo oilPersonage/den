@@ -167,7 +167,7 @@ export default function ProductCalc({ slug, product }: { slug: string; product: 
 									{(el) => (
 										<button className='btn link w-full px-2 py-2 min-h-14'>
 											<div className='max-w-full flex items-center gap-sm *:text-left'>
-												{el.data?.src && <CustomImage className='max-h-10 w-fit' src={el.data.src} alt={el.label} />}
+												{el.data?.src && <CustomImage className='max-h-10' src={el.data.src} alt={el.label} />}
 												<p className='mb-0'>{el.data?.name}</p>
 											</div>
 											<span></span>
