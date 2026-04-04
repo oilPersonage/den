@@ -17,7 +17,6 @@ export function calculateSizes(
   const targetStyle = window.getComputedStyle(targetSize);
   const height = parseFloat(targetStyle.height);
   const width = parseFloat(targetStyle.width);
-  console.log({ item, height, width });
 
   // Границы перемещения с учетом поворота
   const x1 = rotated ? width / 2 + WALL_HEIGHT / 2 : 0;

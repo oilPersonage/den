@@ -31,6 +31,7 @@ export interface Item {
   finalY: number;
   h: number;
   w: number;
+  id: string;
   pH: number;
   pW: number;
   x: number;
@@ -42,6 +43,7 @@ export interface Item {
   type: ItemType;
   rotated: boolean;
   dragging: boolean;
+  sticky?: "end";
 }
 
 const elementsState = new Map<HTMLElement, Item>();
@@ -108,26 +110,40 @@ export function watchDrag(
         rotated
       );
     // Сохраняем состояние для элемента
+    let currentX = cX;
+    let currentY = cY;
+
+    function checkSticky() {
+      if (!initialData.sticky) return;
+      if (rotated) {
+        currentY = initialData.sticky === "end" ? parentSizes[0] : currentY;
+      } else {
+        console.log("sticky ==", parentSizes[1]);
+        currentX = initialData.sticky === "end" ? parentSizes[1] : currentX;
+      }
+    }
+    checkSticky();
+
     const newData = {
       type: initialData.dom.dataset.type as ItemType,
       rotated,
-      x: cX,
-      y: cY,
+      x: currentX,
+      y: currentY,
       h: h,
       w: w,
       cropX,
       cropY,
-      finalX: fixedXFn(cX),
+      finalX: fixedXFn(currentX),
       finalY: fixedYFn(cY),
-      initDragX: cX,
-      initDragY: cY,
+      initDragX: currentX,
+      initDragY: currentY,
       fixedXFn,
       fixedYFn,
       magnetPointsX: magX,
       magnetPointsY: magY
     };
 
-    initialData.dom.style.translate = `${fixedXFn(cX)}px ${fixedYFn(cY)}px`;
+    initialData.dom.style.translate = `${fixedXFn(currentX)}px ${fixedYFn(currentY)}px`;
     Object.keys(newData).forEach((key) => {
       initialData[key] = newData[key];
     });
@@ -142,7 +158,7 @@ export function watchDrag(
 
   draggables.forEach((item) => {
     const rotated = !!item.dataset.rotated;
-    const { heigth: iHeight, width: iWidth } = item.dataset;
+    const { sticky, id } = item.dataset; // 'end' or wall.id or undefined
     const isWall = !!item.querySelector(".calc-wall-height-wrapper");
     const targetSize = item.querySelector("[data-target-size]") as HTMLElement;
     if (!targetSize) return;
@@ -152,6 +168,8 @@ export function watchDrag(
 
     if (!initialData) return;
 
+    initialData.sticky = sticky;
+    initialData.id = id;
     initialData.pW = parentSizes[1];
     initialData.pH = parentSizes[0];
     initialData.targetSize = targetSize;
@@ -185,6 +203,8 @@ export function watchDrag(
       initialData.dom.removeAttribute("data-top");
       initialData.dom.removeAttribute("data-width");
       initialData.dom.removeAttribute("data-height");
+      // проверить на удаление, елси он поменялся но прижат к краю
+      initialData.dom.removeAttribute("data-sticky");
       initialData.dragging = true;
       parent.classList.add("draggable");
       state.isDragging = true;

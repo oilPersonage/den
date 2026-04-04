@@ -116,12 +116,13 @@ export function CalcBase({
       <div className="calc-base-border"></div>
       {/*<p className='mt-4'>{id}</p>*/}
 
-      {doors.map(({ id, rotated, left, top }) => (
+      {doors.map(({ id, rotated, left, top, sticky }) => (
         <div
           key={id}
           data-type="door"
           data-rotated={rotated ? "true" : ""}
           data-id={id}
+          data-sticky={sticky}
           style={{ translate: `${left ?? 0}px ${top ?? 0}px` }}
           className={`calc-base-item ${rotated ? "calc-base-rotated" : ""}`}
         >
@@ -146,11 +147,12 @@ export function CalcBase({
           </div>
         </div>
       ))}
-      {windows.map(({ id, rotated, left, top }) => (
+      {windows.map(({ id, rotated, left, top, sticky }) => (
         <div
           key={id}
           data-type="window"
           data-rotated={rotated ? "true" : ""}
+          data-sticky={sticky}
           style={{ translate: `${left ?? 0}px ${top ?? 0}px` }}
           data-id={id}
           className={`calc-base-item ${rotated ? "calc-base-rotated" : ""}`}

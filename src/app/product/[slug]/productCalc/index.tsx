@@ -91,7 +91,7 @@ export default function ProductCalc({
   return (
     <div className="calc-section min-h-screen flex flex-col pt-header max-md:hidden">
       <div className="flex flex-1">
-        <div className="flex flex-col gap-md py-md pl-xl pr-lg calc-left">
+        <div className="sticky top-header flex flex-col gap-md py-md pl-xl pr-lg calc-left h-fit">
           <div className="h1Box">
             <h3 className="animate-chars">Конструктор</h3>
           </div>
@@ -320,32 +320,33 @@ export default function ProductCalc({
                 </div>
               </div>
 
-              <div className="flex max-w-100" data-ai="3">
+              <div className="flex max-w-80" data-ai="3">
                 <p>
                   Для изменения положения двери, окна или перегородки, нажмите и
                   перетащите
                 </p>
               </div>
             </div>
+
+            <ul id="calc-wrapper" data-ai="3">
+              {containers.map((el, idx) => (
+                <CalcBase
+                  isFirst={idx === 0}
+                  name={`${idx + 1} Блок`}
+                  key={el.id}
+                  height={h}
+                  width={w}
+                  container={el}
+                  onChangeConainer={(v) =>
+                    setContainers(
+                      containers.map((el) => (el.id === v.id ? v : el))
+                    )
+                  }
+                  onRemove={() => onRemove(el.id)}
+                />
+              ))}
+            </ul>
           </div>
-          <ul id="calc-wrapper" data-ai="3">
-            {containers.map((el, idx) => (
-              <CalcBase
-                isFirst={idx === 0}
-                name={`${idx + 1} Блок`}
-                key={el.id}
-                height={h}
-                width={w}
-                container={el}
-                onChangeConainer={(v) =>
-                  setContainers(
-                    containers.map((el) => (el.id === v.id ? v : el))
-                  )
-                }
-                onRemove={() => onRemove(el.id)}
-              />
-            ))}
-          </ul>
         </div>
       </div>
     </div>
