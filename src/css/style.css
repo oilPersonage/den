@@ -968,7 +968,7 @@ footer p {
 }
 
 .product-count {
-  @apply flex gap-xs w-min;
+  @apply flex gap-1 w-min;
 }
 .product-count a {
   @apply py-sm px-sm min-w-lg flex justify-center;

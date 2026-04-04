@@ -247,7 +247,7 @@ export default function ProductCalc({
               ))}
             </ul>
           </div>
-          <div className="divider"></div>
+          <div data-ai="4" className="divider"></div>
           <ProductCalculatorPrice
             name={product.name}
             containers={containers}

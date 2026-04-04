@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import Request from "src/components/request";
 import { ItemType } from "src/ts/calculator";
 import { Heights, Widths } from "src/ts/calculator/data";
@@ -71,42 +71,50 @@ export function ProductCalculatorPrice({
     if (/^\d+$/.test(e.target.value)) setCount(e.target.value);
   }
 
-  const renderPriceInfo = useMemo(
-    () => (
-      <div className="flex flex-col gap-x-sm max-md:*:text-2xl mb-sm p-sm px-md bg-bg2">
+  const renderPriceInfo = useCallback(
+    (isModal: boolean) => (
+      <div
+        className="flex flex-col gap-x-sm max-md:*:text-2xl mb-sm"
+        data-modal-anim={isModal ? "1" : ""}
+        data-ai={isModal ? "" : "4"}
+      >
         {total.doors.count > 0 && (
           <div className="flex gap-sm">
-            <p className="min-w-30">{total.doors.title}</p>
+            <p className="min-w-40">{total.doors.title}</p>
             <p className="text-black/40">{total.doors.count} шт</p>
             <p>{priceFormatter(total.doors.price)} ₽</p>
           </div>
         )}
         {total.windows.count > 0 && (
           <div className="flex gap-sm">
-            <p className="min-w-30">{total.windows.title}</p>
+            <p className="min-w-40">{total.windows.title}</p>
             <p className="text-black/40">{total.windows.count} шт</p>
             <p>{priceFormatter(total.windows.price)} ₽</p>
           </div>
         )}
         {total.walls.count > 0 && (
           <div className="flex gap-sm">
-            <p className="min-w-30">{total.walls.title}</p>
+            <p className="min-w-40">{total.walls.title}</p>
             <p className="text-black/40">{total.walls.count} шт</p>
             <p>{priceFormatter(total.walls.price)} ₽</p>
           </div>
         )}
         <div className="flex gap-sm">
-          <p className="min-w-30">Кол-во блоков</p>
+          <p className="min-w-40">Кол-во блоков</p>
           <p className="text-black/40">{containers.length} шт</p>
+        </div>
+        <div className="flex gap-sm mt-2 font-bold">
+          <p className="min-w-40">Кол-во товара</p>
+          <p className="text-black/40">{count} шт</p>
         </div>
       </div>
     ),
-    [containers, total]
+    [containers, total, count]
   );
   return (
     <div className="flex flex-col gap-md mb-lg max-md:order-4 max-md:mt-lg">
       <div className="flex gap-md relative z-1 max-md:mb-sm">
-        <div className="flex flex-col gap-sm" data-ai="4">
+        <div className="flex flex-col gap-xs" data-ai="4">
           <p>Кол-во товара</p>
           <div className="product-count">
             <button
@@ -199,16 +207,15 @@ export function ProductCalculatorPrice({
           </div>
         </div>
         <div className="flex flex-col" data-ai="4">
-          {renderPriceInfo}
+          {renderPriceInfo()}
         </div>
       </div>
 
       <Request
         modalDataName="request-product"
-        count={count}
         name={name}
         price={total.total}
-        renderedExtraInfo={renderPriceInfo}
+        renderedExtraInfo={renderPriceInfo(true)}
       />
     </div>
   );

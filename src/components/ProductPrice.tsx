@@ -26,7 +26,7 @@ export default function ProductPrice({
   return (
     <div className="flex flex-col gap-md mb-lg max-md:order-4 max-md:mt-lg">
       <div className="flex gap-md relative z-1 max-md:mb-sm">
-        <div className="flex flex-col gap-sm" data-ai="4">
+        <div className="flex flex-col gap-xs" data-ai="4">
           <p>Кол-во товара</p>
           <div className="product-count">
             <button

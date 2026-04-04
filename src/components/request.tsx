@@ -94,23 +94,24 @@ export default function Request(props: TProps) {
             </div>
           </label>
 
-          {props.renderedExtraInfo ??
-            (Object.keys(props).length > 0 && (
-              <div
-                className="max-md:flex max-md:flex-wrap gap-sm my-md -mt-1"
-                data-modal-anim="1"
-              >
-                {renderSelect.map(({ title, text }) => (
-                  <div
-                    key={title}
-                    className="flex gap-sm max-md:flex-col max-md:gap-1"
-                  >
-                    <p className="text-black/40 min-w-40">{title}</p>
-                    <p className="text-left">{text}</p>
-                  </div>
-                ))}
-              </div>
-            ))}
+          {Object.keys(props).length > 0 && (
+            <div
+              className="max-md:flex max-md:flex-wrap gap-sm my-md -mt-1"
+              data-modal-anim="1"
+            >
+              {renderSelect.map(({ title, text }) => (
+                <div
+                  key={title}
+                  className="flex gap-sm max-md:flex-col max-md:gap-1"
+                >
+                  <p className="min-w-40">{title}</p>
+                  <p className="text-left">{text}</p>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {props.renderedExtraInfo}
 
           <div className="flex flex-col gap-sm">
             <a data-modal-anim="1" href="#" className="btn black">
