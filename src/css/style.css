@@ -1022,6 +1022,12 @@ footer p {
     /* 0 0 0 1px #212529, */ 0 0 0 16px var(--color-neutral-300);
   /* 0 0 0 14px #212529; */
 }
+.calc-right {
+  @apply p-lg pt-md pb-xl pr-30 bg-bg2 flex-1 overflow-x-auto;
+}
+.calc-right-wrapper {
+  @apply flex-1 min-w-max;
+}
 .base-drag-item:hover .calc-rotate,
 .base-drag-item:hover .calc-cross {
   @apply opacity-100 pointer-events-auto;

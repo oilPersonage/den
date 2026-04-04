@@ -249,79 +249,83 @@ export default function ProductCalc({
           </div>
           <div data-ai="4" className="divider"></div>
           <ProductCalculatorPrice
+            base={bases.find((el) => el.value === base)?.label}
+            material={baseMaterials.find((el) => el.value === material)?.label}
             name={product.name}
             containers={containers}
             sizes={[h, w]}
           />
         </div>
-        <div className="p-lg pt-md pb-xl calc-right bg-bg2 flex-1 min-w-295">
-          <div className="flex gap-lg mb-xl" data-ai="3">
-            <div className="grid grid-cols-2 ml-6 gap-xs gap-x-lg min-w-100">
-              <div className="calc-base-rotated flex gap-sm items-center">
-                <div className="calc-base-window">
-                  <div className="calc-base-window-d"></div>
-                  <p className="calc-base-window-text">дверь</p>
-                  <div className="calc-base-window-c bg-transparent!"></div>
-                  <div className="calc-base-window-d"></div>
-                </div>
-                <p className="text-nowrap">- Дверь</p>
-              </div>
-              <div className="flex gap-sm items-center">
-                <button
-                  className="calc-wall-rotate-btn btn link bg-neutral-200 w-6 justify-center h-6 p-1! *:h-3"
-                  onClick={() => null}
-                >
-                  <RotateSvg />
-                  <span></span>
-                  <span></span>
-                  <span></span>
-                  <span></span>
-                </button>
-                <p className="text-nowrap">Повернуть</p>
-              </div>
-              <div className="calc-base-rotated flex gap-sm items-center">
-                <div className="calc-base-window">
-                  <div className="calc-base-window-d"></div>
-                  <div className="calc-base-window-c"></div>
-                  <div className="calc-base-window-d"></div>
-                </div>
-                <p className="text-nowrap">- Окно</p>
-              </div>
-              <div className="flex gap-sm items-center">
-                <CrossSvg
-                  className="bg-neutral-200 w-6 justify-center h-6! p-1! *:h-3"
-                  onClick={() => null}
-                />
-                <p className="text-nowrap">Удалить</p>
-              </div>
-              <div className="calc-base-rotated flex gap-sm items-center">
-                <div className="calc-base-wall-bg max-h-4 min-w-20!">
-                  <span className="calc-wall-coords"></span>
-                </div>
-                <p className="text-nowrap">- Перегородка</p>
-              </div>
-              <div className="flex gap-sm items-center">
-                <button className="btn link small w-6 min-w-6 h-6 p-1 bg-neutral-200">
-                  <div className="grid grid-cols-2 gap-0.5 *:bg-black *:h-1 *:w-1">
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
+        <div className="calc-right">
+          <div className="calc-right-wrapper">
+            <div className="flex gap-lg mb-xl" data-ai="3">
+              <div className="grid grid-cols-2 ml-6 gap-xs gap-x-lg min-w-100">
+                <div className="calc-base-rotated flex gap-sm items-center">
+                  <div className="calc-base-window">
+                    <div className="calc-base-window-d"></div>
+                    <p className="calc-base-window-text">дверь</p>
+                    <div className="calc-base-window-c bg-transparent!"></div>
+                    <div className="calc-base-window-d"></div>
                   </div>
-                  <span></span>
-                  <span></span>
-                  <span></span>
-                  <span></span>
-                </button>
-                <p className="text-nowrap">Изменить размер</p>
+                  <p className="text-nowrap">- Дверь</p>
+                </div>
+                <div className="flex gap-sm items-center">
+                  <button
+                    className="calc-wall-rotate-btn btn link bg-neutral-200 w-6 justify-center h-6 p-1! *:h-3"
+                    onClick={() => null}
+                  >
+                    <RotateSvg />
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                  </button>
+                  <p className="text-nowrap">Повернуть</p>
+                </div>
+                <div className="calc-base-rotated flex gap-sm items-center">
+                  <div className="calc-base-window">
+                    <div className="calc-base-window-d"></div>
+                    <div className="calc-base-window-c"></div>
+                    <div className="calc-base-window-d"></div>
+                  </div>
+                  <p className="text-nowrap">- Окно</p>
+                </div>
+                <div className="flex gap-sm items-center">
+                  <CrossSvg
+                    className="bg-neutral-200 w-6 justify-center h-6! p-1! *:h-3"
+                    onClick={() => null}
+                  />
+                  <p className="text-nowrap">Удалить</p>
+                </div>
+                <div className="calc-base-rotated flex gap-sm items-center">
+                  <div className="calc-base-wall-bg max-h-4 min-w-20!">
+                    <span className="calc-wall-coords"></span>
+                  </div>
+                  <p className="text-nowrap">- Перегородка</p>
+                </div>
+                <div className="flex gap-sm items-center">
+                  <button className="btn link small w-6 min-w-6 h-6 p-1 bg-neutral-200">
+                    <div className="grid grid-cols-2 gap-0.5 *:bg-black *:h-1 *:w-1">
+                      <div></div>
+                      <div></div>
+                      <div></div>
+                      <div></div>
+                    </div>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                  </button>
+                  <p className="text-nowrap">Изменить размер</p>
+                </div>
               </div>
-            </div>
 
-            <div className="flex max-w-100" data-ai="3">
-              <p>
-                Для изменения положения двери, окна или перегородки, нажмите и
-                перетащите
-              </p>
+              <div className="flex max-w-100" data-ai="3">
+                <p>
+                  Для изменения положения двери, окна или перегородки, нажмите и
+                  перетащите
+                </p>
+              </div>
             </div>
           </div>
           <ul id="calc-wrapper" data-ai="3">

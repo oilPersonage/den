@@ -34,11 +34,15 @@ const prices: TPrice = {
 export function ProductCalculatorPrice({
   containers,
   sizes,
+  base,
+  material,
   name
 }: {
   containers: Container[];
   sizes: [Heights, Widths];
   name: string;
+  base: string;
+  material: string;
 }) {
   const [count, setCount] = useState(1);
 
@@ -72,12 +76,24 @@ export function ProductCalculatorPrice({
   }
 
   const renderPriceInfo = useCallback(
-    (isModal: boolean) => (
+    (isModal?: boolean) => (
       <div
         className="flex flex-col gap-x-sm max-md:*:text-2xl mb-sm"
         data-modal-anim={isModal ? "1" : ""}
         data-ai={isModal ? "" : "4"}
       >
+        {isModal && (
+          <>
+            <div className="flex gap-sm">
+              <p className="min-w-40">База</p>
+              <p>{base}</p>
+            </div>
+            <div className="flex gap-sm">
+              <p className="min-w-40">Материал отделки</p>
+              <p>{material}</p>
+            </div>
+          </>
+        )}
         {total.doors.count > 0 && (
           <div className="flex gap-sm">
             <p className="min-w-40">{total.doors.title}</p>
@@ -109,7 +125,7 @@ export function ProductCalculatorPrice({
         </div>
       </div>
     ),
-    [containers, total, count]
+    [containers, total, count, base, material]
   );
   return (
     <div className="flex flex-col gap-md mb-lg max-md:order-4 max-md:mt-lg">
@@ -214,7 +230,7 @@ export function ProductCalculatorPrice({
       <Request
         modalDataName="request-product"
         name={name}
-        price={total.total}
+        price={total.total * count}
         renderedExtraInfo={renderPriceInfo(true)}
       />
     </div>

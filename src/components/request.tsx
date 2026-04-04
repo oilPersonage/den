@@ -94,6 +94,7 @@ export default function Request(props: TProps) {
             </div>
           </label>
 
+          {props.renderedExtraInfo}
           {Object.keys(props).length > 0 && (
             <div
               className="max-md:flex max-md:flex-wrap gap-sm my-md -mt-1"
@@ -110,8 +111,6 @@ export default function Request(props: TProps) {
               ))}
             </div>
           )}
-
-          {props.renderedExtraInfo}
 
           <div className="flex flex-col gap-sm">
             <a data-modal-anim="1" href="#" className="btn black">
