@@ -1,10 +1,13 @@
+import { ReactElement } from "react";
 import { priceFormatter } from "../utils/priceFormater";
 type TProps = {
   price?: number;
   count?: number;
   name?: string;
+  modalDataName?: string;
   delivery?: string;
   paymentMethod?: string;
+  renderedExtraInfo?: ReactElement;
 };
 
 export default function Request(props: TProps) {
@@ -29,7 +32,7 @@ export default function Request(props: TProps) {
     });
   });
   return (
-    <div className="modal" data-modal-name="request">
+    <div className="modal" data-modal-name={props.modalDataName ?? "request"}>
       <div className="modal-wrapper">
         <div className="modal-inner">
           <h4 data-modal-title className="mb-md">
@@ -91,22 +94,23 @@ export default function Request(props: TProps) {
             </div>
           </label>
 
-          {Object.keys(props).length > 0 && (
-            <div
-              className="max-md:flex max-md:flex-wrap gap-sm my-md -mt-1"
-              data-modal-anim="1"
-            >
-              {renderSelect.map(({ title, text }) => (
-                <div
-                  key={title}
-                  className="flex gap-sm max-md:flex-col max-md:gap-1"
-                >
-                  <p className="text-black/40 min-w-40">{title}</p>
-                  <p className="text-left">{text}</p>
-                </div>
-              ))}
-            </div>
-          )}
+          {props.renderedExtraInfo ??
+            (Object.keys(props).length > 0 && (
+              <div
+                className="max-md:flex max-md:flex-wrap gap-sm my-md -mt-1"
+                data-modal-anim="1"
+              >
+                {renderSelect.map(({ title, text }) => (
+                  <div
+                    key={title}
+                    className="flex gap-sm max-md:flex-col max-md:gap-1"
+                  >
+                    <p className="text-black/40 min-w-40">{title}</p>
+                    <p className="text-left">{text}</p>
+                  </div>
+                ))}
+              </div>
+            ))}
 
           <div className="flex flex-col gap-sm">
             <a data-modal-anim="1" href="#" className="btn black">

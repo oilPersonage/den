@@ -172,6 +172,8 @@ btnOpenModal.forEach((el) => {
 
       setImageSize();
     }
+    console.log(modal);
+
     modal.classList.add("opened");
     timeline.speed = 1;
     timeline.play();

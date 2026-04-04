@@ -41580,6 +41580,7 @@ var init_modal = __esm({
           checkStatusArrows(currentImgIdx);
           setImageSize();
         }
+        console.log(modal);
         modal.classList.add("opened");
         timeline.speed = 1;
         timeline.play();
