@@ -704,13 +704,13 @@ a:hover .svg-link {
   transition: opacity 0.3s ease;
 }
 .adv-text-inner ul {
-  @apply flex gap-md;
+  @apply flex gap-md max-md:flex-col max-md:min-w-full;
 }
 .adv-text-inner li {
   @apply min-w-60;
 }
 .adv-text-inner {
-  @apply will-change-transform flex gap-lg;
+  @apply will-change-transform flex gap-[48px];
 }
 
 .adv-text-content p {

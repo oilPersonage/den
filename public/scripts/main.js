@@ -39950,7 +39950,7 @@ var init_adv = __esm({
       (acc, el, index) => [...acc, acc[acc.length - 1] + el.clientWidth + 48],
       [0]
     );
-    console.log(arrayWidthsOurText);
+    console.log(arrayWidthsOurText, itemsOur[0].clientWidth);
     tl = createTimeline({
       duration: TL_DURATION,
       autoplay: onScroll({
@@ -41440,7 +41440,7 @@ var init_scrollAnimation = __esm({
       autoplay: onScroll({
         enter: "bottom top",
         leave: "bottom bottom+=100",
-        sync: 0.8
+        sync: true
       })
     });
   }
@@ -41846,9 +41846,8 @@ var init_plugins = __esm({
     infinityScroll = (api) => {
       const { slides, track } = api.dom;
       track.style.transition = "none";
-      console.log(123123, api.info.totalWidth);
       waapi.animate(track, {
-        x: -api.info.totalWidth / 2,
+        x: -api.info.totalWidth,
         duration: api.options.duration,
         autoplay: true,
         ease: "linear",

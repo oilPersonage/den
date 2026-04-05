@@ -33,7 +33,7 @@ const arrayWidthsOurText = itemsOur.reduce(
   (acc, el, index) => [...acc, acc[acc.length - 1] + el.clientWidth + 48],
   [0]
 );
-console.log(arrayWidthsOurText);
+console.log(arrayWidthsOurText, itemsOur[0].clientWidth);
 const tl = createTimeline({
   duration: TL_DURATION,
   autoplay: onScroll({

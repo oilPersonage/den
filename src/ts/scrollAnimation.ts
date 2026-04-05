@@ -108,6 +108,6 @@ animate(footerWrapper, {
   autoplay: onScroll({
     enter: "bottom top",
     leave: "bottom bottom+=100",
-    sync: 0.8
+    sync: true
   })
 });

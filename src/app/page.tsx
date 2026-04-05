@@ -1024,7 +1024,7 @@ export default async function Home() {
         </div>
       </section>
 
-      <section className="main-variants h-screen pt-header flex flex-col">
+      <section className="main-variants h-[320px] md:h-screen pt-header flex flex-col">
         <div className="w-full flex-1 p-md flex flex-col min-h-0">
           <div className="bg-bg2 relative flex flex-1 min-h-0 overflow-hidden">
             <CustomImage

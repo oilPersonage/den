@@ -32,9 +32,8 @@ export const infinityScroll: TSliderPlugin = (api) => {
   const { slides, track } = api.dom;
 
   track.style.transition = "none";
-  console.log(123123, api.info.totalWidth);
   waapi.animate(track, {
-    x: -api.info.totalWidth / 2,
+    x: -api.info.totalWidth,
     duration: api.options.duration,
     autoplay: true,
     ease: "linear",
