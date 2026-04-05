@@ -1,5 +1,5 @@
 import { animate, createTimeline, cubicBezier, splitText, stagger } from 'animejs'
-import { animateModel } from 'ts/model'
+import { animateModel } from 'src/ts/home'
 export const isMobile = window.matchMedia('(max-width: 768px)').matches
 const loader = document.querySelector('.loader')
 

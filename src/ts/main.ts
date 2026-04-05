@@ -16,7 +16,7 @@ navs.forEach((n) =>
 )
 
 if (isIndex) {
-	await Promise.all([import('ts/model'), import('ts/adv')])
+	await Promise.all([import('src/ts/home'), import('ts/adv')])
 }
 if (isIndex) {
 	setTimeout(() => intro.startIntro(isIndex), 1000)

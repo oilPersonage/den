@@ -39628,9 +39628,9 @@ var init_factoryShadow = __esm({
   }
 });
 
-// src/ts/model.ts
-var model_exports = {};
-__export(model_exports, {
+// src/ts/home.ts
+var home_exports = {};
+__export(home_exports, {
   animateModel: () => animateModel,
   playAnimationModel: () => playAnimationModel,
   stopAnimationModel: () => stopAnimationModel
@@ -39650,9 +39650,9 @@ function animateModel() {
   wrapper?.classList.add("show");
   observer.observe(wrapper);
 }
-var animatedId, mixer, isPlaying, animate2, wrapper, clock, createLights2, observer;
-var init_model = __esm({
-  "src/ts/model.ts"() {
+var animatedId, mixer, isPlaying, animate2, repoName, wrapper, clock, createLights2, observer;
+var init_home = __esm({
+  "src/ts/home.ts"() {
     "use strict";
     init_three_module();
     init_OrbitControls();
@@ -39664,6 +39664,7 @@ var init_model = __esm({
     mixer = null;
     isPlaying = false;
     animate2 = null;
+    repoName = "";
     wrapper = document.querySelector(".canvas-wrapper");
     clock = new Clock2();
     if (isIndex) {
@@ -39697,14 +39698,7 @@ var init_model = __esm({
       const scene = new Scene();
       const width = wrapper.clientWidth;
       const height = wrapper.clientHeight;
-      const camera = new OrthographicCamera(
-        -width / 2,
-        width / 2,
-        height / 2,
-        -height / 2,
-        -1e3,
-        1e3
-      );
+      const camera = new OrthographicCamera(-width / 2, width / 2, height / 2, -height / 2, -1e3, 1e3);
       const renderer = new WebGLRenderer({ antialias: true, alpha: true });
       renderer.setClearColor(0, 0);
       renderer.setClearAlpha(0);
@@ -39718,8 +39712,7 @@ var init_model = __esm({
       const loader2 = new GLTFLoader();
       let model;
       loader2.load(
-        // repoName + `/home2.glb`,
-        `/den/home2.glb`,
+        repoName + `/home2.glb`,
         (gltf) => {
           model = gltf.scene;
           scene.background = null;
@@ -39762,18 +39755,14 @@ var init_model = __esm({
         renderer.setSize(width, height);
       });
       const hdrLoader = new HDRLoader();
-      hdrLoader.load(
-        `/den/sky.hdr`,
-        // repoName + `/sky.hdr`,
-        (texture) => {
-          texture.mapping = EquirectangularReflectionMapping;
-          const pmremGenerator = new PMREMGenerator(renderer);
-          const envMap = pmremGenerator.fromEquirectangular(texture).texture;
-          scene.environment = envMap;
-          pmremGenerator.dispose();
-          scene.background = null;
-        }
-      );
+      hdrLoader.load(repoName + `/sky.hdr`, (texture) => {
+        texture.mapping = EquirectangularReflectionMapping;
+        const pmremGenerator = new PMREMGenerator(renderer);
+        const envMap = pmremGenerator.fromEquirectangular(texture).texture;
+        scene.environment = envMap;
+        pmremGenerator.dispose();
+        scene.background = null;
+      });
       const light = new AmbientLight(16777215, 0.7);
       scene.add(light);
       camera.position.set(5, 5, 5);
@@ -39904,7 +39893,7 @@ var init_intro = __esm({
   "src/ts/intro.ts"() {
     "use strict";
     init_modules();
-    init_model();
+    init_home();
     isMobile2 = window.matchMedia("(max-width: 768px)").matches;
     loader = document.querySelector(".loader");
     ({ chars } = splitText(".h1Box .animate-chars", { chars: true }));
@@ -40156,19 +40145,13 @@ var init_catalog = __esm({
   "src/ts/catalog.ts"() {
     "use strict";
     init_modules();
-    init_model();
+    init_home();
     init_config();
-    catalogCloseBtn = document.querySelector(
-      "#catalog-close-btn"
-    );
+    catalogCloseBtn = document.querySelector("#catalog-close-btn");
     catalogBtn = document.querySelector("#catalog-btn");
-    catalogWrapper = document.querySelector(
-      "#catalog-wrapper"
-    );
+    catalogWrapper = document.querySelector("#catalog-wrapper");
     catalogInner = document.querySelector("#catalog-inner");
-    items = document.querySelectorAll(
-      "[data-catalog-bottom]"
-    );
+    items = document.querySelectorAll("[data-catalog-bottom]");
     time = 500;
     translate = isMobile ? "translateX" : "translateY";
     tl2 = createTimeline({
@@ -42114,7 +42097,7 @@ navs2.forEach(
   })
 );
 if (isIndex) {
-  await Promise.all([Promise.resolve().then(() => (init_model(), model_exports)), Promise.resolve().then(() => (init_adv(), adv_exports))]);
+  await Promise.all([Promise.resolve().then(() => (init_home(), home_exports)), Promise.resolve().then(() => (init_adv(), adv_exports))]);
 }
 if (isIndex) {
   setTimeout(() => intro.startIntro(isIndex), 1e3);
