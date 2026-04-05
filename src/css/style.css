@@ -643,28 +643,28 @@ a:hover .svg-link {
   @apply absolute inset-0;
 }
 .adv {
-  @apply sticky top-0 h-screen pt-header flex flex-col;
+  @apply sticky top-0 h-screen pt-header flex flex-col mb-lg;
   will-change: transform;
   transform: translateZ(0);
   contain: layout;
   isolation: isolate;
 }
 .adv-img-wrapper {
-  @apply relative flex-1 mb-lg overflow-hidden z-3 max-md:!w-full;
+  @apply relative flex-1 overflow-hidden z-3 max-md:!w-full;
   /*width: calc(var(--spacing-wrapper) + ((100vw - var(--spacing-wrapper)) / 2 - 96px));*/
 }
 .adv-main {
-  @apply relative flex flex-col flex-1;
+  @apply relative flex justify-center flex-col flex-1;
 }
 .adv-right-progress,
 .adv-decor-wrapper {
-  @apply absolute mt-[293px] max-md:mt-[207px] top-0 rotate-90 origin-top-left;
+  /* @apply absolute mt-[293px] max-md:mt-[207px] top-0 rotate-90 origin-top-left; */
 }
 .adv-decor-wrapper {
-  @apply md:-left-0.5 md:-left-sm overflow-hidden md:mt-[195px] max-md:rotate-0 max-md:mt-59;
+  @apply mb-md;
 }
 .adv-decor {
-  @apply flex font-bold text-2xl h-max will-change-transform;
+  @apply flex font-bold text-3xl h-max will-change-transform;
 }
 .adv-decor p {
   @apply text-nowrap opacity-15 pr-md;
@@ -692,24 +692,25 @@ a:hover .svg-link {
 .adv-text-inner.active-0 {
   @apply translate-x-0;
 }
-.adv-text-inner.active-1 {
-  @apply -translate-x-full;
-}
-.adv-text-inner.active-2 {
-  @apply -translate-x-[calc(100%*2)];
-}
-.adv-text-inner.active-3 {
-  @apply -translate-x-[calc(100%*3)];
-}
 .adv-text-content {
-  @apply relative flex-1 overflow-hidden;
+  @apply relative flex-1;
 }
 .adv-text-box {
-  @apply md:bg-bg md:absolute z-4 w-full md:w-140 -top-px left-0 pb-lg flex flex-col justify-between *:flex-1 gap-md;
+  @apply md:bg-bg z-4 w-full md:w-140 -top-px left-0 pb-lg flex flex-col justify-between *:flex-1 gap-md;
 }
 
+.adv-text-inner ul:not(.active) {
+  @apply opacity-0;
+  transition: opacity 0.3s ease;
+}
+.adv-text-inner ul {
+  @apply flex gap-md;
+}
+.adv-text-inner li {
+  @apply min-w-60;
+}
 .adv-text-inner {
-  @apply will-change-transform flex transition-transform duration-600;
+  @apply will-change-transform flex gap-lg;
 }
 
 .adv-text-content p {
@@ -733,7 +734,7 @@ a:hover .svg-link {
   @apply w-5 h-px bg-black mt-2.5 flex;
 }
 .adv-decor-line {
-  @apply absolute left-0 top-0.5 h-6 bg-black z-2;
+  @apply left-0 top-0.5 h-6 bg-black z-2;
 }
 .adv-decor-line:nth-child(2) {
   @apply left-0;
@@ -753,7 +754,7 @@ a:hover .svg-link {
 }
 
 .adv-right-progress {
-  @apply absolute -right-5.5 md:-right-md flex flex-col justify-between md:mt-[192px] rotate-0 origin-top-left font-display;
+  @apply flex justify-between h-fit py-md items-center;
 }
 .adv-right-progress p.active {
   @apply text-black;
@@ -762,16 +763,16 @@ a:hover .svg-link {
   @apply text-black/30 transition-colors duration-150;
 }
 .adv-right-progress p:not(.adv-right-number) {
-  writing-mode: vertical-rl;
+  /* writing-mode: vertical-rl; */
 }
 .adv-right-number:last-child {
-  @apply pb-0;
+  @apply pr-0;
 }
 .adv-right-number {
   @apply text-xs p-1.25 bg-bg relative leading-[0.6];
 }
 .adv-right-line {
-  @apply w-px bg-black mt-20 md:mt-16.5 left-2 h-0;
+  @apply h-px bg-black ml-18;
 }
 footer {
   @apply bg-black pt-lg overflow-hidden relative;

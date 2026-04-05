@@ -39917,15 +39917,12 @@ var init_intro = __esm({
 
 // src/ts/adv.ts
 var adv_exports = {};
-var imgs, bottomTextOur, decorTexts, decorWrapper, advLineProgress, advLineLine, decorItems, itemsOur, itemsProgressText, textWrapperOur, lastTriggered, TL_DURATION, fakeData, tl, translateX, updateClasses, updateOnDiscrete, advLineAnimate, animateFake;
+var advMain, decorTexts, decorWrapper, advLineProgress, advLineLine, decorItems, textWrapperOur, itemsOur, itemsProgressText, lastTriggered, TL_DURATION, fakeData, arrayWidthsOurText, tl, translateX, updateClasses, updateOnDiscrete, advLineAnimate, animateFake;
 var init_adv = __esm({
   "src/ts/adv.ts"() {
     "use strict";
     init_modules();
-    imgs = [...document.querySelectorAll(".adv-img")];
-    bottomTextOur = document.querySelector(
-      ".adv-text-box [data-our] .adv-text-inner"
-    );
+    advMain = document.querySelector(".adv-main");
     decorTexts = [
       ...document.querySelectorAll(".adv-decor p")
     ];
@@ -39939,17 +39936,21 @@ var init_adv = __esm({
     decorItems = [
       ...document.querySelectorAll(".adv-decor p")
     ];
-    itemsOur = [...bottomTextOur.querySelectorAll("p")];
+    textWrapperOur = document.querySelector(".adv-text-inner");
+    itemsOur = [...textWrapperOur.querySelectorAll("ul")];
     itemsProgressText = [
       ...document.querySelectorAll(".adv-right-progress p")
     ];
-    textWrapperOur = document.querySelector(
-      ".adv-text-left .adv-text-inner"
-    );
-    advLineProgress.style.height = imgs[0].clientHeight + "px";
+    console.log(decorItems, itemsOur);
+    advLineProgress.style.width = advMain.clientWidth + "px";
     lastTriggered = -1;
     TL_DURATION = 3e3;
     fakeData = { p: 0 };
+    arrayWidthsOurText = itemsOur.reduce(
+      (acc, el, index) => [...acc, acc[acc.length - 1] + el.clientWidth + 48],
+      [0]
+    );
+    console.log(arrayWidthsOurText);
     tl = createTimeline({
       duration: TL_DURATION,
       autoplay: onScroll({
@@ -39967,21 +39968,30 @@ var init_adv = __esm({
     updateClasses = (progress) => {
       const index = Math.floor(progress * itemsOur.length);
       if (index > itemsOur.length - 1) return;
+      animate(textWrapperOur, {
+        translateX: arrayWidthsOurText[index] * -1,
+        duration: 300,
+        ease: "out(3)"
+      });
+      const currentOurItem = itemsOur[index];
+      animate(currentOurItem.querySelectorAll("li"), {
+        translateY: [20, 0],
+        opacity: [0, 1],
+        ease: "out(3)",
+        delay: stagger(100, { start: 400 })
+      });
       itemsOur.forEach((el, i) => {
         if (i <= index) {
           itemsProgressText[i].classList.add("active");
-          imgs[i].classList.add("active");
         } else {
           itemsProgressText[i].classList.remove("active");
-          imgs[i].classList.remove("active");
         }
         animate(decorWrapper, {
           translateX: translateX[index],
           ease: "linear"
         });
-        decorItems[i].classList.toggle("active", i === index);
-        textWrapperOur.classList.toggle(`active-${i}`, i === index);
         itemsOur[i].classList.toggle("active", i === index);
+        decorItems[i].classList.toggle("active", i === index);
         el.classList.toggle("active", i === index);
       });
     };
@@ -39993,7 +40003,7 @@ var init_adv = __esm({
       }
     };
     advLineAnimate = animate(advLineLine, {
-      height: [0, imgs[0].clientHeight - 76],
+      width: [0, advMain.clientWidth - 76],
       ease: "linear",
       duration: 2300,
       autoplay: false
@@ -41635,8 +41645,6 @@ var init_customSlider = __esm({
         changeCount: 1
         // draggable: Draggable,
       };
-      let arrayWidths = [];
-      let totalWidth = 0;
       if (typeof target === "string") {
         container = document.querySelector(target);
       } else if (target instanceof HTMLElement) {
@@ -41645,8 +41653,12 @@ var init_customSlider = __esm({
       if (!container) throw new Error("Target element not found");
       const track = container.querySelector(".slider-track");
       if (!track) throw new Error("Track element not found");
-      const slides = [...track.querySelectorAll(":scope >  .slide")];
-      const cleanOptions = Object.fromEntries(Object.entries(options).filter(([_, v]) => v !== void 0));
+      const slides = [
+        ...track.querySelectorAll(":scope >  .slide")
+      ];
+      const cleanOptions = Object.fromEntries(
+        Object.entries(options).filter(([_, v]) => v !== void 0)
+      );
       const currentOptions = { ...initOptions, ...cleanOptions };
       currentOptions.duration = currentOptions.duration * 1e3;
       function applyStyles() {
@@ -41657,13 +41669,17 @@ var init_customSlider = __esm({
             state.changeCount = Number(currentOptions.media[media].changeCount) || state.changeCount;
           }
         });
-        if (!currentOptions.widthAuto && container) {
+        if (!currentOptions.widthAuto) {
           container.style.setProperty("--items", currentOptions.items.toString());
           container.style.minWidth = "0px";
+        } else {
+          container.style.setProperty("--items", "auto");
         }
         container?.style.setProperty("--gap", `${currentOptions.gap}px`);
       }
       applyStyles();
+      let arrayWidths = slides.map((slide) => slide.clientWidth);
+      let totalWidth = arrayWidths.reduce((acc, curr) => acc + curr, 0);
       if (!slides.length) throw new Error("No slides found");
       const listeners = {
         changed: []
@@ -41723,7 +41739,9 @@ var init_customSlider = __esm({
           api.goTo(Math.max(0, state.currentIdx - state.changeCount));
         },
         goNext: () => {
-          api.goTo(Math.min(api.info.totalLength, state.currentIdx + state.changeCount));
+          api.goTo(
+            Math.min(api.info.totalLength, state.currentIdx + state.changeCount)
+          );
         },
         checkChangeDependSlider: (index) => {
           if (index >= api.options.items) {
@@ -41828,8 +41846,9 @@ var init_plugins = __esm({
     infinityScroll = (api) => {
       const { slides, track } = api.dom;
       track.style.transition = "none";
+      console.log(123123, api.info.totalWidth);
       waapi.animate(track, {
-        x: -api.info.totalWidth,
+        x: -api.info.totalWidth / 2,
         duration: api.options.duration,
         autoplay: true,
         ease: "linear",
