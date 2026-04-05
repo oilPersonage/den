@@ -1,52 +1,27 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Select } from "src/components/select";
 
 import ArrowSvg from "src/components/arrowSvg";
 import CrossSvg from "src/components/crossSvg";
 import CustomImage from "src/components/customImage";
-import products from "src/data/products";
 import { Product } from "src/libs/products";
-import { Heights, heights, Widths, widths } from "src/ts/calculator/data";
+import { Heights, Widths } from "src/ts/calculator/data";
 import { Container } from "src/ts/customStore/store";
 import { getDeclOfNum } from "src/utils/getDecl";
 import { blockContainerVariants } from "./block-container-variants";
 import { CalcBase } from "./calcBase";
+import {
+  baseMaterials,
+  bases,
+  charactersMap,
+  hOptions,
+  variants,
+  wOptions
+} from "./data";
 import { ProductCalculatorPrice } from "./productPrice";
 import RotateSvg from "./rotateSvg";
-
-const hOptions: { value: Heights; label: string }[] = [];
-const wOptions: { value: Widths; label: string }[] = [];
-
-for (const key of heights.keys()) {
-  hOptions.push({ value: key, label: key + "м" });
-}
-
-for (const key of widths.keys()) {
-  wOptions.push({ value: key, label: key + "м" });
-}
-
-const baseMaterials = [
-  { value: "1", label: "ОСП" },
-  { value: "2", label: "ЛДСП" },
-  { value: "3", label: "АКВА" }
-];
-
-const bases = [
-  { value: "1", label: "Профлист" },
-  { value: "2", label: "Сендвич панели" },
-  { value: "3", label: "Вагонка" },
-  { value: "4", label: "Брус" }
-];
-
-const variants = products
-  .filter((el) => el.tag === "Блок-контейнер")
-  .map((el) => ({
-    value: el.slug,
-    data: { src: el.pictures[0]?.smallSrc, name: el.name }
-  }));
-variants.unshift({ value: "base", data: { name: "Пустой блок" } });
 
 export default function ProductCalc({
   slug,
@@ -72,6 +47,25 @@ export default function ProductCalc({
     setContainers([findContainer(slug)]);
   }, [slug]);
 
+  const characters = useMemo(() => {
+    const values = {
+      w,
+      h,
+      h2: "2.4",
+      summ: (w * h).toFixed(1),
+      material: baseMaterials.find((el) => el.value === material)?.label,
+      base: bases.find((el) => el.value === base)?.label
+    };
+    return Object.entries(charactersMap).map(([title, template]) => {
+      const value = template.replace(/\[(\w+)\]/g, (_, key) => {
+        const val = values[key as keyof typeof values];
+        return val !== undefined ? String(val) : `[${key}]`; // если не найдено — оставляем как есть
+      });
+
+      return { title, value };
+    });
+  }, [h, w, material, base]);
+
   function onAdd(name: string) {
     const newContainer = findContainer(name);
     setContainers((v) => [...v, newContainer]);
@@ -91,7 +85,7 @@ export default function ProductCalc({
   return (
     <div className="calc-section min-h-screen flex flex-col pt-header max-md:hidden">
       <div className="flex flex-1">
-        <div className="sticky top-header flex flex-col gap-md py-md pl-xl pr-lg calc-left h-fit">
+        <div className="sticky top-header flex flex-col gap-md py-md pl-xl pr-lg calc-left h-fit z-3 bg-bg">
           <div className="h1Box">
             <h3 className="animate-chars">Конструктор</h3>
           </div>
@@ -254,6 +248,7 @@ export default function ProductCalc({
             name={product.name}
             containers={containers}
             sizes={[h, w]}
+            characters={characters}
           />
         </div>
         <div className="calc-right">

@@ -1,9 +1,12 @@
 import { useCallback, useMemo, useState } from "react";
+import ArrowSvg from "src/components/arrowSvg";
 import Request from "src/components/request";
 import { ItemType } from "src/ts/calculator";
 import { Heights, Widths } from "src/ts/calculator/data";
 import { Container } from "src/ts/customStore/store";
 import { priceFormatter } from "src/utils/priceFormater";
+import ProductInfo from "./productInfo";
+import { TCharacter } from "../../../../libs/products";
 
 type BlockHeight = Record<Heights, number>;
 type BlockWidth = Record<Widths, number>;
@@ -36,13 +39,15 @@ export function ProductCalculatorPrice({
   sizes,
   base,
   material,
-  name
+  name,
+  characters
 }: {
   containers: Container[];
   sizes: [Heights, Widths];
   name: string;
   base: string;
   material: string;
+  characters: TCharacter[];
 }) {
   const [count, setCount] = useState(1);
 
@@ -51,6 +56,7 @@ export function ProductCalculatorPrice({
     const doors = { count: 0, price: 0, title: "Дверь" };
     const windows = { count: 0, price: 0, title: "Окно" };
     const walls = { count: 0, price: 0, title: "Перегородка" };
+
     containers.forEach((el) => {
       el.doors.forEach(() => {
         doors.count += 1;
@@ -129,7 +135,7 @@ export function ProductCalculatorPrice({
   );
   return (
     <div className="flex flex-col gap-md mb-lg max-md:order-4 max-md:mt-lg">
-      <div className="flex gap-md relative z-1 max-md:mb-sm">
+      <div className="flex justify-between items-end gap-md relative z-1 max-md:mb-sm">
         <div className="flex flex-col gap-xs" data-ai="4">
           <p>Кол-во товара</p>
           <div className="product-count">
@@ -201,6 +207,16 @@ export function ProductCalculatorPrice({
               <span></span>
             </button>
           </div>
+        </div>
+        <div className="product-calc-info-wrapper">
+          <button className="btn link h-fit bg-btn-hover">
+            Описание
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+          <ProductInfo charact={characters} />
         </div>
       </div>
       <div className="product-price-summ">

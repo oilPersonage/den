@@ -1023,7 +1023,7 @@ footer p {
   /* 0 0 0 14px #212529; */
 }
 .calc-right {
-  @apply p-lg pt-md pb-xl bg-bg2 flex-1 overflow-x-auto;
+  @apply p-lg pt-md pb-xl bg-bg2 flex-1 overflow-x-auto relative z-1;
 }
 .calc-right-wrapper {
   @apply flex-1 min-w-max;
@@ -1184,6 +1184,18 @@ footer p {
 }
 .product-price-summ {
   @apply flex gap-sm md:gap-md max-md:flex-col md:items-center;
+}
+.product-price-info-wrapper {
+  @apply relative;
+}
+.product-calc-info-wrapper:hover .product-calc-info {
+  @apply opacity-100 pointer-events-auto select-auto scale-100;
+}
+.product-calc-info .product-characters {
+  @apply bg-bg border border-black px-md py-4 min-w-120;
+}
+.product-calc-info {
+  @apply absolute left-full pl-px top-1/2 -translate-y-1/2 z-2 max-w-100 scale-80 opacity-0 select-none pointer-events-none transition-all origin-bottom;
 }
 
 /* CALCULATOR */
