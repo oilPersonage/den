@@ -1,12 +1,11 @@
 import { useCallback, useMemo, useState } from "react";
-import ArrowSvg from "src/components/arrowSvg";
 import Request from "src/components/request";
 import { ItemType } from "src/ts/calculator";
 import { Heights, Widths } from "src/ts/calculator/data";
 import { Container } from "src/ts/customStore/store";
 import { priceFormatter } from "src/utils/priceFormater";
-import ProductInfo from "./productInfo";
 import { TCharacter } from "../../../../libs/products";
+import ProductInfo from "./productInfo";
 
 type BlockHeight = Record<Heights, number>;
 type BlockWidth = Record<Widths, number>;
@@ -208,7 +207,7 @@ export function ProductCalculatorPrice({
             </button>
           </div>
         </div>
-        <div className="product-calc-info-wrapper">
+        <div className="product-calc-info-wrapper" data-ai="4">
           <button className="btn link h-fit bg-btn-hover">
             Описание
             <span></span>

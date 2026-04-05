@@ -86,8 +86,8 @@ export default function ProductCalc({
     <div className="calc-section min-h-screen flex flex-col pt-header max-md:hidden">
       <div className="flex flex-1">
         <div className="sticky top-header flex flex-col gap-md py-md pl-xl pr-lg calc-left h-fit z-3 bg-bg">
-          <div className="h1Box">
-            <h3 className="animate-chars">Конструктор</h3>
+          <div data-ai="4">
+            <h3>Конструктор</h3>
           </div>
           <div className="flex items-start gap-lg relative z-4">
             <div data-ai="4" className="flex flex-col gap-md">
