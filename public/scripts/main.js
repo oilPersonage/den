@@ -41327,15 +41327,9 @@ var init_scrollAnimation = __esm({
     });
     containerCoord = isMobile ? { enter: "end", leave: "start" } : { enter: "80% 20%", leave: "20% 80%" };
     footerWrapper = document.querySelector("footer .wrapper");
-    typingList = [...document.querySelectorAll("[data-typing]")].map(
-      prepareChars
-    );
-    fromBottomList = [
-      ...document.querySelectorAll("[data-animate-container]")
-    ];
-    fromTopList = [...document.querySelectorAll("[data-from-top]")].map(
-      prepareChars
-    );
+    typingList = [...document.querySelectorAll("[data-typing]")].map(prepareChars);
+    fromBottomList = [...document.querySelectorAll("[data-animate-container]")];
+    fromTopList = [...document.querySelectorAll("[data-from-top]")].map(prepareChars);
     zoomList = [...document.querySelectorAll("[data-zoom]")];
     typingList.forEach(({ el, chars: chars2 }) => {
       const container = el.closest("[data-animate-container]");
@@ -41357,18 +41351,19 @@ var init_scrollAnimation = __esm({
       const isSticky = el.dataset.isSticky !== void 0;
       const isInvert = el.dataset.animateInvert !== void 0;
       const items3 = [...el.querySelectorAll("[data-from-bottom]")];
-      const delay = 50;
+      const delay = 100;
       animate(items3, {
         y: [14, 0],
         opacity: [0, 1],
         duration: 600,
-        delay: stagger(-delay, {
+        delay: stagger(delay * -1, {
           start: delay * items3.length,
           from: isInvert ? "firts" : "last"
         }),
         easing: "inSine",
         autoplay: onScroll({
           // ...coord,
+          debug: items3.length === 1,
           target: isSticky ? el : void 0
         })
       });

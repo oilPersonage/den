@@ -778,22 +778,22 @@ export default async function Home() {
 				</div>
 			</section>
 
-			<div className='wrapper'>
+			<div className='wrapper' data->
 				<div className='adv-wrapper min-h-[500vh] relative w-full' data-animate-container data-is-sticky>
 					<div className='adv'>
 						<h2 className='md:py-lg pb-md pt-sm' data-typing>
 							Чем мы отличаемся от других производителей?
 						</h2>
 						<div className='adv-main'>
-							<div className='adv-decor-wrapper'>
-								<div data-from-bottom className='adv-decor'>
+							<div className='adv-decor-wrapper' data-from-bottom>
+								<div className='adv-decor'>
 									<p className='active'>СОБСТВЕННОЕ ПРОИЗВОДСТВО</p>
 									<p>КОМПЛЕКСНЫЙ ПОДХОД</p>
 									<p>МАТЕРИАЛЫ</p>
 									<p>ИНЖЕНЕРИНГ</p>
 								</div>
 							</div>
-							<div className='adv-text-box'>
+							<div className='adv-text-box' data-from-bottom>
 								<div className='adv-text-inner' data-our>
 									<ul className='active'>
 										<li>
