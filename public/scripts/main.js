@@ -39912,34 +39912,19 @@ var init_adv = __esm({
     "use strict";
     init_modules();
     advMain = document.querySelector(".adv-main");
-    decorTexts = [
-      ...document.querySelectorAll(".adv-decor p")
-    ];
-    decorWrapper = [
-      ...document.querySelectorAll(".adv-decor")
-    ];
-    advLineProgress = document.querySelector(
-      ".adv-right-progress"
-    );
+    decorTexts = [...document.querySelectorAll(".adv-decor p")];
+    decorWrapper = [...document.querySelectorAll(".adv-decor")];
+    advLineProgress = document.querySelector(".adv-right-progress");
     advLineLine = document.querySelector(".adv-right-line");
-    decorItems = [
-      ...document.querySelectorAll(".adv-decor p")
-    ];
+    decorItems = [...document.querySelectorAll(".adv-decor p")];
     textWrapperOur = document.querySelector(".adv-text-inner");
     itemsOur = [...textWrapperOur.querySelectorAll("ul")];
-    itemsProgressText = [
-      ...document.querySelectorAll(".adv-right-progress p")
-    ];
-    console.log(decorItems, itemsOur);
+    itemsProgressText = [...document.querySelectorAll(".adv-right-progress p")];
     advLineProgress.style.width = advMain.clientWidth + "px";
     lastTriggered = -1;
     TL_DURATION = 3e3;
     fakeData = { p: 0 };
-    arrayWidthsOurText = itemsOur.reduce(
-      (acc, el, index) => [...acc, acc[acc.length - 1] + el.clientWidth + 48],
-      [0]
-    );
-    console.log(arrayWidthsOurText, itemsOur[0].clientWidth);
+    arrayWidthsOurText = itemsOur.reduce((acc, el, index) => [...acc, acc[acc.length - 1] + el.clientWidth + 48], [0]);
     tl = createTimeline({
       duration: TL_DURATION,
       autoplay: onScroll({
@@ -39954,7 +39939,7 @@ var init_adv = __esm({
       to: `${pos}px`,
       ease: "outExpo"
     }));
-    updateClasses = (progress) => {
+    updateClasses = (progress, last) => {
       const index = Math.floor(progress * itemsOur.length);
       if (index > itemsOur.length - 1) return;
       animate(textWrapperOur, {
@@ -39963,12 +39948,13 @@ var init_adv = __esm({
         ease: "out(3)"
       });
       const currentOurItem = itemsOur[index];
-      animate(currentOurItem.querySelectorAll("li"), {
-        translateY: [20, 0],
-        opacity: [0, 1],
-        ease: "out(3)",
-        delay: stagger(100, { start: 400 })
-      });
+      if (!(last < 0) && last !== itemsOur.length)
+        animate(currentOurItem.querySelectorAll("li"), {
+          translateY: [20, 0],
+          opacity: [0, 1],
+          ease: "out(3)",
+          delay: stagger(100, { start: 400 })
+        });
       itemsOur.forEach((el, i) => {
         if (i <= index) {
           itemsProgressText[i].classList.add("active");
@@ -39987,8 +39973,9 @@ var init_adv = __esm({
     updateOnDiscrete = (progress) => {
       const currentIndex = Math.floor(progress * itemsOur.length);
       if (currentIndex !== lastTriggered) {
+        const last = lastTriggered;
         lastTriggered = currentIndex;
-        updateClasses(currentIndex / itemsOur.length);
+        updateClasses(currentIndex / itemsOur.length, last);
       }
     };
     advLineAnimate = animate(advLineLine, {
@@ -40001,9 +39988,7 @@ var init_adv = __esm({
       p: 1
     });
     tl.onRender = (self2) => {
-      advLineAnimate.seek(
-        self2.progress / (advLineAnimate.duration / TL_DURATION) * advLineAnimate.duration
-      );
+      advLineAnimate.seek(self2.progress / (advLineAnimate.duration / TL_DURATION) * advLineAnimate.duration);
       updateOnDiscrete(self2.progress);
     };
     tl.sync(animateFake, 0);
