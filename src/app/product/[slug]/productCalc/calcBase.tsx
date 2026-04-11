@@ -120,7 +120,7 @@ export function CalcBase({
         <div
           key={id}
           data-type="door"
-          data-rotated={rotated ? "true" : ""}
+          data-rotated={rotated || undefined}
           data-id={id}
           data-sticky={sticky}
           style={{ translate: `${left ?? 0}px ${top ?? 0}px` }}
@@ -151,7 +151,7 @@ export function CalcBase({
         <div
           key={id}
           data-type="window"
-          data-rotated={rotated ? "true" : ""}
+          data-rotated={rotated || undefined}
           data-sticky={sticky}
           style={{ translate: `${left ?? 0}px ${top ?? 0}px` }}
           data-id={id}
@@ -190,7 +190,7 @@ export function CalcBase({
             }}
             data-width={width}
             data-height={height}
-            data-rotated={rotated ? "true" : ""}
+            data-rotated={rotated || undefined}
             data-id={id}
             className={`calc-base-item calc-base-wall ${rotated ? "calc-base-rotated" : ""}`}
           >

@@ -17,9 +17,12 @@ function calculateSize(
   const fixedXFn = utils.clamp(MIN_WALL_OFFSET + WALL_HEIGHT, maxWidth);
   const spanValue = utils.snap(WALL_HEIGHT);
 
+  console.log({ rotated });
+
   const dragCount = dom.querySelector(
     ".calc-wall-height-count"
   ) as HTMLButtonElement;
+
   if (rotated) {
     const v = spanValue(fixedXFn(initWidth + dx));
     targetSize.style.minWidth = `${v}px`;
@@ -60,6 +63,7 @@ export default function draggableHeight(
   function hangleRotate() {
     dom.classList.toggle("calc-base-rotated", !stateItem.rotated);
     stateItem.rotated = !stateItem.rotated;
+    dom.toggleAttribute("data-rotated", stateItem.rotated);
     calculateSize(stateItem, 0, 0, maxSizes[0], maxSizes[1]);
     onReacalculate(stateItem, stateItem.rotated);
   }

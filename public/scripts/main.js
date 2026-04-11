@@ -39664,7 +39664,7 @@ var init_home = __esm({
     mixer = null;
     isPlaying = false;
     animate2 = null;
-    repoName = "";
+    repoName = "/den";
     wrapper = document.querySelector(".canvas-wrapper");
     clock = new Clock2();
     if (isIndex) {
@@ -39698,7 +39698,14 @@ var init_home = __esm({
       const scene = new Scene();
       const width = wrapper.clientWidth;
       const height = wrapper.clientHeight;
-      const camera = new OrthographicCamera(-width / 2, width / 2, height / 2, -height / 2, -1e3, 1e3);
+      const camera = new OrthographicCamera(
+        -width / 2,
+        width / 2,
+        height / 2,
+        -height / 2,
+        -1e3,
+        1e3
+      );
       const renderer = new WebGLRenderer({ antialias: true, alpha: true });
       renderer.setClearColor(0, 0);
       renderer.setClearAlpha(0);

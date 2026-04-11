@@ -23,6 +23,13 @@ import {
 import { ProductCalculatorPrice } from "./productPrice";
 import RotateSvg from "./rotateSvg";
 
+const maxContainersMap: Record<Heights, number> = {
+  2.4: 8,
+  4.8: 3,
+  9.6: 2,
+  19.2: 1
+};
+
 export default function ProductCalc({
   slug,
   product
@@ -66,6 +73,20 @@ export default function ProductCalc({
     });
   }, [h, w, material, base]);
 
+  // max h = 4.8 = 3
+  //
+  const lengthOptions = useMemo(
+    () => ({
+      options: hOptions.filter(
+        (el) => containers.length <= maxContainersMap[el.value]
+      ),
+      allowed: hOptions.filter(
+        (el) => containers.length > maxContainersMap[el.value]
+      )
+    }),
+    [containers]
+  );
+
   function onAdd(name: string) {
     const newContainer = findContainer(name);
     setContainers((v) => [...v, newContainer]);
@@ -82,15 +103,19 @@ export default function ProductCalc({
     setContainers((v) => v.filter(({ id }) => targetId !== id));
   }
 
+  function onChangeHight(height: Heights) {
+    const allowChange = maxContainersMap[height] >= containers.length;
+    if (allowChange) {
+      setH(height);
+    }
+  }
+
   return (
-    <div className="calc-section min-h-screen flex flex-col pt-header max-md:hidden">
+    <div className="calc-section">
       <div className="flex flex-1">
-        <div className="sticky top-header flex flex-col gap-md py-md pl-xl pr-lg calc-left h-fit z-3 bg-bg">
-          <div data-ai="4">
-            <h3>Конструктор</h3>
-          </div>
+        <div className="calc-left" data-lenis-prevent>
           <div className="flex items-start gap-lg relative z-4">
-            <div data-ai="4" className="flex flex-col gap-md">
+            <div data-ai="4" className="flex flex-col gap-sm">
               <div className="relative z-2">
                 <p className="mb-xs">База</p>
                 <Select
@@ -123,42 +148,60 @@ export default function ProductCalc({
               />
             </div>
           </div>
-          <div className="flex justify-between gap-1 relative z-3">
-            <div data-ai="4" className="flex gap-md w-full">
-              <p className="mr-auto">
-                Размеры <br className="max-md:hidden" />
-                (каждого блока)
-              </p>
-              <div className="flex gap-xs">
-                <div>
-                  <p className="mb-xs">Высота</p>
-                  <Select
-                    size="sm"
-                    className="w-26 min-w-0!"
-                    onSelectAction={(v) => setH(v)}
-                    value={h + "м"}
-                    options={hOptions}
-                  />
-                </div>
-                <div>
-                  <p className="mb-xs">Ширина</p>
-                  <Select
-                    size="sm"
-                    className="w-26 min-w-0!"
-                    onSelectAction={(v) => setW(v)}
-                    value={w + "м"}
-                    options={wOptions}
-                  />
+          <div className="flex flex-col gap-xs">
+            <div className="flex justify-between gap-1 relative z-3">
+              <div data-ai="4" className="flex gap-md w-full">
+                <p className="mr-auto">
+                  Размеры <br className="max-md:hidden" />
+                  (каждого блока)
+                </p>
+                <div className="flex gap-xs">
+                  <div>
+                    <p className="mb-xs">Длина</p>
+                    <Select
+                      size="sm"
+                      className="w-26 min-w-0!"
+                      onSelectAction={(v) => onChangeHight(v)}
+                      value={h + "м"}
+                      options={lengthOptions.options}
+                    />
+                  </div>
+                  <div>
+                    <p className="mb-xs">Ширина</p>
+                    <Select
+                      size="sm"
+                      className="w-26 min-w-0!"
+                      onSelectAction={(v) => setW(v)}
+                      value={w + "м"}
+                      options={wOptions}
+                    />
+                  </div>
                 </div>
               </div>
             </div>
+            {lengthOptions.allowed.length > 0 && (
+              <ul className="flex flex-col">
+                {lengthOptions.allowed.map((el) => (
+                  <li key={el.value} className="text-black/40">
+                    ! Для выбора Длины {el.value}м оставьте{" "}
+                    {maxContainersMap[el.value]}{" "}
+                    {getDeclOfNum(maxContainersMap[el.value], [
+                      "блок",
+                      "блока",
+                      "блоков"
+                    ])}{" "}
+                  </li>
+                ))}
+              </ul>
+            )}
           </div>
+
           <div data-ai="4" className="flex flex-col gap-xs relative z-2">
-            <div className="flex flex-col mb-xs min-h-[34px] relative z-2">
-              <p className="font-bold mb-xs">Блоки</p>
-              {containers.length < 5 && (
+            <div className="flex flex-col mb-xs relative z-2">
+              <p className="font-bold">Блоки</p>
+              {containers.length < maxContainersMap[h] ? (
                 <Select
-                  className="max-w-full min-w-28!"
+                  className="max-w-full min-w-28! mt-xs"
                   options={variants}
                   value={""}
                   onSelectAction={(v) => onAdd(v)}
@@ -172,7 +215,7 @@ export default function ProductCalc({
                 >
                   {(el) => (
                     <button className="btn link w-full px-2 py-2 min-h-14">
-                      <div className="max-w-full flex items-center gap-sm *:text-left">
+                      <div className="max-w-100 flex items-center gap-sm *:text-left">
                         {el.data?.src && (
                           <CustomImage
                             className="max-h-10"
@@ -189,7 +232,7 @@ export default function ProductCalc({
                     </button>
                   )}
                 </Select>
-              )}
+              ) : null}
             </div>
             <ul className="mt-xs">
               {containers.map((el, idx) => (
@@ -241,6 +284,7 @@ export default function ProductCalc({
               ))}
             </ul>
           </div>
+
           <div data-ai="4" className="divider"></div>
           <ProductCalculatorPrice
             base={bases.find((el) => el.value === base)?.label}
@@ -253,6 +297,9 @@ export default function ProductCalc({
         </div>
         <div className="calc-right">
           <div className="calc-right-wrapper">
+            <div className="ml-6 mb-md" data-ai="3">
+              <h3>Конструктор</h3>
+            </div>
             <div className="flex gap-lg mb-xl" data-ai="3">
               <div className="grid grid-cols-2 ml-6 gap-xs gap-x-lg min-w-100">
                 <div className="calc-base-rotated flex gap-sm items-center">

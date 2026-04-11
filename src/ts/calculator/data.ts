@@ -17,12 +17,14 @@ export const baseItem: BaseItem = {
   onRotate(deg: number) {}
 };
 
-export type Heights = 2.4 | 4.8;
+export type Heights = 2.4 | 4.8 | 9.6 | 19.2;
 export type Widths = 4 | 5 | 6 | 7 | 8 | 9;
 
 export const heights = new Map<Heights, number>();
 heights.set(2.4, 240);
 heights.set(4.8, 480);
+heights.set(9.6, 960);
+heights.set(19.2, 1920);
 
 export const widths = new Map<Widths, number>();
 widths.set(4, 400);

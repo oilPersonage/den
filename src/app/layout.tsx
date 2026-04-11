@@ -89,6 +89,7 @@ export default async function RootLayout({
         <Policies />
         <Catalog products={groupedProducts} />
       </body>
+      <div id="modal-portal"></div>
       <Script
         src={`${process.env.NEXT_PUBLIC_BASE_PATH}/scripts/main.js`}
         type="module"

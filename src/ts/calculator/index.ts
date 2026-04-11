@@ -43,7 +43,7 @@ export interface Item {
   type: ItemType;
   rotated: boolean;
   dragging: boolean;
-  sticky?: "end";
+  sticky?: "x" | "y";
 }
 
 const elementsState = new Map<HTMLElement, Item>();
@@ -68,7 +68,7 @@ const findMagnetPoint = (
   value: number,
   points: number[],
   threshold: number
-): number => {
+): { isSticky: boolean; value: number } => {
   // Проходим по всем точкам
   for (let i = 0; i < points.length; i++) {
     const point = points[i];
@@ -77,12 +77,12 @@ const findMagnetPoint = (
     const end = point + threshold;
     // Если значение попадает в диапазон - прилипаем
     if (value < end && value > start) {
-      return point;
+      return { isSticky: point === points[points.length - 1], value: point };
     }
   }
 
   // Не попали ни в один диапазон - возвращаем исходное значение
-  return value;
+  return { isSticky: false, value };
 };
 
 export function watchDrag(
@@ -116,10 +116,9 @@ export function watchDrag(
     function checkSticky() {
       if (!initialData.sticky) return;
       if (rotated) {
-        currentY = initialData.sticky === "end" ? parentSizes[0] : currentY;
+        currentY = initialData.sticky === "y" ? parentSizes[0] : currentY;
       } else {
-        console.log("sticky ==", parentSizes[1]);
-        currentX = initialData.sticky === "end" ? parentSizes[1] : currentX;
+        currentX = initialData.sticky === "x" ? parentSizes[1] : currentX;
       }
     }
     checkSticky();
@@ -157,8 +156,8 @@ export function watchDrag(
   }
 
   draggables.forEach((item) => {
-    const rotated = !!item.dataset.rotated;
-    const { sticky, id } = item.dataset; // 'end' or wall.id or undefined
+    const rotated = item.dataset.rotated !== undefined;
+    const { sticky, id } = item.dataset;
     const isWall = !!item.querySelector(".calc-wall-height-wrapper");
     const targetSize = item.querySelector("[data-target-size]") as HTMLElement;
     if (!targetSize) return;
@@ -204,7 +203,6 @@ export function watchDrag(
       initialData.dom.removeAttribute("data-width");
       initialData.dom.removeAttribute("data-height");
       // проверить на удаление, елси он поменялся но прижат к краю
-      initialData.dom.removeAttribute("data-sticky");
       initialData.dragging = true;
       parent.classList.add("draggable");
       state.isDragging = true;
@@ -275,10 +273,12 @@ export function watchDrag(
       const valueX = initialData.initDragX + dx;
       initialData.finalX = initialData.rotated
         ? valueX
-        : findMagnetPoint(valueX, initialData.magnetPointsX, MAGNET_THRESHOLD);
+        : findMagnetPoint(valueX, initialData.magnetPointsX, MAGNET_THRESHOLD)
+            .value;
       const valueY = initialData.initDragY + dy;
       initialData.finalY = initialData.rotated
         ? findMagnetPoint(valueY, initialData.magnetPointsY, MAGNET_THRESHOLD)
+            .value
         : valueY;
       initialData.finalX = initialData.fixedXFn(initialData.finalX);
       initialData.finalY = initialData.fixedYFn(initialData.finalY);
@@ -290,6 +290,22 @@ export function watchDrag(
       item.classList.remove("draggable");
       initialData.dragging = false;
       parent.classList.remove("draggable");
+
+      const stickyX = findMagnetPoint(
+        initialData.finalX,
+        initialData.magnetPointsX,
+        MAGNET_THRESHOLD
+      ).isSticky;
+      const stickyY = findMagnetPoint(
+        initialData.finalY,
+        initialData.magnetPointsY,
+        MAGNET_THRESHOLD
+      ).isSticky;
+      item.setAttribute(
+        "data-sticky",
+        stickyX ? "x" : stickyY ? "y" : undefined
+      );
+      console.log(stickyX, stickyY);
       // state.currentDragItem = undefined
       if (!state.isDragging) return;
       item.style.cursor = "grab";
