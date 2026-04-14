@@ -88,9 +88,9 @@ animate('#header', {
 	'--alpha': [0, 1],
 	autoplay: onScroll({
 		container: '.scroll-container',
-		enter: 'top+=100 top+=100',
-		leave: 'top bottom+=100',
-		sync: 0.5,
+		enter: 'top+=60 top+=60',
+		leave: 'top bottom+=60',
+		sync: true,
 	}),
 	easing: 'linear', // ВАЖНО: для скролла всегда используйте linear
 })

@@ -41397,9 +41397,9 @@ var init_scrollAnimation = __esm({
       "--alpha": [0, 1],
       autoplay: onScroll({
         container: ".scroll-container",
-        enter: "top+=100 top+=100",
-        leave: "top bottom+=100",
-        sync: 0.5
+        enter: "top+=60 top+=60",
+        leave: "top bottom+=60",
+        sync: true
       }),
       easing: "linear"
       // ВАЖНО: для скролла всегда используйте linear
@@ -41451,7 +41451,7 @@ function createTimelineFn(modal) {
       delay: stagger(10),
       autoplay: false
     },
-    "modal p"
+    "-=400"
   ).add(
     [...modal.querySelectorAll("[data-modal-anim='1']")],
     {
@@ -41472,47 +41472,11 @@ function createTimelineFn(modal) {
     "modal p"
   );
 }
-function checkStatusArrows(idx) {
-  if (!isNaN(idx)) {
-    prevImgBtn?.classList.toggle("disabled", idx === 0);
-    nextImgBtn?.classList.toggle("disabled", idx === imgsLength - 1);
-  }
-}
-function setImageSize() {
-  if (!img || !imgModal) return;
-  const originalImg = new Image();
-  originalImg.src = img.src;
-  const { width: imgW, height: imgH } = originalImg;
-  const imgRatio = imgW / imgH;
-  const windowRatio = window.innerWidth / window.innerHeight;
-  if (imgRatio > windowRatio) {
-    const size = window.innerWidth - modalSpacing;
-    imgModal.style.width = size + "px";
-    imgModal.style.height = size / imgRatio + "px";
-    img.style.width = size + "px";
-    img.style.height = size / imgRatio + "px";
-  } else {
-    const size = window.innerHeight - modalSpacing;
-    imgModal.style.height = size + "px";
-    imgModal.style.width = size * imgRatio + "px";
-    img.style.height = size + "px";
-    img.style.width = size * imgRatio + "px";
-  }
-}
-function changeImg(dir) {
-  if (currentImgIdx === 0 && dir < 0 || currentImgIdx === imgsLength - 1 && dir > 0)
-    return;
-  currentImgIdx += dir;
-  img.src = pathImgFolder + currentImgIdx + ".png";
-  setImageSize();
-  checkStatusArrows(currentImgIdx);
-}
-var btnOpenModal, btnCloseModal, modals, timelines, modalSpacing, prevImgBtn, nextImgBtn, currentImgIdx, pathImgFolder, img, imgModal, imgsLength;
+var btnOpenModal, btnCloseModal, modals, timelines;
 var init_modal = __esm({
   "src/ts/modal.ts"() {
     "use strict";
     init_modules();
-    init_intro();
     btnOpenModal = [
       ...document.querySelectorAll("[data-modal]")
     ];
@@ -41533,34 +41497,11 @@ var init_modal = __esm({
         modal
       };
     });
-    modalSpacing = isMobile2 ? 46 : 120;
-    prevImgBtn = document.querySelector("[data-photo-prev]");
-    nextImgBtn = document.querySelector("[data-photo-next]");
-    currentImgIdx = 0;
-    pathImgFolder = "";
-    img = null;
-    imgModal = null;
-    imgsLength = [...document.querySelectorAll('[data-modal="photos"]')].length;
-    prevImgBtn?.addEventListener("click", () => changeImg(-1));
-    nextImgBtn?.addEventListener("click", () => changeImg(1));
-    window.addEventListener("resize", setImageSize);
     btnOpenModal.forEach((el) => {
-      el.addEventListener("click", (e) => {
+      el.addEventListener("click", async (e) => {
         e.preventDefault();
         const modalName = el.dataset.modal;
         const { timeline, modal } = timelines[modalName];
-        if (modalName === "photos") {
-          img = modal.querySelector("img");
-          imgModal = modal.querySelector(".modal-wrapper");
-          const { src = "" } = el.dataset;
-          img.src = src;
-          const number = parseInt(src.match(/\d+/)[0]);
-          pathImgFolder = src.match(/^.*?(?=\d+)/)?.[0] || "";
-          currentImgIdx = number;
-          checkStatusArrows(currentImgIdx);
-          setImageSize();
-        }
-        console.log(modal);
         modal.classList.add("opened");
         timeline.speed = 1;
         timeline.play();

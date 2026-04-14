@@ -1143,7 +1143,7 @@ footer p {
   @apply px-2 py-2 h-8;
 }
 .calc-left {
-  @apply sticky max-h-[calc(100vh-var(--spacing-header))] overflow-y-auto 
+  @apply sticky max-h-[calc(100vh-var(--spacing-header))] overflow-y-auto
 	overflow-x-hidden top-header flex flex-col gap-md py-md pl-xl pr-lg h-fit z-3 bg-bg;
 }
 .calc-left-block {
@@ -1207,6 +1207,12 @@ footer p {
 }
 .product-calc-info {
   @apply absolute right-0 left-0 pl-px top-1/2 translate-x-30 -translate-y-1/2 z-2 transition-all origin-bottom;
+}
+.projects {
+  background: url("/pictures/projects4.png");
+}
+.projects-header {
+  @apply flex gap-md flex-col items-center justify-center min-h-[calc(100vh-var(--spacing-header))];
 }
 
 /* CALCULATOR */
