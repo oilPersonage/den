@@ -105,7 +105,10 @@ export default function Projects() {
       <Request />
       <Loader />
 
-      <Script src="/scripts/projects.js" />
+      <Script
+        src={`${process.env.NEXT_PUBLIC_BASE_PATH}/scripts/projects.js`}
+        type="module"
+      />
     </>
   );
 }
