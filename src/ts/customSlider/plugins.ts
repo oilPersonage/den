@@ -8,8 +8,9 @@ export const fadePlugin: TSliderPlugin = (api) => {
   } = api;
   // Доступ к DOM через API (можно расширить API, добавив туда ссылку на элементы)
   const { track, slides } = dom;
-  const height = slides[0].clientHeight;
-  track.style.height = `${height}px`;
+  // const height = slides[0].clientHeight;
+  track.style.aspectRatio = "10/6";
+  // track.style.height = `${height}px`;
   // 1. Подготовка стилей для Fade
   track.style.transform = "none"; // Отключаем смещение
   slides.forEach((slide, i) => {

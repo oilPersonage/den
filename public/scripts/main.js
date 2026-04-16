@@ -39913,25 +39913,29 @@ var init_intro = __esm({
 
 // src/ts/adv.ts
 var adv_exports = {};
-var advMain, decorTexts, decorWrapper, advLineProgress, advLineLine, decorItems, textWrapperOur, itemsOur, itemsProgressText, lastTriggered, TL_DURATION, fakeData, arrayWidthsOurText, tl, translateX, updateClasses, updateOnDiscrete, advLineAnimate, animateFake;
+var decorTexts, decorWrapper, decorItems, textWrapperOur, itemsOur, lastTriggered, TL_DURATION, fakeData, arrayWidthsOurText, tl, translateX, updateClasses, updateOnDiscrete, animateFake;
 var init_adv = __esm({
   "src/ts/adv.ts"() {
     "use strict";
     init_modules();
-    advMain = document.querySelector(".adv-main");
-    decorTexts = [...document.querySelectorAll(".adv-decor p")];
-    decorWrapper = [...document.querySelectorAll(".adv-decor")];
-    advLineProgress = document.querySelector(".adv-right-progress");
-    advLineLine = document.querySelector(".adv-right-line");
-    decorItems = [...document.querySelectorAll(".adv-decor p")];
+    decorTexts = [
+      ...document.querySelectorAll(".adv-decor p")
+    ];
+    decorWrapper = [
+      ...document.querySelectorAll(".adv-decor")
+    ];
+    decorItems = [
+      ...document.querySelectorAll(".adv-decor p")
+    ];
     textWrapperOur = document.querySelector(".adv-text-inner");
     itemsOur = [...textWrapperOur.querySelectorAll("ul")];
-    itemsProgressText = [...document.querySelectorAll(".adv-right-progress p")];
-    advLineProgress.style.width = advMain.clientWidth + "px";
     lastTriggered = -1;
     TL_DURATION = 3e3;
     fakeData = { p: 0 };
-    arrayWidthsOurText = itemsOur.reduce((acc, el, index) => [...acc, acc[acc.length - 1] + el.clientWidth + 48], [0]);
+    arrayWidthsOurText = itemsOur.reduce(
+      (acc, el, index) => [...acc, acc[acc.length - 1] + el.clientWidth + 48],
+      [0]
+    );
     tl = createTimeline({
       duration: TL_DURATION,
       autoplay: onScroll({
@@ -39963,16 +39967,10 @@ var init_adv = __esm({
           delay: stagger(100, { start: 400 })
         });
       itemsOur.forEach((el, i) => {
-        if (i <= index) {
-          itemsProgressText[i].classList.add("active");
-        } else {
-          itemsProgressText[i].classList.remove("active");
-        }
         animate(decorWrapper, {
           translateX: translateX[index],
           ease: "linear"
         });
-        itemsOur[i].classList.toggle("active", i === index);
         decorItems[i].classList.toggle("active", i === index);
         el.classList.toggle("active", i === index);
       });
@@ -39985,17 +39983,10 @@ var init_adv = __esm({
         updateClasses(currentIndex / itemsOur.length, last);
       }
     };
-    advLineAnimate = animate(advLineLine, {
-      width: [0, advMain.clientWidth - 76],
-      ease: "linear",
-      duration: 2300,
-      autoplay: false
-    });
     animateFake = animate(fakeData, {
       p: 1
     });
     tl.onRender = (self2) => {
-      advLineAnimate.seek(self2.progress / (advLineAnimate.duration / TL_DURATION) * advLineAnimate.duration);
       updateOnDiscrete(self2.progress);
     };
     tl.sync(animateFake, 0);
@@ -41575,7 +41566,6 @@ var init_customSlider = __esm({
       function applyStyles() {
         Object.keys(currentOptions.media).forEach((media) => {
           if (window.matchMedia(`(width<=${media}px)`).matches) {
-            console.log(currentOptions);
             currentOptions.items = currentOptions.media[media].items || currentOptions.items || currentOptions.items;
             state.changeCount = Number(currentOptions.media[media].changeCount) || state.changeCount;
           }
@@ -41636,7 +41626,6 @@ var init_customSlider = __esm({
           track.style.translate = `-${arrayWidths[index] * index}px 0`;
           onCheckDisabledArrows(index, api.info.totalLength);
           state.currentIdx = index;
-          emit("changed", index);
         },
         goTo: (index) => {
           const total = api.info.totalLength;
@@ -41644,6 +41633,7 @@ var init_customSlider = __esm({
           if (isDisabled) return;
           api.engine(index);
           state.currentIdx = index;
+          emit("changed", index);
           return index;
         },
         goPrev: () => {
@@ -41738,8 +41728,7 @@ var init_plugins = __esm({
         options: { duration, ease }
       } = api;
       const { track, slides } = dom;
-      const height = slides[0].clientHeight;
-      track.style.height = `${height}px`;
+      track.style.aspectRatio = "10/6";
       track.style.transform = "none";
       slides.forEach((slide, i) => {
         slide.style.transition = `opacity ${duration}ms ${ease}`;
@@ -41793,7 +41782,19 @@ var init_customSlider2 = __esm({
 // src/ts/slider.ts
 var slider_exports = {};
 function createSlider(slide) {
-  const { duration, dots, dotSelector, arrows, widthAuto, gap = 0, perPage = "1", mobilePerPage } = slide.dataset;
+  const {
+    duration,
+    dots,
+    dotSelector,
+    arrows,
+    widthAuto,
+    gap = 0,
+    fade,
+    perPage = "1",
+    mobilePerPage
+  } = slide.dataset;
+  const plugins = [];
+  if (fade !== void 0) plugins.push(fadePlugin2);
   const data = {
     items: Number(perPage),
     gap: Number(gap),
@@ -41806,7 +41807,7 @@ function createSlider(slide) {
       changeCount: 1
     }
   } : void 0;
-  const api = slider2(slide, data);
+  const api = slider2(slide, data, plugins);
   if (arrows) {
     generateArrows2(api, {
       arrowsWrapper: arrows,
@@ -41828,12 +41829,20 @@ var init_slider = __esm({
     "use strict";
     init_customSlider2();
     ({ fadePlugin: fadePlugin2, generateArrows: generateArrows2, generateDots: generateDots2, infinityScroll: infinityScroll2, slider: slider2 } = customSlider);
-    sliders = [...document.querySelectorAll("[data-slider]")];
-    combinedSlider = [...document.querySelectorAll("[data-combined-slider]")];
+    sliders = [
+      ...document.querySelectorAll("[data-slider]")
+    ];
+    combinedSlider = [
+      ...document.querySelectorAll("[data-combined-slider]")
+    ];
     for (const slide of combinedSlider) {
-      const outerSlider = slide.querySelector("[data-combined-slider-outer]");
+      const outerSlider = slide.querySelector(
+        "[data-combined-slider-outer]"
+      );
       const api = createSlider(outerSlider);
-      const innerSlider = slide.querySelector("[data-combined-slider-inner]");
+      const innerSlider = slide.querySelector(
+        "[data-combined-slider-inner]"
+      );
       if (!innerSlider) continue;
       api.dependSlider = createSlider(innerSlider);
     }

@@ -55,7 +55,6 @@ export const slider: TSliderInit = (target, options = {}, plugins = []) => {
   function applyStyles() {
     Object.keys(currentOptions.media).forEach((media) => {
       if (window.matchMedia(`(width<=${media}px)`).matches) {
-        console.log(currentOptions);
         currentOptions.items =
           currentOptions.media[media].items ||
           currentOptions.items ||
@@ -134,7 +133,6 @@ export const slider: TSliderInit = (target, options = {}, plugins = []) => {
       track.style.translate = `-${arrayWidths[index] * index}px 0`;
       onCheckDisabledArrows(index, api.info.totalLength);
       state.currentIdx = index;
-      emit("changed", index);
     },
     goTo: (index: number) => {
       const total = api.info.totalLength;
@@ -143,6 +141,7 @@ export const slider: TSliderInit = (target, options = {}, plugins = []) => {
       if (isDisabled) return;
       api.engine(index);
       state.currentIdx = index;
+      emit("changed", index);
       return index;
     },
     goPrev: () => {

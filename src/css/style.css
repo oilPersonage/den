@@ -643,7 +643,7 @@ a:hover .svg-link {
   @apply absolute inset-0;
 }
 .adv {
-  @apply sticky top-0 h-screen pt-header flex flex-col mb-lg;
+  @apply sticky top-0 h-screen flex justify-center flex-col mb-lg;
   will-change: transform;
   transform: translateZ(0);
   contain: layout;
@@ -654,7 +654,7 @@ a:hover .svg-link {
   /*width: calc(var(--spacing-wrapper) + ((100vw - var(--spacing-wrapper)) / 2 - 96px));*/
 }
 .adv-main {
-  @apply relative flex justify-center flex-col flex-1;
+  @apply relative flex justify-center flex-col;
 }
 .adv-right-progress,
 .adv-decor-wrapper {
@@ -664,10 +664,10 @@ a:hover .svg-link {
   @apply mb-md;
 }
 .adv-decor {
-  @apply flex font-bold text-3xl h-max will-change-transform;
+  @apply flex font-bold h-max will-change-transform md:-tracking-[4px];
 }
 .adv-decor p {
-  @apply text-nowrap opacity-15 pr-md;
+  @apply text-nowrap opacity-15 pr-md text-2xl md:text-6xl;
   will-change: opacity;
   transition: opacity 0.6s ease-in-out;
 }
@@ -696,7 +696,7 @@ a:hover .svg-link {
   @apply relative flex-1;
 }
 .adv-text-box {
-  @apply md:bg-bg z-4 w-full -top-px left-0 pb-lg flex flex-col justify-between *:flex-1 gap-md;
+  @apply md:bg-bg z-4 w-full -top-px left-0 flex flex-col justify-between *:flex-1 gap-md;
 }
 
 .adv-text-inner ul:not(.active) {
@@ -704,7 +704,7 @@ a:hover .svg-link {
   transition: opacity 0.3s ease;
 }
 .adv-text-inner ul {
-  @apply grid grid-cols-3 gap-md max-md:flex-col min-w-full;
+  @apply grid grid-cols-3 gap-md max-md:flex-col min-w-full max-md:flex max-md:gap-lg;
 }
 .adv-text-inner li {
   @apply min-w-60 flex flex-col gap-xs;
