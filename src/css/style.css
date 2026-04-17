@@ -642,6 +642,10 @@ a:hover .svg-link {
 .adv-img {
   @apply absolute inset-0;
 }
+
+.adv-inner-top {
+  @apply relative bg-bg2 mb-sm aspect-10/2;
+}
 .adv {
   @apply sticky top-0 h-screen flex justify-center flex-col mb-lg;
   will-change: transform;
@@ -664,7 +668,7 @@ a:hover .svg-link {
   @apply mb-md;
 }
 .adv-decor {
-  @apply flex font-bold h-max will-change-transform md:-tracking-[4px];
+  @apply flex font-bold h-max will-change-transform md:-tracking-[2px];
 }
 .adv-decor p {
   @apply text-nowrap opacity-15 pr-md text-2xl md:text-6xl;

@@ -866,7 +866,7 @@ export default async function Home() {
         </div>
       </section>
 
-      <section className="main-wrapper py-xl">
+      <section data-adv-target-top className=" main-wrapper py-xl">
         <div className="cards-wrapper big">
           {firstItems.map((product) => (
             <MainCard
@@ -878,9 +878,10 @@ export default async function Home() {
         </div>
       </section>
 
-      <div className="wrapper" data->
+      <div className="wrapper" data-adv-for-bottom>
         <div
           className="adv-wrapper min-h-[300vh] relative w-full"
+          data-adv-for-top
           data-animate-container
           data-is-sticky
         >
@@ -900,115 +901,128 @@ export default async function Home() {
                 <div className="adv-text-inner" data-our>
                   <ul className="active">
                     <li>
-                      <div className="relative bg-bg2 mb-xs aspect-10/2">
+                      <div className="adv-inner-top">
                         <CustomImage
                           className="-scale-x-100 h-60"
                           src="/pictures/projects3.png"
                           alt=""
                         />
                       </div>
-                      <p className="title bottom-2 left-6 text-xl">30+</p>
-                      <p>
-                        Производственные мощности позволяют изготавливать до 30
-                        бытовок в месяц.
-                      </p>
+                      <div className="adv-inner-bottom">
+                        <p className="title left-6 text-xl mb-2">30+</p>
+                        <p>
+                          Производственные мощности позволяют изготавливать до
+                          30 бытовок в месяц.
+                        </p>
+                      </div>
                     </li>
                     <li>
-                      <div className="relative bg-bg2 mb-xs aspect-10/2">
+                      <div className="adv-inner-top">
                         <CustomImage
                           className="-scale-x-100 h-60 w-full object-cover"
                           src="/pictures/index/adv-2.png"
                           alt=""
                         />
                       </div>
-                      <p className="title bottom-2 left-6 text-xl">
-                        Универсальность
-                      </p>
-                      <p>
-                        Мы используем сертифицированные материалы, утепляем
-                        конструкции для круглогодичной эксплуатации и можем
-                        адаптировать планировку под задачи клиента — от
-                        мобильных бытовок для стройплощадок до жилых модульных
-                        домов.
-                      </p>
+                      <div className="adv-inner-bottom">
+                        <p className="title left-6 text-xl mb-2">
+                          Универсальность
+                        </p>
+                        <p>
+                          Мы используем сертифицированные материалы, утепляем
+                          конструкции для круглогодичной эксплуатации и можем
+                          адаптировать планировку под задачи клиента — от
+                          мобильных бытовок для стройплощадок до жилых модульных
+                          домов.
+                        </p>
+                      </div>
                     </li>
                   </ul>
                   <ul>
                     <li>
-                      <div className="relative bg-bg2 mb-xs aspect-10/2">
+                      <div className="adv-inner-top">
                         <CustomImage
                           className="-scale-x-100 h-60 w-full object-cover"
                           src="/pictures/index/adv-1.png"
                           alt=""
                         />
                       </div>
-                      <p className="title bottom-2 left-6 text-xl">
-                        Проектирование
-                      </p>
-                      <p>
-                        Разработка индивидуальных решений и чертежей модульных
-                        конструкций
-                      </p>
+                      <div className="adv-inner-bottom">
+                        <p className="title left-6 text-xl mb-2">
+                          Проектирование
+                        </p>
+                        <p>
+                          Разработка индивидуальных решений и чертежей модульных
+                          конструкций
+                        </p>
+                      </div>
                     </li>
                     <li>
-                      <p className="title">Производство</p>
-                      <p>
-                        Производство блок‑контейнеров, бытовок и модульных домов
-                        на собственном производстве
-                      </p>
+                      <div className="adv-inner-bottom">
+                        <p className="title">Производство</p>
+                        <p>
+                          Производство блок‑контейнеров, бытовок и модульных
+                          домов на собственном производстве
+                        </p>
+                      </div>
                     </li>
                     <li>
-                      <div className="relative bg-bg2 mb-xs aspect-10/2">
+                      <div className="adv-inner-top">
                         <CustomImage
                           className="-scale-x-100 h-60 object-cover w-full"
                           src="/pictures/index/adv-4.png"
                           alt=""
                         />
                       </div>
-                      <p className="title bottom-2 left-6 text-xl">Монтаж</p>
-                      <p>
-                        Сборка и установка модульных конструкций на объекте «под
-                        ключ»
-                      </p>
+                      <div className="adv-inner-bottom">
+                        <p className="title left-6 text-xl mb-2">Монтаж</p>
+                        <p>
+                          Сборка и установка модульных конструкций на объекте
+                          «под ключ»
+                        </p>
+                      </div>
                     </li>
                   </ul>
                   <ul>
                     <li>
-                      <div className="relative bg-bg2 mb-xs aspect-10/2">
+                      <div className="adv-inner-top">
                         <CustomImage
                           className="-scale-x-100 h-60 object-cover w-full"
                           src="/pictures/index/adv-6.png"
                           alt=""
                         />
                       </div>
-                      <p className="title bottom-2 left-6 text-xl">
-                        Экологичность
-                      </p>
-                      <p>
-                        Металлоконструкции с полимерным покрытием, SIP-панели и
-                        базальтовый утеплитель для круглогодичной эксплуатации.
-                        Защищают от коррозии, огня и влаги, минимизируя затраты
-                        на обслуживание бытовок и модульных зданий.
-                      </p>
+                      <div className="adv-inner-bottom">
+                        <p className="title left-6 text-xl mb-2">
+                          Экологичность
+                        </p>
+                        <p>
+                          Металлоконструкции с полимерным покрытием, SIP-панели
+                          и базальтовый утеплитель для круглогодичной
+                          эксплуатации. Защищают от коррозии, огня и влаги,
+                          минимизируя затраты на обслуживание бытовок и
+                          модульных зданий.
+                        </p>
+                      </div>
                     </li>
                     <li>
-                      <div className="relative bg-bg2 mb-xs aspect-10/2">
+                      <div className="adv-inner-top">
                         <CustomImage
                           className="-scale-x-100 h-60 object-cover w-full"
                           src="/pictures/index/adv-5.png"
                           alt=""
                         />
                       </div>
-                      <p className="title bottom-2 left-6 text-xl">
-                        Надёжность
-                      </p>
-                      <p>
-                        Используем проверенные материалы с сертификатами
-                        качества: оцинкованный профлист, сэндвич-панели и
-                        утеплители на минеральной вате. Обеспечивают
-                        долговечность конструкций в любых климатах — от
-                        стройплощадок до жилых модулей и бань.
-                      </p>
+                      <div className="adv-inner-bottom">
+                        <p className="title left-6 text-xl mb-2">Надёжность</p>
+                        <p>
+                          Используем проверенные материалы с сертификатами
+                          качества: оцинкованный профлист, сэндвич-панели и
+                          утеплители на минеральной вате. Обеспечивают
+                          долговечность конструкций в любых климатах — от
+                          стройплощадок до жилых модулей и бань.
+                        </p>
+                      </div>
                     </li>
                   </ul>
                 </div>
@@ -1018,7 +1032,11 @@ export default async function Home() {
         </div>
       </div>
 
-      <section className="big-space md:-mb-header" data-animate-container>
+      <section
+        className="big-space md:-mb-header relative"
+        data-adv-target-bottom
+        data-animate-container
+      >
         <div className="wrapper">
           <h2 data-typing className="mb-lg">
             От идеи до готового дома: прозрачный процесс в три шага?

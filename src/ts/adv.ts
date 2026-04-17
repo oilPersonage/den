@@ -51,13 +51,20 @@ const updateClasses = (progress: number, last: number) => {
   });
   const currentOurItem = itemsOur[index];
 
-  if (!(last < 0) && last !== itemsOur.length)
-    animate(currentOurItem.querySelectorAll("li"), {
+  if (!(last < 0) && last !== itemsOur.length) {
+    animate(currentOurItem.querySelectorAll(".adv-inner-top"), {
+      translateY: [-20, 0],
+      opacity: [0, 1],
+      ease: "out(3)",
+      delay: stagger(200, { start: 400 })
+    });
+    animate(currentOurItem.querySelectorAll(".adv-inner-bottom * "), {
       translateY: [20, 0],
       opacity: [0, 1],
       ease: "out(3)",
       delay: stagger(100, { start: 400 })
     });
+  }
 
   itemsOur.forEach((el, i) => {
     animate(decorWrapper, {

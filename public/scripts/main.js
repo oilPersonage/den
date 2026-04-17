@@ -39959,13 +39959,20 @@ var init_adv = __esm({
         ease: "out(3)"
       });
       const currentOurItem = itemsOur[index];
-      if (!(last < 0) && last !== itemsOur.length)
-        animate(currentOurItem.querySelectorAll("li"), {
+      if (!(last < 0) && last !== itemsOur.length) {
+        animate(currentOurItem.querySelectorAll(".adv-inner-top"), {
+          translateY: [-20, 0],
+          opacity: [0, 1],
+          ease: "out(3)",
+          delay: stagger(200, { start: 400 })
+        });
+        animate(currentOurItem.querySelectorAll(".adv-inner-bottom * "), {
           translateY: [20, 0],
           opacity: [0, 1],
           ease: "out(3)",
           delay: stagger(100, { start: 400 })
         });
+      }
       itemsOur.forEach((el, i) => {
         animate(decorWrapper, {
           translateX: translateX[index],
@@ -41311,7 +41318,7 @@ function prepareChars(el) {
   const { chars: chars2 } = splitText(el, { chars: true });
   return { el, chars: chars2 };
 }
-var containerCoord, footerWrapper, typingList, fromBottomList, fromTopList, zoomList;
+var containerCoord, footerWrapper, adv, advForBottom, advTargetTop, advTargetBottom, typingList, fromBottomList, fromTopList, zoomList;
 var init_scrollAnimation = __esm({
   "src/ts/scrollAnimation.ts"() {
     "use strict";
@@ -41325,9 +41332,19 @@ var init_scrollAnimation = __esm({
     });
     containerCoord = isMobile ? { enter: "end", leave: "start" } : { enter: "80% 20%", leave: "20% 80%" };
     footerWrapper = document.querySelector("footer .wrapper");
-    typingList = [...document.querySelectorAll("[data-typing]")].map(prepareChars);
-    fromBottomList = [...document.querySelectorAll("[data-animate-container]")];
-    fromTopList = [...document.querySelectorAll("[data-from-top]")].map(prepareChars);
+    adv = document.querySelector("[data-adv-for-top]");
+    advForBottom = document.querySelector("[data-adv-for-bottom]");
+    advTargetTop = document.querySelector("[data-adv-target-top]");
+    advTargetBottom = document.querySelector("[data-adv-target-bottom]");
+    typingList = [...document.querySelectorAll("[data-typing]")].map(
+      prepareChars
+    );
+    fromBottomList = [
+      ...document.querySelectorAll("[data-animate-container]")
+    ];
+    fromTopList = [...document.querySelectorAll("[data-from-top]")].map(
+      prepareChars
+    );
     zoomList = [...document.querySelectorAll("[data-zoom]")];
     typingList.forEach(({ el, chars: chars2 }) => {
       const container = el.closest("[data-animate-container]");
@@ -41402,6 +41419,34 @@ var init_scrollAnimation = __esm({
         enter: "bottom top",
         leave: "bottom bottom+=100",
         sync: true
+      })
+    });
+    animate(adv, {
+      x: [300, 0],
+      opacity: [0, 1],
+      autoplay: onScroll({
+        target: advTargetTop,
+        onUpdate() {
+          console.log("top");
+        },
+        // debug: true,
+        enter: "top center+=200",
+        sync: 0.8,
+        composition: "blend"
+      })
+    });
+    animate(advForBottom, {
+      x: [0, -300],
+      opacity: [1, 0],
+      autoplay: onScroll({
+        target: advTargetBottom,
+        onUpdate() {
+          console.log("update");
+        },
+        debug: true,
+        leave: "bottom bottom",
+        sync: 0.8,
+        composition: "blend"
       })
     });
   }
