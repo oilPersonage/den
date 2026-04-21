@@ -41378,7 +41378,7 @@ var init_scrollAnimation = __esm({
         easing: "inSine",
         autoplay: onScroll({
           // ...coord,
-          debug: items3.length === 1,
+          // debug: items.length === 1,
           target: isSticky ? el : void 0
         })
       });
@@ -41443,7 +41443,7 @@ var init_scrollAnimation = __esm({
         onUpdate() {
           console.log("update");
         },
-        debug: true,
+        // debug: true,
         leave: "bottom bottom",
         sync: 0.8,
         composition: "blend"
@@ -42045,7 +42045,7 @@ var init_accordion = __esm({
         duration: 1,
         autoplay: onScroll({
           repeat: true,
-          // debug: true,
+          debug: false,
           enter: `top+=41vh top`,
           leave: `top+=41vh bottom`,
           onEnter() {

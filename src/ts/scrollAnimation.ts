@@ -70,7 +70,7 @@ fromBottomList.forEach((el) => {
     easing: "inSine",
     autoplay: onScroll({
       // ...coord,
-      debug: items.length === 1,
+      // debug: items.length === 1,
       target: isSticky ? el : undefined
     })
   });
