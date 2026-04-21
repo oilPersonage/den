@@ -142,7 +142,7 @@ animate(advForBottom, {
     onUpdate() {
       console.log("update");
     },
-    debug: true,
+    // debug: true,
     leave: "bottom bottom",
     sync: 0.8,
     composition: "blend"
