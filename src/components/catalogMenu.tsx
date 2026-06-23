@@ -2,14 +2,14 @@ import { Product } from "src/libs/products";
 import CustomImage from "./customImage";
 
 export default function Catalog({
-  products
+  products,
 }: {
   products: Record<string, Product[]>;
 }) {
   function renderClassMenu(idx: number) {
     const colIdx = [0, 5, 9];
-    if (colIdx.includes(idx)) return "with-col-span2";
-    if (idx === 2) return "with-row-span2";
+    if (colIdx.includes(idx)) return "with-col-span2 catalog-item-row";
+    if (idx === 2) return "with-row-span2 catalog-item-col";
     return "";
   }
 
@@ -22,8 +22,8 @@ export default function Catalog({
           className="btn link"
           aria-label="Закрыть каталог"
         >
-          <b className="max-md:hidden">Закрыть</b>
-          <b className="md:hidden">Назад</b>
+          <p className="max-md:hidden">Закрыть</p>
+          <p className="md:hidden">Назад</p>
           <span></span>
           <span></span>
           <span></span>

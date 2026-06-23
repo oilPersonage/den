@@ -7,13 +7,13 @@ import ShowMoreText from "./showMoreText";
 
 export default function MainCard({
   product,
-  sameProducts
+  sameProducts,
 }: {
   product: Product;
   sameProducts: Product[];
 }) {
   const currentVariant = sameProducts.find(
-    (el) => el.slug === product.slug
+    (el) => el.slug === product.slug,
   ) as Product;
 
   const { h1, headingDescription, price, slug } = currentVariant as Product;
@@ -95,7 +95,6 @@ export default function MainCard({
           <div className="card-right">
             <div className="flex md:flex-row flex-col items-center gap-sm md:gap-lg">
               <div className="card-price" data-from-bottom>
-                <p className="card-text-info">Цена:</p>
                 <p>от {priceFormatter(price)} ₽</p>
               </div>
               <a

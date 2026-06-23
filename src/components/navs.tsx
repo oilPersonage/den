@@ -1,3 +1,5 @@
+import CustomImage from "./customImage";
+
 export default function Navs({ page }: { page?: string }) {
   const links = [
     { title: "Главная", href: process.env.NEXT_PUBLIC_BASE_PATH + "/" },
@@ -6,9 +8,12 @@ export default function Navs({ page }: { page?: string }) {
     { title: "Проекты", href: process.env.NEXT_PUBLIC_BASE_PATH + "/projects" },
     {
       title: "Вопрос — ответ",
-      href: process.env.NEXT_PUBLIC_BASE_PATH + "/questions"
+      href: process.env.NEXT_PUBLIC_BASE_PATH + "/questions",
     },
-    { title: "Контакты", href: process.env.NEXT_PUBLIC_BASE_PATH + "/contacts" }
+    {
+      title: "Контакты",
+      href: process.env.NEXT_PUBLIC_BASE_PATH + "/contacts",
+    },
   ];
   return (
     <header
@@ -22,19 +27,23 @@ export default function Navs({ page }: { page?: string }) {
           data-ai="1"
         >
           <svg
-            viewBox="0 0 38 32"
-            className="fill-current"
+            width="28"
+            height="28"
+            viewBox="0 0 28 28"
+            fill="none"
             xmlns="http://www.w3.org/2000/svg"
           >
             <path
-              fillRule="evenodd"
-              clipRule="evenodd"
-              d="M12.5049 11.748L6.21582 15.7197L6.23535 15.7334V15.7793L12.4854 27.281V19.5039L18.7344 23.041L18.7334 23.0674L18.7539 23.0537L18.7344 23.041L18.7637 23.0479L24.9697 19.6621V27.49L31.2344 16.0615L24.9844 11.9111L31.2041 7.74512L37.4834 11.9111V19.6289L18.7637 31.3887L0 19.1123V11.5664L6.20606 7.38574L12.5049 11.748Z"
-              fill="inherit"
+              d="M12.7275 2.04688H12.7344V8.97266H14.4492V12.999H0V8.97266H1.73242V1.78125H1.7334V0H12.7275V2.04688ZM5.75879 8.97266H8.70801V4.02637H5.75879V8.97266Z"
+              fill="currentColor"
             />
             <path
-              d="M24.9844 4.16602L24.9834 11.8838L18.7344 8.34766V8.32031L18.7139 8.33398L18.7344 8.34766L18.7051 8.34082L12.499 11.7266V4.18066L12.4854 4.16602L18.7051 0L24.9844 4.16602Z"
-              fill="inherit"
+              d="M27.1531 27.2754H16.1794V23.249H27.1531V27.2754ZM27.1531 12.999H16.1794V0H27.1531V12.999ZM20.2058 8.97266H23.1277V4.02637H20.2058V8.97266Z"
+              fill="currentColor"
+            />
+            <path
+              d="M7.22656 20.4219L10.4229 14.7393V14.7324H14.4531L14.4492 14.7393V27.2754H10.4229V21.8965L9.23926 24.001L9.24219 24.0059H5.21094L5.21289 24.001L4.02637 21.8906V27.2754H0V14.7324H4.02637L7.22656 20.4219Z"
+              fill="currentColor "
             />
           </svg>
         </a>
@@ -51,14 +60,10 @@ export default function Navs({ page }: { page?: string }) {
                 key={href}
                 id={id}
                 href={href}
-                className={`btn link ${page === href ? "font-bold" : ""}`}
+                className={`nav ${page === href ? "font-bold" : ""}`}
                 data-ai="1"
               >
                 {title}
-                <span className="btn-tl"></span>
-                <span className="btn-tr"></span>
-                <span className="btn-bl"></span>
-                <span className="btn-br"></span>
               </a>
             ))}
           </nav>

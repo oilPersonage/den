@@ -24,7 +24,7 @@ const prices: TPrice = {
     "2.4": 100_000,
     "4.8": 200_000,
     "9.6": 400_000,
-    "19.2": 800_000
+    "19.2": 800_000,
   },
   width: {
     "4": 100_000,
@@ -32,8 +32,8 @@ const prices: TPrice = {
     "6": 200_000,
     "7": 250_000,
     "8": 300_000,
-    "9": 350_000
-  }
+    "9": 350_000,
+  },
 };
 
 export function ProductCalculatorPrice({
@@ -42,7 +42,7 @@ export function ProductCalculatorPrice({
   base,
   material,
   name,
-  characters
+  characters,
 }: {
   containers: Container[];
   sizes: [Heights, Widths];
@@ -87,7 +87,7 @@ export function ProductCalculatorPrice({
   const renderPriceInfo = useCallback(
     (isModal?: boolean) => (
       <div
-        className="flex flex-col gap-x-sm max-md:*:text-2xl mb-sm"
+        className="flex flex-col gap-x-sm gap-0.5 max-md:*:text-2xl mb-sm"
         data-modal-anim={isModal ? "1" : ""}
         data-ai={isModal ? "" : "4"}
       >
@@ -134,7 +134,7 @@ export function ProductCalculatorPrice({
         </div>
       </div>
     ),
-    [containers, total, count, base, material]
+    [containers, total, count, base, material],
   );
   return (
     <div className="flex flex-col gap-md mb-lg max-md:order-4 max-md:mt-lg">
@@ -169,7 +169,7 @@ export function ProductCalculatorPrice({
                 type="text"
                 value={count}
                 onChange={onChangeCount}
-                className="text-center min-w-18 max-h-10 min-h-10 bg-btn-hover"
+                className="text-center min-w-24 max-w-24 max-h-10 min-h-10 bg-btn-hover"
                 min="1"
               />
               <span></span>
@@ -228,10 +228,10 @@ export function ProductCalculatorPrice({
         </div>
       </div>
       <div className="product-price-summ">
-        <div className="flex gap-md">
+        <div className="flex flex-col-reverse gap-md">
           <a
             href="#"
-            className="btn black max-md:order-2 max-md:py-4 max-md:text-lg max-md:w-full max-md:justify-center"
+            className="btn black biggest max-md:order-2 max-md:py-4 max-md:text-lg max-md:w-full max-md:justify-center"
             data-modal="request-product"
             data-ai="4"
           >
@@ -243,7 +243,9 @@ export function ProductCalculatorPrice({
           </a>
           <div className="flex flex-col justify-center" data-ai="4">
             <p className="text-black/40">Всего:</p>
-            <p className=" text-xl">{priceFormatter(total.total * count)} ₽</p>
+            <p className="font-display text-xl">
+              {priceFormatter(total.total * count)} ₽
+            </p>
           </div>
         </div>
         <div className="flex flex-col" data-ai="4">

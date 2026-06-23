@@ -24,21 +24,21 @@ export function CalcBase({
   height,
   width,
   name,
-  isFirst
+  isFirst,
 }: Props) {
   const cleanupRef = useRef<(() => void) | null>(null);
   const { id, doors, windows, walls } = container;
   const mapParams = {
     doors: doors,
     windows: windows,
-    walls: walls
+    walls: walls,
   };
   const currentHeight = heights.get(height);
   const currentWidth = widths.get(width);
   function changeItem(
     action: "add" | "remove",
     key: TChangedKeys,
-    removeId?: string
+    removeId?: string,
   ) {
     if (action === "add") {
       if (mapParams[key].length >= MAX_ITEM_SIZE) return;
@@ -46,14 +46,14 @@ export function CalcBase({
         ...container,
         [key]: [
           ...mapParams[key],
-          { id: crypto.randomUUID(), rotate: 0, size: "1" }
-        ]
+          { id: crypto.randomUUID(), rotate: 0, size: "1" },
+        ],
       });
     }
     if (action === "remove") {
       onChangeConainer({
         ...container,
-        [key]: mapParams[key].filter((d) => d.id !== removeId)
+        [key]: mapParams[key].filter((d) => d.id !== removeId),
       });
     }
   }
@@ -62,8 +62,8 @@ export function CalcBase({
     onChangeConainer({
       ...container,
       [key]: mapParams[key].map((el) =>
-        el.id === id ? { ...el, rotated: !el.rotated } : el
-      )
+        el.id === id ? { ...el, rotated: !el.rotated } : el,
+      ),
     });
   }
   const shortUid = id.split("-")[0];
@@ -82,7 +82,7 @@ export function CalcBase({
     }
     const cleanup = watchDrag(".calc-base-item", shortUid, [
       currentHeight,
-      currentWidth
+      currentWidth,
     ]);
     cleanupRef.current = cleanup;
     return () => {
@@ -186,7 +186,7 @@ export function CalcBase({
             key={id}
             data-type="wall"
             style={{
-              translate: `${left ?? 0}px ${top ?? 0}px`
+              translate: `${left ?? 0}px ${top ?? 0}px`,
             }}
             data-width={width}
             data-height={height}
@@ -198,7 +198,7 @@ export function CalcBase({
               className="calc-base-wall-bg"
               style={{
                 minHeight: height ?? "auto",
-                minWidth: width ?? "auto"
+                minWidth: width ?? "auto",
               }}
               data-target-size
             >
@@ -237,8 +237,8 @@ export function CalcBase({
         );
       })}
 
-      <div className="absolute -right-40 top-0 py-3.5 flex flex-col gap-1">
-        <div className="font-bold text-xl">{name}</div>
+      <div className="absolute -right-52 top-0 py-3.5 flex flex-col gap-1">
+        <div className="font-bold text-p">{name}</div>
         <button
           className={`btn link small w-max px-sm ${doors.length >= MAX_ITEM_SIZE ? "disabled" : ""}`}
           onClick={() => changeItem("add", "doors")}

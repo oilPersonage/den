@@ -14,7 +14,7 @@ export default function Policies() {
             <p data-modal-anim="1" className="mb-md">
               Дата вступления в силу: 8 марта 2026 г.
             </p>
-            <ul className="flex flex-col gap-sm mb-lg" data-modal-anim="1">
+            <ul className="flex flex-col gap-md mb-lg" data-modal-anim="1">
               <li>
                 <p>Общие положения</p>
                 <p>

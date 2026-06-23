@@ -20,7 +20,7 @@
     "lil-gui": "^0.21.0",
     "lodash.throttle": "^4.1.1",
     "nanoid": "^5.1.6",
-    "next": "16.1.6",
+    "next": "^16.2.9",
     "react": "19.2.3",
     "react-dom": "19.2.3",
     "three": "^0.182.0"
@@ -37,5 +37,10 @@
     "husky": "^9.1.7",
     "tailwindcss": "^4",
     "typescript": "^5"
+  },
+  "overrides": {
+    "next": {
+      "postcss": "8.5.15"
+    }
   }
 }

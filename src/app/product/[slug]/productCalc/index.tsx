@@ -18,7 +18,7 @@ import {
   charactersMap,
   hOptions,
   variants,
-  wOptions
+  wOptions,
 } from "./data";
 import { ProductCalculatorPrice } from "./productPrice";
 import RotateSvg from "./rotateSvg";
@@ -27,12 +27,12 @@ const maxContainersMap: Record<Heights, number> = {
   2.4: 8,
   4.8: 3,
   9.6: 2,
-  19.2: 1
+  19.2: 1,
 };
 
 export default function ProductCalc({
   slug,
-  product
+  product,
 }: {
   slug: string;
   product: Product;
@@ -61,7 +61,7 @@ export default function ProductCalc({
       h2: "2.4",
       summ: (w * h).toFixed(1),
       material: baseMaterials.find((el) => el.value === material)?.label,
-      base: bases.find((el) => el.value === base)?.label
+      base: bases.find((el) => el.value === base)?.label,
     };
     return Object.entries(charactersMap).map(([title, template]) => {
       const value = template.replace(/\[(\w+)\]/g, (_, key) => {
@@ -78,13 +78,13 @@ export default function ProductCalc({
   const lengthOptions = useMemo(
     () => ({
       options: hOptions.filter(
-        (el) => containers.length <= maxContainersMap[el.value]
+        (el) => containers.length <= maxContainersMap[el.value],
       ),
       allowed: hOptions.filter(
-        (el) => containers.length > maxContainersMap[el.value]
-      )
+        (el) => containers.length > maxContainersMap[el.value],
+      ),
     }),
-    [containers]
+    [containers],
   );
 
   function onAdd(name: string) {
@@ -188,7 +188,7 @@ export default function ProductCalc({
                     {getDeclOfNum(maxContainersMap[el.value], [
                       "блок",
                       "блока",
-                      "блоков"
+                      "блоков",
                     ])}{" "}
                   </li>
                 ))}
@@ -214,7 +214,7 @@ export default function ProductCalc({
                   }
                 >
                   {(el) => (
-                    <button className="btn link w-full px-2 py-2 min-h-14">
+                    <button className="btn link small w-full px-2 py-2 min-h-14 justify-start">
                       <div className="max-w-100 flex items-center gap-sm *:text-left">
                         {el.data?.src && (
                           <CustomImage
@@ -381,7 +381,7 @@ export default function ProductCalc({
                   container={el}
                   onChangeConainer={(v) =>
                     setContainers(
-                      containers.map((el) => (el.id === v.id ? v : el))
+                      containers.map((el) => (el.id === v.id ? v : el)),
                     )
                   }
                   onRemove={() => onRemove(el.id)}

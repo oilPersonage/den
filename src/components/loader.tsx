@@ -1,30 +1,33 @@
 export default function Loader() {
-	return (
-		<div className='fixed loader flex items-center justify-center inset-0 z-10'>
-			<div className='text-currentColor'>
-				<div className='loading-shadow absolute bottom-1 bg-currentColor w-full h-8 rounded-[50%]'></div>
-				<div className='loading-wrapper'>
-					<div className='loading-inner'>
-						<svg
-							className='anime22'
-							width='54'
-							height='54'
-							viewBox='0 0 54 54'
-							fill='currentColor'
-							xmlns='http://www.w3.org/2000/svg'
-						>
-							<path d='M8.91406 26.0415L17.7754 46.7562L0 33.6635V19.4426L8.91406 26.0415Z' fill='currentColor' />
-							<path d='M17.7754 46.7732V32.5388L26.7168 39.0349V53.2966L17.7754 46.7732Z' fill='currentColor' />
-							<path d='M35.6338 46.7732V32.5388L26.6924 39.0349V53.2966L35.6338 46.7732Z' fill='currentColor' />
-							<path d='M44.4951 26.0415L35.6338 46.7562L53.4092 33.6635V19.4426L44.4951 26.0415Z' fill='currentColor' />
-							<path d='M53.4092 33.6694L35.624 20.7475L44.2627 12.7781L53.4092 19.61V33.6694Z' fill='currentColor' />
-							<path d='M35.6279 6.52344V20.7578L26.6865 14.2617V0L35.6279 6.52344Z' fill='currentColor' />
-							<path d='M17.7812 6.52344V20.7578L26.7227 14.2617V0L17.7812 6.52344Z' fill='currentColor' />
-							<path d='M0 33.6694L17.7852 20.7475L9.14651 12.7781L0 19.61V33.6694Z' fill='currentColor' />
-						</svg>
-					</div>
-				</div>
-			</div>
-		</div>
-	)
+  return (
+    <div className="fixed loader flex items-center justify-center inset-0 z-10">
+      <div className="text-currentColor">
+        <div className="loading-shadow absolute bottom-1 bg-currentColor w-full h-8 rounded-[50%]"></div>
+        <div className="loading-wrapper">
+          <div className="loading-inner">
+            <svg
+              width="28"
+              height="28"
+              viewBox="0 0 28 28"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M12.7275 2.04688H12.7344V8.97266H14.4492V12.999H0V8.97266H1.73242V1.78125H1.7334V0H12.7275V2.04688ZM5.75879 8.97266H8.70801V4.02637H5.75879V8.97266Z"
+                fill="currentColor"
+              />
+              <path
+                d="M27.1531 27.2754H16.1794V23.249H27.1531V27.2754ZM27.1531 12.999H16.1794V0H27.1531V12.999ZM20.2058 8.97266H23.1277V4.02637H20.2058V8.97266Z"
+                fill="currentColor"
+              />
+              <path
+                d="M7.22656 20.4219L10.4229 14.7393V14.7324H14.4531L14.4492 14.7393V27.2754H10.4229V21.8965L9.23926 24.001L9.24219 24.0059H5.21094L5.21289 24.001L4.02637 21.8906V27.2754H0V14.7324H4.02637L7.22656 20.4219Z"
+                fill="currentColor "
+              />
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }

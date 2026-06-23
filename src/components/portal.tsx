@@ -6,7 +6,7 @@ import { createPortal } from "react-dom";
 interface PortalProps {
   children: React.ReactNode;
   trigger: React.ReactNode;
-  position:
+  position?:
     | "top left"
     | "top right"
     | "bottom left"
@@ -18,7 +18,7 @@ interface PortalProps {
 export function Portal({ children, trigger, position }: PortalProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [coords, setCoords] = useState<{ top: number; left: number } | null>(
-    null
+    null,
   );
   const triggerRef = useRef<HTMLDivElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
@@ -46,7 +46,7 @@ export function Portal({ children, trigger, position }: PortalProps) {
       const rect = triggerRef.current.getBoundingClientRect();
       setCoords({
         top: rect.bottom,
-        left: rect.left
+        left: rect.left,
       });
     }
   }, [isOpen]);
@@ -74,14 +74,14 @@ export function Portal({ children, trigger, position }: PortalProps) {
             className="fixed"
             style={{
               top: `${coords.top}px`,
-              left: `${coords.left}px`,
-              zIndex: 8
+              left: `${coords.left * 1.2}px`,
+              zIndex: 8,
             }}
             onClick={(e) => e.stopPropagation()}
           >
             {children}
           </div>,
-          wrapperRef.current
+          wrapperRef.current,
         )}
     </>
   );

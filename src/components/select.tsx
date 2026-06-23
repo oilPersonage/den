@@ -19,7 +19,7 @@ export function Select<T>({
   isAutoWidth,
   children,
   customValue,
-  size = "md"
+  size = "md",
 }: {
   options: Option<T>[];
   value: string | number;
@@ -58,13 +58,13 @@ export function Select<T>({
   }, [onClose]);
 
   const classMap = {
-    sm: "py-2 px-3.5",
-    md: "py-2 px-4"
+    sm: "py-2 px-3.5 text-[12px]",
+    md: "py-2 px-4 text-[14px]",
   };
 
   return (
     <label
-      className={`relative min-w-40 ${isSupport && !isOpened ? "opacity-50 hover:opacity-100" : ""} ${className || ""}`}
+      className={`relative min-w-56 ${isSupport && !isOpened ? "opacity-50 hover:opacity-100" : ""} ${className || ""}`}
       ref={selectRef}
     >
       <button
@@ -97,7 +97,7 @@ export function Select<T>({
                 {children ? (
                   children(el)
                 ) : (
-                  <button className="btn link w-full *:text-left small justify-start px-2.5">
+                  <button className="btn link w-full text-[12px] *:text-left small justify-start px-2.5">
                     <b className={value !== el.value ? "font-normal" : ""}>
                       {el.label}
                     </b>

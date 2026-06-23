@@ -8,7 +8,7 @@ import { getGroupedProducts, getProducts } from "src/libs/products";
 export async function generateStaticParams() {
   const products = await getProducts();
   return products.map((product) => ({
-    slug: product.slug
+    slug: product.slug,
   }));
 }
 
@@ -46,15 +46,15 @@ export default async function Home() {
             <ul className="header-adv">
               <li data-ai="4">
                 <span>14</span>
-                <p>лет на рынке</p>
+                <p className="text-lg">лет на рынке</p>
               </li>
               <li data-ai="4">
                 <span>3000+</span>
-                <p>проектов</p>
+                <p className="text-lg">проектов</p>
               </li>
               <li data-ai="4">
                 <span>10+</span>
-                <p>регионов поставок</p>
+                <p className="text-lg">регионов поставок</p>
               </li>
             </ul>
             <a
@@ -77,15 +77,12 @@ export default async function Home() {
                 data-ai="0"
               >
                 <h1 className="animate-chars">
-                  Производство бытовок, модульных зданий
-                  <br />
-                  и торговых павильонов
-                  <br className="md:hidden" />
-                  под ключ
+                  Производство бытовок, модульных зданий и торговых павильонов{" "}
+                  <br className="hidden" /> под ключ
                 </h1>
-                <p>
-                  Собственное производство полного цикла. Мы сами делаем всё —
-                  от каркаса до готовой комплектации по вашим требованиям.
+                <p className="text-lg">
+                  Собственное производство полного цикла. <br /> Мы сами делаем
+                  всё — от каркаса до готовой комплектации по вашим требованиям.
                 </p>
               </div>
             </div>
@@ -880,7 +877,7 @@ export default async function Home() {
 
       <div className="wrapper" data-adv-for-bottom>
         <div
-          className="adv-wrapper min-h-[300vh] relative w-full"
+          className="adv-wrapper min-h-[400vh] relative w-full"
           data-adv-for-top
           data-animate-container
           data-is-sticky
@@ -903,13 +900,13 @@ export default async function Home() {
                     <li>
                       <div className="adv-inner-top">
                         <CustomImage
-                          className="-scale-x-100 h-60"
+                          className="-scale-x-100 "
                           src="/pictures/projects3.png"
                           alt=""
                         />
                       </div>
                       <div className="adv-inner-bottom">
-                        <p className="title left-6 text-xl mb-2">30+</p>
+                        <p className="title ">30+</p>
                         <p>
                           Производственные мощности позволяют изготавливать до
                           30 бытовок в месяц.
@@ -919,15 +916,13 @@ export default async function Home() {
                     <li>
                       <div className="adv-inner-top">
                         <CustomImage
-                          className="-scale-x-100 h-60 w-full object-cover"
+                          className="-scale-x-100  w-full object-cover"
                           src="/pictures/index/adv-2.png"
                           alt=""
                         />
                       </div>
                       <div className="adv-inner-bottom">
-                        <p className="title left-6 text-xl mb-2">
-                          Универсальность
-                        </p>
+                        <p className="title ">Универсальность</p>
                         <p>
                           Мы используем сертифицированные материалы, утепляем
                           конструкции для круглогодичной эксплуатации и можем
@@ -938,64 +933,55 @@ export default async function Home() {
                       </div>
                     </li>
                   </ul>
-                  <ul>
-                    <li>
-                      <div className="adv-inner-top">
-                        <CustomImage
-                          className="-scale-x-100 h-60 w-full object-cover"
-                          src="/pictures/index/adv-1.png"
-                          alt=""
-                        />
-                      </div>
-                      <div className="adv-inner-bottom">
-                        <p className="title left-6 text-xl mb-2">
-                          Проектирование
-                        </p>
-                        <p>
-                          Разработка индивидуальных решений и чертежей модульных
-                          конструкций
-                        </p>
-                      </div>
-                    </li>
-                    <li>
-                      <div className="adv-inner-bottom">
-                        <p className="title">Производство</p>
-                        <p>
-                          Производство блок‑контейнеров, бытовок и модульных
-                          домов на собственном производстве
-                        </p>
-                      </div>
-                    </li>
-                    <li>
-                      <div className="adv-inner-top">
-                        <CustomImage
-                          className="-scale-x-100 h-60 object-cover w-full"
-                          src="/pictures/index/adv-4.png"
-                          alt=""
-                        />
-                      </div>
-                      <div className="adv-inner-bottom">
-                        <p className="title left-6 text-xl mb-2">Монтаж</p>
-                        <p>
-                          Сборка и установка модульных конструкций на объекте
-                          «под ключ»
-                        </p>
-                      </div>
-                    </li>
+                  <ul className="adv-text-inner-rows">
+                    <div className="adv-inner-top bg-bg2">
+                      <CustomImage
+                        className="-scale-x-100 "
+                        src="/pictures/projects3.png"
+                        alt=""
+                      />
+                    </div>
+                    <div className="flex gap-md">
+                      <li>
+                        <div className="adv-inner-bottom">
+                          <p className="title ">Проектирование</p>
+                          <p>
+                            Разработка индивидуальных решений и чертежей
+                            модульных конструкций
+                          </p>
+                        </div>
+                      </li>
+                      <li>
+                        <div className="adv-inner-bottom">
+                          <p className="title">Производство</p>
+                          <p>
+                            Производство блок‑контейнеров, бытовок и модульных
+                            домов на собственном производстве
+                          </p>
+                        </div>
+                      </li>
+                      <li>
+                        <div className="adv-inner-bottom">
+                          <p className="title ">Монтаж</p>
+                          <p>
+                            Сборка и установка модульных конструкций на объекте
+                            «под ключ»
+                          </p>
+                        </div>
+                      </li>
+                    </div>
                   </ul>
                   <ul>
                     <li>
                       <div className="adv-inner-top">
                         <CustomImage
-                          className="-scale-x-100 h-60 object-cover w-full"
+                          className="-scale-x-100  object-cover w-full"
                           src="/pictures/index/adv-6.png"
                           alt=""
                         />
                       </div>
                       <div className="adv-inner-bottom">
-                        <p className="title left-6 text-xl mb-2">
-                          Экологичность
-                        </p>
+                        <p className="title ">Экологичность</p>
                         <p>
                           Металлоконструкции с полимерным покрытием, SIP-панели
                           и базальтовый утеплитель для круглогодичной
@@ -1008,13 +994,13 @@ export default async function Home() {
                     <li>
                       <div className="adv-inner-top">
                         <CustomImage
-                          className="-scale-x-100 h-60 object-cover w-full"
+                          className="-scale-x-100  object-cover w-full"
                           src="/pictures/index/adv-5.png"
                           alt=""
                         />
                       </div>
                       <div className="adv-inner-bottom">
-                        <p className="title left-6 text-xl mb-2">Надёжность</p>
+                        <p className="title ">Надёжность</p>
                         <p>
                           Используем проверенные материалы с сертификатами
                           качества: оцинкованный профлист, сэндвич-панели и
@@ -1039,12 +1025,13 @@ export default async function Home() {
       >
         <div className="wrapper">
           <h2 data-typing className="mb-lg">
-            От идеи до готового дома: прозрачный процесс в три шага?
+            От идеи до готового дома: <br /> прозрачный процесс в три шага?
           </h2>
           <div className="grid grid-cols-[repeat(auto-fit,minmax(240px,1fr))] gap-md md:gap-lg md:mb-xl">
             <div className="flex flex-col gap-xs md:gap-sm">
               <p className="title" data-from-bottom>
-                01. Договор
+                01. <br />
+                Договор
               </p>
               <p data-from-bottom>
                 Утверждаем проект и комплектацию, фиксируем сроки и стоимость.
@@ -1053,7 +1040,7 @@ export default async function Home() {
             </div>
             <div className="flex flex-col gap-xs md:gap-sm">
               <p className="title" data-from-bottom>
-                02. Производство
+                02. <br /> Производство
               </p>
               <p data-from-bottom>
                 Стандартные бытовки — от 5 рабочих дней. Индивидуальные проекты
@@ -1062,7 +1049,7 @@ export default async function Home() {
             </div>
             <div className="flex flex-col gap-xs md:gap-sm">
               <p className="title" data-from-bottom>
-                03. Установка
+                03. <br /> Установка
               </p>
               <p data-from-bottom>
                 Доставляем готовые модули на участок и устанавливаем дом за 1-2

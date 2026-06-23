@@ -1,14 +1,14 @@
 import { animate, createTimeline, onScroll, stagger } from "animejs";
 
 const decorTexts = [
-  ...document.querySelectorAll(".adv-decor p")
+  ...document.querySelectorAll(".adv-decor p"),
 ] as HTMLElement[];
 const decorWrapper = [
-  ...document.querySelectorAll(".adv-decor")
+  ...document.querySelectorAll(".adv-decor"),
 ] as HTMLElement[];
 
 const decorItems = [
-  ...document.querySelectorAll(".adv-decor p")
+  ...document.querySelectorAll(".adv-decor p"),
 ] as HTMLElement[];
 const textWrapperOur = document.querySelector(".adv-text-inner") as HTMLElement;
 const itemsOur = [...textWrapperOur.querySelectorAll("ul")] as HTMLElement[];
@@ -18,7 +18,7 @@ const TL_DURATION = 3000;
 const fakeData = { p: 0 };
 const arrayWidthsOurText = itemsOur.reduce(
   (acc, el, index) => [...acc, acc[acc.length - 1] + el.clientWidth + 48],
-  [0]
+  [0],
 );
 
 const tl = createTimeline({
@@ -28,8 +28,8 @@ const tl = createTimeline({
     // debug: true,
     sync: true,
     enter: "top",
-    leave: "bottom"
-  })
+    leave: "bottom",
+  }),
 });
 
 const translateX = decorTexts
@@ -37,39 +37,33 @@ const translateX = decorTexts
   .slice(0, -1)
   .map((pos, i) => ({
     to: `${pos}px`,
-    ease: "outExpo"
+    ease: "outExpo",
   }));
 
 const updateClasses = (progress: number, last: number) => {
   const index = Math.floor(progress * itemsOur.length);
   if (index > itemsOur.length - 1) return;
-
-  animate(textWrapperOur, {
-    translateX: arrayWidthsOurText[index] * -1,
-    duration: 300,
-    ease: "out(3)"
-  });
   const currentOurItem = itemsOur[index];
 
   if (!(last < 0) && last !== itemsOur.length) {
-    animate(currentOurItem.querySelectorAll(".adv-inner-top"), {
-      translateY: [-20, 0],
+    animate(currentOurItem.querySelectorAll(".adv-inner-top img"), {
+      translateY: ["100%", "0%"],
       opacity: [0, 1],
       ease: "out(3)",
-      delay: stagger(200, { start: 400 })
+      delay: stagger(200, { start: 400 }),
     });
-    animate(currentOurItem.querySelectorAll(".adv-inner-bottom * "), {
+    animate(currentOurItem.querySelectorAll(".adv-inner-bottom"), {
       translateY: [20, 0],
       opacity: [0, 1],
       ease: "out(3)",
-      delay: stagger(100, { start: 400 })
+      delay: stagger(100, { start: 400 }),
     });
   }
 
   itemsOur.forEach((el, i) => {
     animate(decorWrapper, {
       translateX: translateX[index],
-      ease: "linear"
+      ease: "linear",
     });
     decorItems[i].classList.toggle("active", i === index);
     el.classList.toggle("active", i === index);
@@ -88,7 +82,7 @@ const updateOnDiscrete = (progress: number) => {
 };
 
 const animateFake = animate(fakeData, {
-  p: 1
+  p: 1,
 });
 
 tl.onRender = (self) => {
