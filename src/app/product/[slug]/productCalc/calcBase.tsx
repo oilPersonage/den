@@ -133,7 +133,10 @@ export function CalcBase({
             <div className="calc-base-window-d"></div>
           </div>
           <div className="calc-action-wrapper">
-            <button className="btn link" onClick={() => onRotate(id, "doors")}>
+            <button
+              className="btn link small"
+              onClick={() => onRotate(id, "doors")}
+            >
               <RotateSvg />
               <span></span>
               <span></span>
@@ -141,7 +144,7 @@ export function CalcBase({
               <span></span>
             </button>
             <CrossSvg
-              className=""
+              className="small"
               onClick={() => changeItem("remove", "doors", id)}
             />
           </div>
@@ -164,7 +167,7 @@ export function CalcBase({
           </div>
           <div className="calc-action-wrapper">
             <button
-              className="btn link"
+              className="btn link small"
               onClick={() => onRotate(id, "windows")}
             >
               <RotateSvg />
@@ -174,7 +177,7 @@ export function CalcBase({
               <span></span>
             </button>
             <CrossSvg
-              className=""
+              className="small"
               onClick={() => changeItem("remove", "windows", id)}
             />
           </div>
@@ -221,7 +224,7 @@ export function CalcBase({
             </div>
             <div className="calc-action-wrapper">
               {/* <button className='calc-wall-rotate-btn btn link' onClick={() => onRotate(id, 'walls')}>/ */}
-              <button className="calc-wall-rotate-btn btn link">
+              <button className="calc-wall-rotate-btn btn link small">
                 <RotateSvg />
                 <span></span>
                 <span></span>
@@ -229,7 +232,7 @@ export function CalcBase({
                 <span></span>
               </button>
               <CrossSvg
-                className=""
+                className="small"
                 onClick={() => changeItem("remove", "walls", id)}
               />
             </div>
@@ -238,7 +241,7 @@ export function CalcBase({
       })}
 
       <div className="absolute -right-52 top-0 py-3.5 flex flex-col gap-1">
-        <div className="font-bold text-p">{name}</div>
+        <div className="font-display text-[12px]">{name}</div>
         <button
           className={`btn link small w-max px-sm ${doors.length >= MAX_ITEM_SIZE ? "disabled" : ""}`}
           onClick={() => changeItem("add", "doors")}

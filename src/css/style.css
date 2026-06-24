@@ -172,6 +172,9 @@ body {
   .btn.black:hover {
     @apply bg-accent-hover!;
   }
+  .btn:hover svg {
+    @apply fill-accent-hover;
+  }
   .input-wrapper span,
   .btn span,
   .input-wrapper span {

@@ -240,7 +240,7 @@ export default function ProductCalc({
                   className="flex items-center gap-sm text-nowrap"
                   key={el.id}
                 >
-                  <div className="font-bold">{idx + 1} блок</div>
+                  <div className="font-bold font-p">{idx + 1} блок</div>
                   {el.doors.length > 0 && (
                     <div>{`${el.doors.length} ${getDeclOfNum(el.doors.length, ["дверь", "двери", "дверей"])}`}</div>
                   )}
@@ -313,7 +313,7 @@ export default function ProductCalc({
                 </div>
                 <div className="flex gap-sm items-center">
                   <button
-                    className="calc-wall-rotate-btn btn link bg-neutral-200 w-6 justify-center h-6 p-1! *:h-3"
+                    className="calc-wall-rotate-btn small btn link bg-neutral-200 w-6 justify-center h-6 p-1!"
                     onClick={() => null}
                   >
                     <RotateSvg />
@@ -334,7 +334,7 @@ export default function ProductCalc({
                 </div>
                 <div className="flex gap-sm items-center">
                   <CrossSvg
-                    className="bg-neutral-200 w-6 justify-center h-6! p-1! *:h-3"
+                    className="small bg-neutral-200 w-6 justify-center h-6! p-1!"
                     onClick={() => null}
                   />
                   <p className="text-nowrap">Удалить</p>

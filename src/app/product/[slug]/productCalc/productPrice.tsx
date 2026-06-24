@@ -154,7 +154,7 @@ export function ProductCalculatorPrice({
               >
                 <path
                   d="M24 10.5V13.5L0 13.5L2.62268e-07 10.5L24 10.5Z"
-                  fill="black"
+                  fill="currentColor"
                 />
               </svg>
 
@@ -190,11 +190,11 @@ export function ProductCalculatorPrice({
                 <g clipPath="url(#clip0_358_45)">
                   <path
                     d="M24 10.259V13.259L0 13.259L2.62268e-07 10.259L24 10.259Z"
-                    fill="black"
+                    fill="currentColor"
                   />
                   <path
                     d="M10.5 1.31134e-07L13.5 0L13.5 24H10.5L10.5 1.31134e-07Z"
-                    fill="black"
+                    fill="currentColor"
                   />
                 </g>
                 <defs>

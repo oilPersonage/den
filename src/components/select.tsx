@@ -68,7 +68,7 @@ export function Select<T>({
       ref={selectRef}
     >
       <button
-        className={`btn btn-link bg-bg2 w-full ${classMap[size]}`}
+        className={`btn link btn-link bg-bg2 w-full ${classMap[size]}`}
         id={id}
         onClick={(e) => {
           e.stopPropagation();
@@ -81,6 +81,10 @@ export function Select<T>({
         <div className="pl-sm -mr-xs ml-auto">
           <ArrowSvg className={isOpened ? "rotate-180" : ""} />
         </div>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
       </button>
       <div
         className={`grid absolute top-0

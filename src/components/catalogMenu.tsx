@@ -63,7 +63,7 @@ export default function Catalog({
                       >
                         <path
                           d="M15.1064 10.0312H13.1064V3.41406L2.92304 13.6924H0L11.6924 2H4.94922V0H15.1064V10.0312Z"
-                          fill="black"
+                          fill="inherit"
                         />
                       </svg>
                     </a>
