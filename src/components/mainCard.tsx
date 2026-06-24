@@ -95,7 +95,10 @@ export default function MainCard({
           <div className="card-right">
             <div className="flex md:flex-row flex-col items-center gap-sm md:gap-lg">
               <div className="card-price" data-from-bottom>
-                <p>от {priceFormatter(price)} ₽</p>
+                <p>
+                  <span className="text-span">от </span>
+                  {priceFormatter(price)} ₽
+                </p>
               </div>
               <a
                 href={`${process.env.NEXT_PUBLIC_BASE_PATH}/product/${slug}`}

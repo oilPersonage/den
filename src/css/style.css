@@ -5,6 +5,7 @@
   --col-bl: 20, 20, 20;
   --col-bg: 249, 249, 249;
   --col-bg2: 244, 244, 244;
+  --col-ac: #8a3e09;
 }
 ::selection {
   background-color: var(
@@ -48,7 +49,8 @@
   --color-bg2: rgb(var(--col-bg2));
   --color-black: rgb(var(--col-bl));
   --color-black2: rgba(var(--col-bl), 0.6);
-  --color-accent: rgb(var(--col-bl));
+  --color-accent-hover: color-mix(in srgb, var(--col-ac), black 20%);
+  --color-accent: var(--col-ac);
   --color-border: #e9e9e9;
   --color-btn-hover: rgba(0, 0, 0, 0.03);
 }
@@ -161,11 +163,14 @@ body {
     @apply opacity-30 cursor-default;
   }
   .btn.black {
-    @apply max-md:w-full max-md:justify-center max-md:text-lg font-bold;
+    @apply max-md:w-full max-md:justify-center text-p! max-md:text-lg font-bold;
   }
   .btn.black,
   .btn.active {
-    @apply text-bg bg-black;
+    @apply text-bg bg-accent;
+  }
+  .btn.black:hover {
+    @apply bg-accent-hover!;
   }
   .input-wrapper span,
   .btn span,
@@ -180,22 +185,22 @@ body {
   .input-wrapper span:nth-of-type(1),
   .btn span:nth-of-type(1),
   .link span:nth-of-type(1) {
-    @apply absolute top-0 left-0 border-t-black border-l-black border-0;
+    @apply absolute top-0 left-0 border-t-accent-hover border-l-accent-hover border-0;
   }
   .input-wrapper span:nth-of-type(2),
   .btn span:nth-of-type(2),
   .link span:nth-of-type(2) {
-    @apply absolute top-0 right-0 border-t-black border-r-black border-0;
+    @apply absolute top-0 right-0 border-t-accent-hover border-r-accent-hover border-0;
   }
   .input-wrapper span:nth-of-type(3),
   .btn span:nth-of-type(3),
   .link span:nth-of-type(3) {
-    @apply absolute bottom-0 left-0 border-l-black border-b-black border-0;
+    @apply absolute bottom-0 left-0 border-l-accent-hover border-b-accent-hover border-0;
   }
   .input-wrapper span:nth-of-type(4),
   .btn span:nth-of-type(4),
   .link span:nth-of-type(4) {
-    @apply absolute bottom-0 right-0 border-b-black border-r-black border-0;
+    @apply absolute bottom-0 right-0 border-b-accent-hover border-r-accent-hover border-0;
   }
   .btn:hover span:nth-of-type(1) {
     @apply -translate-y-[var(--space)] -translate-x-[var(--space)];
@@ -232,14 +237,14 @@ body {
     @apply invert;
   }
   .btn.link.inv:hover {
-    @apply bg-bg/10;
+    @apply bg-accent/10;
   }
   .input-wrapper {
     @apply relative font-display tracking-wide;
     --space: 0;
   }
   .btn.link:hover {
-    @apply bg-btn-hover;
+    @apply bg-accent/5 text-accent-hover;
   }
   .btn.link.black:hover,
   .btn.link.active:hover {
@@ -332,13 +337,19 @@ body.menu-opened {
 .nav:hover:after {
   @apply opacity-100 -bottom-1;
 }
+.nav a.active {
+  @apply text-accent;
+}
 .nav::after {
-  @apply absolute -bottom-2 left-0 w-full h-0.5 bg-black content-[''] opacity-0 transition-all ease-in pointer-events-none;
+  @apply absolute -bottom-2 left-0 w-full h-0.5 bg-accent content-[''] opacity-0 transition-all ease-in pointer-events-none;
 }
 nav > a,
 .header-contacts > a {
   @apply opacity-0 text-[12px] font-bold tracking-[1px] text-nowrap;
   backface-visibility: hidden;
+}
+nav a:hover {
+  @apply text-accent-hover;
 }
 .navs-wrapper {
   @apply flex items-center md:gap-2 flex-1 md:justify-between fixed md:static max-md:flex-col top-header inset-0
@@ -579,7 +590,7 @@ a:hover .svg-link {
   @apply flex gap-2xs items-end md:order-2;
 }
 .card-price p {
-  @apply text-2xl!;
+  @apply text-xl;
 }
 .card-img {
   @apply flex items-center justify-center overflow-hidden bg-bg2 p-md aspect-10/6;
@@ -700,7 +711,7 @@ a:hover .svg-link {
   @apply flex font-bold h-max will-change-transform;
 }
 .adv-decor p {
-  @apply font-display text-nowrap opacity-15 pr-md text-2xl md:text-4xl;
+  @apply font-display text-accent text-nowrap opacity-15 pr-md text-2xl md:text-4xl;
   will-change: opacity;
   transition: opacity 0.6s ease-in-out;
 }
@@ -947,6 +958,9 @@ footer p {
 }
 .catalog-sub-img {
   @apply absolute right-0 h-full flex-1 m-1;
+}
+.catalog-sub-menu a:hover p {
+  @apply text-accent-hover;
 }
 .catalog-sub-menu img {
   @apply max-w-50 my-1 transition-transform duration-600;
