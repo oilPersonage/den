@@ -1,5 +1,6 @@
 @import "./fonts.css";
 @import "tailwindcss";
+@import "./introLogo.css";
 
 :root {
   --col-bl: 20, 20, 20;
@@ -218,11 +219,35 @@ body {
     @apply translate-y-[var(--space)] translate-[var(--space)];
   }
   .btn.biggest {
-    @apply py-5 px-8 text-lg font-bold pb-[22px];
+    @apply py-5 px-8 text-lg font-bold pb-5;
+  }
+  .btn.biggest p {
+    @apply relative;
   }
   .btn.biggest span {
     @apply h-4 w-4;
   }
+  .btn.biggest:hover {
+    @apply bg-accent!;
+  }
+  /* .btn.biggest:hover .btnBigWrapper {
+    @apply
+  } */
+  .btnBigWrapper {
+    @apply flex flex-col absolute inset-0 gap-px!;
+    background: color-mix(
+      in srgb,
+      var(--color-accent-hover) calc(var(--bg-alpha) * 100%),
+      transparent
+    ) !important;
+  }
+  .btnBigWrapperLine {
+    @apply flex-1 grid grid-cols-[repeat(auto-fit,minmax(20px,1fr))] justify-self-stretch grid-rows-[1fr] gap-px;
+  }
+  .btnBigItem {
+    @apply bg-accent origin-center min-w-full min-h-full;
+  }
+
   .btn.small {
     @apply flex justify-center text-[12px]! p-0 w-9 h-8.5 transition-colors leading-7.5;
   }
@@ -483,7 +508,10 @@ a:hover .svg-link {
   @apply origin-center;
 }
 .loading-inner {
-  @apply origin-bottom;
+  @apply grid grid-cols-2 gap-1 min-w-max;
+}
+.loading-inner svg {
+  @apply origin-bottom w-md h-md;
 }
 .loader {
   @apply bg-bg;
@@ -886,6 +914,9 @@ footer p {
 
 .catalog-item-row .catalog-sub-menu a {
   @apply flex-col pr-0 justify-end overflow-hidden items-start;
+}
+.catalog-sub-menu .btn.link:hover {
+  @apply bg-transparent;
 }
 .catalog-item-row .catalog-sub-menu a:hover img {
   @apply scale-120;

@@ -1,4 +1,5 @@
 import Request from "components/request";
+import { ButtonBig } from "src/components/buttonBig";
 import CustomImage from "src/components/customImage";
 import Loader from "src/components/loader";
 import MainCard from "src/components/mainCard";
@@ -57,18 +58,11 @@ export default async function Home() {
                 <p className="text-lg">регионов поставок</p>
               </li>
             </ul>
-            <a
-              href="#"
-              data-modal="request"
+            <ButtonBig
+              dataModal="request"
               id="header-button"
-              className="btn uppercase biggest black btn-open-modal"
-            >
-              Оставить заявку
-              <span className="btn-tl"></span>
-              <span className="btn-tr"></span>
-              <span className="btn-bl"></span>
-              <span className="btn-br"></span>
-            </a>
+              title="Оставить заявку"
+            />
           </div>
           <div className="flex justify-between -ml-lg gap-2">
             <div className="overflow-hidden">
@@ -1060,17 +1054,7 @@ export default async function Home() {
               <p className="font-bold font-display" data-from-bottom>
                 Готовы начать? Свяжитесь с нами
               </p>
-              <a
-                href="#"
-                className="btn black biggest btn-open-modal"
-                data-modal="request"
-              >
-                Связаться
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-              </a>
+              <ButtonBig title="Связаться" dataModal="request" />
             </div>
           </div>
         </div>
@@ -1092,7 +1076,7 @@ export default async function Home() {
             />
             <div className="absolute top-md left-1/2 -translate-x-1/2 flex gap-sm">
               <div className="bg-bg">
-                <a href="#" className="btn link active">
+                <a href="#" className="btn link black">
                   Первый
                   <span></span>
                   <span></span>

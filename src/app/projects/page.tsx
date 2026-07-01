@@ -1,5 +1,6 @@
 import Request from "components/request";
 import Script from "next/script";
+import { ButtonBig } from "src/components/buttonBig";
 import CustomImage from "src/components/customImage";
 import Loader from "src/components/loader";
 import PhotoModal from "src/components/modalPhoto";
@@ -31,17 +32,13 @@ export default function Projects() {
                   доставим до двера
                 </p>
               </div>
-              <button
-                className="btn black px-lg text-2xl"
-                data-modal="request"
-                data-ai="3"
-              >
-                СВЯЗАТЬСЯ
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-              </button>
+              <ButtonBig
+                title="СВЯЗАТЬСЯ"
+                className="px-lg text-2xl"
+                dataModal="request"
+                dataAi="3"
+              />
+
               <div className="flex flex-col gap-xs" data-ai="3">
                 <p className="title">Готовые решения в наличии</p>
                 <p>
@@ -95,7 +92,7 @@ export default function Projects() {
                       СМОТРЕТЬ
                     </div>
                   </div>
-                ))
+                )),
               ]}
             </div>
           </div>

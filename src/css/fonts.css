@@ -15,15 +15,23 @@
 
 @font-face {
   font-family: "Pobeda"; /* Название, которое вы будете использовать в коде */
-  src: url("/pobeda-regular.ttf") format("truetype");
+  src: url("/HS_LunaObscura.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap; /* Чтобы текст не пропадал во время загрузки */
+}
+
+@font-face {
+  font-family: "Pobeda"; /* Название, которое вы будете использовать в коде */
+  src: url("/HS_LunaObscura.otf") format("opentype");
   font-weight: normal;
   font-style: normal;
   font-display: swap; /* Чтобы текст не пропадал во время загрузки */
 }
 @font-face {
   font-family: "Pobeda"; /* Название, которое вы будете использовать в коде */
-  src: url("/pobeda-bold.ttf") format("truetype");
-  font-weight: bold;
+  src: url("/HS_LunaObscura.woff2") format("woff2");
+  font-weight: normal;
   font-style: normal;
   font-display: swap; /* Чтобы текст не пропадал во время загрузки */
 }
