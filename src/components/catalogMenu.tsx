@@ -23,7 +23,7 @@ export default function Catalog({
           aria-label="Закрыть каталог"
         >
           <p className="max-md:hidden">Закрыть</p>
-          <p className="md:hidden">Назад</p>
+          <p className="md:hidden text-[12px]!">Назад</p>
           <span></span>
           <span></span>
           <span></span>

@@ -11,72 +11,70 @@ if (isMobile) {
   const { chars: menuChars } = splitText(".hamb-open", { chars: true });
   const { chars: closeChars } = splitText(".hamb-close", { chars: true });
   [...links, ...[...contacts.querySelectorAll("a")]].forEach((el) =>
-    el.removeAttribute("data-ai")
+    el.removeAttribute("data-ai"),
   );
   // удалить data.ai
   const animateMenu = createTimeline({
     autoplay: false,
-    defaults: { duration: 300 }
+    defaults: { duration: 300 },
   })
     .label("close", 0)
     .label("open", 100)
     .add(
       menuChars,
       {
-        translateY: [0, -12],
+        translateY: [0, -14],
         easing: "inOutCirc",
-        delay: stagger(60)
+        delay: stagger(60),
       },
-      "open"
+      "open",
     )
     .add(
       closeChars,
       {
-        translateY: [0, -12],
+        translateY: [0, -14],
         easing: "inOutCirc",
-        delay: stagger(60)
+        delay: stagger(60),
       },
-      "close"
+      "close",
     );
 
   const timelineNavs = createTimeline({
     autoplay: false,
-    defaults: { duration: 500 }
+    defaults: { duration: 500 },
   })
     .add(navs, {
       translateX: [40, 0],
       opacity: [0, 1],
-      easing: "easeOutQuad"
+      easing: "easeOutQuad",
     })
     .add(
       links,
       {
-        translateY: [stagger("-10", { from: "first" }), 0],
+        translateX: [stagger("-10"), 0],
         opacity: [0, 1],
-        scale: [0.8, 1],
         easing: "easeOutQuad",
         duration: 300,
-        delay: stagger([0, 150], { from: "first", ease: "inInOut(3)" })
+        delay: stagger([0, 150], { from: "first", ease: "inInOut(3)" }),
       },
-      "-=200"
+      "-=200",
     );
 
   const timelineContacts = createTimeline({
     autoplay: false,
-    defaults: { duration: 500 }
+    defaults: { duration: 500 },
   })
     .add(contacts, {
       translateX: [-40, 0],
       opacity: [0, 1],
-      easing: "easeOutQuad"
+      easing: "easeOutQuad",
     })
     .add(contacts.querySelectorAll("a"), {
-      translateY: [stagger("-10"), 0],
+      translateX: [stagger("-10"), 0],
       opacity: [0, 1],
-      scale: [0.8, 1],
-      duration: 300,
+      duration: 600,
       easing: "easeOutQuad",
-      delay: stagger(40)
+      delay: stagger(100),
     });
 
   function toggleMenu(event: Event) {

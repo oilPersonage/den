@@ -40625,7 +40625,7 @@ var init_mobileMenu = __esm({
       }).label("close", 0).label("open", 100).add(
         menuChars,
         {
-          translateY: [0, -12],
+          translateY: [0, -14],
           easing: "inOutCirc",
           delay: stagger(60)
         },
@@ -40633,7 +40633,7 @@ var init_mobileMenu = __esm({
       ).add(
         closeChars,
         {
-          translateY: [0, -12],
+          translateY: [0, -14],
           easing: "inOutCirc",
           delay: stagger(60)
         },
@@ -40649,9 +40649,8 @@ var init_mobileMenu = __esm({
       }).add(
         links,
         {
-          translateY: [stagger("-10", { from: "first" }), 0],
+          translateX: [stagger("-10"), 0],
           opacity: [0, 1],
-          scale: [0.8, 1],
           easing: "easeOutQuad",
           duration: 300,
           delay: stagger([0, 150], { from: "first", ease: "inInOut(3)" })
@@ -40666,12 +40665,11 @@ var init_mobileMenu = __esm({
         opacity: [0, 1],
         easing: "easeOutQuad"
       }).add(contacts.querySelectorAll("a"), {
-        translateY: [stagger("-10"), 0],
+        translateX: [stagger("-10"), 0],
         opacity: [0, 1],
-        scale: [0.8, 1],
-        duration: 300,
+        duration: 600,
         easing: "easeOutQuad",
-        delay: stagger(40)
+        delay: stagger(100)
       });
       links.forEach((el) => el.addEventListener("click", toggleMenu));
       if (hamb) {
