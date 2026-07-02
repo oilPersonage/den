@@ -1332,10 +1332,14 @@ footer p {
   @apply absolute right-0 left-0 pl-px top-1/2 translate-x-30 -translate-y-1/2 z-2 transition-all origin-bottom;
 }
 .projects {
-  background: url("/pictures/projects4.png");
+  background: url("/featureHome.png");
+  filter: brightness(1.1);
+  background-size: 80%;
+  background-position: 0% 150%;
+  background-repeat: no-repeat;
 }
 .projects-header {
-  @apply flex gap-md flex-col items-center justify-center min-h-[calc(100vh-var(--spacing-header))];
+  @apply flex gap-lg flex-col justify-center! min-h-[calc(100vh-var(--spacing-header))];
 }
 
 /* CALCULATOR */

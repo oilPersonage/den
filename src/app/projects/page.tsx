@@ -10,21 +10,27 @@ export default function Projects() {
   return (
     <>
       <Navs page="/projects" />
-      <div className="pt-header" id="projects">
+      <div className="pt-header bg-bg2" id="projects">
         <div className="main-wrapper projects fixed inset-0">
           <div className="projects-header">
-            <div className="projects-top flex flex-col items-center gap-md">
-              <h1 data-ai="3">Мы реализовали 3000+ проектов</h1>
-              <p className="max-w-200 text-center" data-ai="3">
-                Надежные конструкции из качественных материалов. Своевременная
-                доставка и монтаж 'под ключ'. Гарантия качества и полное
-                сопровождение.
-              </p>
+            <div className="projects-top flex flex-col items-end gap-md">
+              <h1 data-ai="3">
+                Мы реализовали <span className="text-accent">3000+</span>
+                проектов
+              </h1>
+              {/* <p
+                className="max-w-240 text-end text-xl leading-[1.4]"
+                data-ai="3"
+              >
+                Надежные конструкции из качественных материалов. <br />
+                Своевременная доставка и монтаж <b>под ключ</b>. <br /> Гарантия
+                качества и полное сопровождение.
+              </p> */}
             </div>
 
-            <div className="projects-bottom flex gap-lg items-center mt-lg wrapper">
-              <div className="flex flex-col gap-xs text-right" data-ai="3">
-                <p className="title">
+            <div className="projects-bottom items-end mr-0 pr-0 flex flex-col gap-md mt-lg wrapper">
+              <div className="flex flex-col gap-sm text-right" data-ai="3">
+                <p className="title text-right">
                   Есть идеи, но не знаете как реализовать?
                 </p>
                 <p>
@@ -32,20 +38,24 @@ export default function Projects() {
                   доставим до двера
                 </p>
               </div>
-              <ButtonBig
-                title="СВЯЗАТЬСЯ"
-                className="px-lg text-2xl"
-                dataModal="request"
-                dataAi="3"
-              />
 
-              <div className="flex flex-col gap-xs" data-ai="3">
+              <div
+                className="flex flex-col items-end gap-sm *:text-end"
+                data-ai="3"
+              >
                 <p className="title">Готовые решения в наличии</p>
-                <p>
+                <p className="max-w-3/4">
                   Бытовки, дачные домики и модульные дома. Быстрая сборка за 1-3
                   дня. Доставка по России от 7 дней.
                 </p>
               </div>
+
+              <ButtonBig
+                title="СВЯЗАТЬСЯ"
+                className="px-lg text-2xl mt-md"
+                dataModal="request"
+                dataAi="3"
+              />
             </div>
           </div>
         </div>

@@ -6,7 +6,7 @@ import * as THREE from "three";
 // --- НАСТРОЙКИ ---
 const CONFIG = {
   spacing: 20, // Расстояние между точками (пиксели)
-  baseRadius: 2, // Базовый радиус
+  baseRadius: 1, // Базовый радиус
   color: new THREE.Color(0x000000),
   // color: new THREE.Color(0x808080),
   density: 1.5, // Плотность точек (1.0 = стандарт)
@@ -137,12 +137,12 @@ void main() {
     vec2 distToDot = pixelCoord - displacedDotPos;
     float dist = length(distToDot);
 
-    float noise = cnoise(gridPos * 0.05 + u_time * 0.3);
+    float noise = cnoise(gridPos * 0.02 + u_time * 0.1);
     float n = noise * 0.5 + 0.5;
     float threshold = 0.5;
     float noiseAlpha = smoothstep(threshold, threshold + 0.2, n);
 
-    float alpha = dist < u_baseRadius ? .05 : 0.0;
+    float alpha = dist < u_baseRadius ? .1 : 0.0;
 
     gl_FragColor = vec4(u_color, alpha * noiseAlpha);
 }`,
