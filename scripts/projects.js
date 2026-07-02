@@ -39514,8 +39514,8 @@ modal.addEventListener("click", async (e) => {
 });
 
 // src/ts/projects.ts
-var animateHeading = waapi.animate("#projects .projects-top", {
-  y: [0, -230],
+waapi.animate("#projects .projects-top", {
+  y: [0, -160],
   autoplay: onScroll({
     sync: 0.5,
     enter: "top top",
@@ -39523,7 +39523,7 @@ var animateHeading = waapi.animate("#projects .projects-top", {
     target: ".projects"
   })
 });
-var animateHeadingDescr = waapi.animate("#projects .projects-bottom", {
+waapi.animate("#projects .projects-bottom", {
   y: [0, 200],
   opacity: [1, 0],
   autoplay: onScroll({
