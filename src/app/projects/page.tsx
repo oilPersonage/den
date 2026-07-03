@@ -10,7 +10,7 @@ export default function Projects() {
   return (
     <>
       <Navs page="/projects" />
-      <div className="pt-header bg-bg2" id="projects">
+      <div className="pt-header" id="projects">
         <div className="main-wrapper projects fixed inset-0">
           <div className="projects-header">
             <div className="projects-top flex flex-col items-end gap-md">
