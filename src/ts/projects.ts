@@ -1,11 +1,18 @@
-import "./imageModal";
-
 import { onScroll, waapi } from "animejs";
 
+waapi.animate(".projects-img", {
+  y: [0, -460],
+  autoplay: onScroll({
+    sync: true,
+    enter: "top top",
+    leave: "top bottom",
+    target: ".projects",
+  }),
+});
 waapi.animate("#projects .projects-top", {
   y: [0, -160],
   autoplay: onScroll({
-    sync: 0.5,
+    sync: true,
     enter: "top top",
     leave: "top bottom",
     target: ".projects",

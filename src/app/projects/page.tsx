@@ -10,6 +10,11 @@ export default function Projects() {
   return (
     <>
       <Navs page="/projects" />
+      <img
+        className="projects-img fixed -left-10 w-6/7 -bottom-50 brightness-115"
+        src="/pictures/projects/featureHome3.webp"
+        alt="Feature Home 3"
+      />
       <div className="pt-header" id="projects">
         <div className="main-wrapper projects fixed inset-0">
           <div className="projects-header">
