@@ -1,4 +1,5 @@
 import { onScroll, waapi } from "animejs";
+import "./imageModal";
 
 waapi.animate(".projects-img", {
   y: [0, -460],

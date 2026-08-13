@@ -4,7 +4,7 @@ import { TSliderPlugin } from "./types";
 export const fadePlugin: TSliderPlugin = (api) => {
   const {
     dom,
-    options: { duration, ease }
+    options: { duration, ease },
   } = api;
   // Доступ к DOM через API (можно расширить API, добавив туда ссылку на элементы)
   const { track, slides } = dom;
@@ -17,14 +17,18 @@ export const fadePlugin: TSliderPlugin = (api) => {
     slide.style.transition = `opacity ${duration}ms ${ease}`;
     slide.style.position = "absolute";
     slide.style.inset = "0";
-    slide.style.opacity = i === 0 ? "1" : "0";
+    if (i === 0) return;
+    slide.style.pointerEvents = "none";
+    slide.style.opacity = "0";
   });
 
   // 2. Подписываемся на изменение слайда
   api.engine = (index: number) => {
+    console.log({ index, slides });
     slides.forEach((s, i) => {
       s.style.opacity = i === index ? "1" : "0";
-      s.style.zIndex = i === index ? "1" : "0";
+      s.style.pointerEvents = "auto";
+      s.style.zIndex = i === index ? "1" : "-1";
     });
   };
 };
@@ -38,7 +42,7 @@ export const infinityScroll: TSliderPlugin = (api) => {
     duration: api.options.duration,
     autoplay: true,
     ease: "linear",
-    loop: true
+    loop: true,
   });
   slides.forEach((el) => track.appendChild(el.cloneNode(true)));
   api.engine = () => {};

@@ -2,13 +2,14 @@
 
 import { useState } from "react";
 import CustomImage from "src/components/customImage";
+import { CustomImageZoom } from "src/components/customImageZoom";
 import ProductInfo from "src/components/productInfo";
 import ShowMoreText from "src/components/showMoreText";
 import { type Product } from "src/libs/products";
 
 export default function ProductSection({
   product,
-  sameProducts
+  sameProducts,
 }: {
   product: Product;
   sameProducts: Product[];
@@ -29,7 +30,7 @@ export default function ProductSection({
         data-product-clider-wrapper
       >
         <div className="flex flex-col gap-sm md:gap-md">
-          <div className="flex-1 bg-bg2 max-h-[500px] items-center flex justify-center">
+          <div className="flex-1 bg-bg2 max-h-[500px] items-stretch flex justify-center">
             <div
               className="slider"
               data-ai="4"
@@ -39,17 +40,16 @@ export default function ProductSection({
               data-dot-selector="[data-dot]"
               data-dots=".product-variant-btns"
             >
-              <div className="slider-container">
-                <div className="slider-track">
+              <div className="slider-container h-full">
+                <div className="slider-track h-full">
                   {sameProducts.map((el: Product) => (
                     <div key={el.id} className="slide">
-                      <div className="card-img">
-                        <CustomImage
-                          className="aspect-video object-contain p-md w-full h-full"
-                          src={pictures[0].src}
-                          alt=""
-                        />
-                      </div>
+                      <CustomImageZoom
+                        classNameWrapper="card-img h-full w-full"
+                        className="aspect-video object-contain w-full h-full"
+                        src={el.pictures[0].src}
+                        alt=""
+                      />
                     </div>
                   ))}
                 </div>
@@ -67,7 +67,7 @@ export default function ProductSection({
         <ProductInfo
           setActiveProduct={(s: Product["slug"]) =>
             setActiveProduct(
-              sameProducts.find((el) => el.slug === s) as Product
+              sameProducts.find((el) => el.slug === s) as Product,
             )
           }
           {...rest}

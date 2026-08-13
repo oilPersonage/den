@@ -47,12 +47,6 @@ export default async function RootLayout({
           href={`${process.env.NEXT_PUBLIC_BASE_PATH}/vite.svg`}
         />
         {/* <meta http-equiv="x-ua-compatible" content="ie=edge" /> */}
-        {/* <Script>
-			if ('scrollRestoration' in history) {
-			history.scrollRestoration = 'manual'
-			}
-			window.scrollTo(0, 0)
-		</script> */}
         <title>Строительная компания | Дома под ключ | [Город]</title>
 
         <meta
@@ -74,8 +68,11 @@ export default async function RootLayout({
           content="Дома под ключ от производителя"
         />
 
-        <meta name="business:contact_data:country_name" content="Россия" />
-        <meta name="business:contact_data:city" content="[Город]" />
+        {/*<meta name="business:contact_data:country_name" content="Россия" />
+        <meta name="business:contact_data:city" content="[Проекты]" />*/}
+        <script type="module">
+          console.log('to top'); window.scrollTo(0, 0);
+        </script>
       </head>
       <body>
         <div

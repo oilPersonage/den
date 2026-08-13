@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import { priceFormatter } from "src/utils/priceFormater";
 import Request from "./request";
+import { ButtonBig } from "./buttonBig";
 
 export default function ProductPrice({
   price,
@@ -41,7 +42,7 @@ export default function ProductPrice({
               >
                 <path
                   d="M24 10.5V13.5L0 13.5L2.62268e-07 10.5L24 10.5Z"
-                  fill="inherit"
+                  fill="currentColor"
                 />
               </svg>
 
@@ -77,11 +78,11 @@ export default function ProductPrice({
                 <g clipPath="url(#clip0_358_45)">
                   <path
                     d="M24 10.259V13.259L0 13.259L2.62268e-07 10.259L24 10.259Z"
-                    fill="inherit"
+                    fill="currentColor"
                   />
                   <path
                     d="M10.5 1.31134e-07L13.5 0L13.5 24H10.5L10.5 1.31134e-07Z"
-                    fill="inherit"
+                    fill="currentColor"
                   />
                 </g>
                 <defs>
@@ -118,18 +119,12 @@ export default function ProductPrice({
 				</div>*/}
       </div>
       <div className="product-price-summ">
-        <a
-          href="#"
-          className="btn black max-md:order-2 max-md:py-4 max-md:text-lg max-md:w-full max-md:justify-center"
-          data-modal="request"
+        <ButtonBig
+          dataModal="request"
+          id="header-button"
           data-ai="4"
-        >
-          Оставить заявку
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-        </a>
+          title="Оставить заявку"
+        />
         <div className="flex flex-col" data-ai="4">
           <div className="flex flex-wrap gap-x-sm text-xl max-md:*:text-2xl">
             <p>от {priceFormatter(price)} ₽</p>

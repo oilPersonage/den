@@ -1,3 +1,5 @@
+"use client";
+import { useMemo, useState } from "react";
 import { Product } from "src/libs/products";
 import { priceFormatter } from "src/utils/priceFormater";
 import ArrowSvg from "./arrowSvg";
@@ -12,11 +14,14 @@ export default function MainCard({
   product: Product;
   sameProducts: Product[];
 }) {
+  const [currentProductIdx, setCrrentProductIdx] = useState(0);
   const currentVariant = sameProducts.find(
     (el) => el.slug === product.slug,
   ) as Product;
 
-  const { h1, headingDescription, price, slug } = currentVariant as Product;
+  const { h1, headingDescription, price, slug } = useMemo(() => {
+    return sameProducts[currentProductIdx];
+  }, [sameProducts, currentProductIdx]);
 
   return (
     <div className="card" data-animate-container data-combined-slider>
@@ -83,6 +88,7 @@ export default function MainCard({
                     {sameProducts.map((prod, idx) => (
                       <SameProductBtn
                         key={prod.id}
+                        onClick={() => setCrrentProductIdx(idx)}
                         isActive={idx === 0}
                         product={prod}
                       />

@@ -240,8 +240,8 @@ export function CalcBase({
         );
       })}
 
-      <div className="absolute -right-52 top-0 py-3.5 flex flex-col gap-1">
-        <div className="font-display text-[12px]">{name}</div>
+      <div className="absolute -right-52 top-0 py-3.5 flex flex-col gap-px">
+        <div className="font-display text-[12px] mb-2">{name}</div>
         <button
           className={`btn link small w-max px-sm ${doors.length >= MAX_ITEM_SIZE ? "disabled" : ""}`}
           onClick={() => changeItem("add", "doors")}

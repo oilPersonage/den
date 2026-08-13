@@ -40530,7 +40530,7 @@ var init_adv = __esm({
         target: ".adv-wrapper",
         // debug: true,
         sync: true,
-        enter: "top",
+        enter: "60% top",
         leave: "bottom"
       })
     });
@@ -40544,7 +40544,7 @@ var init_adv = __esm({
       const currentOurItem = itemsOur[index];
       if (!(last < 0) && last !== itemsOur.length) {
         animate(currentOurItem.querySelectorAll(".adv-inner-top img"), {
-          translateY: ["100%", "0%"],
+          scale: [1.1, 1],
           opacity: [0, 1],
           ease: "out(3)",
           delay: stagger(200, { start: 400 })
@@ -40577,9 +40577,14 @@ var init_adv = __esm({
       p: 1
     });
     tl.onRender = (self2) => {
+      if (self2.progress < 0.15) return;
       updateOnDiscrete(self2.progress);
     };
-    tl.sync(animateFake, 0);
+    tl.add(".adv", {
+      scale: [0.9, 1],
+      opacity: [0, 1],
+      duration: 200
+    }).sync(animateFake, 0);
   }
 });
 
@@ -40711,18 +40716,25 @@ function createScrollTriggerObserver(container, config) {
   observer2.observe(trigger);
   return observer2;
 }
-var catalogCloseBtn, catalogBtn, catalogWrapper, catalogInner, items, time2, translate, tl2, innerAnimate, itemsAnimate;
+var catalogCloseBtn, catalogBtn, catalogWrapper, catalogInner, items, catalogItems, time2, translate, tl2, innerAnimate, itemsAnimate;
 var init_catalog = __esm({
   "src/ts/catalog.ts"() {
     "use strict";
     init_modules();
     init_home();
     init_config();
-    catalogCloseBtn = document.querySelector("#catalog-close-btn");
+    catalogCloseBtn = document.querySelector(
+      "#catalog-close-btn"
+    );
     catalogBtn = document.querySelector("#catalog-btn");
-    catalogWrapper = document.querySelector("#catalog-wrapper");
+    catalogWrapper = document.querySelector(
+      "#catalog-wrapper"
+    );
     catalogInner = document.querySelector("#catalog-inner");
-    items = document.querySelectorAll("[data-catalog-bottom]");
+    items = document.querySelectorAll(
+      "[data-catalog-bottom]"
+    );
+    catalogItems = catalogWrapper.querySelectorAll(".catalog-item");
     time2 = 500;
     translate = isMobile ? "translateX" : "translateY";
     tl2 = createTimeline({
@@ -40770,6 +40782,21 @@ var init_catalog = __esm({
           rootMargin: "-100% 0px 0px 0px"
         });
       }
+    });
+    catalogItems.forEach((el) => {
+      const linksAnimate = animate(el.querySelectorAll("a"), {
+        opacity: [0, 1],
+        y: [14, 0],
+        delay: stagger(50),
+        duration: 300,
+        autoplay: false
+      });
+      el.addEventListener("mouseenter", () => {
+        linksAnimate.play();
+      });
+      el.addEventListener("mouseleave", () => {
+        linksAnimate.reverse();
+      });
     });
   }
 });
@@ -42185,12 +42212,16 @@ var init_plugins = __esm({
         slide.style.transition = `opacity ${duration}ms ${ease}`;
         slide.style.position = "absolute";
         slide.style.inset = "0";
-        slide.style.opacity = i === 0 ? "1" : "0";
+        if (i === 0) return;
+        slide.style.pointerEvents = "none";
+        slide.style.opacity = "0";
       });
       api.engine = (index) => {
+        console.log({ index, slides });
         slides.forEach((s, i) => {
           s.style.opacity = i === index ? "1" : "0";
-          s.style.zIndex = i === index ? "1" : "0";
+          s.style.pointerEvents = "auto";
+          s.style.zIndex = i === index ? "1" : "-1";
         });
       };
     };

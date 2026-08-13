@@ -2,10 +2,10 @@ import { animate, createTimeline } from "animejs";
 import { isMobile } from "./intro";
 
 const btnOpenModal = [
-  ...document.querySelectorAll("[data-image-btn]")
+  ...document.querySelectorAll("[data-image-btn]"),
 ] as HTMLLinkElement[];
 const btnCloseModal = document.querySelector(
-  "[data-image-close-btn]"
+  "[data-image-close-btn]",
 ) as HTMLLinkElement;
 const modal = document.querySelector("[data-image-modal]") as HTMLElement;
 const modalWrapper = modal.querySelector(".modal-wrapper") as HTMLElement;
@@ -25,20 +25,20 @@ const timeline = createTimeline({
     if (self.reversed && modal) {
       modal.classList.remove("opened");
     }
-  }
+  },
 })
   .add(modal, {
     "--alpha": [0, 0.4],
-    duration: 600
+    duration: 600,
   })
   .add(
     modalWrapper,
     {
       opacity: [0, 1],
       y: [40, 0],
-      duration: 400
+      duration: 400,
     },
-    0
+    0,
   );
 
 const imgsLength = [...document.querySelectorAll("[data-image-btn]")].length;
@@ -77,7 +77,7 @@ img.onload = async () => {
   setSizes();
   animate(modalWrapper, {
     maxWidth: [0, currentWidth],
-    duration: 300
+    duration: 300,
   });
 };
 
@@ -87,7 +87,7 @@ async function setImageSize() {
     duration: 300,
     onComplete: () => {
       img.src = pathImgFolder + currentImgIdx + ".webp";
-    }
+    },
   });
 }
 

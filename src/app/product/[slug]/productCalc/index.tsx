@@ -115,7 +115,7 @@ export default function ProductCalc({
       <div className="flex flex-1">
         <div className="calc-left" data-lenis-prevent>
           <div className="flex items-start gap-lg relative z-4">
-            <div data-ai="4" className="flex flex-col gap-sm">
+            <div data-ai="4" className="flex flex-col gap-md">
               <div className="relative z-2">
                 <p className="mb-xs">База</p>
                 <Select

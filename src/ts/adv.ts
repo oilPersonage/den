@@ -27,7 +27,7 @@ const tl = createTimeline({
     target: ".adv-wrapper",
     // debug: true,
     sync: true,
-    enter: "top",
+    enter: "60% top",
     leave: "bottom",
   }),
 });
@@ -47,7 +47,7 @@ const updateClasses = (progress: number, last: number) => {
 
   if (!(last < 0) && last !== itemsOur.length) {
     animate(currentOurItem.querySelectorAll(".adv-inner-top img"), {
-      translateY: ["100%", "0%"],
+      scale: [1.1, 1],
       opacity: [0, 1],
       ease: "out(3)",
       delay: stagger(200, { start: 400 }),
@@ -86,6 +86,11 @@ const animateFake = animate(fakeData, {
 });
 
 tl.onRender = (self) => {
+  if (self.progress < 0.15) return;
   updateOnDiscrete(self.progress);
 };
-tl.sync(animateFake, 0);
+tl.add(".adv", {
+  scale: [0.9, 1],
+  opacity: [0, 1],
+  duration: 200,
+}).sync(animateFake, 0);
