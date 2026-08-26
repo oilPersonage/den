@@ -7,6 +7,7 @@ const contacts = document.querySelector(".header-contacts") as HTMLElement;
 const hamb = document.querySelector(".hamb");
 let isOpened = false;
 
+console.log("isMobile", isMobile);
 if (isMobile) {
   const { chars: menuChars } = splitText(".hamb-open", { chars: true });
   const { chars: closeChars } = splitText(".hamb-close", { chars: true });
@@ -24,7 +25,6 @@ if (isMobile) {
       menuChars,
       {
         translateY: [0, -14],
-        opacity: [1, 0],
         easing: "inOutCirc",
         delay: stagger(60),
       },
@@ -34,7 +34,6 @@ if (isMobile) {
       closeChars,
       {
         translateY: [0, -14],
-        opacity: [1, 0],
         easing: "inOutCirc",
         delay: stagger(60),
       },
@@ -98,6 +97,7 @@ if (isMobile) {
   }
 
   links.forEach((el: Element) => el.addEventListener("click", toggleMenu));
+  console.log({ hamb });
   if (hamb) {
     hamb.addEventListener("click", toggleMenu);
   }

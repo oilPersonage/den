@@ -479,10 +479,10 @@ a:hover .svg-link {
 }
 
 .hamb {
-  @apply flex items-center min-h-full uppercase font-display font-bold md:hidden pr-md -mr-md;
+  @apply flex items-center min-h-full uppercase font-display font-bold md:hidden pr-md -mr-md cursor-pointer;
 }
 .hamb-inner {
-  @apply overflow-hidden max-h-[14px] flex flex-col items-end;
+  @apply overflow-hidden max-h-[13px] flex flex-col items-end;
 }
 .hamb-open,
 .hamb-close {

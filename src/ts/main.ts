@@ -37,6 +37,7 @@ const heavyModules = [
 if (isQuestions) {
   heavyModules.push(import("ts/accordion"));
 }
+
 await Promise.all(heavyModules);
 
 export {};

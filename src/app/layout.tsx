@@ -71,9 +71,7 @@ export default async function RootLayout({
 
         {/*<meta name="business:contact_data:country_name" content="Россия" />
         <meta name="business:contact_data:city" content="[Проекты]" />*/}
-        <script type="module">
-          console.log('to top'); window.scrollTo(0, 0);
-        </script>
+        <script type="module">window.scrollTo(0, 0);</script>
       </head>
       <body>
         <div

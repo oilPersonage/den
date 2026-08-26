@@ -69,21 +69,21 @@ export default function Navs({ page }: { page?: string }) {
           <div className="header-contacts">
             <a
               href="tel:+7(342)259-24-46"
-              className="link btn max-2xl:px-2 max-2xl:py-2"
+              className="link btn md:max-2xl:px-2 md:max-2xl:py-2"
               data-ai="1.1"
             >
-              <p className="max-2xl:hidden">+7 (342) 259-24-46</p>
+              <p className="md:max-2xl:hidden">+7 (342) 259-24-46</p>
               <svg
                 width="24"
                 height="24"
-                className="2xl:hidden"
+                className="max-md:hidden  2xl:hidden"
                 viewBox="0 0 24 24"
                 fill="currentColor"
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <path
-                  fill-rule="evenodd"
-                  clip-rule="evenodd"
+                  fillRule="evenodd"
+                  clipRule="evenodd"
                   d="M19.4696 4.03035C19.6103 4.171 19.6893 4.36176 19.6893 4.56068V8.3891C19.6893 8.80332 19.3535 9.1391 18.9393 9.1391C18.5251 9.1391 18.1893 8.80332 18.1893 8.3891V6.37134L15.0303 9.53035C14.7374 9.82324 14.2625 9.82324 13.9696 9.53035C13.6768 9.23745 13.6768 8.76258 13.9696 8.46969L17.1287 5.31068L15.1109 5.31068C14.6967 5.31068 14.3609 4.97489 14.3609 4.56068C14.3609 4.14646 14.6967 3.81068 15.1109 3.81068L18.9393 3.81068C19.1382 3.81068 19.329 3.88969 19.4696 4.03035Z"
                   fill="currentColor"
                 />
@@ -100,14 +100,14 @@ export default function Navs({ page }: { page?: string }) {
             </a>
             <a
               href="https://yandex.ru/maps/50/perm/house/ulitsa_geroyev_khasana_72b/YU8YdAFgS0wGQFttfXV3cH9nYQ==/?ll=56.260292%2C57.961345&mode=search&sctx=ZAAAAAgAEAAaKAoSCUAXDRmPOENAEfMf0m9f7UtAEhIJj3IwmwDDzj8RxqUqbXGNsz8iBgABAgMEBSgKOABA9lNIAWoCcnWdAc3MzD2gAQCoAQC9AcPwGSrCAQEAggIf0LPQtdGA0L7QtdCyINGF0LDRgdCw0L3QsCA3MiDQsYoCAJICAJoCDGRlc2t0b3AtbWFwcw%3D%3D&sll=56.260292%2C57.961345&sspn=0.008864%2C0.004356&text=%D0%B3%D0%B5%D1%80%D0%BE%D0%B5%D0%B2%20%D1%85%D0%B0%D1%81%D0%B0%D0%BD%D0%B0%2072%20%D0%B1&z=17.23"
-              className="link btn max-2xl:px-2 max-2xl:py-2"
+              className="link btn md:max-2xl:px-2 md:max-2xl:py-2"
               data-ai="1.1"
             >
-              <p className="max-2xl:hidden">Героев Хасана 72 Б</p>
+              <p className="md:max-2xl:hidden">Героев Хасана 72 Б</p>
               <svg
                 width="24"
                 height="24"
-                className="2xl:hidden"
+                className="max-md:hidden 2xl:hidden"
                 viewBox="0 0 24 24"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
@@ -117,8 +117,8 @@ export default function Navs({ page }: { page?: string }) {
                   fill="currentColor"
                 />
                 <path
-                  fill-rule="evenodd"
-                  clip-rule="evenodd"
+                  fillRule="evenodd"
+                  clipRule="evenodd"
                   d="M3.77354 8.87739C4.11718 4.70845 7.60097 1.5 11.7841 1.5H12.216C16.3991 1.5 19.8829 4.70845 20.2265 8.87739C20.4115 11.122 19.7182 13.3508 18.2925 15.0943L13.4995 20.9561C12.7245 21.9039 11.2756 21.9039 10.5006 20.9561L5.70752 15.0943C4.28187 13.3508 3.58852 11.122 3.77354 8.87739ZM12 5.25C9.37665 5.25 7.25 7.37665 7.25 10C7.25 12.6234 9.37665 14.75 12 14.75C14.6234 14.75 16.75 12.6234 16.75 10C16.75 7.37665 14.6234 5.25 12 5.25Z"
                   fill="currentColor"
                 />
@@ -128,7 +128,7 @@ export default function Navs({ page }: { page?: string }) {
               <span className="btn-bl"></span>
               <span className="btn-br"></span>
               <svg
-                className="svg-link max-2xl:hidden"
+                className="svg-link md:max-2xl:hidden"
                 viewBox="0 0 16 14"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"

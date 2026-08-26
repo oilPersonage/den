@@ -8,7 +8,7 @@ function calculateSize(
   dy: number,
   initHeight: number,
   initWidth: number,
-  onUpdate?: () => void
+  onUpdate?: () => void,
 ) {
   const { rotated, dom, targetSize, pW, pH } = stateItem;
   const maxHeight = pH - WALL_HEIGHT * 2;
@@ -17,10 +17,8 @@ function calculateSize(
   const fixedXFn = utils.clamp(MIN_WALL_OFFSET + WALL_HEIGHT, maxWidth);
   const spanValue = utils.snap(WALL_HEIGHT);
 
-  console.log({ rotated });
-
   const dragCount = dom.querySelector(
-    ".calc-wall-height-count"
+    ".calc-wall-height-count",
   ) as HTMLButtonElement;
 
   if (rotated) {
@@ -44,13 +42,13 @@ function calculateSize(
 export default function draggableHeight(
   stateItem: Item,
   onReacalculate: (item: Item, rotated: boolean) => void,
-  maxSizes: [number, number]
+  maxSizes: [number, number],
 ) {
   if (!stateItem) return;
   const { dom } = stateItem;
   const rotateBtn = dom.querySelector(".calc-wall-rotate-btn");
   const dragBtn = dom.querySelector(
-    ".calc-wall-height-btn"
+    ".calc-wall-height-btn",
   ) as HTMLButtonElement;
   if (!dragBtn) return;
 
@@ -92,7 +90,7 @@ export default function draggableHeight(
     const dy = e.clientY - initDragY;
     const dx = e.clientX - initDragX;
     calculateSize(stateItem, dx, dy, initHeight, initWidth, () =>
-      onReacalculate(stateItem, stateItem.rotated)
+      onReacalculate(stateItem, stateItem.rotated),
     );
   }, 16);
 

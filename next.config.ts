@@ -10,6 +10,7 @@ const nextConfig: NextConfig = {
   assetPrefix: isProd ? `/${repoName}/` : "",
   skipTrailingSlashRedirect: true,
   images: { unoptimized: true },
+  productionBrowserSourceMaps: true,
   turbopack: {
     root: __dirname,
   },
