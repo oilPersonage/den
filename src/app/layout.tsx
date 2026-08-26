@@ -5,6 +5,7 @@ import Catalog from "src/components/catalogMenu";
 import Footer from "src/components/footer";
 import Policies from "src/components/policies";
 import { getGroupedProducts } from "src/libs/products";
+import { lunaObscura } from "../ts/fonts";
 import "../css/style.css";
 
 const play = Google_Sans({
@@ -28,7 +29,7 @@ export default async function RootLayout({
 }>) {
   const groupedProducts = await getGroupedProducts();
   return (
-    <html lang="en" className={play.variable}>
+    <html lang="en" className={`${play.variable} ${lunaObscura.variable}`}>
       <head>
         <meta charSet="UTF-8" />
         <meta
