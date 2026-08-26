@@ -29,7 +29,7 @@
   font-display: swap; /* Чтобы текст не пропадал во время загрузки */
 }
 @font-face {
-  font-family: "Pobeda"; /* Название, которое вы будете использовать в коде */
+  font-family: "LunaObscura"; /* Название, которое вы будете использовать в коде */
   src: url("/OBS.woff2") format("woff2");
   font-weight: normal;
   font-style: normal;

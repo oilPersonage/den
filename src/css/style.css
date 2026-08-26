@@ -18,7 +18,7 @@
 @theme {
   --font-sans: "Google Sans", ui-sans-serif, system-ui;
   /*--font-sans: 'Moderustic', ui-sans-serif, system-ui;*/
-  --font-display: "Pobeda", ui-sans-serif, system-ui;
+  --font-display: "LunaObscura", ui-sans-serif, system-ui;
   --text-h1: 1.8rem; /* 32px */
 
   /* Коэффициент масштабирования (Scale Factor) — 1.25 (Major Third) */
