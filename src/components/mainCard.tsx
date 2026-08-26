@@ -99,7 +99,7 @@ export default function MainCard({
             </div>
           </div>
           <div className="card-right">
-            <div className="flex md:flex-row flex-col items-center gap-sm md:gap-lg">
+            <div className="flex flex-row max-md:justify-between items-center gap-sm md:gap-lg">
               <div className="card-price" data-from-bottom>
                 <p>
                   <span className="text-span">от </span>
@@ -108,7 +108,7 @@ export default function MainCard({
               </div>
               <a
                 href={`${process.env.NEXT_PUBLIC_BASE_PATH}/product/${slug}`}
-                className="btn black"
+                className="btn black max-md:w-fit"
                 data-from-bottom
               >
                 Подробнее

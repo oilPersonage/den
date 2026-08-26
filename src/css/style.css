@@ -95,7 +95,7 @@ body {
   }
   h4,
   h4 span {
-    @apply text-h4 font-bold font-display tracking-wider;
+    @apply text-h4 font-bold font-display tracking-wider max-md:leading-[1.6]!;
   }
   h5 {
     @apply text-h5 font-bold font-display tracking-wider;
@@ -133,19 +133,22 @@ body {
       --spacing-header: 48px;
       h1,
       h1 span {
-        font-size: 24px;
+        font-size: 16px;
       }
       h2,
       h2 span {
-        font-size: 20px;
+        font-size: 14px;
       }
       h3,
       h3 span {
-        font-size: 18px;
+        font-size: 13px;
+      }
+      h4 {
+        font-size: 12px;
       }
       p.title,
       p.title span {
-        font-size: 16px;
+        font-size: 12px;
       }
       p,
       p.span {
@@ -164,7 +167,7 @@ body {
     @apply opacity-30 cursor-default;
   }
   .btn.black {
-    @apply max-md:w-full max-md:justify-center text-p! max-md:text-lg font-bold;
+    @apply max-md:w-full max-md:justify-center text-p! max-md:text-sm font-bold;
   }
   .btn.black,
   .btn.active {
@@ -276,7 +279,7 @@ body {
   }
   .btn.link.black:hover,
   .btn.link.active:hover {
-    @apply bg-black text-bg;
+    @apply bg-accent text-bg;
   }
   .btn.link:hover span,
   textarea:focus ~ span,
@@ -632,7 +635,7 @@ a:hover .svg-link {
 
 /*CARD*/
 .cards-wrapper {
-  @apply grid gap-lg mt-lg;
+  @apply grid gap-lg;
 }
 .cards-wrapper.big {
   @apply grid grid-cols-1 md:grid-cols-[repeat(auto-fit,minmax(600px,1fr))] gap-xl;
@@ -747,10 +750,10 @@ a:hover .svg-link {
 }
 
 .adv-inner-top {
-  @apply relative mb-sm overflow-hidden h-120;
+  @apply relative mb-sm overflow-hidden md:h-120;
 }
 .adv-inner-top img {
-  @apply object-cover w-full h-full;
+  @apply object-cover w-full md:h-full max-md:aspect-video;
 }
 .adv-inner-bottom {
   @apply flex flex-col gap-sm;
@@ -770,7 +773,7 @@ a:hover .svg-link {
   @apply relative flex justify-center flex-col;
 }
 .adv-text-box {
-  @apply min-h-[60vh];
+  @apply min-h-[70vh] md:min-h-[60vh];
 }
 .adv-right-progress,
 .adv-decor-wrapper {
@@ -780,7 +783,7 @@ a:hover .svg-link {
   @apply flex font-bold h-max will-change-transform;
 }
 .adv-decor p {
-  @apply font-display text-accent text-nowrap opacity-15 pr-md text-2xl md:text-4xl;
+  @apply font-display text-accent md:text-nowrap opacity-15 pr-md text-4xl;
   will-change: opacity;
   transition: opacity 0.6s ease-in-out;
 }
@@ -820,7 +823,7 @@ a:hover .svg-link {
   @apply grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))];
 }
 .adv-text-inner ul {
-  @apply absolute inset-0 gap-md max-md:flex-col min-w-full max-md:flex max-md:gap-lg;
+  @apply absolute inset-0 gap-md max-md:flex-col min-w-full max-md:flex max-md:gap-lg max-md:h-fit;
 }
 .adv-text-inner-rows {
   @apply flex flex-col;

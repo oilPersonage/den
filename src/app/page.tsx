@@ -935,12 +935,12 @@ export default async function Home() {
                         alt=""
                       />
                     </div>
-                    <div className="flex gap-lg">
+                    <div className="flex max-md:flex-col gap-md md:gap-lg">
                       <li>
                         <div className="adv-inner-bottom">
                           <p className="title flex">
                             Проектирование
-                            <div className="translate-x-7 flex-1 flex items-center">
+                            <div className="max-md:hidden translate-x-7 flex-1 flex items-center">
                               <span className="h-px bg-black flex-1"></span>
                               <span className="min-h-2.5 min-w-2.5 border-b-black border-b border-l -rotate-135 -translate-x-2.5"></span>
                             </div>
@@ -955,7 +955,7 @@ export default async function Home() {
                         <div className="adv-inner-bottom">
                           <p className="title flex">
                             Производство
-                            <div className="translate-x-7 flex-1 flex items-center">
+                            <div className="max-md:hidden translate-x-7 flex-1 flex items-center">
                               <span className="h-px bg-black flex-1"></span>
                               <span className="min-h-2.5 min-w-2.5 border-b-black border-b border-l -rotate-135 -translate-x-2.5"></span>
                             </div>
@@ -1020,7 +1020,7 @@ export default async function Home() {
             <br /> в <span className="text-accent">три шага</span>?
           </h2>
           <div className="grid grid-cols-[repeat(auto-fit,minmax(240px,1fr))] gap-md md:gap-lg md:mb-xl">
-            <div className="flex flex-col gap-xs md:gap-sm">
+            <div className="flex flex-col gap-sm md:gap-xs md:gap-sm">
               <p className="title" data-from-bottom>
                 <span className="text-neutral-300">01.</span> <br />
                 Договор
@@ -1030,7 +1030,7 @@ export default async function Home() {
                 Подписываем договор.
               </p>
             </div>
-            <div className="flex flex-col gap-xs md:gap-sm">
+            <div className="flex flex-col gap-sm md:gap-xs md:gap-sm">
               <p className="title" data-from-bottom>
                 <span className="text-neutral-300">02.</span>
                 <br /> Производство
@@ -1040,7 +1040,7 @@ export default async function Home() {
                 — от 7 дней
               </p>
             </div>
-            <div className="flex flex-col gap-xs md:gap-sm">
+            <div className="flex flex-col gap-sm md:gap-xs md:gap-sm">
               <p className="title" data-from-bottom>
                 <span className="text-neutral-300">03.</span>
                 <br /> Установка
@@ -1050,7 +1050,7 @@ export default async function Home() {
                 дня. Подключаем коммуникации – и можно заезжать
               </p>
             </div>
-            <div className="flex flex-col gap-xs max-md:mt-sm md:gap-sm">
+            <div className="flex flex-col gap-sm md:gap-xs max-md:mt-sm md:gap-sm">
               <p className="font-bold font-display" data-from-bottom>
                 Готовы начать? Свяжитесь с нами
               </p>
@@ -1062,37 +1062,33 @@ export default async function Home() {
 
       <section className="main-variants h-[320px] md:h-screen pt-header flex flex-col">
         <div className="w-full flex-1 p-md flex flex-col min-h-0">
-          <div className="bg-bg2 relative flex flex-1 min-h-0 overflow-hidden">
+          <div className="bg-bg2 relative flex flex-1 min-h-0">
             <CustomImage
-              className="main-variants-img active"
+              className="main-variants-img active object-contain!"
               data-zoom
-              src="/pictures/card-6.jpg"
+              src="/future-home-v2.png"
               alt=""
             />
             <CustomImage
-              className="main-variants-img"
-              src="/pictures/card-7.jpg"
+              className="main-variants-img object-contain!"
+              src="/future-home-v2.png"
               alt=""
             />
-            <div className="absolute top-md left-1/2 -translate-x-1/2 flex gap-sm">
-              <div className="bg-bg">
-                <a href="#" className="btn link black">
-                  Первый
-                  <span></span>
-                  <span></span>
-                  <span></span>
-                  <span></span>
-                </a>
-              </div>
-              <div className="bg-bg">
-                <a href="#" className="btn link">
-                  Второй
-                  <span></span>
-                  <span></span>
-                  <span></span>
-                  <span></span>
-                </a>
-              </div>
+            <div className="absolute max-md:bg-bg2 w-fit top-md left-1/2 max-md:-mt-18 -translate-x-1/2 flex gap-sm">
+              <a href="#" className="btn link active text-xs">
+                Первый
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+              </a>
+              <a href="#" className="btn link text-xs">
+                Второй
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+              </a>
             </div>
           </div>
         </div>

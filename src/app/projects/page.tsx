@@ -10,7 +10,7 @@ export default function Projects() {
   return (
     <>
       <Navs page="/projects" />
-      <img
+      <CustomImage
         className="projects-img fixed -left-10 w-6/7 -bottom-50 brightness-115"
         src="/pictures/projects/featureHome3.webp"
         alt="Feature Home 3"
