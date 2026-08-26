@@ -938,13 +938,13 @@ export default async function Home() {
                     <div className="flex max-md:flex-col gap-md md:gap-lg">
                       <li>
                         <div className="adv-inner-bottom">
-                          <p className="title flex">
+                          <div className="title flex">
                             Проектирование
                             <div className="max-md:hidden translate-x-7 flex-1 flex items-center">
                               <span className="h-px bg-black flex-1"></span>
                               <span className="min-h-2.5 min-w-2.5 border-b-black border-b border-l -rotate-135 -translate-x-2.5"></span>
                             </div>
-                          </p>
+                          </div>
                           <p>
                             Разработка индивидуальных решений и чертежей
                             модульных конструкций
@@ -953,13 +953,13 @@ export default async function Home() {
                       </li>
                       <li>
                         <div className="adv-inner-bottom">
-                          <p className="title flex">
+                          <div className="title flex">
                             Производство
                             <div className="max-md:hidden translate-x-7 flex-1 flex items-center">
                               <span className="h-px bg-black flex-1"></span>
                               <span className="min-h-2.5 min-w-2.5 border-b-black border-b border-l -rotate-135 -translate-x-2.5"></span>
                             </div>
-                          </p>
+                          </div>
                           <p>
                             Производство блок‑контейнеров, бытовок и модульных
                             домов на собственном производстве
@@ -1062,7 +1062,7 @@ export default async function Home() {
 
       <section className="main-variants h-[320px] md:h-screen pt-header flex flex-col">
         <div className="w-full flex-1 p-md flex flex-col min-h-0">
-          <div className="bg-bg2 relative flex flex-1 min-h-0">
+          <div className="bg-bg2 relative flex flex-1 min-h-0 overflow-hidden">
             <CustomImage
               className="main-variants-img active object-contain!"
               data-zoom

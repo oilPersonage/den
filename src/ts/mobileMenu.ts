@@ -24,6 +24,7 @@ if (isMobile) {
       menuChars,
       {
         translateY: [0, -14],
+        opacity: [1, 0],
         easing: "inOutCirc",
         delay: stagger(60),
       },
@@ -33,6 +34,7 @@ if (isMobile) {
       closeChars,
       {
         translateY: [0, -14],
+        opacity: [1, 0],
         easing: "inOutCirc",
         delay: stagger(60),
       },

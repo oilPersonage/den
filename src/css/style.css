@@ -392,7 +392,7 @@ nav a {
   @apply pointer-events-auto select-auto;
 }
 nav {
-  @apply flex flex-col flex-1 max-md:justify-end items-end md:flex-row 2xl:gap-md max-md:w-full max-md:bg-bg
+  @apply flex flex-col flex-1 max-md:justify-end items-end md:flex-row gap-xs lg:gap-md max-md:w-full max-md:bg-bg
  max-md:opacity-0 max-md:pb-sm;
 }
 .header-contacts {
@@ -471,7 +471,7 @@ a:hover .svg-link {
 
   margin-right: calc(((100vw - 1280px) / 2) - 100px);
   @media (max-width: 1548px) {
-    margin-right: 0;
+    margin-right: 12px;
   }
 }
 .header-logo img {
