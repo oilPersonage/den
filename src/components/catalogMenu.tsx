@@ -23,7 +23,7 @@ export default function Catalog({
           aria-label="Закрыть каталог"
         >
           <p className="max-md:hidden">Закрыть</p>
-          <p className="md:hidden text-[12px]!">Назад</p>
+          <p className="md:hidden text-[10px] md:text-[12px]!">Назад</p>
           <span></span>
           <span></span>
           <span></span>
@@ -37,7 +37,7 @@ export default function Catalog({
               data-catalog-bottom
               className={`catalog-item overflow-hidden ${renderClassMenu(keyIdx)}`}
             >
-              <div className="absolute flex flex-col inset-0 pt-10">
+              <div className="absolute flex flex-col inset-0 pt-10 max-md:hidden">
                 <CustomImage
                   className="catalog-item-bg-img"
                   src={

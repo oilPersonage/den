@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 export default function ShowMoreText({
   slug,
   description,
-  dataAttr
+  dataAttr,
 }: {
   slug: string;
   description: string;
@@ -38,7 +38,7 @@ export default function ShowMoreText({
     <>
       <div
         {...dataAttr}
-        className={`${isOpenedDesc ? "max-h-full" : "max-h-19"} mt-sm overflow-hidden`}
+        className={`${isOpenedDesc ? "max-h-full" : "max-h-19"} max-md:mt-xs mt-sm overflow-hidden`}
       >
         <p
           ref={refDesc}

@@ -14,6 +14,7 @@ export default function Navs({ page }: { page?: string }) {
       href: process.env.NEXT_PUBLIC_BASE_PATH + "/contacts",
     },
   ];
+
   return (
     <header
       id="header"
