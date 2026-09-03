@@ -16,10 +16,6 @@ let lastTriggered = -1;
 
 const TL_DURATION = 3000;
 const fakeData = { p: 0 };
-const arrayWidthsOurText = itemsOur.reduce(
-  (acc, el, index) => [...acc, acc[acc.length - 1] + el.clientWidth + 48],
-  [0],
-);
 
 const tl = createTimeline({
   duration: TL_DURATION,
@@ -27,7 +23,7 @@ const tl = createTimeline({
     target: ".adv-wrapper",
     // debug: true,
     sync: true,
-    enter: "60% top",
+    enter: "80% top",
     leave: "bottom",
   }),
 });

@@ -16,20 +16,22 @@ export default function Catalog({
   return (
     <div id="catalog-wrapper" className="catalog-wrapper" data-lenis-prevent>
       <div id="catalog-inner" className="catalog-inner main-wrapper relative">
-        <a
-          id="catalog-close-btn"
-          href="#"
-          className="btn link"
-          aria-label="Закрыть каталог"
-        >
-          <p className="max-md:hidden">Закрыть</p>
-          <p className="md:hidden text-[10px] md:text-[12px]!">Назад</p>
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-        </a>
-        <h4 className="uppercase">Каталог</h4>
+        <div className="flex justify-between items-center">
+          <h4 className="uppercase">Каталог</h4>
+          <a
+            id="catalog-close-btn"
+            href="#"
+            className="btn link"
+            aria-label="Закрыть каталог"
+          >
+            <p className="max-md:hidden">Закрыть</p>
+            <p className="md:hidden text-[10px] md:text-[12px]!">Назад</p>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+          </a>
+        </div>
         <div className="catalog-content">
           {Object.keys(products).map((key, keyIdx) => (
             <div

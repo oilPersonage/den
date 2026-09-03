@@ -67,7 +67,7 @@ export default async function Home() {
           <div className="flex justify-between -ml-lg gap-2">
             <div className="overflow-hidden">
               <div
-                className="h1Box flex flex-col gap-sm py-md px-lg max-w-6xl bg-bg2"
+                className="h1Box flex flex-col gap-md py-md px-lg max-w-6xl bg-bg2"
                 data-ai="0"
               >
                 <h1 className="animate-chars">
@@ -98,44 +98,42 @@ export default async function Home() {
         </div>
       </section>
 
-      <section className="big-space max-md:pb-xl" data-animate-container>
-        <div className="wrapper">
-          <h2 data-typing className="mb-lg">
-            Почему с нами выгодно работать?
-          </h2>
-          <div className="grid grid-cols-[repeat(auto-fit,minmax(240px,1fr))] gap-md md:gap-lg mb-xl">
-            <div className="flex flex-col gap-xs md:gap-sm">
-              <p className="title" data-from-bottom>
-                Собственное производство
-              </p>
-              <p data-from-bottom>
-                Контролируем качество на каждом этапе — от металлокаркаса до
-                внутренней отделки.
-              </p>
-            </div>
-            <div className="flex flex-col gap-xs md:gap-sm">
-              <p className="title" data-from-bottom>
-                Сжатые сроки изготовления
-              </p>
-              <p data-from-bottom>
-                Стандартные бытовки — от 5 рабочих дней. Индивидуальные проекты
-                — от 7 дней
-              </p>
-            </div>
-            <div className="flex flex-col gap-xs md:gap-sm">
-              <p className="title" data-from-bottom>
-                Фиксированная цена по договору
-              </p>
-              <p data-from-bottom>Без скрытых доплат и изменений сметы</p>
-            </div>
-            <div className="flex flex-col gap-xs md:gap-sm">
-              <p className="title" data-from-bottom>
-                Доставка по всей России
-              </p>
-              <p data-from-bottom>
-                Собственный автопарк и проверенные перевозчики
-              </p>
-            </div>
+      <section className="big-space main-wrapper" data-animate-container>
+        <h2 data-typing className="mb-lg">
+          Почему с нами выгодно работать?
+        </h2>
+        <div className="grid grid-cols-[repeat(auto-fit,minmax(240px,1fr))] gap-md md:gap-lg mb-xl">
+          <div className="flex flex-col gap-xs md:gap-sm">
+            <p className="title" data-from-bottom>
+              Собственное производство
+            </p>
+            <p data-from-bottom>
+              Контролируем качество на каждом этапе — от металлокаркаса до
+              внутренней отделки.
+            </p>
+          </div>
+          <div className="flex flex-col gap-xs md:gap-sm">
+            <p className="title" data-from-bottom>
+              Сжатые сроки изготовления
+            </p>
+            <p data-from-bottom>
+              Стандартные бытовки — от 5 рабочих дней. Индивидуальные проекты —
+              от 7 дней
+            </p>
+          </div>
+          <div className="flex flex-col gap-xs md:gap-sm">
+            <p className="title" data-from-bottom>
+              Фиксированная цена по договору
+            </p>
+            <p data-from-bottom>Без скрытых доплат и изменений сметы</p>
+          </div>
+          <div className="flex flex-col gap-xs md:gap-sm">
+            <p className="title" data-from-bottom>
+              Доставка по всей России
+            </p>
+            <p data-from-bottom>
+              Собственный автопарк и проверенные перевозчики
+            </p>
           </div>
         </div>
 
@@ -900,7 +898,7 @@ export default async function Home() {
                         />
                       </div>
                       <div className="adv-inner-bottom">
-                        <p className="title ">30+ / месяц</p>
+                        <p className="title uppercase">30+ в месяц</p>
                         <p>
                           Производственные мощности позволяют изготавливать до
                           30 бытовок в месяц.
@@ -916,7 +914,7 @@ export default async function Home() {
                         />
                       </div>
                       <div className="adv-inner-bottom">
-                        <p className="title ">Универсальность</p>
+                        <p className="title uppercase ">Универсальность</p>
                         <p>
                           Мы используем сертифицированные материалы, утепляем
                           конструкции для круглогодичной эксплуатации и можем
@@ -938,13 +936,13 @@ export default async function Home() {
                     <div className="flex max-md:flex-col gap-md md:gap-lg">
                       <li>
                         <div className="adv-inner-bottom">
-                          <div className="title flex">
+                          <p className="title flex uppercase">
                             Проектирование
-                            <div className="max-md:hidden translate-x-7 flex-1 flex items-center">
+                            <span className="max-md:hidden translate-x-7 flex-1 flex items-center">
                               <span className="h-px bg-black flex-1"></span>
                               <span className="min-h-2.5 min-w-2.5 border-b-black border-b border-l -rotate-135 -translate-x-2.5"></span>
-                            </div>
-                          </div>
+                            </span>
+                          </p>
                           <p>
                             Разработка индивидуальных решений и чертежей
                             модульных конструкций
@@ -953,13 +951,13 @@ export default async function Home() {
                       </li>
                       <li>
                         <div className="adv-inner-bottom">
-                          <div className="title flex">
+                          <p className="title flex uppercase">
                             Производство
-                            <div className="max-md:hidden translate-x-7 flex-1 flex items-center">
+                            <span className="max-md:hidden translate-x-7 flex-1 flex items-center">
                               <span className="h-px bg-black flex-1"></span>
                               <span className="min-h-2.5 min-w-2.5 border-b-black border-b border-l -rotate-135 -translate-x-2.5"></span>
-                            </div>
-                          </div>
+                            </span>
+                          </p>
                           <p>
                             Производство блок‑контейнеров, бытовок и модульных
                             домов на собственном производстве
@@ -968,7 +966,7 @@ export default async function Home() {
                       </li>
                       <li>
                         <div className="adv-inner-bottom">
-                          <p className="title ">Монтаж</p>
+                          <p className="title uppercase">Монтаж</p>
                           <p>
                             Сборка и установка модульных конструкций на объекте
                             «под ключ»
@@ -987,7 +985,9 @@ export default async function Home() {
                         />
                       </div>
                       <div className="adv-inner-bottom">
-                        <p className="title ">Экологичность и Надежность</p>
+                        <p className="title uppercase">
+                          Экологичность и Надежность
+                        </p>
                         <p>
                           Металлоконструкции с полимерным покрытием, SIP-панели
                           и базальтовый утеплитель для круглогодичной
@@ -1017,12 +1017,12 @@ export default async function Home() {
         <div className="wrapper">
           <h2 data-typing className="mb-lg">
             От идеи до готового дома:
-            <br /> в <span className="text-accent">три шага</span>?
+            <br /> в <span className="text-accent uppercase">три шага</span>?
           </h2>
           <div className="grid grid-cols-[repeat(auto-fit,minmax(240px,1fr))] gap-md md:gap-lg md:mb-xl">
-            <div className="flex flex-col gap-sm md:gap-xs md:gap-sm">
-              <p className="title" data-from-bottom>
-                <span className="text-neutral-300">01.</span> <br />
+            <div className="flex flex-col gap-sm md:gap-4">
+              <p className="title uppercase" data-from-bottom>
+                <span className="text-neutral-300">01.</span>
                 Договор
               </p>
               <p data-from-bottom>
@@ -1030,20 +1030,20 @@ export default async function Home() {
                 Подписываем договор.
               </p>
             </div>
-            <div className="flex flex-col gap-sm md:gap-xs md:gap-sm">
-              <p className="title" data-from-bottom>
+            <div className="flex flex-col gap-sm md:gap-4">
+              <p className="title uppercase" data-from-bottom>
                 <span className="text-neutral-300">02.</span>
-                <br /> Производство
+                Производство
               </p>
               <p data-from-bottom>
                 Стандартные бытовки — от 5 рабочих дней. Индивидуальные проекты
                 — от 7 дней
               </p>
             </div>
-            <div className="flex flex-col gap-sm md:gap-xs md:gap-sm">
-              <p className="title" data-from-bottom>
+            <div className="flex flex-col gap-sm md:gap-4">
+              <p className="title uppercase" data-from-bottom>
                 <span className="text-neutral-300">03.</span>
-                <br /> Установка
+                Установка
               </p>
               <p data-from-bottom>
                 Доставляем готовые модули на участок и устанавливаем дом за 1-2
@@ -1062,7 +1062,7 @@ export default async function Home() {
 
       <section className="main-variants h-[320px] md:h-screen pt-header flex flex-col">
         <div className="w-full flex-1 p-md flex flex-col min-h-0">
-          <div className="bg-bg2 relative flex flex-1 min-h-0">
+          <div className="bg-bg2 relative flex flex-1 min-h-0 overflow-hidden">
             <CustomImage
               className="main-variants-img active object-contain!"
               data-zoom
@@ -1075,14 +1075,14 @@ export default async function Home() {
               alt=""
             />
             <div className="absolute max-md:bg-bg2 w-fit top-md left-1/2 max-md:-mt-18 -translate-x-1/2 flex gap-sm">
-              <a href="#" className="btn link active text-xs">
+              <a href="#" className="btn active uppercase">
                 Первый
                 <span></span>
                 <span></span>
                 <span></span>
                 <span></span>
               </a>
-              <a href="#" className="btn link text-xs">
+              <a href="#" className="btn uppercase">
                 Второй
                 <span></span>
                 <span></span>

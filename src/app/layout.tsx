@@ -1,18 +1,23 @@
 import type { Metadata } from "next";
-import { Google_Sans } from "next/font/google";
+import { Golos_Text, Mulish } from "next/font/google";
 import Script from "next/script";
 import Catalog from "src/components/catalogMenu";
 import Footer from "src/components/footer";
 import Policies from "src/components/policies";
 import { getGroupedProducts } from "src/libs/products";
-import { lunaObscura } from "../ts/fonts";
 import "../css/style.css";
 
-const play = Google_Sans({
-  // Google Fonts правильно!
+const golos = Golos_Text({
   weight: ["400", "700"], // Только нужные веса
   subsets: ["latin", "cyrillic"], // Русский!
-  variable: "--font-play", // CSS переменная
+  variable: "--font-golos", // CSS переменная
+  display: "swap", // Без layout shift
+});
+
+const mulish = Mulish({
+  weight: ["400", "700"], // Только нужные веса
+  subsets: ["latin", "cyrillic"], // Русский!
+  variable: "--font-mulish", // CSS переменная
   display: "swap", // Без layout shift
 });
 
@@ -29,7 +34,7 @@ export default async function RootLayout({
 }>) {
   const groupedProducts = await getGroupedProducts();
   return (
-    <html lang="en" className={`${play.variable} ${lunaObscura.variable}`}>
+    <html lang="en" className={`${golos.variable} ${mulish.variable}`}>
       <head>
         <meta charSet="UTF-8" />
         <meta

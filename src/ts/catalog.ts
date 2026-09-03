@@ -63,48 +63,28 @@ catalogBtn?.addEventListener("click", (e) => toggleCatalog(e, "open"));
 
 // SCROLL HIDE END FIELD
 
-function createScrollTriggerObserver(container: HTMLElement, config) {
-  const trigger = document.createElement("div");
-  trigger.className = config.className;
-  container.append(trigger);
+// function createScrollTriggerObserver(container: HTMLElement, config) {
+//   const trigger = document.createElement("div");
+//   trigger.className = config.className;
+//   container.append(trigger);
 
-  const observer = new IntersectionObserver(
-    ([entry]) => {
-      container.classList.toggle(
-        config.className.replace("-trigger", ""),
-        entry.isIntersecting === config.isIntersectingAction,
-      );
-    },
-    {
-      root: container,
-      threshold: 0,
-      rootMargin: config.rootMargin,
-    },
-  );
+//   const observer = new IntersectionObserver(
+//     ([entry]) => {
+//       container.classList.toggle(
+//         config.className.replace("-trigger", ""),
+//         entry.isIntersecting === config.isIntersectingAction,
+//       );
+//     },
+//     {
+//       root: container,
+//       threshold: 0,
+//       rootMargin: config.rootMargin,
+//     },
+//   );
 
-  observer.observe(trigger);
-  return observer; // для disconnect при необходимости
-}
-
-items.forEach((container) => {
-  const el = container.querySelector(".catalog-sub-wrapper") as HTMLElement;
-  const hasScrollbar = el.scrollHeight > el.clientHeight;
-  if (hasScrollbar) {
-    el.classList.add("has-scroll");
-    createScrollTriggerObserver(el, {
-      className: "scroll-end-trigger",
-      isIntersectingAction: false, // класс когда НЕ видно
-      rootMargin: "0px 0px -100% 0px",
-    });
-
-    // Начало скролла
-    createScrollTriggerObserver(el, {
-      className: "scroll-top-trigger",
-      isIntersectingAction: true, // класс когда видно
-      rootMargin: "-100% 0px 0px 0px",
-    });
-  }
-});
+//   observer.observe(trigger);
+//   return observer; // для disconnect при необходимости
+// }
 
 // mobileItems.forEach(item => {
 // 	item.addEventListener('click', () => {

@@ -5485,7 +5485,6 @@ var init_modules = __esm({
     init_utils();
     init_waapi();
     init_cubic_bezier();
-    init_random();
     init_stagger();
     init_split();
   }
@@ -40501,7 +40500,7 @@ void main() {
 
 // src/ts/adv.ts
 var adv_exports = {};
-var decorTexts, decorWrapper, decorItems, textWrapperOur, itemsOur, lastTriggered, TL_DURATION, fakeData, arrayWidthsOurText, tl, translateX, updateClasses, updateOnDiscrete, animateFake;
+var decorTexts, decorWrapper, decorItems, textWrapperOur, itemsOur, lastTriggered, TL_DURATION, fakeData, tl, translateX, updateClasses, updateOnDiscrete, animateFake;
 var init_adv = __esm({
   "src/ts/adv.ts"() {
     "use strict";
@@ -40520,17 +40519,13 @@ var init_adv = __esm({
     lastTriggered = -1;
     TL_DURATION = 3e3;
     fakeData = { p: 0 };
-    arrayWidthsOurText = itemsOur.reduce(
-      (acc, el, index) => [...acc, acc[acc.length - 1] + el.clientWidth + 48],
-      [0]
-    );
     tl = createTimeline({
       duration: TL_DURATION,
       autoplay: onScroll({
         target: ".adv-wrapper",
         // debug: true,
         sync: true,
-        enter: "60% top",
+        enter: "80% top",
         leave: "bottom"
       })
     });
@@ -40602,7 +40597,6 @@ var init_mobileMenu = __esm({
     contacts = document.querySelector(".header-contacts");
     hamb = document.querySelector(".hamb");
     isOpened = false;
-    console.log("isMobile", isMobile);
     if (isMobile) {
       let toggleMenu = function(event) {
         if (event.target.id === "catalog-btn") return;
@@ -40632,6 +40626,7 @@ var init_mobileMenu = __esm({
         menuChars,
         {
           translateY: [0, -14],
+          opacity: [1, 0],
           easing: "inOutCirc",
           delay: stagger(60)
         },
@@ -40640,6 +40635,7 @@ var init_mobileMenu = __esm({
         closeChars,
         {
           translateY: [0, -14],
+          opacity: [0, 1],
           easing: "inOutCirc",
           delay: stagger(60)
         },
@@ -40698,26 +40694,6 @@ function toggleCatalog(e, action) {
     tl2.play();
   }
 }
-function createScrollTriggerObserver(container, config) {
-  const trigger = document.createElement("div");
-  trigger.className = config.className;
-  container.append(trigger);
-  const observer2 = new IntersectionObserver(
-    ([entry]) => {
-      container.classList.toggle(
-        config.className.replace("-trigger", ""),
-        entry.isIntersecting === config.isIntersectingAction
-      );
-    },
-    {
-      root: container,
-      threshold: 0,
-      rootMargin: config.rootMargin
-    }
-  );
-  observer2.observe(trigger);
-  return observer2;
-}
 var catalogCloseBtn, catalogBtn, catalogWrapper, catalogInner, items, catalogItems, time2, translate, tl2, innerAnimate, itemsAnimate;
 var init_catalog = __esm({
   "src/ts/catalog.ts"() {
@@ -40766,25 +40742,6 @@ var init_catalog = __esm({
     tl2.sync(innerAnimate, 0).sync(itemsAnimate, "-=300");
     catalogCloseBtn?.addEventListener("click", (e) => toggleCatalog(e, "close"));
     catalogBtn?.addEventListener("click", (e) => toggleCatalog(e, "open"));
-    items.forEach((container) => {
-      const el = container.querySelector(".catalog-sub-wrapper");
-      const hasScrollbar = el.scrollHeight > el.clientHeight;
-      if (hasScrollbar) {
-        el.classList.add("has-scroll");
-        createScrollTriggerObserver(el, {
-          className: "scroll-end-trigger",
-          isIntersectingAction: false,
-          // класс когда НЕ видно
-          rootMargin: "0px 0px -100% 0px"
-        });
-        createScrollTriggerObserver(el, {
-          className: "scroll-top-trigger",
-          isIntersectingAction: true,
-          // класс когда видно
-          rootMargin: "-100% 0px 0px 0px"
-        });
-      }
-    });
     catalogItems.forEach((el) => {
       const linksAnimate = animate(el.querySelectorAll("a"), {
         opacity: [0, 1],
@@ -40798,32 +40755,6 @@ var init_catalog = __esm({
       });
       el.addEventListener("mouseleave", () => {
         linksAnimate.reverse();
-      });
-    });
-  }
-});
-
-// src/ts/buttonBig.ts
-var buttonBig_exports = {};
-var buttons;
-var init_buttonBig = __esm({
-  "src/ts/buttonBig.ts"() {
-    "use strict";
-    init_modules();
-    buttons = [...document.querySelectorAll(".btn.biggest")];
-    buttons.forEach((button) => {
-      button.addEventListener("mouseenter", () => {
-        animate(button.querySelector(".btnBigWrapper"), {
-          "--bg-alpha": [{ to: 1 }, { to: 0 }],
-          duration: 2e3
-        });
-        animate(button.querySelectorAll(".btnBigWrapper .btnBigItem"), {
-          scale: [{ to: [0, 1] }, { to: 0 }],
-          delay: stagger(100, {
-            grid: [14, 3],
-            from: random(0, 14 * 3)
-          })
-        });
       });
     });
   }
@@ -42381,26 +42312,26 @@ var init_slider = __esm({
 
 // src/ts/variant.ts
 var variant_exports = {};
-var buttons2, images;
+var buttons, images;
 var init_variant = __esm({
   "src/ts/variant.ts"() {
     "use strict";
-    buttons2 = [...document.querySelectorAll(".main-variants .btn")];
+    buttons = [...document.querySelectorAll(".main-variants .btn")];
     images = [...document.querySelectorAll(".main-variants .main-variants-img")];
-    buttons2.forEach((button, idx) => {
+    buttons.forEach((button, idx) => {
       button.addEventListener("click", (e) => {
         e.preventDefault();
         if (idx) {
-          buttons2[1].classList.add("active");
-          buttons2[0].classList.remove("active");
+          buttons[1].classList.add("active");
+          buttons[0].classList.remove("active");
           images[1].classList.add("active");
           images[0].classList.remove("active");
           return;
         }
         images[1].classList.remove("active");
         images[0].classList.add("active");
-        buttons2[1].classList.remove("active");
-        buttons2[0].classList.add("active");
+        buttons[1].classList.remove("active");
+        buttons[0].classList.add("active");
       });
     });
   }
@@ -42527,7 +42458,6 @@ if (isIndex) {
 var heavyModules = [
   Promise.resolve().then(() => (init_mobileMenu(), mobileMenu_exports)),
   Promise.resolve().then(() => (init_catalog(), catalog_exports)),
-  Promise.resolve().then(() => (init_buttonBig(), buttonBig_exports)),
   Promise.resolve().then(() => (init_scrollAnimation(), scrollAnimation_exports)),
   Promise.resolve().then(() => (init_modal(), modal_exports)),
   Promise.resolve().then(() => (init_slider(), slider_exports)),

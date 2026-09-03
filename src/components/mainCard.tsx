@@ -101,10 +101,10 @@ export default function MainCard({
           <div className="card-right">
             <div className="flex flex-row max-md:justify-between items-center gap-sm md:gap-lg">
               <div className="card-price" data-from-bottom>
-                <p>
-                  <span className="text-span">от </span>
-                  {priceFormatter(price)} ₽
+                <p className="font-display font-bold text-xl">
+                  от {priceFormatter(price)} ₽
                 </p>
+                <p>+ стоимость доставки</p>
               </div>
               <a
                 href={`${process.env.NEXT_PUBLIC_BASE_PATH}/product/${slug}`}
