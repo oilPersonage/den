@@ -17,15 +17,7 @@ var init_config = __esm({
     isQuestions = Boolean(
       document.querySelector("[data-page-questions]")
     );
-    isMobile = window.matchMedia("(max-width: 480px)").matches;
-  }
-});
-
-// src/ts/logotype.ts
-var logotype_exports = {};
-var init_logotype = __esm({
-  "src/ts/logotype.ts"() {
-    "use strict";
+    isMobile = window.matchMedia("(max-width: 768px)").matches;
   }
 });
 
@@ -5504,9 +5496,9 @@ function createElementNS(name) {
   return document.createElementNS("http://www.w3.org/1999/xhtml", name);
 }
 function createCanvasElement() {
-  const canvas2 = createElementNS("canvas");
-  canvas2.style.display = "block";
-  return canvas2;
+  const canvas = createElementNS("canvas");
+  canvas.style.display = "block";
+  return canvas;
 }
 function log(...params) {
   const message = "THREE." + params.shift();
@@ -9459,9 +9451,9 @@ var init_three_core = __esm({
         if (typeof HTMLCanvasElement === "undefined") {
           return image.src;
         }
-        let canvas2;
+        let canvas;
         if (image instanceof HTMLCanvasElement) {
-          canvas2 = image;
+          canvas = image;
         } else {
           if (_canvas === void 0) _canvas = createElementNS("canvas");
           _canvas.width = image.width;
@@ -9472,9 +9464,9 @@ var init_three_core = __esm({
           } else {
             context.drawImage(image, 0, 0, image.width, image.height);
           }
-          canvas2 = _canvas;
+          canvas = _canvas;
         }
-        return canvas2.toDataURL(type);
+        return canvas.toDataURL(type);
       }
       /**
        * Converts the given sRGB image data to linear color space.
@@ -9484,10 +9476,10 @@ var init_three_core = __esm({
        */
       static sRGBToLinear(image) {
         if (typeof HTMLImageElement !== "undefined" && image instanceof HTMLImageElement || typeof HTMLCanvasElement !== "undefined" && image instanceof HTMLCanvasElement || typeof ImageBitmap !== "undefined" && image instanceof ImageBitmap) {
-          const canvas2 = createElementNS("canvas");
-          canvas2.width = image.width;
-          canvas2.height = image.height;
-          const context = canvas2.getContext("2d");
+          const canvas = createElementNS("canvas");
+          canvas.width = image.width;
+          canvas.height = image.height;
+          const context = canvas.getContext("2d");
           context.drawImage(image, 0, 0, image.width, image.height);
           const imageData = context.getImageData(0, 0, image.width, image.height);
           const data = imageData.data;
@@ -9495,7 +9487,7 @@ var init_three_core = __esm({
             data[i] = SRGBToLinear(data[i] / 255) * 255;
           }
           context.putImageData(imageData, 0, 0);
-          return canvas2;
+          return canvas;
         } else if (image.data) {
           const data = image.data.slice(0);
           for (let i = 0; i < data.length; i++) {
@@ -30323,13 +30315,13 @@ function WebGLTextures(_gl, extensions, state, properties, capabilities, utils, 
         const width = Math.floor(scale * dimensions.width);
         const height = Math.floor(scale * dimensions.height);
         if (_canvas2 === void 0) _canvas2 = createCanvas(width, height);
-        const canvas2 = needsNewCanvas ? createCanvas(width, height) : _canvas2;
-        canvas2.width = width;
-        canvas2.height = height;
-        const context = canvas2.getContext("2d");
+        const canvas = needsNewCanvas ? createCanvas(width, height) : _canvas2;
+        canvas.width = width;
+        canvas.height = height;
+        const context = canvas.getContext("2d");
         context.drawImage(image, 0, 0, width, height);
         warn("WebGLRenderer: Texture has been resized from (" + dimensions.width + "x" + dimensions.height + ") to (" + width + "x" + height + ").");
-        return canvas2;
+        return canvas;
       } else {
         if ("data" in image) {
           warn("WebGLRenderer: Image in DataTexture is too big (" + dimensions.width + "x" + dimensions.height + ").");
@@ -34675,7 +34667,7 @@ void main() {
        */
       constructor(parameters = {}) {
         const {
-          canvas: canvas2 = createCanvasElement(),
+          canvas = createCanvasElement(),
           context = null,
           depth = true,
           stencil = false,
@@ -34719,7 +34711,7 @@ void main() {
         const renderListStack = [];
         const renderStateStack = [];
         let output = null;
-        this.domElement = canvas2;
+        this.domElement = canvas;
         this.debug = {
           /**
            * Enables error checking and reporting when shader programs are being compiled.
@@ -34755,8 +34747,8 @@ void main() {
         let _currentScissorTest = null;
         const _currentClearColor = new Color(0);
         let _currentClearAlpha = 0;
-        let _width = canvas2.width;
-        let _height = canvas2.height;
+        let _width = canvas.width;
+        let _height = canvas.height;
         let _pixelRatio = 1;
         let _opaqueSort = null;
         let _transparentSort = null;
@@ -34776,7 +34768,7 @@ void main() {
         }
         let _gl = context;
         function getContext(contextName, contextAttributes) {
-          return canvas2.getContext(contextName, contextAttributes);
+          return canvas.getContext(contextName, contextAttributes);
         }
         try {
           const contextAttributes = {
@@ -34789,10 +34781,10 @@ void main() {
             powerPreference,
             failIfMajorPerformanceCaveat
           };
-          if ("setAttribute" in canvas2) canvas2.setAttribute("data-engine", `three.js r${REVISION}`);
-          canvas2.addEventListener("webglcontextlost", onContextLost, false);
-          canvas2.addEventListener("webglcontextrestored", onContextRestore, false);
-          canvas2.addEventListener("webglcontextcreationerror", onContextCreationError, false);
+          if ("setAttribute" in canvas) canvas.setAttribute("data-engine", `three.js r${REVISION}`);
+          canvas.addEventListener("webglcontextlost", onContextLost, false);
+          canvas.addEventListener("webglcontextrestored", onContextRestore, false);
+          canvas.addEventListener("webglcontextcreationerror", onContextCreationError, false);
           if (_gl === null) {
             const contextName = "webgl2";
             _gl = getContext(contextName, contextAttributes);
@@ -34853,7 +34845,7 @@ void main() {
         }
         initGLContext();
         if (_outputBufferType !== UnsignedByteType) {
-          output = new WebGLOutput(_outputBufferType, canvas2.width, canvas2.height, depth, stencil);
+          output = new WebGLOutput(_outputBufferType, canvas.width, canvas.height, depth, stencil);
         }
         const xr = new WebXRManager(_this, _gl);
         this.xr = xr;
@@ -34889,14 +34881,14 @@ void main() {
           }
           _width = width;
           _height = height;
-          canvas2.width = Math.floor(width * _pixelRatio);
-          canvas2.height = Math.floor(height * _pixelRatio);
+          canvas.width = Math.floor(width * _pixelRatio);
+          canvas.height = Math.floor(height * _pixelRatio);
           if (updateStyle === true) {
-            canvas2.style.width = width + "px";
-            canvas2.style.height = height + "px";
+            canvas.style.width = width + "px";
+            canvas.style.height = height + "px";
           }
           if (output !== null) {
-            output.setSize(canvas2.width, canvas2.height);
+            output.setSize(canvas.width, canvas.height);
           }
           this.setViewport(0, 0, width, height);
         };
@@ -34907,8 +34899,8 @@ void main() {
           _width = width;
           _height = height;
           _pixelRatio = pixelRatio;
-          canvas2.width = Math.floor(width * pixelRatio);
-          canvas2.height = Math.floor(height * pixelRatio);
+          canvas.width = Math.floor(width * pixelRatio);
+          canvas.height = Math.floor(height * pixelRatio);
           this.setViewport(0, 0, width, height);
         };
         this.setEffects = function(effects) {
@@ -35027,9 +35019,9 @@ void main() {
           this.clear(false, false, true);
         };
         this.dispose = function() {
-          canvas2.removeEventListener("webglcontextlost", onContextLost, false);
-          canvas2.removeEventListener("webglcontextrestored", onContextRestore, false);
-          canvas2.removeEventListener("webglcontextcreationerror", onContextCreationError, false);
+          canvas.removeEventListener("webglcontextlost", onContextLost, false);
+          canvas.removeEventListener("webglcontextrestored", onContextRestore, false);
+          canvas.removeEventListener("webglcontextcreationerror", onContextCreationError, false);
           background.dispose();
           renderLists.dispose();
           renderStates.dispose();
@@ -40614,7 +40606,6 @@ var init_mobileMenu = __esm({
         isOpened = !isOpened;
       };
       toggleMenu2 = toggleMenu;
-      console.log("mobile menu");
       const { chars: menuChars } = splitText(".hamb-open", { chars: true });
       const { chars: closeChars } = splitText(".hamb-close", { chars: true });
       [...links, ...[...contacts.querySelectorAll("a")]].forEach(
@@ -42436,8 +42427,8 @@ var init_accordion = __esm({
 
 // src/ts/main.ts
 init_config();
-var [logotype, intro, canvas] = await Promise.all([
-  Promise.resolve().then(() => (init_logotype(), logotype_exports)),
+var [intro] = await Promise.all([
+  // import("ts/logotype"),
   Promise.resolve().then(() => (init_intro(), intro_exports)),
   Promise.resolve().then(() => (init_dotsCanvas(), dotsCanvas_exports))
 ]);

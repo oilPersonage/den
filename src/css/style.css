@@ -367,12 +367,15 @@ body.menu-opened {
   @apply text-accent;
 }
 .nav::after {
-  @apply absolute -bottom-1 left-0 w-full h-0.5 bg-accent content-[''] opacity-0 transition-all ease-in pointer-events-none;
+  @apply absolute -bottom-1 left-0 w-full h-px bg-accent content-[''] opacity-0 transition-all ease-in pointer-events-none;
 }
 nav > a,
 .header-contacts > a {
   @apply opacity-0 text-nowrap;
   backface-visibility: hidden;
+}
+.header-contacts > a {
+  @apply md:max-xl:px-3!;
 }
 nav a:hover {
   @apply text-accent-hover;
@@ -512,7 +515,7 @@ a:hover .svg-link {
   @apply grid grid-cols-2 gap-1 min-w-max;
 }
 .loading-inner svg {
-  @apply origin-bottom w-md h-md;
+  @apply origin-bottom w-sm h-sm;
 }
 @keyframes morthD {
   0%,
@@ -922,7 +925,7 @@ footer p {
 }
 .catalog-content {
   grid-template-rows: repeat(3, 1fr);
-  @apply flex-1 md:grid h-full grid-cols-5 gap-2xs *:opacity-0 max-[1268px]:grid-cols-4 max-lg:grid-cols-2
+  @apply flex-1 md:grid h-full grid-cols-5 *:opacity-0 max-[1268px]:grid-cols-4 max-lg:grid-cols-2
  	max-md:grid-cols-1 flex flex-col max-md:h-fit max-md:pb-lg max-md:pr-3;
 }
 .catalog-item a p {
@@ -982,7 +985,7 @@ footer p {
   @apply md:border-accent;
 }
 .catalog-item > p {
-  @apply font-bold md:uppercase font-display! md:ml-2.5 md:mb-0.5 max-md:py-4
+  @apply font-bold md:uppercase font-display! md:ml-2.5 md:mb-0.5 max-md:py-3
    max-md:pr-8 flex justify-between items-center md:inline max-md:pl-2.5;
 }
 

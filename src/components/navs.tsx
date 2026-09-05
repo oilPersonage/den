@@ -69,11 +69,11 @@ export default function Navs({ page }: { page?: string }) {
           </nav>
           <div className="header-contacts">
             <a href="tel:+7(342)259-24-46" className="link btn" data-ai="1.1">
-              <p className="md:max-2xl:hidden">+7 (342) 259-24-46</p>
+              <p className="md:max-lg:hidden">+7 (342) 259-24-46</p>
               <svg
                 width="24"
                 height="24"
-                className="max-md:hidden  2xl:hidden"
+                className="max-md:hidden lg:hidden"
                 viewBox="0 0 24 24"
                 fill="currentColor"
                 xmlns="http://www.w3.org/2000/svg"
@@ -100,11 +100,11 @@ export default function Navs({ page }: { page?: string }) {
               className="link btn"
               data-ai="1.1"
             >
-              <p className="md:max-2xl:hidden">Героев Хасана 72 Б</p>
+              <p className="md:max-lg:hidden">Героев Хасана 72 Б</p>
               <svg
                 width="24"
                 height="24"
-                className="max-md:hidden 2xl:hidden"
+                className="max-md:hidden lg:hidden"
                 viewBox="0 0 24 24"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"

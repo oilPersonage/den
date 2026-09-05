@@ -99,7 +99,7 @@ export default function MainCard({
             </div>
           </div>
           <div className="card-right">
-            <div className="flex flex-row max-md:justify-between items-center gap-sm md:gap-lg">
+            <div className="flex flex-row max-md:justify-between items-center gap-sm md:gap-md">
               <div className="card-price" data-from-bottom>
                 <p className="font-display font-bold text-xl">
                   от {priceFormatter(price)} ₽
