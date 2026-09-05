@@ -40614,6 +40614,7 @@ var init_mobileMenu = __esm({
         isOpened = !isOpened;
       };
       toggleMenu2 = toggleMenu;
+      console.log("mobile menu");
       const { chars: menuChars } = splitText(".hamb-open", { chars: true });
       const { chars: closeChars } = splitText(".hamb-close", { chars: true });
       [...links, ...[...contacts.querySelectorAll("a")]].forEach(

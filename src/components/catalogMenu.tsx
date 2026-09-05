@@ -17,11 +17,11 @@ export default function Catalog({
     <div id="catalog-wrapper" className="catalog-wrapper" data-lenis-prevent>
       <div id="catalog-inner" className="catalog-inner main-wrapper relative">
         <div className="flex justify-between items-center">
-          <h4 className="uppercase">Каталог</h4>
+          {/* <h4 className="uppercase max-md:hidden">Каталог</h4> */}
           <a
             id="catalog-close-btn"
             href="#"
-            className="btn link"
+            className="btn link ml-auto"
             aria-label="Закрыть каталог"
           >
             <p className="max-md:hidden">Закрыть</p>

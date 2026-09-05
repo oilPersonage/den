@@ -371,14 +371,14 @@ body.menu-opened {
 }
 nav > a,
 .header-contacts > a {
-  @apply opacity-0 font-bold text-nowrap;
+  @apply opacity-0 text-nowrap;
   backface-visibility: hidden;
 }
 nav a:hover {
   @apply text-accent-hover;
 }
 nav a {
-  @apply max-md:mb-md;
+  @apply max-md:mb-sm max-md:text-lg;
 }
 .navs-wrapper {
   @apply flex items-center md:gap-2 flex-1 md:justify-between fixed md:static max-md:flex-col top-header inset-0
@@ -907,30 +907,30 @@ footer p {
 }
 
 .catalog-inner {
-  @apply grid grid-rows-[auto_1fr] bg-bg gap-sm py-md max-md:pb-0  max-md:overflow-y-auto
+  @apply grid grid-rows-[auto_1fr] bg-bg md:gap-sm py-md max-md:pb-0 max-md:overflow-y-auto
  h-full max-h-screen max-md:max-h-screen max-md:pr-1 max-md:pl-3 max-md:pt-3;
 }
 
 .catalog-item:hover .catalog-sub-wrapper {
-  @apply opacity-100;
+  @apply opacity-100 grid-rows-[1fr];
 }
 .catalog-sub-wrapper {
-  @apply relative flex-1 flex flex-col md:h-full items-stretch order-2 opacity-0
-	 overflow-hidden md:overflow-y-auto max-md:grid min-h-0;
+  @apply relative flex-1 flex flex-col md:h-full items-stretch order-2 md:opacity-0
+	 overflow-hidden md:overflow-y-auto max-md:grid grid-rows-[0fr] min-h-0;
   will-change: grid-template-rows;
   transition: all 0.3s ease;
 }
 .catalog-content {
   grid-template-rows: repeat(3, 1fr);
-  @apply flex-1 md:grid h-full grid-cols-5 gap-sm md:gap-2xs *:opacity-0 max-[1268px]:grid-cols-4 max-lg:grid-cols-2
+  @apply flex-1 md:grid h-full grid-cols-5 gap-2xs *:opacity-0 max-[1268px]:grid-cols-4 max-lg:grid-cols-2
  	max-md:grid-cols-1 flex flex-col max-md:h-fit max-md:pb-lg max-md:pr-3;
 }
 .catalog-item a p {
   @apply font-sans tracking-normal;
 }
 .catalog-item {
-  @apply relative pt-3! max-md:pb-3! flex flex-col md:gap-2 md:bg-bg2 md:p-0.5 md:pb-0 border border-transparent transition-colors
-	will-change-transform max-md:bg-bg2;
+  @apply relative md:pt-3! flex flex-col md:gap-2 md:bg-bg2 md:p-0.5 md:pb-0 border border-transparent transition-colors
+	will-change-transform;
 }
 .catalog-item-row {
   @apply md:pl-0.5 md:pb-0.5;
@@ -955,8 +955,7 @@ footer p {
 }
 
 .catalog-item-row .catalog-sub-menu a {
-  @apply flex-col pr-0 justify-end overflow-hidden items-start max-md:opacity-100! max-md:transform-none!
-  max-md:min-h-18!;
+  @apply md:flex-col pr-0 justify-end overflow-hidden items-end md:items-start max-md:opacity-100! max-md:transform-none! max-md:max-h-24;
 }
 .catalog-sub-menu .btn.link:hover {
   /* @apply bg-transparent; */
@@ -983,7 +982,7 @@ footer p {
   @apply md:border-accent;
 }
 .catalog-item > p {
-  @apply font-bold md:uppercase font-display! md:ml-2.5 md:mb-0.5 max-md:text-span
+  @apply font-bold md:uppercase font-display! md:ml-2.5 md:mb-0.5 max-md:py-4
    max-md:pr-8 flex justify-between items-center md:inline max-md:pl-2.5;
 }
 
@@ -997,12 +996,12 @@ footer p {
 }
 .catalog-sub-menu {
   @apply flex-1 flex flex-col md:grid grid-cols-[1fr] grid-rows-[repeat(auto-fit,minmax(70px,1fr))] md:absolute left-0 top-0 right-0
-  z-3 md:pb-0.5 overflow-hidden min-h-full;
+  z-3 md:pb-0.5 overflow-hidden min-h-full max-md:gap-1;
 }
 
 .catalog-sub-menu a {
-  @apply flex flex-col! justify-end items-start gap-xs w-full max-md:pl-0 max-md:pr-2.5 p-0 bg-bg2
-  max-md:opacity-100! max-md:transform-none! min-h-30!;
+  @apply flex flex-row-reverse justify-between md:flex-col! md:justify-end items-start gap-xs w-full max-md:pl-0 max-md:pr-2.5 p-0 md:bg-bg2
+    max-md:opacity-100! max-md:transform-none! md:min-h-30 min-h-24! max-md:py-4 max-md:bg-bg2;
 }
 .catalog-sub-menu svg {
   @apply absolute left-auto right-5.5 top-3;
@@ -1011,22 +1010,22 @@ footer p {
   @apply flex-1;
 }
 .catalog-sub-extraText {
-  @apply absolute top-1 left-sm text-xl opacity-30;
+  @apply absolute top-1 left-sm text-xl opacity-30 max-md:hidden;
 }
 .catalog-sub-menu a .svg-link {
   /*@apply pr-0 ml-0;*/
 }
 .catalog-sub-menu p {
-  @apply leading-[1.2] max-md:w-3/4 pb-1.5! px-3 relative flex-0 h-fit w-fit;
+  @apply leading-[1.2] max-md:flex-1 pb-1.5! px-3 relative flex-0 h-fit md:w-fit;
 }
 .catalog-sub-img {
-  @apply h-full flex-1 ml-auto;
+  @apply h-full md:flex-1 ml-auto max-md:w-30;
 }
 .catalog-sub-menu a:hover p {
   @apply text-accent-hover;
 }
 .catalog-sub-menu img {
-  @apply max-w-full max-h-20 transition-transform duration-600 object-contain;
+  @apply md:max-w-full max-h-20 transition-transform duration-600 object-contain;
 }
 
 #catalog-close-btn {

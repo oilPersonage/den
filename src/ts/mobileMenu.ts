@@ -8,6 +8,7 @@ const hamb = document.querySelector(".hamb");
 let isOpened = false;
 
 if (isMobile) {
+  console.log("mobile menu");
   const { chars: menuChars } = splitText(".hamb-open", { chars: true });
   const { chars: closeChars } = splitText(".hamb-close", { chars: true });
   [...links, ...[...contacts.querySelectorAll("a")]].forEach((el) =>

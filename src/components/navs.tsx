@@ -68,11 +68,7 @@ export default function Navs({ page }: { page?: string }) {
             ))}
           </nav>
           <div className="header-contacts">
-            <a
-              href="tel:+7(342)259-24-46"
-              className="link btn p-3!"
-              data-ai="1.1"
-            >
+            <a href="tel:+7(342)259-24-46" className="link btn" data-ai="1.1">
               <p className="md:max-2xl:hidden">+7 (342) 259-24-46</p>
               <svg
                 width="24"
@@ -101,7 +97,7 @@ export default function Navs({ page }: { page?: string }) {
             </a>
             <a
               href="https://yandex.ru/maps/50/perm/house/ulitsa_geroyev_khasana_72b/YU8YdAFgS0wGQFttfXV3cH9nYQ==/?ll=56.260292%2C57.961345&mode=search&sctx=ZAAAAAgAEAAaKAoSCUAXDRmPOENAEfMf0m9f7UtAEhIJj3IwmwDDzj8RxqUqbXGNsz8iBgABAgMEBSgKOABA9lNIAWoCcnWdAc3MzD2gAQCoAQC9AcPwGSrCAQEAggIf0LPQtdGA0L7QtdCyINGF0LDRgdCw0L3QsCA3MiDQsYoCAJICAJoCDGRlc2t0b3AtbWFwcw%3D%3D&sll=56.260292%2C57.961345&sspn=0.008864%2C0.004356&text=%D0%B3%D0%B5%D1%80%D0%BE%D0%B5%D0%B2%20%D1%85%D0%B0%D1%81%D0%B0%D0%BD%D0%B0%2072%20%D0%B1&z=17.23"
-              className="link btn p-3!"
+              className="link btn"
               data-ai="1.1"
             >
               <p className="md:max-2xl:hidden">Героев Хасана 72 Б</p>
