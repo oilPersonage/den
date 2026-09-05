@@ -39195,7 +39195,7 @@ var isIndex = Boolean(document.querySelector("[data-page-index]"));
 var isQuestions = Boolean(
   document.querySelector("[data-page-questions]")
 );
-var isMobile = window.matchMedia("(max-width: 480px)").matches;
+var isMobile = window.matchMedia("(max-width: 768px)").matches;
 
 // src/ts/factoryShadow.ts
 function factoryShadow(prps) {
