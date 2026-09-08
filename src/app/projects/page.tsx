@@ -11,7 +11,7 @@ export default function Projects() {
     <>
       <Navs page="/projects" />
       <CustomImage
-        className="projects-img fixed -left-10 max-md:min-w-200 md:w-6/7 top-20 md:-bottom-50 brightness-115"
+        className="projects-img fixed -left-10 max-md:min-w-200 md:w-6/7 max-md:top-20 md:-bottom-50 brightness-115"
         src="/pictures/projects/featureHome3.webp"
         alt="Feature Home 3"
       />
@@ -44,7 +44,10 @@ export default function Projects() {
                 </p>
               </div>
 
-              <div className="flex flex-col gap-sm md:text-right" data-ai="3">
+              <div
+                className="flex flex-col md:items-end gap-sm md:text-right"
+                data-ai="3"
+              >
                 <p className="title text-center md:text-right">
                   Готовые решения в наличии
                 </p>
