@@ -11,15 +11,15 @@ export default function Projects() {
     <>
       <Navs page="/projects" />
       <CustomImage
-        className="projects-img fixed -left-10 w-6/7 -bottom-50 brightness-115"
+        className="projects-img fixed -left-10 max-md:min-w-200 md:w-6/7 top-20 md:-bottom-50 brightness-115"
         src="/pictures/projects/featureHome3.webp"
         alt="Feature Home 3"
       />
       <div className="pt-header" id="projects">
         <div className="main-wrapper projects fixed inset-0">
           <div className="projects-header">
-            <div className="projects-top flex flex-col items-end gap-md">
-              <h1 data-ai="3">
+            <div className="projects-top flex flex-col md:items-end gap-md">
+              <h1 data-ai="3" className="max-md:text-center">
                 Мы реализовали <span className="text-accent">3000+</span>
                 проектов
               </h1>
@@ -33,23 +33,22 @@ export default function Projects() {
               </p> */}
             </div>
 
-            <div className="projects-bottom items-end mr-0 pr-0 flex flex-col gap-md mt-lg wrapper">
-              <div className="flex flex-col gap-sm text-right" data-ai="3">
-                <p className="title text-right">
+            <div className="projects-bottom items-end mr-0 pr-0 flex flex-col gap-md md:mt-lg wrapper">
+              <div className="flex flex-col gap-sm md:text-right" data-ai="3">
+                <p className="title text-center md:text-right">
                   Есть идеи, но не знаете как реализовать?
                 </p>
-                <p>
+                <p className="max-md:text-center">
                   Подберем для вас лучшую идею и поможем с реализацией проекта и
                   доставим до двера
                 </p>
               </div>
 
-              <div
-                className="flex flex-col items-end gap-sm *:text-end"
-                data-ai="3"
-              >
-                <p className="title">Готовые решения в наличии</p>
-                <p className="max-w-3/4">
+              <div className="flex flex-col gap-sm md:text-right" data-ai="3">
+                <p className="title text-center md:text-right">
+                  Готовые решения в наличии
+                </p>
+                <p className="max-md:text-center md:max-w-3/4">
                   Бытовки, дачные домики и модульные дома. Быстрая сборка за 1-3
                   дня. Доставка по России от 7 дней.
                 </p>
@@ -85,11 +84,14 @@ export default function Projects() {
             <h2 data-typing className="mb-md">
               Фотографии
             </h2>
-            <div className="grid grid-cols-[repeat(auto-fill,minmax(240px,1fr))] *:bg-black/20 gap-1 *:min-h-40">
+            <div
+              className="grid grid-cols-3 md:grid-cols-[repeat(auto-fill,minmax(240px,1fr))] *:overflow-hidden
+             *:bg-black/20 gap-1 *:min-h-40"
+            >
               {[
                 ...Array.from({ length: 19 }, (_, i) => (
                   <div
-                    className="relative cursor-pointer group overflow-hidden aspect-square"
+                    className="relative cursor-pointer group overflow-hidden md:aspect-square"
                     key={i}
                     data-from-bottom
                     data-src={`/pictures/projects/${i + 1}.webp`}

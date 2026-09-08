@@ -26,7 +26,20 @@ export default function ProductPrice({
 
   return (
     <div className="flex flex-col gap-md mb-lg max-md:order-4 max-md:mt-lg">
-      <div className="flex gap-md relative z-1 max-md:mb-sm">
+      <div className="flex justify-between relative z-1">
+        <div className="flex flex-col" data-ai="4">
+          <div className="flex flex-col gap-x-sm text-xl">
+            <div className="flex items-end gap-1">
+              <p className="font-bold text-2xl">
+                от {priceFormatter(price * count)} ₽
+              </p>
+            </div>
+            <p className="text-black/40">
+              Стоимость доставки:{" "}
+              {isSelfDeliver ? "Бесплатно" : "Зависит от региона"}
+            </p>
+          </div>
+        </div>
         <div className="flex flex-col gap-xs" data-ai="4">
           <p>Кол-во товара</p>
           <div className="product-count">
@@ -99,6 +112,7 @@ export default function ProductPrice({
             </button>
           </div>
         </div>
+
         {/*<div className='flex flex-col gap-sm' data-ai='4'>
 					<p>Способ доставки:</p>
 					<Select
@@ -125,7 +139,7 @@ export default function ProductPrice({
           data-ai="4"
           title="Оставить заявку"
         />
-        <div className="flex flex-col" data-ai="4">
+        <div className="flex flex-col max-md:hidden!" data-ai="4">
           <div className="flex flex-wrap gap-x-sm text-xl max-md:*:text-2xl">
             <p>от {priceFormatter(price)} ₽</p>
             <p>x {priceFormatter(count)}</p>

@@ -64,7 +64,10 @@ export default function ProductSection({
             />
           </div>
         </div>
+        {console.log(activeProduct.name, activeProduct.price, "activeProduct")}
         <ProductInfo
+          price={activeProduct?.price}
+          name={activeProduct?.name}
           setActiveProduct={(s: Product["slug"]) =>
             setActiveProduct(
               sameProducts.find((el) => el.slug === s) as Product,

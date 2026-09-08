@@ -18,7 +18,7 @@ export default function Navs({ page }: { page?: string }) {
   return (
     <header
       id="header"
-      className="main-wrapper fixed z-4 top-0 left-0 right-0 border-b"
+      className="main-wrapper fixed z-6 top-0 left-0 right-0 border-b"
     >
       <div className="flex justify-between h-header items-center">
         <a

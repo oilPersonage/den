@@ -68,7 +68,7 @@ export default function RequestForm({ isIntro }: { isIntro?: boolean }) {
           data-ai={isIntro ? "4" : ""}
           data-from-bottom
         >
-          <a href="#" className="btn black">
+          <a href="#" className="btn black max-md:py-4">
             Отправить
             <span className="btn-tl"></span>
             <span className="btn-tr"></span>

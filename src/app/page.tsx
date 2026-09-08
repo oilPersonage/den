@@ -1060,21 +1060,21 @@ export default async function Home() {
         </div>
       </section>
 
-      <section className="main-variants h-[320px] md:h-screen pt-header flex flex-col">
+      <section className="main-variants h-screen pt-header flex flex-col">
         <div className="w-full flex-1 p-md flex flex-col min-h-0">
           <div className="bg-bg2 relative flex flex-1 min-h-0 overflow-hidden">
             <CustomImage
-              className="main-variants-img active object-contain!"
+              className="main-variants-img active md:object-contain!"
               data-zoom
               src="/future-home-v2.png"
               alt=""
             />
             <CustomImage
-              className="main-variants-img object-contain!"
+              className="main-variants-img md:object-contain!"
               src="/future-home-v2.png"
               alt=""
             />
-            <div className="absolute max-md:bg-bg2 w-fit top-md left-1/2 max-md:-mt-18 -translate-x-1/2 flex gap-sm">
+            <div className="absolute max-md:bg-bg2 w-fit top-md left-1/2 -translate-x-1/2 flex gap-sm">
               <a href="#" className="btn active uppercase">
                 Первый
                 <span></span>

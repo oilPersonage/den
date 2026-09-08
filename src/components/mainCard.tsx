@@ -67,7 +67,7 @@ export default function MainCard({
                   <p className="card-text-info">Конфигурации:</p>
                   <div className="same-products-arrows-wrapper flex gap-xs *:py-3 *:px-2">
                     <button className="btn link rotate-90 small">
-                      <ArrowSvg className="w-3 -translate-x-px" />
+                      <ArrowSvg className="w-3 -translate-y-0.5" />
                       <span></span>
                       <span></span>
                       <span></span>
@@ -75,7 +75,7 @@ export default function MainCard({
                     </button>
 
                     <button className="btn link -rotate-90 small">
-                      <ArrowSvg className="w-3 translate-x-px" />
+                      <ArrowSvg className="w-3 translate-y-0.5" />
                       <span></span>
                       <span></span>
                       <span></span>

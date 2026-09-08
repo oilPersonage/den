@@ -98,13 +98,13 @@ export default function Request(props: TProps) {
           {props.renderedExtraInfo}
           {Object.keys(props).length > 0 && (
             <div
-              className="max-md:flex max-md:flex-wrap gap-sm my-md -mt-1"
+              className="max-md:flex max-md:flex-col gap-sm my-md -mt-1"
               data-modal-anim="1"
             >
-              {renderSelect.map(({ title, text }) => (
+              {renderSelect.map(({ title, text }, idx) => (
                 <div
                   key={title}
-                  className="flex gap-sm max-md:flex-col max-md:gap-1"
+                  className={`flex gap-sm ${idx === 0 ? "max-md:flex-col" : ""} max-md:gap-1`}
                 >
                   <p className="min-w-40">{title}</p>
                   <p className="text-left">{text}</p>
@@ -114,7 +114,7 @@ export default function Request(props: TProps) {
           )}
 
           <div className="flex flex-col gap-sm">
-            <a data-modal-anim="1" href="#" className="btn black">
+            <a data-modal-anim="1" href="#" className="btn black max-md:py-4">
               Отправить
               <span className="btn-tl"></span>
               <span className="btn-tr"></span>
