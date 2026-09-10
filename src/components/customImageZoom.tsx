@@ -40,8 +40,8 @@ export const CustomImageZoom = ({
       const percentY = (y / rect.height) * 100;
 
       // (percentX - 50) даёт диапазон от -50 до 50 — удобно для параллакса
-      const moveX = (percentX - 50) * 0.7;
-      const moveY = (percentY - 50) * 0.7;
+      const moveX = (percentX - 50) * 0.6;
+      const moveY = (percentY - 50) * 0.6;
 
       // пример применения к вложенной картинке
       imgRef.current.style.transform = `translate(${moveX}%, ${moveY}%)`;
@@ -57,7 +57,7 @@ export const CustomImageZoom = ({
 
   return (
     <div ref={ref} className={classNameWrapper}>
-      <div ref={imgRef} className={isZoom ? "scale-300" : undefined}>
+      <div ref={imgRef} className={isZoom ? "scale-200" : undefined}>
         <CustomImage
           className={className + " cursor-crosshair"}
           src={src}

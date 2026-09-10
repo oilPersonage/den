@@ -27,19 +27,6 @@ export default function ProductPrice({
   return (
     <div className="flex flex-col gap-md mb-lg max-md:order-4 max-md:mt-lg">
       <div className="flex justify-between relative z-1">
-        <div className="flex flex-col" data-ai="4">
-          <div className="flex flex-col gap-x-sm text-xl">
-            <div className="flex items-end gap-1">
-              <p className="font-bold text-2xl">
-                от {priceFormatter(price * count)} ₽
-              </p>
-            </div>
-            <p className="text-black/40">
-              Стоимость доставки:{" "}
-              {isSelfDeliver ? "Бесплатно" : "Зависит от региона"}
-            </p>
-          </div>
-        </div>
         <div className="flex flex-col gap-xs" data-ai="4">
           <p>Кол-во товара</p>
           <div className="product-count">

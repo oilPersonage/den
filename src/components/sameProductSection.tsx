@@ -23,14 +23,14 @@ export default function SameProductSection({
         <div className="flex gap-md mb-sm md:mb-lg max-md:justify-between items-center">
           <h2>Еще товаров</h2>
           <div className="more-product-arrows-wrapper flex items-center gap-xs">
-            <button className="btn link biggest max-md:px-4 px-sm bg-bg2">
+            <button className="btn link biggest max-md:px-8 px-4 bg-bg2">
               <ArrowSvg className="rotate-90 -translate-x-0.5" />
               <span></span>
               <span></span>
               <span></span>
               <span></span>
             </button>
-            <button className="btn link biggest max-md:px-4 px-sm bg-bg2">
+            <button className="btn link biggest max-md:px-8 px-4 bg-bg2">
               <ArrowSvg className="-rotate-90 translate-x-0.5" />
               <span></span>
               <span></span>
