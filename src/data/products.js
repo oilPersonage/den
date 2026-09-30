@@ -107,7 +107,7 @@ const boxs = [
     price: 10000,
     rent: 15000,
     headingDescription:
-      "Блок-контейнер с внутренней перегородкой и проходной планировкой — удобен для организации двух функциональных зон (например, рабочего кабинета и комнаты отдыха) в одном модуле. Позволяет разделить потоки людей или назначение помещений без потери полезной площади. Надёжная конструкция и отделка вагонкой для круглогодичного использования.",
+      "Блок-контейнер с внутренней перегородкой и проходной планировкой — удобен для организации двух функциональных зон (например, рабочего кабинета и комнаты отдыха) в одном модуле. Позволяет разделить потоки людей или назначение помещений без потери полезной площади",
     tag: "Блок-контейнер",
     characters: [
       {
@@ -274,11 +274,11 @@ const pavilions = [
       },
     ],
     id: "bCLAY_I8AYgGymvlEJ7ab",
-    preview: "/pictures/pavilions/preview.png",
+    preview: "/pictures/pavilions/v5.png",
     pictures: [
       {
-        src: "/pictures/pavilions/v2.png",
-        smallSrc: "/pictures/pavilions/v2-small.png",
+        src: "/pictures/pavilions/v4.png",
+        smallSrc: "/pictures/pavilions/v4.png",
       },
     ],
   },
@@ -336,8 +336,8 @@ const pavilions = [
     id: "7Lok6SWpWZzlpQ8j4M80s",
     pictures: [
       {
-        src: "/pictures/pavilions/v1.png",
-        smallSrc: "/pictures/pavilions/v1-small.png",
+        src: "/pictures/pavilions/v5.png",
+        smallSrc: "/pictures/pavilions/v5.png",
       },
     ],
   },
@@ -395,8 +395,8 @@ const pavilions = [
     id: "pYFS5OV7gAUtRWO52lxf9",
     pictures: [
       {
-        src: "/pictures/pavilions/v3.png",
-        smallSrc: "/pictures/pavilions/v3-small.png",
+        src: "",
+        smallSrc: "",
       },
     ],
   },
@@ -519,8 +519,8 @@ const moduleBuildins = [
     extraText: "x3",
     pictures: [
       {
-        src: "/pictures/module-building/v2.png",
-        smallSrc: "/pictures/module-building/v2.png",
+        src: "/pictures/module-building/v3.png",
+        smallSrc: "/pictures/module-building/v3.png",
       },
     ],
   },
@@ -579,8 +579,8 @@ const moduleBuildins = [
     extraText: "x6",
     pictures: [
       {
-        src: "/pictures/module-building/v2.png",
-        smallSrc: "/pictures/module-building/v2.png",
+        src: "/pictures/module-building/v6.png",
+        smallSrc: "/pictures/module-building/v6.png",
       },
     ],
   },
@@ -639,8 +639,8 @@ const moduleBuildins = [
     extraText: "x12",
     pictures: [
       {
-        src: "/pictures/module-building/v2.png",
-        smallSrc: "/pictures/module-building/v2.png",
+        src: "/pictures/module-building/v6.png",
+        smallSrc: "/pictures/module-building/v6.png",
       },
     ],
   },
@@ -761,8 +761,8 @@ const posts = [
     id: "TBM7yOnqvkO8uXhUji7nn",
     pictures: [
       {
-        src: "/pictures/card-1.png",
-        smallSrc: "/pictures/card-1.png",
+        src: "/pictures/post/post.png",
+        smallSrc: "/pictures/post/post.png",
       },
     ],
   },
@@ -820,8 +820,8 @@ const posts = [
     id: "t7jDQKqgrbvn_sWMsfyej",
     pictures: [
       {
-        src: "/pictures/card-1.png",
-        smallSrc: "/pictures/card-1.png",
+        src: "",
+        smallSrc: "",
       },
     ],
   },
@@ -879,8 +879,8 @@ const posts = [
     id: "Xv9PjgF1CQ4-727qWLLMa",
     pictures: [
       {
-        src: "/pictures/card-1.png",
-        smallSrc: "/pictures/card-1.png",
+        src: "",
+        smallSrc: "",
       },
     ],
   },
@@ -913,7 +913,10 @@ const moduleHomes = [
     ],
     id: "ox3MhHszRlLzqUV8RtD4s",
     pictures: [
-      { src: "/pictures/card-1.png", smallSrc: "/pictures/card-1.png" },
+      {
+        src: "/pictures/module-home/module-home.png",
+        smallSrc: "/pictures/module-home/module-home.png",
+      },
     ],
   },
   {
@@ -941,9 +944,7 @@ const moduleHomes = [
       { title: "Размеры", children: ["Д х Ш х В: 6.0 х 2.4 х 2.5 м"] },
     ],
     id: "xu5dLJTQKx-xSBnnOYKX1",
-    pictures: [
-      { src: "/pictures/card-1.png", smallSrc: "/pictures/card-1.png" },
-    ],
+    pictures: [{ src: "", smallSrc: "" }],
   },
   {
     name: "1 пример",
@@ -970,155 +971,153 @@ const moduleHomes = [
       { title: "Размеры", children: ["Д х Ш х В: 6.0 х 2.4 х 2.5 м"] },
     ],
     id: "-0_02XlLnIVLSfxqr8TUL",
-    pictures: [
-      { src: "/pictures/card-1.png", smallSrc: "/pictures/card-1.png" },
-    ],
+    pictures: [{ src: "", smallSrc: "" }],
   },
-  {
-    name: "1 пример",
-    keywords: "SEO",
-    h1: "Модульный дом - 1 пример",
-    slug: "post-1-primer",
-    price: 10000,
-    headingDescription:
-      "Модульный дом увеличенной комплектации — несколько жилых комнат и общая зона в едином корпусе для комфортного проживания нескольких человек. Утеплённый каркас и надёжная кровля обеспечивают эксплуатацию в любых климатических условиях. Мобильность конструкции позволяет переместить дом на новый участок при необходимости.",
-    tag: "Модульный дом",
-    characters: [
-      { title: "Размер наружный", children: ["Д х Ш х В: 6.0 х 2.4 х 2.5 м"] },
-      {
-        title: "Внутренний размер",
-        children: ["Д х Ш х В: 5.8 х 2.2 х 2.3 м"],
-      },
-      { title: "Высота потолков", children: ["2.3 м"] },
-      { title: "Кровля", children: ["Металлочерепица"] },
-      { title: "Внутренняя отделка", children: ["Вагонка"] },
-      { title: "Наружная отделка", children: ["Профлист"] },
-      { title: "Полы", children: ["Доска пола 40 мм"] },
-      { title: "Электропроводка", children: ["Скрытая, стандартная"] },
-      { title: "Масса", children: ["2.5 тонны"] },
-      { title: "Размеры", children: ["Д х Ш х В: 6.0 х 2.4 х 2.5 м"] },
-    ],
-    id: "sIyp-HV-r7xy6Hf-jRvQb",
-    pictures: [
-      { src: "/pictures/card-1.png", smallSrc: "/pictures/card-1.png" },
-    ],
-  },
-  {
-    name: "1 пример",
-    keywords: "SEO",
-    h1: "Модульный дом - 1 пример",
-    slug: "post-1-primer",
-    price: 10000,
-    headingDescription:
-      "Модульный дом с индивидуальной планировкой — количество и расположение комнат подбирается под потребности заказчика. Подходит для постоянного проживания, дачного или вахтового использования. Прочный каркас и качественные материалы отделки обеспечивают долгий срок службы.",
-    tag: "Модульный дом",
-    characters: [
-      { title: "Размер наружный", children: ["Д х Ш х В: 6.0 х 2.4 х 2.5 м"] },
-      {
-        title: "Внутренний размер",
-        children: ["Д х Ш х В: 5.8 х 2.2 х 2.3 м"],
-      },
-      { title: "Высота потолков", children: ["2.3 м"] },
-      { title: "Кровля", children: ["Металлочерепица"] },
-      { title: "Внутренняя отделка", children: ["Вагонка"] },
-      { title: "Наружная отделка", children: ["Профлист"] },
-      { title: "Полы", children: ["Доска пола 40 мм"] },
-      { title: "Электропроводка", children: ["Скрытая, стандартная"] },
-      { title: "Масса", children: ["2.5 тонны"] },
-      { title: "Размеры", children: ["Д х Ш х В: 6.0 х 2.4 х 2.5 м"] },
-    ],
-    id: "ngIxgnWsQKrsPhEs0G1GE",
-    pictures: [
-      { src: "/pictures/card-1.png", smallSrc: "/pictures/card-1.png" },
-    ],
-  },
-  {
-    name: "1 пример",
-    keywords: "SEO",
-    h1: "Модульный дом - 1 пример",
-    slug: "post-1-primer",
-    price: 10000,
-    headingDescription:
-      "Модульный дом для круглогодичного проживания — утеплённые стены, надёжная кровля и продуманная вентиляция создают комфортные условия в любой сезон. Компактные габариты позволяют разместить дом на участке практически любой формы. Заводская готовность сокращает сроки строительства до минимума.",
-    tag: "Модульный дом",
-    characters: [
-      { title: "Размер наружный", children: ["Д х Ш х В: 6.0 х 2.4 х 2.5 м"] },
-      {
-        title: "Внутренний размер",
-        children: ["Д х Ш х В: 5.8 х 2.2 х 2.3 м"],
-      },
-      { title: "Высота потолков", children: ["2.3 м"] },
-      { title: "Кровля", children: ["Металлочерепица"] },
-      { title: "Внутренняя отделка", children: ["Вагонка"] },
-      { title: "Наружная отделка", children: ["Профлист"] },
-      { title: "Полы", children: ["Доска пола 40 мм"] },
-      { title: "Электропроводка", children: ["Скрытая, стандартная"] },
-      { title: "Масса", children: ["2.5 тонны"] },
-      { title: "Размеры", children: ["Д х Ш х В: 6.0 х 2.4 х 2.5 м"] },
-    ],
-    id: "rgxkuF0Q46uQraHKzx-1Z",
-    pictures: [
-      { src: "/pictures/card-1.png", smallSrc: "/pictures/card-1.png" },
-    ],
-  },
-  {
-    name: "1 пример",
-    keywords: "SEO",
-    h1: "Модульный дом - 2 пример",
-    slug: "post-1-primer",
-    price: 10000,
-    headingDescription:
-      "Модульный дом с расширенной жилой площадью — несколько блоков объединены в единую конструкцию для просторного и функционального жилья. Подходит как основное жильё или гостевой домик на участке. Надёжная теплоизоляция и качественная отделка обеспечивают комфорт круглый год.",
-    tag: "Модульный дом",
-    characters: [
-      { title: "Размер наружный", children: ["Д х Ш х В: 6.0 х 2.4 х 2.5 м"] },
-      {
-        title: "Внутренний размер",
-        children: ["Д х Ш х В: 5.8 х 2.2 х 2.3 м"],
-      },
-      { title: "Высота потолков", children: ["2.3 м"] },
-      { title: "Кровля", children: ["Металлочерепица"] },
-      { title: "Внутренняя отделка", children: ["Вагонка"] },
-      { title: "Наружная отделка", children: ["Профлист"] },
-      { title: "Полы", children: ["Доска пола 40 мм"] },
-      { title: "Электропроводка", children: ["Скрытая, стандартная"] },
-      { title: "Масса", children: ["2.5 тонны"] },
-      { title: "Размеры", children: ["Д х Ш х В: 6.0 х 2.4 х 2.5 м"] },
-    ],
-    id: "ngIxgnWsQKrsPhEs0G3GE",
-    pictures: [
-      { src: "/pictures/card-1.png", smallSrc: "/pictures/card-1.png" },
-    ],
-  },
-  {
-    name: "1 пример",
-    keywords: "SEO",
-    h1: "Модульный дом - 3 пример",
-    slug: "post-1-primer",
-    price: 10000,
-    headingDescription:
-      "Модульный дом премиум-комплектации — улучшенная отделка, увеличенные окна и продуманное зонирование пространства для максимального комфорта проживания. Подходит для семьи или сдачи в аренду. Быстрый монтаж и надёжная конструкция гарантируют долгий срок эксплуатации.",
-    tag: "Модульный дом",
-    characters: [
-      { title: "Размер наружный", children: ["Д х Ш х В: 6.0 х 2.4 х 2.5 м"] },
-      {
-        title: "Внутренний размер",
-        children: ["Д х Ш х В: 5.8 х 2.2 х 2.3 м"],
-      },
-      { title: "Высота потолков", children: ["2.3 м"] },
-      { title: "Кровля", children: ["Металлочерепица"] },
-      { title: "Внутренняя отделка", children: ["Вагонка"] },
-      { title: "Наружная отделка", children: ["Профлист"] },
-      { title: "Полы", children: ["Доска пола 40 мм"] },
-      { title: "Электропроводка", children: ["Скрытая, стандартная"] },
-      { title: "Масса", children: ["2.5 тонны"] },
-      { title: "Размеры", children: ["Д х Ш х В: 6.0 х 2.4 х 2.5 м"] },
-    ],
-    id: "rgxkuF0Q46uQraHKzx-ZZ",
-    pictures: [
-      { src: "/pictures/card-1.png", smallSrc: "/pictures/card-1.png" },
-    ],
-  },
+  // {
+  //   name: "1 пример",
+  //   keywords: "SEO",
+  //   h1: "Модульный дом - 1 пример",
+  //   slug: "post-1-primer",
+  //   price: 10000,
+  //   headingDescription:
+  //     "Модульный дом увеличенной комплектации — несколько жилых комнат и общая зона в едином корпусе для комфортного проживания нескольких человек. Утеплённый каркас и надёжная кровля обеспечивают эксплуатацию в любых климатических условиях. Мобильность конструкции позволяет переместить дом на новый участок при необходимости.",
+  //   tag: "Модульный дом",
+  //   characters: [
+  //     { title: "Размер наружный", children: ["Д х Ш х В: 6.0 х 2.4 х 2.5 м"] },
+  //     {
+  //       title: "Внутренний размер",
+  //       children: ["Д х Ш х В: 5.8 х 2.2 х 2.3 м"],
+  //     },
+  //     { title: "Высота потолков", children: ["2.3 м"] },
+  //     { title: "Кровля", children: ["Металлочерепица"] },
+  //     { title: "Внутренняя отделка", children: ["Вагонка"] },
+  //     { title: "Наружная отделка", children: ["Профлист"] },
+  //     { title: "Полы", children: ["Доска пола 40 мм"] },
+  //     { title: "Электропроводка", children: ["Скрытая, стандартная"] },
+  //     { title: "Масса", children: ["2.5 тонны"] },
+  //     { title: "Размеры", children: ["Д х Ш х В: 6.0 х 2.4 х 2.5 м"] },
+  //   ],
+  //   id: "sIyp-HV-r7xy6Hf-jRvQb",
+  //   pictures: [
+  //     { src: "/pictures/card-1.png", smallSrc: "/pictures/card-1.png" },
+  //   ],
+  // },
+  // {
+  //   name: "1 пример",
+  //   keywords: "SEO",
+  //   h1: "Модульный дом - 1 пример",
+  //   slug: "post-1-primer",
+  //   price: 10000,
+  //   headingDescription:
+  //     "Модульный дом с индивидуальной планировкой — количество и расположение комнат подбирается под потребности заказчика. Подходит для постоянного проживания, дачного или вахтового использования. Прочный каркас и качественные материалы отделки обеспечивают долгий срок службы.",
+  //   tag: "Модульный дом",
+  //   characters: [
+  //     { title: "Размер наружный", children: ["Д х Ш х В: 6.0 х 2.4 х 2.5 м"] },
+  //     {
+  //       title: "Внутренний размер",
+  //       children: ["Д х Ш х В: 5.8 х 2.2 х 2.3 м"],
+  //     },
+  //     { title: "Высота потолков", children: ["2.3 м"] },
+  //     { title: "Кровля", children: ["Металлочерепица"] },
+  //     { title: "Внутренняя отделка", children: ["Вагонка"] },
+  //     { title: "Наружная отделка", children: ["Профлист"] },
+  //     { title: "Полы", children: ["Доска пола 40 мм"] },
+  //     { title: "Электропроводка", children: ["Скрытая, стандартная"] },
+  //     { title: "Масса", children: ["2.5 тонны"] },
+  //     { title: "Размеры", children: ["Д х Ш х В: 6.0 х 2.4 х 2.5 м"] },
+  //   ],
+  //   id: "ngIxgnWsQKrsPhEs0G1GE",
+  //   pictures: [
+  //     { src: "/pictures/card-1.png", smallSrc: "/pictures/card-1.png" },
+  //   ],
+  // },
+  // {
+  //   name: "1 пример",
+  //   keywords: "SEO",
+  //   h1: "Модульный дом - 1 пример",
+  //   slug: "post-1-primer",
+  //   price: 10000,
+  //   headingDescription:
+  //     "Модульный дом для круглогодичного проживания — утеплённые стены, надёжная кровля и продуманная вентиляция создают комфортные условия в любой сезон. Компактные габариты позволяют разместить дом на участке практически любой формы. Заводская готовность сокращает сроки строительства до минимума.",
+  //   tag: "Модульный дом",
+  //   characters: [
+  //     { title: "Размер наружный", children: ["Д х Ш х В: 6.0 х 2.4 х 2.5 м"] },
+  //     {
+  //       title: "Внутренний размер",
+  //       children: ["Д х Ш х В: 5.8 х 2.2 х 2.3 м"],
+  //     },
+  //     { title: "Высота потолков", children: ["2.3 м"] },
+  //     { title: "Кровля", children: ["Металлочерепица"] },
+  //     { title: "Внутренняя отделка", children: ["Вагонка"] },
+  //     { title: "Наружная отделка", children: ["Профлист"] },
+  //     { title: "Полы", children: ["Доска пола 40 мм"] },
+  //     { title: "Электропроводка", children: ["Скрытая, стандартная"] },
+  //     { title: "Масса", children: ["2.5 тонны"] },
+  //     { title: "Размеры", children: ["Д х Ш х В: 6.0 х 2.4 х 2.5 м"] },
+  //   ],
+  //   id: "rgxkuF0Q46uQraHKzx-1Z",
+  //   pictures: [
+  //     { src: "/pictures/card-1.png", smallSrc: "/pictures/card-1.png" },
+  //   ],
+  // },
+  // {
+  //   name: "1 пример",
+  //   keywords: "SEO",
+  //   h1: "Модульный дом - 2 пример",
+  //   slug: "post-1-primer",
+  //   price: 10000,
+  //   headingDescription:
+  //     "Модульный дом с расширенной жилой площадью — несколько блоков объединены в единую конструкцию для просторного и функционального жилья. Подходит как основное жильё или гостевой домик на участке. Надёжная теплоизоляция и качественная отделка обеспечивают комфорт круглый год.",
+  //   tag: "Модульный дом",
+  //   characters: [
+  //     { title: "Размер наружный", children: ["Д х Ш х В: 6.0 х 2.4 х 2.5 м"] },
+  //     {
+  //       title: "Внутренний размер",
+  //       children: ["Д х Ш х В: 5.8 х 2.2 х 2.3 м"],
+  //     },
+  //     { title: "Высота потолков", children: ["2.3 м"] },
+  //     { title: "Кровля", children: ["Металлочерепица"] },
+  //     { title: "Внутренняя отделка", children: ["Вагонка"] },
+  //     { title: "Наружная отделка", children: ["Профлист"] },
+  //     { title: "Полы", children: ["Доска пола 40 мм"] },
+  //     { title: "Электропроводка", children: ["Скрытая, стандартная"] },
+  //     { title: "Масса", children: ["2.5 тонны"] },
+  //     { title: "Размеры", children: ["Д х Ш х В: 6.0 х 2.4 х 2.5 м"] },
+  //   ],
+  //   id: "ngIxgnWsQKrsPhEs0G3GE",
+  //   pictures: [
+  //     { src: "/pictures/card-1.png", smallSrc: "/pictures/card-1.png" },
+  //   ],
+  // },
+  // {
+  //   name: "1 пример",
+  //   keywords: "SEO",
+  //   h1: "Модульный дом - 3 пример",
+  //   slug: "post-1-primer",
+  //   price: 10000,
+  //   headingDescription:
+  //     "Модульный дом премиум-комплектации — улучшенная отделка, увеличенные окна и продуманное зонирование пространства для максимального комфорта проживания. Подходит для семьи или сдачи в аренду. Быстрый монтаж и надёжная конструкция гарантируют долгий срок эксплуатации.",
+  //   tag: "Модульный дом",
+  //   characters: [
+  //     { title: "Размер наружный", children: ["Д х Ш х В: 6.0 х 2.4 х 2.5 м"] },
+  //     {
+  //       title: "Внутренний размер",
+  //       children: ["Д х Ш х В: 5.8 х 2.2 х 2.3 м"],
+  //     },
+  //     { title: "Высота потолков", children: ["2.3 м"] },
+  //     { title: "Кровля", children: ["Металлочерепица"] },
+  //     { title: "Внутренняя отделка", children: ["Вагонка"] },
+  //     { title: "Наружная отделка", children: ["Профлист"] },
+  //     { title: "Полы", children: ["Доска пола 40 мм"] },
+  //     { title: "Электропроводка", children: ["Скрытая, стандартная"] },
+  //     { title: "Масса", children: ["2.5 тонны"] },
+  //     { title: "Размеры", children: ["Д х Ш х В: 6.0 х 2.4 х 2.5 м"] },
+  //   ],
+  //   id: "rgxkuF0Q46uQraHKzx-ZZ",
+  //   pictures: [
+  //     { src: "/pictures/card-1.png", smallSrc: "/pictures/card-1.png" },
+  //   ],
+  // },
 ];
 
 const goverments = [
@@ -1180,6 +1179,35 @@ const goverments = [
       { src: "/pictures/card-1.png", smallSrc: "/pictures/card-1.png" },
     ],
   },
+  {
+    name: "Модуль из 12х штук",
+    keywords: "SEO",
+    h1: "Административно-бытовые комплексы, общежития, столовые - модуль из 8х штук",
+    slug: "adm-module-8",
+    price: 10000,
+    headingDescription:
+        "Административно-бытовой комплекс из восьми модулей — масштабное решение для крупных объектов: общежития, столовые, офисные и бытовые помещения в единой инфраструктуре. Гибкая компоновка модулей позволяет организовать пространство под конкретные задачи персонала. Надёжная конструкция рассчитана на длительную эксплуатацию в любых климатических условиях.",
+    tag: "Административно-бытовые комплексы, общежития, столовые",
+    characters: [
+      { title: "Размер наружный", children: ["Д х Ш х В: 6.0 х 2.4 х 2.5 м"] },
+      {
+        title: "Внутренний размер",
+        children: ["Д х Ш х В: 5.8 х 2.2 х 2.3 м"],
+      },
+      { title: "Высота потолков", children: ["2.3 м"] },
+      { title: "Кровля", children: ["Металлочерепица"] },
+      { title: "Внутренняя отделка", children: ["Вагонка"] },
+      { title: "Наружная отделка", children: ["Профлист"] },
+      { title: "Полы", children: ["Доска пола 40 мм"] },
+      { title: "Электропроводка", children: ["Скрытая, стандартная"] },
+      { title: "Масса", children: ["2.5 тонны"] },
+      { title: "Размеры", children: ["Д х Ш х В: 6.0 х 2.4 х 2.5 м"] },
+    ],
+    id: "pEqx5DsZA3wDq1LcSXvFO",
+    pictures: [
+      { src: "/pictures/card-1.png", smallSrc: "/pictures/card-1.png" },
+    ],
+  },
 ];
 
 const factories = [
@@ -1208,9 +1236,8 @@ const factories = [
       { title: "Размеры", children: ["Д х Ш х В: 6.0 х 2.4 х 2.5 м"] },
     ],
     id: "BfDhlTneh2sLWCvmCgCqY",
-    pictures: [
-      { src: "/pictures/card-1.png", smallSrc: "/pictures/card-1.png" },
-    ],
+    preview: "/pictures/module-home/module-home.png",
+    pictures: [{ src: "", smallSrc: "" }],
   },
   {
     name: "Платформы",
@@ -1237,9 +1264,7 @@ const factories = [
       { title: "Размеры", children: ["Д х Ш х В: 6.0 х 2.4 х 2.5 м"] },
     ],
     id: "ywD1SH47owtmRJYXIiINX",
-    pictures: [
-      { src: "/pictures/card-1.png", smallSrc: "/pictures/card-1.png" },
-    ],
+    pictures: [{ src: "", smallSrc: "" }],
   },
 ];
 
@@ -1270,7 +1295,7 @@ const mobilities = [
     ],
     id: "Yj6fs9vnFstQIvAReLzeb",
     pictures: [
-      { src: "/pictures/card-1.png", smallSrc: "/pictures/card-1.png" },
+      { src: "/pictures/kns/kns.png", smallSrc: "/pictures/kns/kns.png" },
     ],
   },
   {
@@ -1299,7 +1324,7 @@ const mobilities = [
     ],
     id: "fjGFO4NApjnjRxj5rm3Al",
     pictures: [
-      { src: "/pictures/card-1.png", smallSrc: "/pictures/card-1.png" },
+      { src: "/pictures/kns/kns.png", smallSrc: "/pictures/kns/kns.png" },
     ],
   },
 ];
@@ -1392,7 +1417,10 @@ const santeh = [
     ],
     id: "fHqWT5SlLQoVJXJQLtJ6u",
     pictures: [
-      { src: "/pictures/card-1.png", smallSrc: "/pictures/card-1.png" },
+      {
+        src: "/pictures/santech/santech.png",
+        smallSrc: "/pictures/santech/santech.png",
+      },
     ],
   },
   {
@@ -1421,7 +1449,10 @@ const santeh = [
     ],
     id: "GSvq1ntQfYMbu3gVVDnw-",
     pictures: [
-      { src: "/pictures/card-1.png", smallSrc: "/pictures/card-1.png" },
+      {
+        src: "/pictures/santech/santech.png",
+        smallSrc: "/pictures/santech/santech.png",
+      },
     ],
   },
   {
@@ -1450,7 +1481,10 @@ const santeh = [
     ],
     id: "TcbhxG3BTrC_72Y-Wy7xI",
     pictures: [
-      { src: "/pictures/card-1.png", smallSrc: "/pictures/card-1.png" },
+      {
+        src: "/pictures/santech/santech.png",
+        smallSrc: "/pictures/santech/santech.png",
+      },
     ],
   },
 ];
@@ -1490,7 +1524,7 @@ const banya = [
     ],
   },
   {
-    name: "2 пример",
+    name: "Футуристическая баня с верандой",
     keywords: "SEO",
     h1: "Баня 2 пример",
     slug: "banay-2",
@@ -1515,7 +1549,10 @@ const banya = [
     ],
     id: "pnci3XMttQBR0XkeYR84z",
     pictures: [
-      { src: "/pictures/card-1.png", smallSrc: "/pictures/card-1.png" },
+      {
+        src: "/pictures/banay/bany-v2.png",
+        smallSrc: "/pictures/banay/bany-v2.png",
+      },
     ],
   },
 ];

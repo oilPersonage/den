@@ -17,7 +17,8 @@ export default function ShowMoreText({
   useEffect(() => {
     if (!refDesc.current) return;
     const { clientHeight } = refDesc.current;
-    if (clientHeight > 76) {
+    console.log({ clientHeight }, refDesc.current);
+    if (clientHeight > 60) {
       setShowExtend(true);
       setIsOpenDesc(false);
     } else {
@@ -38,10 +39,16 @@ export default function ShowMoreText({
     <>
       <div
         {...dataAttr}
-        className={`${isOpenedDesc ? "max-h-full" : "max-h-19"} max-md:mt-xs mt-sm overflow-hidden`}
+        className={`${isOpenedDesc ? "max-h-full" : "max-h-19"} relative max-md:mt-xs mt-sm overflow-hidden`}
       >
         <p
           ref={refDesc}
+          className={`card-desc opacity-100 absolute inset-0 bottom-auto`}
+          data-from-bottom
+        >
+          {description}
+        </p>
+        <p
           className={`card-desc ${showExtend && !isOpenedDesc ? "extended" : ""} ${isOpenedDesc ? "opened" : ""}`}
           data-from-bottom
         >

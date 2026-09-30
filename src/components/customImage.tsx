@@ -1,14 +1,18 @@
+import { Logotype } from "./logotype";
+
 export default function CustomImage({
   src,
   alt,
   className,
   ...rest
 }: {
-  src: string;
+  src?: string;
   alt: string;
   className?: string;
 }) {
   const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
+
+  if (!src) return <Logotype />;
   return (
     <img
       src={basePath + src}

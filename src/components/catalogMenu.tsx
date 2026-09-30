@@ -53,7 +53,7 @@ export default function Catalog({
               <div className="catalog-sub-wrapper">
                 <div className="catalog-sub-menu">
                   {products[key]?.map(
-                    ({ name, slug, pictures, extraText }, idx) => (
+                    ({ name, slug, pictures }, idx) => (
                       <a
                         key={slug + idx}
                         href={`${process.env.NEXT_PUBLIC_BASE_PATH}/product/${slug}`}
@@ -62,11 +62,10 @@ export default function Catalog({
                         {!pictures[0].hideMenu && (
                           <CustomImage
                             className="catalog-sub-img"
-                            src={pictures[0].smallSrc}
+                            src={pictures[0]?.smallSrc}
                             alt=""
                           />
                         )}
-                        <div className="catalog-sub-extraText">{extraText}</div>
                         <p>{name}</p>
                         <span></span>
                         <span></span>
