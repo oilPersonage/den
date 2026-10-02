@@ -999,7 +999,7 @@ const moduleHomes = [
   //   ],
   //   id: "sIyp-HV-r7xy6Hf-jRvQb",
   //   pictures: [
-  //     { src: "/pictures/card-1.png", smallSrc: "/pictures/card-1.png" },
+  //     { src: "/pictures/card-2.png", smallSrc: "/pictures/card-2.png" },
   //   ],
   // },
   // {
@@ -1028,7 +1028,7 @@ const moduleHomes = [
   //   ],
   //   id: "ngIxgnWsQKrsPhEs0G1GE",
   //   pictures: [
-  //     { src: "/pictures/card-1.png", smallSrc: "/pictures/card-1.png" },
+  //     { src: "/pictures/card-2.png", smallSrc: "/pictures/card-2.png" },
   //   ],
   // },
   // {
@@ -1057,7 +1057,7 @@ const moduleHomes = [
   //   ],
   //   id: "rgxkuF0Q46uQraHKzx-1Z",
   //   pictures: [
-  //     { src: "/pictures/card-1.png", smallSrc: "/pictures/card-1.png" },
+  //     { src: "/pictures/card-2.png", smallSrc: "/pictures/card-2.png" },
   //   ],
   // },
   // {
@@ -1086,7 +1086,7 @@ const moduleHomes = [
   //   ],
   //   id: "ngIxgnWsQKrsPhEs0G3GE",
   //   pictures: [
-  //     { src: "/pictures/card-1.png", smallSrc: "/pictures/card-1.png" },
+  //     { src: "/pictures/card-2.png", smallSrc: "/pictures/card-2.png" },
   //   ],
   // },
   // {
@@ -1115,7 +1115,7 @@ const moduleHomes = [
   //   ],
   //   id: "rgxkuF0Q46uQraHKzx-ZZ",
   //   pictures: [
-  //     { src: "/pictures/card-1.png", smallSrc: "/pictures/card-1.png" },
+  //     { src: "/pictures/card-2.png", smallSrc: "/pictures/card-2.png" },
   //   ],
   // },
 ];
@@ -1147,7 +1147,7 @@ const goverments = [
     ],
     id: "JeuD_VhrejhvZ84yXEOHk",
     pictures: [
-      { src: "/pictures/card-1.png", smallSrc: "/pictures/card-1.png" },
+      { src: "/pictures/admin/card-3.png", smallSrc: "/pictures/admin/card-3.png" },
     ],
   },
   {
@@ -1176,7 +1176,7 @@ const goverments = [
     ],
     id: "pEqx5DsZA3wDq1LcSXvFO",
     pictures: [
-      { src: "/pictures/card-1.png", smallSrc: "/pictures/card-1.png" },
+      { src: "/pictures/admin/card-3.png", smallSrc: "/pictures/admin/card-3.png" },
     ],
   },
   {
@@ -1205,7 +1205,7 @@ const goverments = [
     ],
     id: "pEqx5DsZA3wDq1LcSXvFO",
     pictures: [
-      { src: "/pictures/card-1.png", smallSrc: "/pictures/card-1.png" },
+      { src: "/pictures/admin/card-3.png", smallSrc: "/pictures/admin/card-3.png" },
     ],
   },
 ];
@@ -1356,7 +1356,7 @@ const carHomes = [
     ],
     id: "QYgH_eTDqI_eh5EbtFYYS",
     pictures: [
-      { src: "/pictures/card-1.png", smallSrc: "/pictures/card-1.png" },
+      { src: "/pictures/card-2.png", smallSrc: "/pictures/card-2.png" },
     ],
   },
   {
@@ -1385,7 +1385,7 @@ const carHomes = [
     ],
     id: "Tw9qqhyxju--4gxyhzcuO",
     pictures: [
-      { src: "/pictures/card-1.png", smallSrc: "/pictures/card-1.png" },
+      { src: "/pictures/card-2.png", smallSrc: "/pictures/card-2.png" },
     ],
   },
 ];

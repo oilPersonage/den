@@ -1022,7 +1022,7 @@ footer p {
   @apply leading-[1.2] mt-sm min-w-3/4 max-w-3/4 max-md:flex-1 pb-1.5! px-3 relative flex-0 h-fit md:w-fit;
 }
 .catalog-sub-img {
-  @apply absolute left-[60%] bottom-2 ml-auto w-1/2 max-h-full object-conver;
+  @apply absolute left-[60%] bottom-2 ml-auto w-1/2 max-h-full object-cover;
 }
 .catalog-sub-menu a:hover p {
   @apply text-accent-hover;
